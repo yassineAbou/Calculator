@@ -1,3 +1,71 @@
 <resources>
     <string name="app_name">Calculator0</string>
+
+    <!-- Numbers -->
+    <string name="_7">7</string>
+    <string name="_8">8</string>
+    <string name="_9">9</string>
+    <string name="_4">4</string>
+    <string name="_5">5</string>
+    <string name="_6">6</string>
+    <string name="_.">.</string>
+    <string name="_1">1</string>
+    <string name="_2">2</string>
+    <string name="_3">3</string>
+    <string name="minus_sign">+/-</string>
+    <string name="_0">0</string>
+
+    <!-- ImageButton -->
+    <string name="imageDes1">history</string>
+    <string name="imgDes2">scientific</string>
+    <string name="imgDes3">EMI</string>
+    <string name="imgDes4">backspace</string>
+
+    <!-- Operations -->
+    <string name="_clear">C</string>
+    <string name="_betweenBrackets">( )</string>
+    <string name="_percent">%</string>
+    <string name="_divided">÷</string>
+    <string name="_multiplicand">×</string>
+    <string name="_minus">-</string>
+    <string name="_plus">+</string>
+    <string name="_equal">=</string>
+    <string name="_input">15 + 15</string>
+    <string name="_result">30</string>
+
+    <!-- messages -->
+    <string name="_invalid">Invalid format used.</string>
+
+    <!-- Scientific -->
+    <string name="_switch">⇆</string>
+    <string name="_squareRoot">√</string>
+    <string name="_sin">sin</string>
+    <string name="_cos">cos</string>
+    <string name="_tan">tan</string>
+    <string name="_in">In</string>
+    <string name="_log">log</string>
+    <string name="_1_divisionSlash">1/x</string>
+    <string name="_eˣ">eˣ</string>
+    <string name="_squared">x²</string>
+    <string name="power">xʸ</string>
+    <string name="_verticalBars">|x|</string>
+    <string name="_piConstant">𝝅</string>
+    <string name="_EConstant">e</string>
+    <string name="_rad">Rad</string>
+    <string name="_cubeRoot">∛</string>
+    <string name="_sinMinus">sin⁻¹</string>
+    <string name="cosMinus">cos⁻¹</string>
+    <string name="tanMinus">tan⁻¹</string>
+    <string name="_sinh">sinh</string>
+    <string name="_cosh">cosh</string>
+    <string name="_tanh">tanh</string>
+    <string name="sinh_minus">sinh⁻¹</string>
+    <string name="cosh_minus">cosh⁻¹</string>
+    <string name="tanh_minus">tanh⁻¹</string>
+    <string name="_2Power">2ˣ</string>
+    <string name="_power_3">x³</string>
+    <string name="_exclamation_mark">x!</string>
+    <string name="_deg">Deg</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

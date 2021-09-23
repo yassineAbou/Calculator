@@ -1,6 +1,8 @@
 package com.example.calculator0
 
+import android.annotation.SuppressLint
 import android.content.pm.ActivityInfo
+import android.graphics.Color
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -9,8 +11,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.text.isDigitsOnly
 import androidx.core.view.isVisible
+import androidx.navigation.findNavController
 import com.example.calculator0.databinding.FragmentCalculatorBinding
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
@@ -34,11 +38,15 @@ class CalculatorFragment : Fragment() {
     private var action2 = '+'
 
 
+    @SuppressLint("SourceLockedOrientationActivity", "NewApi")
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?, ): View? {
         // Inflate the layout for this fragment
         binding = FragmentCalculatorBinding.inflate(inflater, container, false)
+
+        (activity as AppCompatActivity?)!!.supportActionBar!!.hide()
+        requireActivity().window.statusBarColor = Color.WHITE
 
         binding.apply {
 
@@ -58,6 +66,11 @@ class CalculatorFragment : Fragment() {
             minus.setOnClickListener { onOperationClickedButton(subtraction) }
             multiplicand.setOnClickListener { onOperationClickedButton(multiplication) }
             divided.setOnClickListener { onOperationClickedButton(division) }
+
+            emi.setOnClickListener {
+               it.findNavController()
+                   .navigate(CalculatorFragmentDirections.actionCalculatorFragmentToEmiOneFragment())
+            }
 
             simple?.setOnClickListener {
                 activity?.requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT

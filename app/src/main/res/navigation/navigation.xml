@@ -9,10 +9,53 @@
         android:id="@+id/calculatorFragment"
         android:name="com.example.calculator0.CalculatorFragment"
         android:label="CalculatorFragment"
-        tools:layout="@layout/fragment_calculator"/>
+        tools:layout="@layout/fragment_calculator">
+        <action
+            android:id="@+id/action_calculatorFragment_to_emiOneFragment"
+            app:destination="@id/emiOneFragment" />
+    </fragment>
     <fragment
-        android:id="@+id/oneFragment"
-        android:name="com.example.calculator0.OneFragment"
-        android:label="fragment_one"
-        tools:layout="@layout/fragment_one" />
+        android:id="@+id/emiOneFragment"
+        android:name="com.example.calculator0.EMIFragment"
+        android:label="EMI calculator"
+        tools:layout="@layout/fragment_emi" >
+        <action
+            android:id="@+id/action_emiOneFragment_to_resultFragment"
+            app:destination="@id/resultFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/resultFragment"
+        android:name="com.example.calculator0.ResultFragment"
+        android:label="EMI calculator"
+        tools:layout="@layout/fragment_result">
+        <action
+            android:id="@+id/action_resultFragment_to_emiTwoFragment"
+            app:destination="@id/emiTwoFragment"
+            app:popUpTo="@id/calculatorFragment"
+            app:popUpToInclusive="false" />
+        <action
+            android:id="@+id/action_resultFragment_to_calculatorFragment"
+            app:destination="@id/calculatorFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/emiTwoFragment"
+        android:name="com.example.calculator0.ThreeFragment"
+        android:label="EMI calculator"
+        tools:layout="@layout/fragment_emi_two">
+        <action
+            android:id="@+id/action_emiTwoFragment_to_compareFragment"
+            app:destination="@id/compareFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/compareFragment"
+        android:name="com.example.calculator0.CompareFragment"
+        android:label="Compare"
+        tools:layout="@layout/fragment_compare">
+        <action
+            android:id="@+id/action_compareFragment_to_emiOneFragment"
+            app:destination="@id/emiOneFragment" />
+        <action
+            android:id="@+id/action_compareFragment_to_calculatorFragment"
+            app:destination="@id/calculatorFragment" />
+    </fragment>
 </navigation>

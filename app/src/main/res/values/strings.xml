@@ -66,6 +66,27 @@
     <string name="_power_3">x³</string>
     <string name="_exclamation_mark">x!</string>
     <string name="_deg">Deg</string>
-    <!-- TODO: Remove or change this placeholder text -->
+
+    <!-- EMI-->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="text1">Loan amount</string>
+    <string name="text2">Interest rate</string>
+    <string name="text3">Number of installments</string>
+    <string name="text4">Calculate</string>
+    <string name="emi_amount">EMI amount</string>
+    <string name="per_month">per month</string>
+    <string name="_installments">installments</string>
+    <string name="total">Total amount to pay is</string>
+    <string name="_principal">Principal</string>
+    <string name="_interest">Interest</string>
+    <string name="_compare">Compare with another</string>
+    <string name="text5">Done</string>
+    <string name="_guide">Enter the details of the second EMI option.</string>
+    <string name="text6">Compare</string>
+    <string name="_first">First option</string>
+    <string name="_second">Second option</string>
+    <string name="option_one">First option</string>
+    <string name="option_two">Second option</string>
+    <string name="text7">Reset</string>
+
 </resources>

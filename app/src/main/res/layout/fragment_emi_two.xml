@@ -85,7 +85,7 @@
         app:layout_constraintTop_toBottomOf="@+id/view" />
 
     <EditText
-        android:id="@+id/interesetRate2"
+        android:id="@+id/interestRate2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/_20sdp"
@@ -107,7 +107,7 @@
         android:layout_marginTop="@dimen/_4sdp"
         android:background="@color/brown"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/interesetRate2" />
+        app:layout_constraintTop_toBottomOf="@+id/interestRate2" />
 
     <TextView
         android:id="@+id/textView13"
@@ -128,7 +128,7 @@
         android:layout_marginTop="@dimen/_2sdp"
         android:background="@null"
         android:ems="10"
-        android:inputType="numberDecimal"
+        android:inputType="number"
         android:textColor="@color/brown"
         app:layout_constraintStart_toStartOf="parent"
         android:textSize="@dimen/_16ssp"

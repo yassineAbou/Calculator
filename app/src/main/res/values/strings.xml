@@ -75,8 +75,8 @@
     <string name="text4">Calculate</string>
     <string name="emi_amount">EMI amount</string>
     <string name="per_month">per month</string>
-    <string name="_installments">installments</string>
-    <string name="total">Total amount to pay is</string>
+    <string name="_installments">%s installments</string>
+    <string name="total">Total amount to pay is %s</string>
     <string name="_principal">Principal</string>
     <string name="_interest">Interest</string>
     <string name="_compare">Compare with another</string>
@@ -88,5 +88,14 @@
     <string name="option_one">First option</string>
     <string name="option_two">Second option</string>
     <string name="text7">Reset</string>
+    <string name="hint_amount">Enter cost of purchase</string>
+    <string name="hint_interest">Enter annual rate</string>
+    <string name="hint_installments">Enter number of installments</string>
+    <string name="_share">SHARE</string>
+    <string name="share_result">Loan amount: %1$s\nEMI amount: %2$s\nInterest rate: %3$s\nNumber of installments: %4$s
+    </string>
+    <string name="share_compare">First option \nLoan amount: %1$s\nEMI amount: %2$s\nInterest rate: %3$s\nNumber of installments: %4$s\nSecond option \nLoan amount: %5$s\nEMI amount: %6$s\nInterest rate: %7$s\nNumber of installments: %8$s
+    </string>
+
 
 </resources>

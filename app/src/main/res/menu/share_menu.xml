@@ -3,10 +3,10 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
      >
     <item
-        android:id="@+id/action_add"
+        android:id="@+id/share"
         android:icon="@drawable/ic_baseline_share_24"
         app:showAsAction="ifRoom"
-        android:title="SHARE">
+        android:title="@string/_share">
 
     </item>
 </menu>

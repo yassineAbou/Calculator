@@ -36,13 +36,14 @@
         android:paddingTop="@dimen/_26sdp"/>
 
     <EditText
-        android:id="@+id/loanAmount2"
+        android:id="@+id/loanAmount"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/_20sdp"
         android:layout_marginTop="@dimen/_2sdp"
         android:background="@null"
         android:ems="10"
+        android:hint="@string/hint_amount"
         android:inputType="numberDecimal"
         android:textColor="@color/brown"
         android:textSize="@dimen/_16ssp"
@@ -58,7 +59,7 @@
         android:layout_marginTop="@dimen/_4sdp"
         android:background="@color/brown"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/loanAmount2" />
+        app:layout_constraintTop_toBottomOf="@+id/loanAmount" />
 
     <TextView
         android:id="@+id/textView12"
@@ -72,13 +73,14 @@
         app:layout_constraintTop_toBottomOf="@+id/view" />
 
     <EditText
-        android:id="@+id/interesetRate2"
+        android:id="@+id/interestRate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/_20sdp"
         android:layout_marginTop="@dimen/_2sdp"
         android:background="@null"
         android:ems="10"
+        android:hint="@string/hint_interest"
         android:inputType="numberDecimal"
         android:textColor="@color/brown"
         android:textSize="@dimen/_16ssp"
@@ -94,7 +96,7 @@
         android:layout_marginTop="@dimen/_4sdp"
         android:background="@color/brown"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/interesetRate2" />
+        app:layout_constraintTop_toBottomOf="@+id/interestRate" />
 
     <TextView
         android:id="@+id/textView13"
@@ -108,19 +110,20 @@
         app:layout_constraintTop_toBottomOf="@+id/view2" />
 
     <EditText
-        android:id="@+id/number_of_installments2"
+        android:id="@+id/number_of_installments"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/_20sdp"
         android:layout_marginTop="@dimen/_2sdp"
         android:background="@null"
-        android:ems="10"
-        android:inputType="numberDecimal"
+        android:hint="@string/hint_installments"
+        android:inputType="number"
         android:textColor="@color/brown"
         app:layout_constraintStart_toStartOf="parent"
         android:textSize="@dimen/_16ssp"
         app:layout_constraintTop_toBottomOf="@+id/textView13"
-        android:importantForAutofill="no" />
+
+        />
 
     <View
         android:id="@+id/view3"
@@ -131,7 +134,7 @@
         android:background="@color/brown"
         app:layout_constraintBottom_toTopOf="@+id/calculate"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/number_of_installments2" />
+        app:layout_constraintTop_toBottomOf="@+id/number_of_installments" />
 
     <View
         android:id="@+id/view4"

@@ -21,7 +21,18 @@
         tools:layout="@layout/fragment_emi" >
         <action
             android:id="@+id/action_emiOneFragment_to_resultFragment"
-            app:destination="@id/resultFragment" />
+            app:destination="@id/resultFragment" >
+            <argument
+                android:name="emiMonth" />
+            <argument
+                android:name="installment" />
+            <argument
+                android:name="principal" />
+            <argument
+                android:name="interest" />
+            <argument
+                android:name="total" />
+        </action>
     </fragment>
     <fragment
         android:id="@+id/resultFragment"
@@ -36,6 +47,28 @@
         <action
             android:id="@+id/action_resultFragment_to_calculatorFragment"
             app:destination="@id/calculatorFragment" />
+        <argument
+            android:name="emiMonth"
+            app:argType="string"
+           />
+        <argument
+            android:name="total"
+            app:argType="string"
+            />
+        <argument
+            android:name="interest"
+            app:argType="string"
+            />
+        <argument
+            android:name="installment"
+            app:argType="string"
+            />
+        <argument
+            android:name="principal"
+            app:argType="string" />
+        <argument
+            android:name="interestRateOutput"
+            app:argType="string" />
     </fragment>
     <fragment
         android:id="@+id/emiTwoFragment"
@@ -57,5 +90,23 @@
         <action
             android:id="@+id/action_compareFragment_to_calculatorFragment"
             app:destination="@id/calculatorFragment" />
+        <argument
+            android:name="principal2"
+            app:argType="string" />
+        <argument
+            android:name="installment2"
+            app:argType="string" />
+        <argument
+            android:name="interset2"
+            app:argType="string" />
+        <argument
+            android:name="emiMonth2"
+            app:argType="string" />
+        <argument
+            android:name="total2"
+            app:argType="string" />
+        <argument
+            android:name="intersetOutput2"
+            app:argType="string" />
     </fragment>
 </navigation>

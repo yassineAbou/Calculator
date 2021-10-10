@@ -20,6 +20,7 @@
     <string name="imgDes2">scientific</string>
     <string name="imgDes3">EMI</string>
     <string name="imgDes4">backspace</string>
+    <string name="text8">Clear history</string>
 
     <!-- Operations -->
     <string name="_clear">C</string>
@@ -96,6 +97,7 @@
     </string>
     <string name="share_compare">First option \nLoan amount: %1$s\nEMI amount: %2$s\nInterest rate: %3$s\nNumber of installments: %4$s\nSecond option \nLoan amount: %5$s\nEMI amount: %6$s\nInterest rate: %7$s\nNumber of installments: %8$s
     </string>
+
 
 
 </resources>

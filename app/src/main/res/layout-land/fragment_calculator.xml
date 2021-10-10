@@ -7,13 +7,13 @@
     <data>
         <variable
             name="calculator"
-            type="com.example.calculator0.CalculatorFragment" />
+            type="com.example.calculator0.Calculator.CalculatorFragment" />
     </data>
     
 <androidx.constraintlayout.widget.ConstraintLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".CalculatorFragment">
+    tools:context=".Calculator.CalculatorFragment">
 
     <TextView
         android:id="@+id/current_input"
@@ -71,8 +71,6 @@
         app:layout_constraintLeft_toRightOf = "@+id/history"
         android:contentDescription="@string/imgDes2" />
 
-
-
     <ImageButton
         android:id="@+id/emi"
         android:layout_width="wrap_content"
@@ -97,19 +95,7 @@
         app:layout_constraintTop_toBottomOf="@+id/result"
         android:contentDescription="@string/imgDes4" />
 
-    <ImageButton
-        android:id="@+id/backspace"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/_3sdp"
-        android:background="@color/white"
-        app:srcCompat="@drawable/backspace"
-        android:layout_marginStart="@dimen/_303sdp"
-        app:layout_constraintLeft_toRightOf="@+id/emi"
-        app:layout_constraintTop_toBottomOf="@+id/result"
-        android:contentDescription="@string/imgDes4"
-        android:visibility="gone"
-        />
+
 
     <View
         android:id="@+id/line_space"
@@ -120,6 +106,53 @@
         app:layout_constraintTop_toBottomOf="@+id/history"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"/>
+
+    <androidx.constraintlayout.widget.Group
+        android:id="@+id/group3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="visible"
+        app:constraint_referenced_ids="group1,group2,switchArrow"
+        />
+
+    <androidx.constraintlayout.widget.Group
+        android:id="@+id/group4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        app:constraint_referenced_ids="view11,clearHistory"
+        />
+
+
+    <View
+        android:id="@+id/view11"
+        android:layout_width="@dimen/_1sdp"
+        android:layout_height="@dimen/_150sdp"
+        android:layout_marginStart="@dimen/_250sdp"
+        android:background="@color/gray3"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/line_space" />
+
+    <Button
+        android:id="@+id/clearHistory"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_113sdp"
+        android:background="@drawable/radius_button"
+        android:paddingLeft="@dimen/_30sdp"
+        android:paddingBottom="@dimen/_2sdp"
+        android:paddingRight="@dimen/_30sdp"
+        android:paddingTop="@dimen/_2sdp"
+        android:text="@string/text8"
+        android:textAllCaps="false"
+        android:textSize="@dimen/_13ssp"
+        android:textStyle="bold"
+        app:backgroundTint="@color/blue"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/view11"
+        app:layout_constraintTop_toBottomOf="@+id/line_space"
+        />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/clear"

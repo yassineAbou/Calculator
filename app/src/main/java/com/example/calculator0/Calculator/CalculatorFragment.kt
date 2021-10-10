@@ -1,4 +1,4 @@
-package com.example.calculator0
+package com.example.calculator0.Calculator
 
 import android.annotation.SuppressLint
 import android.content.pm.ActivityInfo
@@ -15,6 +15,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.text.isDigitsOnly
 import androidx.core.view.isVisible
 import androidx.navigation.findNavController
+import com.example.calculator0.R
 import com.example.calculator0.databinding.FragmentCalculatorBinding
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
@@ -67,9 +68,23 @@ class CalculatorFragment : Fragment() {
             multiplicand.setOnClickListener { onOperationClickedButton(multiplication) }
             divided.setOnClickListener { onOperationClickedButton(division) }
 
+            history.setOnClickListener {
+
+                    if (group4.visibility == View.GONE) {
+                      history.setImageResource(R.drawable.ic_baseline_calculate_24)
+                      group3.visibility = View.INVISIBLE
+                      group4.visibility = View.VISIBLE
+                    } else if (group3.visibility == View.INVISIBLE) {
+                        history.setImageResource(R.drawable.no_history)
+                        group3.visibility = View.VISIBLE
+                        group4.visibility = View.GONE
+                    }
+
+            }
+
             emi.setOnClickListener {
                it.findNavController()
-                   .navigate(CalculatorFragmentDirections.actionCalculatorFragmentToEmiOneFragment())
+                   .navigate(com.example.calculator0.CalculatorFragmentDirections.actionCalculatorFragmentToEmiOneFragment())
             }
 
             simple?.setOnClickListener {
@@ -134,12 +149,10 @@ class CalculatorFragment : Fragment() {
 
                     if (currentValue.isEmpty()) {
                         isDotClicked = true
-                        backspace.visibility = View.GONE
-                        noBackspace.visibility =  View.VISIBLE
+                        noBackspace.setImageResource(R.drawable.ic_no_backspace)
                     }
                     else if (currentValue.isNotEmpty()) {
-                        backspace.visibility = View.VISIBLE
-                        noBackspace.visibility =  View.GONE
+                        noBackspace.setImageResource(R.drawable.backspace)
                     }
 
                     if (givenNumber.isDigitsOnly()) {
@@ -189,7 +202,7 @@ class CalculatorFragment : Fragment() {
                 }
             }
 
-            backspace.setOnClickListener {
+            noBackspace.setOnClickListener {
                 var currentValue = binding.currentInput.text.toString()
 
                 if (currentValue != "") {

@@ -1,4 +1,5 @@
-package com.example.calculator0
+package com.example.calculator0.Emi
+
 
 import android.annotation.SuppressLint
 import android.content.Intent
@@ -6,6 +7,7 @@ import android.os.Bundle
 import android.view.*
 import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
+import com.example.calculator0.R
 import com.example.calculator0.databinding.FragmentResultBinding
 
 class ResultFragment : Fragment() {

@@ -1,4 +1,4 @@
-package com.example.calculator0
+package com.example.calculator0.Emi
 
 import android.annotation.SuppressLint
 import android.os.Bundle
@@ -8,6 +8,7 @@ import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.setFragmentResult
 import androidx.navigation.findNavController
+import com.example.calculator0.R
 import com.example.calculator0.databinding.FragmentEmiBinding
 import java.math.RoundingMode
 import java.text.DecimalFormat
@@ -53,7 +54,7 @@ class EMIFragment : Fragment() {
 
                 it.findNavController()
                     .navigate(EMIFragmentDirections.actionEmiOneFragmentToResultFragment(
-                        emiMonth,installment,principal,interest,total,interestRateOutput))
+                        emiMonth, installment, principal, interest, total, interestRateOutput))
 
             }
         }

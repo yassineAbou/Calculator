@@ -1,4 +1,4 @@
-package com.example.calculator0.calculator
+package com.example.calculator0.ui.calculator
 
 import android.annotation.SuppressLint
 import android.content.pm.ActivityInfo
@@ -12,27 +12,32 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.text.isDigitsOnly
 import androidx.core.view.isVisible
-import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
-import androidx.navigation.findNavController
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.NavHostFragment.findNavController
-import com.example.calculator0.R
+import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.example.calculator0.*
+import com.example.calculator0.database.PrevOperationDatabase
 import com.example.calculator0.databinding.FragmentCalculatorBinding
-
-
-import kotlinx.coroutines.*
-import org.mariuszgromada.math.mxparser.Expression
+import com.example.calculator0.repository.PrevOperationRepository
+import com.example.calculator0.viewmodel.CalculatorViewModel
+import com.example.calculator0.viewmodel.CalculatorViewModelFactory
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.launch
 
 
 class CalculatorFragment : Fragment() {
 
-
+    lateinit var viewModel: CalculatorViewModel
     private lateinit var binding: FragmentCalculatorBinding
-    private val viewModel: CalculatorViewModel by viewModels()
 
-    @SuppressLint("SourceLockedOrientationActivity", "NewApi")
+
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?,
@@ -43,18 +48,29 @@ class CalculatorFragment : Fragment() {
         (activity as AppCompatActivity?)!!.supportActionBar!!.hide()
         requireActivity().window.statusBarColor = Color.WHITE
 
+        val application = requireNotNull(this.activity).application
+
+        // Create an instance of the ViewModel Factory.
+        val dao = PrevOperationDatabase.getInstance(application).prevOperationDoe
+        val repository = PrevOperationRepository(dao)
+        val viewModelFactory = CalculatorViewModelFactory(repository, application)
+
+        // Get a reference to the ViewModel associated with this fragment.
+         viewModel =
+            ViewModelProvider(
+                this, viewModelFactory).get(CalculatorViewModel::class.java)
+
         binding.viewModel = viewModel
         binding.lifecycleOwner = viewLifecycleOwner
 
+        val adapter = PrevOperationAdapter(PrevOperationListener { number ->
 
+            viewModel.addNumber(number)
+        })
+        binding.recyclerview.adapter = adapter
+        val manager = LinearLayoutManager(context, RecyclerView.VERTICAL, true)
+        binding.recyclerview.layoutManager = manager
 
-        binding.currentInput.addTextChangedListener(object : TextWatcher {
-                override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
-                    viewModel.getResult()
-                }
-                override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
-                override fun afterTextChanged(p0: Editable?) { }
-            })
 
         binding.apply {
             switchArrow?.setOnClickListener {
@@ -70,11 +86,11 @@ class CalculatorFragment : Fragment() {
             }
 
             simple?.setOnClickListener {
-                activity?.requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
+                    activity?.requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
             }
 
             scientific?.setOnClickListener {
-                activity?.requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE
+                    activity?.requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE
             }
 
             history.setOnClickListener {
@@ -86,12 +102,12 @@ class CalculatorFragment : Fragment() {
                     if (group2?.visibility == View.VISIBLE) {
                         group2.visibility = View.INVISIBLE
                     } else if (group1?.visibility == View.VISIBLE) {
-                        group1.visibility = View.INVISIBLE
+                       group1.visibility = View.INVISIBLE
                     }
 
 
                 } else if (group4.visibility == View.VISIBLE) {
-                    history.setImageResource(R.drawable.no_history)
+                    history.setImageResource(R.drawable.history)
                     group3.visibility = View.VISIBLE
                     group4.visibility = View.GONE
                     if (group2?.visibility == View.INVISIBLE) {
@@ -104,6 +120,23 @@ class CalculatorFragment : Fragment() {
             }
         }
 
+
+
+        binding.currentInput.addTextChangedListener(object : TextWatcher {
+            override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
+                viewModel.getResult()
+            }
+            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
+            override fun afterTextChanged(p0: Editable?) { }
+        })
+
+            viewModel.allPrevOperations.observe(viewLifecycleOwner, Observer {
+                it?.let {
+                    adapter.submitList(it)
+
+                }
+            })
+
             viewModel.invalid.observe(viewLifecycleOwner, Observer { isInvalid ->
                 if (isInvalid)
                     toast()
@@ -115,12 +148,14 @@ class CalculatorFragment : Fragment() {
             })
 
 
-
         return binding.root
     }
 
+
+
     private fun calculatorFinished() {
-        val action = CalculatorFragmentDirections.actionCalculatorFragmentToEmiOneFragment()
+        val action =
+            CalculatorFragmentDirections.actionCalculatorFragmentToEmiOneFragment()
         findNavController(this).navigate(action)
         viewModel.onCalculatorFinishComplete()
     }

@@ -1,4 +1,4 @@
-package com.example.calculator0.emi
+package com.example.calculator0.ui.emi
 
 import android.annotation.SuppressLint
 import android.content.Intent
@@ -65,7 +65,7 @@ class CompareFragment : Fragment() {
     // SHARING VALUES
     //-------------------
 
-    fun getShareIntent() : Intent {
+    private fun getShareIntent() : Intent {
         val args2 = CompareFragmentArgs.fromBundle(requireArguments())
         val shareIntent = Intent(Intent.ACTION_SEND)
         binding.apply {

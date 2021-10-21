@@ -1,4 +1,4 @@
-package com.example.calculator0.emi
+package com.example.calculator0.ui.emi
 
 
 import android.annotation.SuppressLint
@@ -53,7 +53,7 @@ class ResultFragment : Fragment() {
     // SHARING VALUES
     //-------------------
 
-    fun getShareIntent() : Intent {
+    private fun getShareIntent() : Intent {
         val args = ResultFragmentArgs.fromBundle(requireArguments())
         val shareIntent = Intent(Intent.ACTION_SEND)
         shareIntent.setType("text/plain")

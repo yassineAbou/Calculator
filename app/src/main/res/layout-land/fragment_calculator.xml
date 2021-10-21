@@ -7,13 +7,13 @@
     <data>
         <variable
             name="viewModel"
-            type="com.example.calculator0.calculator.CalculatorViewModel" />
+            type="com.example.calculator0.viewmodel.CalculatorViewModel" />
     </data>
     
 <androidx.constraintlayout.widget.ConstraintLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".calculator.CalculatorFragment">
+    tools:context=".ui.calculator.CalculatorFragment">
 
     <TextView
         android:id="@+id/current_input"
@@ -117,7 +117,7 @@
         android:layout_height="wrap_content"
         android:visibility="visible"
         app:constraint_referenced_ids="switchArrow"
-        />
+        tools:visibility="invisible" />
 
     <androidx.constraintlayout.widget.Group
         android:id="@+id/group4"
@@ -125,7 +125,7 @@
         android:layout_height="wrap_content"
         android:visibility="gone"
         app:constraint_referenced_ids="view11,clearHistory"
-        />
+        tools:visibility="visible" />
 
 
     <View
@@ -137,6 +137,18 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/line_space" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerview"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/_100sdp"
+        app:layout_constraintEnd_toEndOf="@+id/view11"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/line_space"
+        android:layout_marginEnd="@dimen/_15sdp"
+        tools:listitem="@layout/list_item_prev_operation"
+        />
 
     <Button
         android:id="@+id/clearHistory"
@@ -156,7 +168,8 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/view11"
         app:layout_constraintTop_toBottomOf="@+id/line_space"
-        />
+        android:onClick="@{() -> viewModel.onClear()}"
+        android:enabled="@{viewModel.clearHistoryEnabled}"/>
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/clear"
@@ -740,7 +753,7 @@
         app:constraint_referenced_ids="Deg,cureRoot,sin_minus,cos_minus,
          tan_minus,sinh,cosh,tanh,sinh_minus,cosh_minus,tanh_minus,two_Power,power_3,
          factorial"
-        tools:visibility="visible" />
+        tools:visibility="gone" />
 
 
     <androidx.appcompat.widget.AppCompatButton

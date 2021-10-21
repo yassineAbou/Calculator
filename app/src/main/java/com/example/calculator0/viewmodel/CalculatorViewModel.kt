@@ -1,18 +1,31 @@
-package com.example.calculator0.calculator
+package com.example.calculator0.viewmodel
 
 
 
 
+import android.app.Application
 import androidx.core.text.isDigitsOnly
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.*
+import com.example.calculator0.repository.PrevOperationRepository
+import com.example.calculator0.database.PrevOperation
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import org.mariuszgromada.math.mxparser.Expression
 
-class CalculatorViewModel : ViewModel()  {
+class CalculatorViewModel(
+    repository: PrevOperationRepository,
+    application: Application) : ViewModel() {
+
+    /* on below line we are creating a variable
+    for our all prevOperationList list and repository
+    */
+    private val repository1 = repository
+    val allPrevOperations = repository.allPrevOperations
+
+
+    val clearHistoryEnabled: LiveData<Boolean?> = Transformations.map(allPrevOperations) {
+        it?.isNotEmpty()
+    }
 
     private val _currentInput = MutableLiveData<String> ()
     val currentInput: LiveData<String>
@@ -25,6 +38,7 @@ class CalculatorViewModel : ViewModel()  {
     private val _invalid = MutableLiveData<Boolean> ()
     val invalid: LiveData<Boolean>
         get() = _invalid
+
 
     private val _eventCalculatorFinished = MutableLiveData<Boolean> ()
     val eventCalculatorFinished: LiveData<Boolean>
@@ -42,6 +56,14 @@ class CalculatorViewModel : ViewModel()  {
     init {
         _currentInput.value = ""
         _currentOutput.value = ""
+
+
+    }
+
+
+    fun addNumber(number: String) {
+        val currentValue = _currentInput.value!!
+        _currentInput.value =  currentValue + number
     }
 
     fun onCalculatorFinish() {
@@ -52,13 +74,15 @@ class CalculatorViewModel : ViewModel()  {
         _eventCalculatorFinished.value = false
     }
 
-    fun onInvalid() {
+    private fun onInvalid() {
         _invalid.value = true
     }
 
     fun onInvalidComplete() {
         _invalid.value = false
     }
+
+
 
     fun updateCurrentValue(keyWord: String) {
         val currentValue = _currentInput.value!!
@@ -154,7 +178,11 @@ class CalculatorViewModel : ViewModel()  {
 
     fun equals() {
         val resultValue = _currentOutput.value!!
+        val currentValue = _currentInput.value!!
         if (resultValue.isNotEmpty()) {
+            val test = PrevOperation(currentValue, resultValue)
+
+            insert(test)
             _currentInput.value = resultValue
             _currentOutput.value = ""
         }
@@ -167,6 +195,7 @@ class CalculatorViewModel : ViewModel()  {
             _currentInput.value = ("$currentValue%")
         }
         else {
+
             onInvalid()
         }
     }
@@ -197,7 +226,7 @@ class CalculatorViewModel : ViewModel()  {
         }
     }
 
-     fun isBalanced(str: String): Boolean {
+     private fun isBalanced(str: String): Boolean {
         var count = 0
         var i = 0
         while (i < str.length && count >= 0) {
@@ -205,6 +234,27 @@ class CalculatorViewModel : ViewModel()  {
             i++
         }
         return count == 0
+    }
+
+
+
+    //------------------
+    // Data
+    //------------------
+
+    fun onClear() {
+        viewModelScope.launch {
+            deleteAll()
+        }
+    }
+
+    private suspend fun deleteAll() {
+        repository1.clear()
+    }
+
+
+    fun insert(pervOperation: PrevOperation) = viewModelScope.launch(Dispatchers.IO) {
+        repository1.insert(pervOperation)
     }
 
 

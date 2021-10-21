@@ -1,17 +1,15 @@
-package com.example.calculator0
+package com.example.calculator0.ui
 
 
-import android.content.pm.ActivityInfo
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.navigation.NavController
-import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
-import androidx.navigation.ui.NavigationUI
 import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
+import com.example.calculator0.R
 import com.example.calculator0.databinding.ActivityMainBinding
 
 

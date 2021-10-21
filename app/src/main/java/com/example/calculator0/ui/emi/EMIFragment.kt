@@ -1,4 +1,4 @@
-package com.example.calculator0.emi
+package com.example.calculator0.ui.emi
 
 import android.annotation.SuppressLint
 import android.os.Bundle

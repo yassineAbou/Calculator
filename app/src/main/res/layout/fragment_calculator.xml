@@ -7,13 +7,13 @@
     <data>
         <variable
             name="viewModel"
-            type="com.example.calculator0.calculator.CalculatorViewModel" />
+            type="com.example.calculator0.viewmodel.CalculatorViewModel" />
     </data>
 
 <androidx.constraintlayout.widget.ConstraintLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".calculator.CalculatorFragment">
+    tools:context=".ui.calculator.CalculatorFragment">
 
     <TextView
         android:id="@+id/current_input"
@@ -56,7 +56,7 @@
         android:id="@+id/history"
         android:layout_width="@dimen/_57sdp"
         android:layout_height="@dimen/_57sdp"
-        app:srcCompat="@drawable/no_history"
+        app:srcCompat="@drawable/history"
         app:layout_constraintTop_toBottomOf = "@+id/result"
         android:layout_marginTop="@dimen/_10sdp"
         android:layout_marginStart="@dimen/_15sdp"
@@ -118,15 +118,16 @@
         android:layout_height="wrap_content"
         android:visibility="visible"
         app:constraint_referenced_ids="clear,betweenBrackets,percent,
-        seven,eight,nine,four,five,six,one,two,three,sign,zero,period" />
+        seven,eight,nine,four,five,six,one,two,three,sign,zero,period"
+        tools:visibility="invisible" />
 
     <androidx.constraintlayout.widget.Group
         android:id="@+id/group4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:visibility="gone"
-        app:constraint_referenced_ids="view11,clearHistory"
-        />
+        app:constraint_referenced_ids="view11,clearHistory,recyclerview"
+        tools:visibility="visible" />
 
     <View
         android:id="@+id/view11"
@@ -137,6 +138,20 @@
         android:layout_marginEnd="@dimen/_11sdp"
         app:layout_constraintTop_toBottomOf="@+id/view10"
         android:layout_marginTop="@dimen/_17sdp"
+        />
+
+    <!--recycler view for displaying all notes-->
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerview"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/_280sdp"
+        app:layout_constraintEnd_toEndOf="@+id/view11"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/view10"
+        android:layout_marginEnd="@dimen/_15sdp"
+        tools:listitem="@layout/list_item_prev_operation"
         />
 
     <Button
@@ -157,7 +172,8 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/view11"
         app:layout_constraintTop_toBottomOf="@+id/view10"
-       />
+        android:onClick="@{() -> viewModel.onClear()}"
+        android:enabled="@{viewModel.clearHistoryEnabled}"/>
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/clear"

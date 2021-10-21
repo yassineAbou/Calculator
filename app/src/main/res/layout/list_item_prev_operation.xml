@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="prevOperation"
+            type="com.example.calculator0.database.PrevOperation" />
+        <variable
+            name="clickListener"
+            type="com.example.calculator0.ui.calculator.PrevOperationListener" />
+    </data>
+
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <TextView
+        android:id="@+id/textInput"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_17sdp"
+        android:gravity="end"
+        android:paddingStart="@dimen/_15sdp"
+        android:textAlignment="viewEnd"
+        android:textColor="@color/light_black"
+        android:textSize="@dimen/_15ssp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:autoSizeTextType="uniform"
+        input="@{prevOperation}"
+        tools:text="15+15"
+        android:paddingEnd="0dp"
+        android:onClick="@{() -> clickListener.onClick(prevOperation)}"
+        />
+
+    <TextView
+        android:id="@+id/textOutput"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_5sdp"
+        android:gravity="end"
+        android:paddingStart="@dimen/_15sdp"
+        android:textColor="@color/blue"
+        android:textSize="@dimen/_18ssp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textInput"
+        app:autoSizeTextType="uniform"
+        output="@{prevOperation}"
+        tools:text="30"
+        android:paddingEnd="0dp"
+        android:onClick="@{() -> clickListener.onClick2(prevOperation)}"
+        />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

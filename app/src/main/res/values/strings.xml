@@ -14,6 +14,7 @@
     <string name="_3">3</string>
     <string name="minus_sign">+/-</string>
     <string name="_0">0</string>
+    <string name="number">%d</string>
 
     <!-- ImageButton -->
     <string name="imageDes1">history</string>
@@ -67,6 +68,36 @@
     <string name="_power_3">x³</string>
     <string name="_exclamation_mark">x!</string>
     <string name="_deg">Deg</string>
+
+    <!-- Scientific values -->
+    <string name="value_2power">^(2)</string>
+    <string name="value_power">^(</string>
+    <string name="value_3power">^(3)</string>
+    <string name="value_factorial">!</string>
+    <string name="value_squareRoot">sqrt(</string>
+    <string name="value_cos">cos(</string>
+    <string name="value_sin">sin(</string>
+    <string name="value_tan">tan(</string>
+    <string name="value_ln">ln(</string>
+    <string name="value_log">log10(</string>
+    <string name="value_one_division_slash">1÷</string>
+    <string name="value_eˣ">exp(</string>
+    <string name="value_verticalBars">abs(</string>
+    <string name="value_EConstant">e</string>
+    <string name="value_piConstant">pi</string>
+    <string name="value_sinMinus">asin(</string>
+    <string name="value_cosMinus">acos(</string>
+    <string name="value_tanMinus">atan(</string>
+    <string name="value_sinh">sinh(</string>
+    <string name="value_cosh">cosh(</string>
+    <string name="value_tanh">tanh(</string>
+    <string name="value_sinhMinus">asinh(</string>
+    <string name="value_coshMinus">acosh(</string>
+    <string name="value_tanhMinus">atanh(</string>
+    <string name="value_twoPower">2^(</string>
+    <string name="value_cureRoot">root(3,</string>
+    <string name="value_rad">rad(</string>
+    <string name="value_deg">deg(</string>
 
     <!-- EMI-->
     <string name="hello_blank_fragment">Hello blank fragment</string>

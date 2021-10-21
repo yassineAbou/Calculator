@@ -1,4 +1,4 @@
-package com.example.calculator0.Emi
+package com.example.calculator0.emi
 
 import android.annotation.SuppressLint
 import android.content.Intent

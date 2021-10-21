@@ -4,10 +4,16 @@
     xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
+    <data>
+        <variable
+            name="viewModel"
+            type="com.example.calculator0.calculator.CalculatorViewModel" />
+    </data>
+
 <androidx.constraintlayout.widget.ConstraintLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Calculator.CalculatorFragment">
+    tools:context=".calculator.CalculatorFragment">
 
     <TextView
         android:id="@+id/current_input"
@@ -24,7 +30,9 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:ignore="RtlHardcoded" />
+        tools:ignore="RtlHardcoded"
+        android:text="@{viewModel.currentInput}"
+        />
 
     <TextView
         android:id="@+id/result"
@@ -41,7 +49,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/current_input"
-        tools:ignore="RtlCompat" />
+        tools:ignore="RtlCompat"
+        android:text="@{viewModel.currentOutput}"/>
 
     <ImageButton
         android:id="@+id/history"
@@ -78,7 +87,8 @@
         app:layout_constraintLeft_toRightOf="@+id/scientific"
         app:layout_constraintTop_toBottomOf="@+id/result"
         android:contentDescription="@string/imgDes3"
-        android:visibility="visible"/>
+        android:visibility="visible"
+        android:onClick="@{() -> viewModel.onCalculatorFinish()}"/>
 
     <ImageButton
         android:id="@+id/no_backspace"
@@ -90,7 +100,8 @@
         android:contentDescription="@string/imgDes4"
         app:layout_constraintLeft_toRightOf="@+id/emi"
         app:layout_constraintTop_toBottomOf="@+id/result"
-        app:srcCompat="@drawable/ic_no_backspace" />
+        app:srcCompat="@drawable/ic_no_backspace"
+        android:onClick="@{() -> viewModel.backspace()}"/>
 
     <View
         android:id="@+id/view10"
@@ -161,7 +172,8 @@
         android:textSize="@dimen/_25ssp"
         android:textStyle="normal"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/history" />
+        app:layout_constraintTop_toBottomOf="@+id/history"
+        android:onClick="@{() -> viewModel.clear()}"/>
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/betweenBrackets"
@@ -172,7 +184,8 @@
         android:textSize="@dimen/_20ssp"
         app:layout_constraintLeft_toRightOf="@+id/clear"
         app:layout_constraintTop_toBottomOf="@+id/history"
-        style="@style/operations" />
+        style="@style/operations"
+        android:onClick="@{() -> viewModel.betweenBrackets()}"/>
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/percent"
@@ -183,7 +196,8 @@
         android:textSize="@dimen/_25ssp"
         app:layout_constraintLeft_toRightOf="@+id/betweenBrackets"
         app:layout_constraintTop_toBottomOf="@+id/history"
-        style="@style/operations"/>
+        style="@style/operations"
+        android:onClick="@{() -> viewModel.percent()}"/>
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/divided"
@@ -194,7 +208,8 @@
         android:textSize="@dimen/_30ssp"
         app:layout_constraintLeft_toRightOf="@+id/percent"
         app:layout_constraintTop_toBottomOf="@+id/history"
-        style="@style/operations"/>
+        style="@style/operations"
+        android:onClick="@{() -> viewModel.onOperationClickedButton(@string/_divided)}"/>
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/seven"
@@ -205,7 +220,8 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/clear"
         android:textSize="@dimen/_30ssp"
-        style="@style/numbers" />
+        style="@style/numbers"
+        android:onClick="@{() -> viewModel.onNumberClickedButton(@string/number(7))}"/>
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/eight"
@@ -216,7 +232,8 @@
         android:textSize="@dimen/_30ssp"
         app:layout_constraintLeft_toRightOf="@+id/seven"
         app:layout_constraintTop_toBottomOf="@+id/clear"
-        style="@style/numbers"/>
+        style="@style/numbers"
+        android:onClick="@{() -> viewModel.onNumberClickedButton(@string/number(8))}"/>
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/nine"
@@ -227,7 +244,8 @@
         android:textSize="@dimen/_30ssp"
         app:layout_constraintLeft_toRightOf="@+id/eight"
         app:layout_constraintTop_toBottomOf="@+id/clear"
-        style="@style/numbers"/>
+        style="@style/numbers"
+        android:onClick="@{() -> viewModel.onNumberClickedButton(@string/number(9))}"/>
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/multiplicand"
@@ -238,7 +256,8 @@
         android:textSize="@dimen/_30ssp"
         app:layout_constraintLeft_toRightOf="@+id/nine"
         app:layout_constraintTop_toBottomOf="@+id/clear"
-        style="@style/operations"/>
+        style="@style/operations"
+        android:onClick="@{() -> viewModel.onOperationClickedButton(@string/_multiplicand)}"/>
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/four"
@@ -249,7 +268,8 @@
         android:textSize="@dimen/_30ssp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/seven"
-        style="@style/numbers"/>
+        style="@style/numbers"
+        android:onClick="@{() -> viewModel.onNumberClickedButton(@string/number(4))}"/>
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/five"
@@ -260,7 +280,8 @@
         android:textSize="@dimen/_30ssp"
         app:layout_constraintLeft_toRightOf="@+id/four"
         app:layout_constraintTop_toBottomOf="@+id/seven"
-        style="@style/numbers"/>
+        style="@style/numbers"
+        android:onClick="@{() -> viewModel.onNumberClickedButton(@string/number(5))}"/>
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/six"
@@ -271,7 +292,8 @@
         android:textSize="@dimen/_30ssp"
         app:layout_constraintLeft_toRightOf="@+id/five"
         app:layout_constraintTop_toBottomOf="@+id/seven"
-        style="@style/numbers"/>
+        style="@style/numbers"
+        android:onClick="@{() -> viewModel.onNumberClickedButton(@string/number(6))}"/>
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/minus"
@@ -282,7 +304,8 @@
         android:textSize="@dimen/_30ssp"
         app:layout_constraintLeft_toRightOf="@+id/six"
         app:layout_constraintTop_toBottomOf="@+id/seven"
-        style="@style/operations"/>
+        style="@style/operations"
+        android:onClick="@{() -> viewModel.onOperationClickedButton(@string/_minus)}"/>
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/one"
@@ -293,7 +316,8 @@
         android:textSize="@dimen/_30ssp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/four"
-        style="@style/numbers"/>
+        style="@style/numbers"
+        android:onClick="@{() -> viewModel.onNumberClickedButton(@string/number(1))}"/>
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/two"
@@ -304,7 +328,8 @@
         android:textSize="@dimen/_30ssp"
         app:layout_constraintLeft_toRightOf="@+id/one"
         app:layout_constraintTop_toBottomOf="@+id/four"
-        style="@style/numbers"/>
+        style="@style/numbers"
+        android:onClick="@{() -> viewModel.onNumberClickedButton(@string/number(2))}"/>
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/three"
@@ -315,7 +340,8 @@
         android:textSize="@dimen/_30ssp"
         app:layout_constraintLeft_toRightOf="@+id/two"
         app:layout_constraintTop_toBottomOf="@+id/four"
-        style="@style/numbers"/>
+        style="@style/numbers"
+        android:onClick="@{() -> viewModel.onNumberClickedButton(@string/number(3))}"/>
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/plus"
@@ -326,7 +352,8 @@
         android:textSize="@dimen/_30ssp"
         app:layout_constraintLeft_toRightOf="@+id/three"
         app:layout_constraintTop_toBottomOf="@+id/four"
-        style="@style/operations"/>
+        style="@style/operations"
+        android:onClick="@{() -> viewModel.onOperationClickedButton(@string/_plus)}"/>
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/sign"
@@ -337,7 +364,8 @@
         android:textSize="@dimen/_25ssp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/one"
-        style="@style/numbers"/>
+        style="@style/numbers"
+        android:onClick="@{() -> viewModel.sign()}"/>
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/zero"
@@ -348,7 +376,8 @@
         android:textSize="@dimen/_30ssp"
         app:layout_constraintLeft_toRightOf="@+id/sign"
         app:layout_constraintTop_toBottomOf="@+id/one"
-        style="@style/numbers"/>
+        style="@style/numbers"
+        android:onClick="@{() -> viewModel.onNumberClickedButton(@string/number(0))}"/>
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/period"
@@ -359,7 +388,8 @@
         android:textSize="@dimen/_30ssp"
         app:layout_constraintLeft_toRightOf="@+id/zero"
         app:layout_constraintTop_toBottomOf="@+id/one"
-        style="@style/numbers"/>
+        style="@style/numbers"
+        android:onClick="@{() -> viewModel.period()}"/>
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/equals"
@@ -372,7 +402,8 @@
         android:textColor="@color/white"
         android:textSize="@dimen/_30ssp"
         app:layout_constraintLeft_toRightOf="@+id/period"
-        app:layout_constraintTop_toBottomOf="@+id/one" />
+        app:layout_constraintTop_toBottomOf="@+id/one"
+        android:onClick="@{() -> viewModel.equals()}"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

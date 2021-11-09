@@ -5,17 +5,21 @@
     <style name="numbers">
         <item name="android:layout_marginTop">@dimen/_5sdp</item>
         <item name="android:background">@drawable/custom_button</item>
-        <item name="android:fontFamily">@font/roboto</item>
-        <item name="android:textColor">@color/light_black</item>
+        <item name="android:textColor">?attr/textColor</item>
     </style>
 
     <style name="operations">
         <item name="android:layout_marginStart">@dimen/_5sdp</item>
         <item name="android:background">@drawable/custom_button</item>
-        <item name="android:fontFamily">@font/roboto</item>
+
         <item name="android:textColor">@color/blue</item>
     </style>
 
+
+    <style name="TextAppearance.Title" parent="TextAppearance.MaterialComponents.Subtitle2">
+        <item name="android:textSize">@dimen/_36ssp</item>
+        <item name="android:textColor">@color/light_black</item>
+    </style>
 
 
 

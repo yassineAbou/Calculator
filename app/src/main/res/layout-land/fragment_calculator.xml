@@ -20,28 +20,27 @@
         android:layout_width="wrap_content"
         android:layout_height="@dimen/_40sdp"
         android:layout_marginTop="@dimen/_2sdp"
-        android:fontFamily="@font/roboto"
         android:paddingStart="@dimen/_25sdp"
         android:paddingEnd="@dimen/_25sdp"
         app:autoSizeTextType="uniform"
-        android:textColor="@color/light_black"
-        android:gravity="right"
+        android:textColor="?attr/textColor"
+        android:gravity="end"
         android:textSize="@dimen/_35ssp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:ignore="RtlHardcoded"
-        android:text="@{viewModel.currentInput}"/>
+        android:text="@{viewModel.currentInput}"
+        android:onTextChanged="@{(text, start, before, count) -> viewModel.getResult()}"/>
 
     <TextView
         android:id="@+id/result"
         android:layout_width="match_parent"
         android:layout_height="@dimen/_30sdp"
-        android:fontFamily="@font/roboto"
         android:layout_marginTop="@dimen/_5sdp"
         android:paddingEnd="@dimen/_25sdp"
         android:paddingStart="0dp"
-        android:gravity="right"
-        android:textColor="@color/gray"
+        android:gravity="end"
+        android:textColor="?attr/textColor2"
         app:autoSizeTextType="uniform"
         android:textSize="@dimen/_23ssp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -53,35 +52,25 @@
         android:id="@+id/history"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:srcCompat="@drawable/no_history"
+        app:srcCompat="@drawable/history"
         app:layout_constraintTop_toBottomOf = "@+id/result"
         android:layout_marginTop="@dimen/_3sdp"
         android:layout_marginStart="@dimen/_52sdp"
-        android:background="@color/white"
+        android:background="?attr/bgColor"
         app:layout_constraintStart_toStartOf="parent"
         android:contentDescription="@string/imageDes1" />
 
-    <ImageButton
-        android:id="@+id/simple"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf = "@+id/result"
-        android:layout_marginTop="@dimen/_3sdp"
-        android:layout_marginStart="@dimen/_54sdp"
-        android:background="@color/white"
-        app:srcCompat="@drawable/ic_plus"
-        app:layout_constraintLeft_toRightOf = "@+id/history"
-        android:contentDescription="@string/imgDes2" />
+
 
     <ImageButton
         android:id="@+id/emi"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/_3sdp"
-        android:layout_marginStart="@dimen/_50sdp"
-        android:background="@color/white"
+        android:layout_marginStart="@dimen/_53sdp"
+        android:background="?attr/bgColor"
         app:srcCompat="@drawable/dollar"
-        app:layout_constraintLeft_toRightOf="@+id/simple"
+        app:layout_constraintStart_toEndOf="@+id/history"
         app:layout_constraintTop_toBottomOf="@+id/result"
         android:contentDescription="@string/imgDes3"
         android:onClick="@{() -> viewModel.onCalculatorFinish()}"/>
@@ -91,10 +80,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/_3sdp"
-        android:background="@color/white"
+        android:background="?attr/bgColor"
         app:srcCompat="@drawable/ic_no_backspace"
-        android:layout_marginStart="@dimen/_303sdp"
-        app:layout_constraintLeft_toRightOf="@+id/emi"
+        android:layout_marginStart="@dimen/_382sdp"
+        app:layout_constraintStart_toEndOf="@+id/emi"
         app:layout_constraintTop_toBottomOf="@+id/result"
         android:contentDescription="@string/imgDes4"
         android:onClick="@{() -> viewModel.backspace()}"/>
@@ -105,11 +94,11 @@
         android:id="@+id/line_space"
         android:layout_width="@dimen/_550sdp"
         android:layout_height="1dp"
-        android:background="@color/white2"
         android:layout_marginTop="@dimen/_5sdp"
         app:layout_constraintTop_toBottomOf="@+id/history"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"/>
+        app:layout_constraintStart_toStartOf="parent"
+        android:background="?attr/bgColor2"/>
 
     <androidx.constraintlayout.widget.Group
         android:id="@+id/group3"
@@ -117,7 +106,7 @@
         android:layout_height="wrap_content"
         android:visibility="visible"
         app:constraint_referenced_ids="switchArrow"
-        tools:visibility="invisible" />
+        tools:visibility="visible" />
 
     <androidx.constraintlayout.widget.Group
         android:id="@+id/group4"
@@ -125,7 +114,7 @@
         android:layout_height="wrap_content"
         android:visibility="gone"
         app:constraint_referenced_ids="view11,clearHistory"
-        tools:visibility="visible" />
+        tools:visibility="gone" />
 
 
     <View
@@ -133,10 +122,11 @@
         android:layout_width="@dimen/_1sdp"
         android:layout_height="@dimen/_150sdp"
         android:layout_marginStart="@dimen/_250sdp"
-        android:background="@color/gray3"
+        android:background="?attr/bgColor2"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/line_space" />
+        app:layout_constraintTop_toBottomOf="@+id/line_space"
+        />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerview"
@@ -148,7 +138,7 @@
         app:layout_constraintTop_toBottomOf="@+id/line_space"
         android:layout_marginEnd="@dimen/_15sdp"
         tools:listitem="@layout/list_item_prev_operation"
-        />
+        android:textColor="@color/white"/>
 
     <Button
         android:id="@+id/clearHistory"
@@ -156,14 +146,15 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/_113sdp"
         android:background="@drawable/radius_button"
-        android:paddingLeft="@dimen/_30sdp"
+        android:paddingStart="@dimen/_30sdp"
         android:paddingBottom="@dimen/_2sdp"
-        android:paddingRight="@dimen/_30sdp"
+        android:paddingEnd="@dimen/_30sdp"
         android:paddingTop="@dimen/_2sdp"
         android:text="@string/text8"
         android:textAllCaps="false"
         android:textSize="@dimen/_13ssp"
         android:textStyle="bold"
+        android:textColor="@color/white"
         app:backgroundTint="@color/blue"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/view11"
@@ -178,7 +169,6 @@
         android:layout_marginStart="@dimen/_295sdp"
         android:layout_marginTop="@dimen/_5sdp"
         android:background="@drawable/custom_btn_landscape"
-        android:fontFamily="@font/roboto"
         android:text="@string/_clear"
         android:textColor="@color/red"
         android:textSize="@dimen/_18ssp"
@@ -193,11 +183,10 @@
         android:layout_marginStart="@dimen/_33sdp"
         android:layout_marginTop="@dimen/_5sdp"
         android:background="@drawable/custom_btn_landscape"
-        android:fontFamily="@font/roboto"
         android:text="@string/_betweenBrackets"
         android:textColor="@color/blue"
         android:textSize="@dimen/_14ssp"
-        app:layout_constraintLeft_toRightOf="@+id/clear"
+        app:layout_constraintStart_toEndOf="@+id/clear"
         app:layout_constraintTop_toBottomOf="@+id/line_space"
         android:onClick="@{() -> viewModel.betweenBrackets()}"/>
 
@@ -207,12 +196,11 @@
         android:layout_height="@dimen/_28sdp"
         android:layout_marginTop="@dimen/_5sdp"
         android:background="@drawable/custom_btn_landscape"
-        android:fontFamily="@font/roboto"
         android:layout_marginStart="@dimen/_33sdp"
         android:text="@string/_percent"
         android:textColor="@color/blue"
         android:textSize="@dimen/_18ssp"
-        app:layout_constraintLeft_toRightOf="@+id/betweenBrackets"
+        app:layout_constraintStart_toEndOf="@+id/betweenBrackets"
         app:layout_constraintTop_toBottomOf="@+id/line_space"
         android:onClick="@{() -> viewModel.percent()}"/>
 
@@ -222,12 +210,11 @@
         android:layout_height="@dimen/_28sdp"
         android:layout_marginTop="@dimen/_5sdp"
         android:background="@drawable/custom_btn_landscape"
-        android:fontFamily="@font/roboto"
         android:layout_marginStart="@dimen/_33sdp"
         android:text="@string/_divided"
         android:textColor="@color/blue"
         android:textSize="@dimen/_20ssp"
-        app:layout_constraintLeft_toRightOf="@+id/percent"
+        app:layout_constraintStart_toEndOf="@+id/percent"
         app:layout_constraintTop_toBottomOf="@+id/line_space"
         android:onClick="@{() -> viewModel.onOperationClickedButton(@string/_divided)}"/>
 
@@ -237,14 +224,13 @@
         android:layout_height="@dimen/_28sdp"
         android:layout_marginTop="@dimen/_6sdp"
         android:background="@drawable/custom_btn_landscape"
-        android:fontFamily="@font/roboto"
         android:text="@string/_7"
         android:layout_marginStart="@dimen/_295sdp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/clear"
         android:textSize="@dimen/_20ssp"
-        android:textColor="@color/light_black"
-        android:onClick="@{() -> viewModel.onNumberClickedButton(@string/number(7))}"/>
+        android:textColor="?attr/textColor"
+        android:onClick="@{() -> viewModel.onNumberClickedButton(@string/_7)}" />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/eight"
@@ -253,13 +239,13 @@
         android:layout_marginTop="@dimen/_6sdp"
         android:layout_marginStart="@dimen/_33sdp"
         android:background="@drawable/custom_btn_landscape"
-        android:fontFamily="@font/roboto"
         android:text="@string/_8"
         android:textSize="@dimen/_20ssp"
-        android:textColor="@color/light_black"
-        app:layout_constraintLeft_toRightOf="@+id/seven"
+        android:textColor="?attr/textColor"
+        app:layout_constraintStart_toEndOf="@+id/seven"
         app:layout_constraintTop_toBottomOf="@+id/clear"
-        android:onClick="@{() -> viewModel.onNumberClickedButton(@string/number(8))}"/>
+        android:onClick="@{() -> viewModel.onNumberClickedButton(@string/_8)}"
+        />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/nine"
@@ -268,13 +254,13 @@
         android:layout_marginTop="@dimen/_6sdp"
         android:layout_marginStart="@dimen/_33sdp"
         android:background="@drawable/custom_btn_landscape"
-        android:fontFamily="@font/roboto"
         android:text="@string/_9"
         android:textSize="@dimen/_20ssp"
-        android:textColor="@color/light_black"
-        app:layout_constraintLeft_toRightOf="@+id/eight"
+        android:textColor="?attr/textColor"
+        app:layout_constraintStart_toEndOf="@+id/eight"
         app:layout_constraintTop_toBottomOf="@+id/clear"
-        android:onClick="@{() -> viewModel.onNumberClickedButton(@string/number(9))}"/>
+        android:onClick="@{() -> viewModel.onNumberClickedButton(@string/_9)}"
+        />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/multiplicand"
@@ -283,11 +269,10 @@
         android:layout_marginTop="@dimen/_6sdp"
         android:layout_marginStart="@dimen/_33sdp"
         android:background="@drawable/custom_btn_landscape"
-        android:fontFamily="@font/roboto"
         android:text="@string/_multiplicand"
         android:textSize="@dimen/_20ssp"
         android:textColor="@color/blue"
-        app:layout_constraintLeft_toRightOf="@+id/nine"
+        app:layout_constraintStart_toEndOf="@+id/nine"
         app:layout_constraintTop_toBottomOf="@+id/clear"
         android:onClick="@{() -> viewModel.onOperationClickedButton(@string/_multiplicand)}"/>
 
@@ -297,14 +282,14 @@
         android:layout_height="@dimen/_28sdp"
         android:layout_marginTop="@dimen/_6sdp"
         android:background="@drawable/custom_btn_landscape"
-        android:fontFamily="@font/roboto"
         android:text="@string/_4"
         android:layout_marginStart="@dimen/_295sdp"
         android:textSize="@dimen/_20ssp"
-        android:textColor="@color/light_black"
+        android:textColor="?attr/textColor"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/seven"
-        android:onClick="@{() -> viewModel.onNumberClickedButton(@string/number(4))}"/>
+        android:onClick="@{() -> viewModel.onNumberClickedButton(@string/_4)}"
+        />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/five"
@@ -313,13 +298,13 @@
         android:layout_marginTop="@dimen/_6sdp"
         android:layout_marginStart="@dimen/_33sdp"
         android:background="@drawable/custom_btn_landscape"
-        android:fontFamily="@font/roboto"
         android:text="@string/_5"
         android:textSize="@dimen/_20ssp"
-        android:textColor="@color/light_black"
-        app:layout_constraintLeft_toRightOf="@+id/four"
+        android:textColor="?attr/textColor"
+        app:layout_constraintStart_toEndOf="@+id/four"
         app:layout_constraintTop_toBottomOf="@+id/seven"
-        android:onClick="@{() -> viewModel.onNumberClickedButton(@string/number(5))}"/>
+        android:onClick="@{() -> viewModel.onNumberClickedButton(@string/_5)}"
+        />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/six"
@@ -328,28 +313,28 @@
         android:layout_marginTop="@dimen/_6sdp"
         android:layout_marginStart="@dimen/_33sdp"
         android:background="@drawable/custom_btn_landscape"
-        android:fontFamily="@font/roboto"
         android:text="@string/_6"
         android:textSize="@dimen/_20ssp"
-        android:textColor="@color/light_black"
-        app:layout_constraintLeft_toRightOf="@+id/five"
+        android:textColor="?attr/textColor"
+        app:layout_constraintStart_toEndOf="@+id/five"
         app:layout_constraintTop_toBottomOf="@+id/seven"
-        android:onClick="@{() -> viewModel.onNumberClickedButton(@string/number(6))}"/>
+        android:onClick="@{() -> viewModel.onNumberClickedButton(@string/_6)}"
+        />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/minus"
         android:layout_width="@dimen/_40sdp"
         android:layout_height="@dimen/_28sdp"
-        android:layout_marginTop="@dimen/_6sdp"
         android:layout_marginStart="@dimen/_33sdp"
+        android:layout_marginTop="@dimen/_6sdp"
         android:background="@drawable/custom_btn_landscape"
-        android:fontFamily="@font/roboto"
+        android:onClick="@{() -> viewModel.onOperationClickedButton(@string/_minus)}"
         android:text="@string/_minus"
-        android:textSize="@dimen/_20ssp"
         android:textColor="@color/blue"
-        app:layout_constraintLeft_toRightOf="@+id/six"
+        android:textSize="@dimen/_20ssp"
+        app:layout_constraintStart_toEndOf="@+id/six"
         app:layout_constraintTop_toBottomOf="@+id/seven"
-        android:onClick="@{() -> viewModel.onOperationClickedButton(@string/_minus)}"/>
+        tools:ignore="TouchTargetSizeCheck" />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/one"
@@ -357,14 +342,14 @@
         android:layout_height="@dimen/_28sdp"
         android:layout_marginTop="@dimen/_6sdp"
         android:background="@drawable/custom_btn_landscape"
-        android:fontFamily="@font/roboto"
         android:text="@string/_1"
         android:layout_marginStart="@dimen/_295sdp"
         android:textSize="@dimen/_20ssp"
-        android:textColor="@color/light_black"
+        android:textColor="?attr/textColor"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/four"
-        android:onClick="@{() -> viewModel.onNumberClickedButton(@string/number(1))}"/>
+        android:onClick="@{() -> viewModel.onNumberClickedButton(@string/_1)}"
+       />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/two"
@@ -373,13 +358,13 @@
         android:layout_marginTop="@dimen/_6sdp"
         android:layout_marginStart="@dimen/_33sdp"
         android:background="@drawable/custom_btn_landscape"
-        android:fontFamily="@font/roboto"
         android:text="@string/_2"
         android:textSize="@dimen/_20ssp"
-        android:textColor="@color/light_black"
-        app:layout_constraintLeft_toRightOf="@+id/one"
+        android:textColor="?attr/textColor"
+        app:layout_constraintStart_toEndOf="@+id/one"
         app:layout_constraintTop_toBottomOf="@+id/four"
-        android:onClick="@{() -> viewModel.onNumberClickedButton(@string/number(2))}"/>
+        android:onClick="@{() -> viewModel.onNumberClickedButton(@string/_2)}"
+        />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/three"
@@ -388,13 +373,13 @@
         android:layout_marginTop="@dimen/_6sdp"
         android:layout_marginStart="@dimen/_33sdp"
         android:background="@drawable/custom_btn_landscape"
-        android:fontFamily="@font/roboto"
         android:text="@string/_3"
         android:textSize="@dimen/_20ssp"
-        android:textColor="@color/light_black"
-        app:layout_constraintLeft_toRightOf="@+id/two"
+        android:textColor="?attr/textColor"
+        app:layout_constraintStart_toEndOf="@+id/two"
         app:layout_constraintTop_toBottomOf="@+id/four"
-        android:onClick="@{() -> viewModel.onNumberClickedButton(@string/number(3))}"/>
+        android:onClick="@{() -> viewModel.onNumberClickedButton(@string/_3)}"
+        />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/plus"
@@ -403,11 +388,10 @@
         android:layout_marginTop="@dimen/_6sdp"
         android:layout_marginStart="@dimen/_33sdp"
         android:background="@drawable/custom_btn_landscape"
-        android:fontFamily="@font/roboto"
         android:text="@string/_plus"
         android:textSize="@dimen/_20ssp"
         android:textColor="@color/blue"
-        app:layout_constraintLeft_toRightOf="@+id/three"
+        app:layout_constraintStart_toEndOf="@+id/three"
         app:layout_constraintTop_toBottomOf="@+id/four"
         android:onClick="@{() -> viewModel.onOperationClickedButton(@string/_plus)}"/>
 
@@ -417,11 +401,10 @@
         android:layout_height="@dimen/_28sdp"
         android:layout_marginTop="@dimen/_6sdp"
         android:background="@drawable/custom_btn_landscape"
-        android:fontFamily="@font/roboto"
         android:text="@string/minus_sign"
         android:layout_marginStart="@dimen/_295sdp"
         android:textSize="@dimen/_20ssp"
-        android:textColor="@color/light_black"
+        android:textColor="?attr/textColor"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/one"
         android:onClick="@{() -> viewModel.sign()}"/>
@@ -433,13 +416,13 @@
         android:layout_marginTop="@dimen/_6sdp"
         android:layout_marginStart="@dimen/_33sdp"
         android:background="@drawable/custom_btn_landscape"
-        android:fontFamily="@font/roboto"
         android:text="@string/_0"
         android:textSize="@dimen/_20ssp"
-        android:textColor="@color/light_black"
-        app:layout_constraintLeft_toRightOf="@+id/sign"
+        android:textColor="?attr/textColor"
+        app:layout_constraintStart_toEndOf="@+id/sign"
         app:layout_constraintTop_toBottomOf="@+id/one"
-        android:onClick="@{() -> viewModel.onNumberClickedButton(@string/number(0))}"/>
+        android:onClick="@{() -> viewModel.onNumberClickedButton(@string/_0)}"
+        />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/period"
@@ -448,11 +431,10 @@
         android:layout_marginTop="@dimen/_6sdp"
         android:layout_marginStart="@dimen/_33sdp"
         android:background="@drawable/custom_btn_landscape"
-        android:fontFamily="@font/roboto"
         android:text="@string/_."
         android:textSize="@dimen/_20ssp"
-        android:textColor="@color/light_black"
-        app:layout_constraintLeft_toRightOf="@+id/zero"
+        android:textColor="?attr/textColor"
+        app:layout_constraintStart_toEndOf="@+id/zero"
         app:layout_constraintTop_toBottomOf="@+id/one"
         android:onClick="@{() -> viewModel.period()}"/>
 
@@ -463,11 +445,10 @@
         android:layout_marginTop="@dimen/_6sdp"
         android:layout_marginStart="@dimen/_33sdp"
         android:background="@drawable/custom_button_equal"
-        android:fontFamily="@font/roboto"
         android:text="@string/_equal"
         android:textSize="@dimen/_20ssp"
         android:textColor="@color/white"
-        app:layout_constraintLeft_toRightOf="@+id/period"
+        app:layout_constraintStart_toEndOf="@+id/period"
         app:layout_constraintTop_toBottomOf="@+id/one"
         android:onClick="@{() -> viewModel.equals()}"/>
 
@@ -478,14 +459,13 @@
         android:layout_marginStart="@dimen/_42sdp"
         android:layout_marginTop="@dimen/_5sdp"
         android:background="@drawable/custom_btn_landscape"
-        android:fontFamily="@font/roboto"
+        android:textColor="?attr/textColor"
         android:text="@string/_switch"
-        android:textColor="@color/black"
         android:textSize="@dimen/_20ssp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/line_space"
 
-        />
+        tools:ignore="TouchTargetSizeCheck" />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/Rad"
@@ -494,12 +474,11 @@
         android:layout_marginTop="@dimen/_5sdp"
         android:layout_marginStart="@dimen/_33sdp"
         android:background="@drawable/custom_btn_landscape"
-        android:fontFamily="@font/roboto"
         android:text="@string/_rad"
         android:textAllCaps="false"
-        android:textColor="@color/light_black"
+        android:textColor="?attr/textColor"
         android:textSize="@dimen/_12ssp"
-        app:layout_constraintLeft_toRightOf="@+id/switchArrow"
+        app:layout_constraintStart_toEndOf="@+id/switchArrow"
         app:layout_constraintTop_toBottomOf="@+id/line_space"
         android:onClick="@{() -> viewModel.updateCurrentValue(@string/value_rad)}"/>
 
@@ -510,12 +489,11 @@
         android:layout_marginTop="@dimen/_5sdp"
         android:layout_marginStart="@dimen/_33sdp"
         android:background="@drawable/custom_btn_landscape"
-        android:fontFamily="@font/roboto"
         android:text="@string/_deg"
         android:textAllCaps="false"
-        android:textColor="@color/light_black"
+        android:textColor="?attr/textColor"
         android:textSize="@dimen/_12ssp"
-        app:layout_constraintLeft_toRightOf="@+id/switchArrow"
+        app:layout_constraintStart_toEndOf="@+id/switchArrow"
         app:layout_constraintTop_toBottomOf="@+id/line_space"
         android:onClick="@{() -> viewModel.updateCurrentValue(@string/value_deg)}"
         />
@@ -537,11 +515,10 @@
         android:layout_marginStart="@dimen/_30sdp"
         android:layout_marginTop="@dimen/_5sdp"
         android:background="@drawable/custom_btn_landscape"
-        android:fontFamily="@font/roboto"
         android:text="@string/_squareRoot"
-        android:textColor="@color/light_black"
+        android:textColor="?attr/textColor"
         android:textSize="@dimen/_15ssp"
-        app:layout_constraintLeft_toRightOf="@+id/Rad"
+        app:layout_constraintStart_toEndOf="@+id/Rad"
         app:layout_constraintTop_toBottomOf="@+id/line_space"
         android:onClick="@{() -> viewModel.updateCurrentValue(@string/value_squareRoot)}"
         />
@@ -553,10 +530,9 @@
         android:layout_marginStart="@dimen/_42sdp"
         android:layout_marginTop="@dimen/_6sdp"
         android:background="@drawable/custom_btn_landscape"
-        android:fontFamily="@font/roboto"
         android:text="@string/_sin"
         android:textAllCaps="false"
-        android:textColor="@color/light_black"
+        android:textColor="?attr/textColor"
         android:textSize="@dimen/_12ssp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/switchArrow"
@@ -570,12 +546,11 @@
         android:layout_marginTop="@dimen/_6sdp"
         android:layout_marginStart="@dimen/_33sdp"
         android:background="@drawable/custom_btn_landscape"
-        android:fontFamily="@font/roboto"
         android:text="@string/_cos"
         android:textAllCaps="false"
-        android:textColor="@color/light_black"
+        android:textColor="?attr/textColor"
         android:textSize="@dimen/_12ssp"
-        app:layout_constraintLeft_toRightOf="@+id/sin"
+        app:layout_constraintStart_toEndOf="@+id/sin"
         app:layout_constraintTop_toBottomOf="@+id/switchArrow"
         android:onClick="@{() -> viewModel.updateCurrentValue(@string/value_cos)}"
         />
@@ -587,12 +562,11 @@
         android:layout_marginStart="@dimen/_30sdp"
         android:layout_marginTop="@dimen/_6sdp"
         android:background="@drawable/custom_btn_landscape"
-        android:fontFamily="@font/roboto"
         android:text="@string/_tan"
         android:textAllCaps="false"
-        android:textColor="@color/light_black"
+        android:textColor="?attr/textColor"
         android:textSize="@dimen/_12ssp"
-        app:layout_constraintLeft_toRightOf="@+id/cos"
+        app:layout_constraintStart_toEndOf="@+id/cos"
         app:layout_constraintTop_toBottomOf="@+id/switchArrow"
         android:onClick="@{() -> viewModel.updateCurrentValue(@string/value_tan)}"
         />
@@ -604,10 +578,9 @@
         android:layout_marginStart="@dimen/_42sdp"
         android:layout_marginTop="@dimen/_6sdp"
         android:background="@drawable/custom_btn_landscape"
-        android:fontFamily="@font/roboto"
         android:text="@string/_in"
         android:textAllCaps="false"
-        android:textColor="@color/light_black"
+        android:textColor="?attr/textColor"
         android:textSize="@dimen/_12ssp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/sin"
@@ -621,12 +594,11 @@
         android:layout_marginTop="@dimen/_6sdp"
         android:layout_marginStart="@dimen/_33sdp"
         android:background="@drawable/custom_btn_landscape"
-        android:fontFamily="@font/roboto"
         android:text="@string/_log"
         android:textAllCaps="false"
-        android:textColor="@color/light_black"
+        android:textColor="?attr/textColor"
         android:textSize="@dimen/_12ssp"
-        app:layout_constraintLeft_toRightOf="@+id/ln"
+        app:layout_constraintStart_toEndOf="@+id/ln"
         app:layout_constraintTop_toBottomOf="@+id/sin"
         android:onClick="@{() -> viewModel.updateCurrentValue(@string/value_log)}"
         />
@@ -638,12 +610,11 @@
         android:layout_marginStart="@dimen/_30sdp"
         android:layout_marginTop="@dimen/_6sdp"
         android:background="@drawable/custom_btn_landscape"
-        android:fontFamily="@font/roboto"
         android:text="@string/_1_divisionSlash"
-        android:textColor="@color/light_black"
+        android:textColor="?attr/textColor"
         android:textAllCaps="false"
         android:textSize="@dimen/_12ssp"
-        app:layout_constraintLeft_toRightOf="@+id/log"
+        app:layout_constraintStart_toEndOf="@+id/log"
         app:layout_constraintTop_toBottomOf="@+id/sin"
         android:onClick="@{() -> viewModel.updateCurrentValue(@string/value_one_division_slash)}"
         />
@@ -655,9 +626,8 @@
         android:layout_marginStart="@dimen/_42sdp"
         android:layout_marginTop="@dimen/_6sdp"
         android:background="@drawable/custom_btn_landscape"
-        android:fontFamily="@font/roboto"
         android:text="@string/_eˣ"
-        android:textColor="@color/light_black"
+        android:textColor="?attr/textColor"
         android:textSize="@dimen/_12ssp"
         android:textAllCaps="false"
         app:layout_constraintStart_toStartOf="parent"
@@ -671,12 +641,11 @@
         android:layout_marginTop="@dimen/_6sdp"
         android:layout_marginStart="@dimen/_33sdp"
         android:background="@drawable/custom_btn_landscape"
-        android:fontFamily="@font/roboto"
         android:text="@string/_squared"
         android:textAllCaps="false"
-        android:textColor="@color/light_black"
+        android:textColor="?attr/textColor"
         android:textSize="@dimen/_12ssp"
-        app:layout_constraintLeft_toRightOf="@+id/eˣ"
+        app:layout_constraintStart_toEndOf="@+id/eˣ"
         app:layout_constraintTop_toBottomOf="@+id/ln"
         android:onClick="@{() -> viewModel.exponentiation(@string/value_2power)}"
         />
@@ -688,12 +657,11 @@
         android:layout_marginStart="@dimen/_30sdp"
         android:layout_marginTop="@dimen/_6sdp"
         android:background="@drawable/custom_btn_landscape"
-        android:fontFamily="@font/roboto"
         android:text="@string/power"
         android:textAllCaps="false"
-        android:textColor="@color/light_black"
+        android:textColor="?attr/textColor"
         android:textSize="@dimen/_12ssp"
-        app:layout_constraintLeft_toRightOf="@+id/squared"
+        app:layout_constraintStart_toEndOf="@+id/squared"
         app:layout_constraintTop_toBottomOf="@+id/ln"
         android:onClick="@{() -> viewModel.exponentiation(@string/value_power)}"
         />
@@ -705,10 +673,9 @@
         android:layout_marginStart="@dimen/_42sdp"
         android:layout_marginTop="@dimen/_6sdp"
         android:background="@drawable/custom_btn_landscape"
-        android:fontFamily="@font/roboto"
         android:text="@string/_verticalBars"
         android:textAllCaps="false"
-        android:textColor="@color/light_black"
+        android:textColor="?attr/textColor"
         android:textSize="@dimen/_12ssp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/eˣ"
@@ -721,11 +688,10 @@
         android:layout_marginTop="@dimen/_6sdp"
         android:layout_marginStart="@dimen/_33sdp"
         android:background="@drawable/custom_btn_landscape"
-        android:fontFamily="@font/roboto"
         android:text="@string/_piConstant"
-        android:textColor="@color/light_black"
+        android:textColor="?attr/textColor"
         android:textSize="@dimen/_12ssp"
-        app:layout_constraintLeft_toRightOf="@+id/verticalBars"
+        app:layout_constraintStart_toEndOf="@+id/verticalBars"
         app:layout_constraintTop_toBottomOf="@+id/eˣ"
         android:onClick="@{() -> viewModel.updateCurrentValue(@string/value_piConstant)}"/>
 
@@ -736,12 +702,11 @@
         android:layout_marginStart="@dimen/_30sdp"
         android:layout_marginTop="@dimen/_6sdp"
         android:background="@drawable/custom_btn_landscape"
-        android:fontFamily="@font/roboto"
         android:text="@string/_EConstant"
         android:textAllCaps="false"
-        android:textColor="@color/light_black"
+        android:textColor="?attr/textColor"
         android:textSize="@dimen/_12ssp"
-        app:layout_constraintLeft_toRightOf="@+id/piConstant"
+        app:layout_constraintStart_toEndOf="@+id/piConstant"
         app:layout_constraintTop_toBottomOf="@+id/eˣ"
         android:onClick="@{() -> viewModel.updateCurrentValue(@string/value_EConstant)}"/>
 
@@ -753,7 +718,7 @@
         app:constraint_referenced_ids="Deg,cureRoot,sin_minus,cos_minus,
          tan_minus,sinh,cosh,tanh,sinh_minus,cosh_minus,tanh_minus,two_Power,power_3,
          factorial"
-        tools:visibility="gone" />
+        tools:visibility="visible" />
 
 
     <androidx.appcompat.widget.AppCompatButton
@@ -762,12 +727,11 @@
         android:layout_height="@dimen/_28sdp"
         android:layout_marginTop="@dimen/_5sdp"
         android:background="@drawable/custom_btn_landscape"
-        android:fontFamily="@font/roboto"
         android:layout_marginStart="@dimen/_30sdp"
         android:text="@string/_cubeRoot"
-        android:textColor="@color/light_black"
+        android:textColor="?attr/textColor"
         android:textSize="@dimen/_15ssp"
-        app:layout_constraintLeft_toRightOf="@+id/Deg"
+        app:layout_constraintStart_toEndOf="@+id/Deg"
         app:layout_constraintTop_toBottomOf="@+id/line_space"
         android:onClick="@{() -> viewModel.updateCurrentValue(@string/value_cureRoot)}"/>
 
@@ -778,10 +742,9 @@
         android:layout_marginStart="@dimen/_42sdp"
         android:layout_marginTop="@dimen/_6sdp"
         android:background="@drawable/custom_btn_landscape"
-        android:fontFamily="@font/roboto"
         android:text="@string/_sinMinus"
         android:textAllCaps="false"
-        android:textColor="@color/light_black"
+        android:textColor="?attr/textColor"
         android:textSize="@dimen/_12ssp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/switchArrow"
@@ -795,12 +758,11 @@
         android:layout_marginTop="@dimen/_6sdp"
         android:layout_marginStart="@dimen/_33sdp"
         android:background="@drawable/custom_btn_landscape"
-        android:fontFamily="@font/roboto"
         android:text="@string/cosMinus"
         android:textAllCaps="false"
-        android:textColor="@color/light_black"
+        android:textColor="?attr/textColor"
         android:textSize="@dimen/_12ssp"
-        app:layout_constraintLeft_toRightOf="@+id/sin_minus"
+        app:layout_constraintStart_toEndOf="@+id/sin_minus"
         app:layout_constraintTop_toBottomOf="@+id/switchArrow"
         android:onClick="@{() -> viewModel.updateCurrentValue(@string/value_cosMinus)}" />
 
@@ -811,12 +773,11 @@
         android:layout_marginStart="@dimen/_30sdp"
         android:layout_marginTop="@dimen/_6sdp"
         android:background="@drawable/custom_btn_landscape"
-        android:fontFamily="@font/roboto"
         android:text="@string/tanMinus"
         android:textAllCaps="false"
-        android:textColor="@color/light_black"
+        android:textColor="?attr/textColor"
         android:textSize="@dimen/_12ssp"
-        app:layout_constraintLeft_toRightOf="@+id/cos_minus"
+        app:layout_constraintStart_toEndOf="@+id/cos_minus"
         app:layout_constraintTop_toBottomOf="@+id/switchArrow"
         android:onClick="@{() -> viewModel.updateCurrentValue(@string/value_tanMinus)}"/>
 
@@ -827,10 +788,9 @@
         android:layout_marginStart="@dimen/_42sdp"
         android:layout_marginTop="@dimen/_6sdp"
         android:background="@drawable/custom_btn_landscape"
-        android:fontFamily="@font/roboto"
         android:text="@string/_sinh"
         android:textAllCaps="false"
-        android:textColor="@color/light_black"
+        android:textColor="?attr/textColor"
         android:textSize="@dimen/_12ssp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/sin_minus"
@@ -843,12 +803,11 @@
         android:layout_marginTop="@dimen/_6sdp"
         android:layout_marginStart="@dimen/_33sdp"
         android:background="@drawable/custom_btn_landscape"
-        android:fontFamily="@font/roboto"
         android:text="@string/_cosh"
         android:textAllCaps="false"
-        android:textColor="@color/light_black"
+        android:textColor="?attr/textColor"
         android:textSize="@dimen/_12ssp"
-        app:layout_constraintLeft_toRightOf="@+id/sinh"
+        app:layout_constraintStart_toEndOf="@+id/sinh"
         app:layout_constraintTop_toBottomOf="@+id/sin_minus"
         android:onClick="@{() -> viewModel.updateCurrentValue(@string/value_cosh)}"/>
 
@@ -859,12 +818,11 @@
         android:layout_marginStart="@dimen/_30sdp"
         android:layout_marginTop="@dimen/_6sdp"
         android:background="@drawable/custom_btn_landscape"
-        android:fontFamily="@font/roboto"
         android:text="@string/_tanh"
-        android:textColor="@color/light_black"
+        android:textColor="?attr/textColor"
         android:textAllCaps="false"
         android:textSize="@dimen/_12ssp"
-        app:layout_constraintLeft_toRightOf="@+id/cosh"
+        app:layout_constraintStart_toEndOf="@+id/cosh"
         app:layout_constraintTop_toBottomOf="@+id/sin_minus"
         android:onClick="@{() -> viewModel.updateCurrentValue(@string/value_tanh)}"/>
 
@@ -875,9 +833,8 @@
         android:layout_marginStart="@dimen/_42sdp"
         android:layout_marginTop="@dimen/_6sdp"
         android:background="@drawable/custom_btn_landscape"
-        android:fontFamily="@font/roboto"
         android:text="@string/sinh_minus"
-        android:textColor="@color/light_black"
+        android:textColor="?attr/textColor"
         android:textSize="@dimen/_12ssp"
         android:textAllCaps="false"
         app:layout_constraintStart_toStartOf="parent"
@@ -891,12 +848,11 @@
         android:layout_marginTop="@dimen/_6sdp"
         android:layout_marginStart="@dimen/_33sdp"
         android:background="@drawable/custom_btn_landscape"
-        android:fontFamily="@font/roboto"
         android:text="@string/cosh_minus"
         android:textAllCaps="false"
-        android:textColor="@color/light_black"
+        android:textColor="?attr/textColor"
         android:textSize="@dimen/_12ssp"
-        app:layout_constraintLeft_toRightOf="@+id/sinh_minus"
+        app:layout_constraintStart_toEndOf="@+id/sinh_minus"
         app:layout_constraintTop_toBottomOf="@+id/sinh"
         android:onClick="@{() -> viewModel.updateCurrentValue(@string/value_coshMinus)}"/>
 
@@ -907,12 +863,11 @@
         android:layout_marginStart="@dimen/_30sdp"
         android:layout_marginTop="@dimen/_6sdp"
         android:background="@drawable/custom_btn_landscape"
-        android:fontFamily="@font/roboto"
         android:text="@string/tanh_minus"
         android:textAllCaps="false"
-        android:textColor="@color/light_black"
+        android:textColor="?attr/textColor"
         android:textSize="@dimen/_12ssp"
-        app:layout_constraintLeft_toRightOf="@+id/cosh_minus"
+        app:layout_constraintStart_toEndOf="@+id/cosh_minus"
         app:layout_constraintTop_toBottomOf="@+id/sinh"
         android:onClick="@{() -> viewModel.updateCurrentValue(@string/value_tanhMinus)}"/>
 
@@ -923,10 +878,9 @@
         android:layout_marginStart="@dimen/_42sdp"
         android:layout_marginTop="@dimen/_6sdp"
         android:background="@drawable/custom_btn_landscape"
-        android:fontFamily="@font/roboto"
         android:text="@string/_2Power"
         android:textAllCaps="false"
-        android:textColor="@color/light_black"
+        android:textColor="?attr/textColor"
         android:textSize="@dimen/_12ssp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/sinh_minus"
@@ -939,12 +893,11 @@
         android:layout_marginTop="@dimen/_6sdp"
         android:layout_marginStart="@dimen/_33sdp"
         android:background="@drawable/custom_btn_landscape"
-        android:fontFamily="@font/roboto"
         android:text="@string/_power_3"
         android:textAllCaps="false"
-        android:textColor="@color/light_black"
+        android:textColor="?attr/textColor"
         android:textSize="@dimen/_12ssp"
-        app:layout_constraintLeft_toRightOf="@+id/two_Power"
+        app:layout_constraintStart_toEndOf="@+id/two_Power"
         app:layout_constraintTop_toBottomOf="@+id/sinh_minus"
         android:onClick="@{() -> viewModel.exponentiation(@string/value_3power)}" />
 
@@ -955,12 +908,11 @@
         android:layout_marginStart="@dimen/_30sdp"
         android:layout_marginTop="@dimen/_6sdp"
         android:background="@drawable/custom_btn_landscape"
-        android:fontFamily="@font/roboto"
         android:text="@string/_exclamation_mark"
         android:textAllCaps="false"
-        android:textColor="@color/light_black"
+        android:textColor="?attr/textColor"
         android:textSize="@dimen/_12ssp"
-        app:layout_constraintLeft_toRightOf="@+id/power_3"
+        app:layout_constraintStart_toEndOf="@+id/power_3"
         app:layout_constraintTop_toBottomOf="@+id/sinh_minus"
         android:onClick="@{() -> viewModel.exponentiation(@string/value_factorial)}"  />
 

@@ -2,9 +2,9 @@
     <!-- Base application theme. -->
     <style name="Theme.Calculator0" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <!-- Primary brand color. -->
-        <item name="colorPrimary">@color/purple_200</item>
-        <item name="colorPrimaryVariant">@color/black</item>
-        <item name="colorOnPrimary">@color/black</item>
+        <item name="colorPrimary">@color/black_holo</item>
+        <item name="colorPrimaryVariant">@color/black_holo</item>
+        <item name="colorOnPrimary">@color/black_holo</item>
         <!-- Secondary brand color. -->
         <item name="colorSecondary">@color/teal_200</item>
         <item name="colorSecondaryVariant">@color/teal_200</item>
@@ -12,5 +12,18 @@
         <!-- Status bar color. -->
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
+        <item name="android:fontFamily">@font/roboto</item>
+        <item name="fontFamily">@font/roboto</item>
+        <item name="toolbarStyle">@style/custom_toolbar</item>
+        <item name="textColor">@color/white_dark</item>
+        <item name="textColor2">@color/gray4</item>
+        <item name="bgColor">@color/black_holo</item>
+        <item name="bgColor2">@color/light_black</item>
+        <item name="bgColor3">@color/black</item>
+        <item name="bgColor4">@color/black_holo</item>
+        <item name="bgColor5">@color/black</item>
+        <item name="textColor3">@color/white</item>
+        <item name="textColor6">@color/black</item>
+
     </style>
 </resources>

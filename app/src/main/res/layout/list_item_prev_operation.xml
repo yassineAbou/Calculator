@@ -25,7 +25,7 @@
         android:gravity="end"
         android:paddingStart="@dimen/_15sdp"
         android:textAlignment="viewEnd"
-        android:textColor="@color/light_black"
+        android:textColor="?attr/textColor"
         android:textSize="@dimen/_15ssp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -33,7 +33,7 @@
         input="@{prevOperation}"
         tools:text="15+15"
         android:paddingEnd="0dp"
-        android:onClick="@{() -> clickListener.onClick(prevOperation)}"
+        android:onClick="@{() -> clickListener.onClickInput(prevOperation)}"
         />
 
     <TextView
@@ -51,7 +51,7 @@
         output="@{prevOperation}"
         tools:text="30"
         android:paddingEnd="0dp"
-        android:onClick="@{() -> clickListener.onClick2(prevOperation)}"
+        android:onClick="@{() -> clickListener.onClickOutput(prevOperation)}"
         />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

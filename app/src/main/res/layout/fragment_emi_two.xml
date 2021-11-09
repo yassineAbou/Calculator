@@ -8,7 +8,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ThreeFragment"
-    android:background="@color/gray2">
+    android:background="?attr/bgColor4">
 
     <View
         android:id="@+id/background"
@@ -21,7 +21,7 @@
         app:layout_constraintStart_toStartOf="@+id/guide"
         app:layout_constraintTop_toTopOf="@+id/guide"
         app:layout_constraintVertical_bias="1.0"
-        android:backgroundTint="@color/white"
+        android:backgroundTint="?attr/bgColor5"
         />
 
     <TextView
@@ -29,7 +29,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/_guide"
-        android:textColor="@color/black"
+        android:textColor="?attr/textColor3"
         android:layout_marginStart="@dimen/_20sdp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -56,12 +56,15 @@
         android:layout_marginTop="@dimen/_2sdp"
         android:background="@null"
         android:ems="10"
+        android:hint="@string/hint_amount"
+        android:textColor="?attr/textColor2"
+        android:textColorHint="?attr/textColor2"
         android:inputType="numberDecimal"
-        android:textColor="@color/brown"
         android:textSize="@dimen/_16ssp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView11"
-        android:importantForAutofill="no" />
+        android:importantForAutofill="no"
+        />
 
     <View
         android:id="@+id/view"
@@ -69,7 +72,7 @@
         android:layout_height="@dimen/_1sdp"
         android:layout_marginStart="@dimen/_20sdp"
         android:layout_marginTop="@dimen/_4sdp"
-        android:background="@color/brown"
+        android:background="?attr/bgColor2"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/loanAmount2" />
 
@@ -92,8 +95,10 @@
         android:layout_marginTop="@dimen/_2sdp"
         android:background="@null"
         android:ems="10"
+        android:hint="@string/hint_interest"
         android:inputType="numberDecimal"
-        android:textColor="@color/brown"
+        android:textColor="?attr/textColor2"
+        android:textColorHint="?attr/textColor2"
         android:textSize="@dimen/_16ssp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView12"
@@ -105,7 +110,7 @@
         android:layout_height="@dimen/_1sdp"
         android:layout_marginStart="@dimen/_20sdp"
         android:layout_marginTop="@dimen/_4sdp"
-        android:background="@color/brown"
+        android:background="?attr/bgColor2"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/interestRate2" />
 
@@ -122,14 +127,16 @@
 
     <EditText
         android:id="@+id/number_of_installments2"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/_20sdp"
         android:layout_marginTop="@dimen/_2sdp"
-        android:background="@null"
         android:ems="10"
+        android:background="@null"
         android:inputType="number"
-        android:textColor="@color/brown"
+        android:textColor="?attr/textColor2"
+        android:textColorHint="?attr/textColor2"
+        android:hint="@string/hint_installments"
         app:layout_constraintStart_toStartOf="parent"
         android:textSize="@dimen/_16ssp"
         app:layout_constraintTop_toBottomOf="@+id/textView13"
@@ -141,7 +148,7 @@
         android:layout_height="@dimen/_1sdp"
         android:layout_marginStart="@dimen/_20sdp"
         android:layout_marginTop="@dimen/_4sdp"
-        android:background="@color/brown"
+        android:background="?attr/bgColor2"
         app:layout_constraintBottom_toTopOf="@+id/compare"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/number_of_installments2" />
@@ -151,7 +158,7 @@
         android:layout_width="@dimen/_50sdp"
         android:layout_height="@dimen/_1sdp"
         android:layout_marginTop="@dimen/_20sdp"
-        android:background="@color/white"
+        android:background="?attr/bgColor5"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/view3" />
@@ -162,12 +169,13 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/_216sdp"
         android:background="@drawable/radius_button"
-        android:paddingLeft="@dimen/_29sdp"
+        android:paddingStart="@dimen/_29sdp"
         android:paddingTop="4dp"
-        android:paddingRight="@dimen/_29sdp"
+        android:paddingEnd="@dimen/_29sdp"
         android:paddingBottom="4dp"
         android:text="@string/text6"
         android:textAllCaps="false"
+        android:textColor="@color/white"
         android:textSize="@dimen/_14ssp"
         app:backgroundTint="@color/blue_dark"
         android:textStyle="bold"

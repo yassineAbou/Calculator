@@ -2,6 +2,7 @@ package com.example.calculator0.ui.emi
 
 import android.annotation.SuppressLint
 import android.content.Intent
+import android.content.pm.ActivityInfo
 import android.os.Bundle
 import android.view.*
 import androidx.fragment.app.Fragment
@@ -22,6 +23,8 @@ class CompareFragment : Fragment() {
         // Inflate the layout for this fragment
         binding = FragmentCompareBinding.inflate(inflater, container, false)
 
+        portraitMode()
+
         setHasOptionsMenu(true)
 
         val args2 = CompareFragmentArgs.fromBundle(requireArguments())
@@ -29,23 +32,10 @@ class CompareFragment : Fragment() {
         binding.apply {
 
             setFragmentResultListener("requestKey") { key, bundle ->
-
-                firstLoan.text = bundle.getString("firstLoan")
-                firstEmi.text = bundle.getString("firstEmi")
-                firsInstallments.text = bundle.getString("firstInstallments")
-                firstTotal.text = getString(R.string.total, bundle.getString("firstTotal"))
-                firstPrincipal.text = bundle.getString("firstLoan")
-                interestOptionOne.text = bundle.getString("interestOptionOne")
-                firstInterest.text = bundle.getString("firstInterest")
-
+                showFirstResult(bundle)
             }
-            secondLoan.text = args2.principal2
-            secondPrincipal.text = args2.principal2
-            secondInstallments.text = args2.installment2
-            interestOptionTwo.text = args2.interset2
-            secondEmi.text = args2.emiMonth2
-            secondTotal.text = getString(R.string.total, args2.total2)
-            secondInterest.text = args2.intersetOutput2
+
+            showSecondResult(args2)
 
             done2.setOnClickListener {
                 it.findNavController()
@@ -59,6 +49,35 @@ class CompareFragment : Fragment() {
             }
         }
         return binding.root
+    }
+
+    private fun showFirstResult(bundle: Bundle) {
+        binding.apply {
+            firstLoan.text = bundle.getString("firstLoan")
+            firstEmi.text = bundle.getString("firstEmi")
+            firsInstallments.text = bundle.getString("firstInstallments")
+            firstTotal.text = getString(R.string.total, bundle.getString("firstTotal"))
+            firstPrincipal.text = bundle.getString("firstLoan")
+            interestOptionOne.text = bundle.getString("interestOptionOne")
+            firstInterest.text = bundle.getString("firstInterest")
+        }
+    }
+
+    private fun showSecondResult(args2: CompareFragmentArgs) {
+         binding.apply {
+             secondLoan.text = args2.principal2
+             secondPrincipal.text = args2.principal2
+             secondInstallments.text = args2.installment2
+             interestOptionTwo.text = args2.interset2
+             secondEmi.text = args2.emiMonth2
+             secondTotal.text = getString(R.string.total, args2.total2)
+             secondInterest.text = args2.intersetOutput2
+         }
+    }
+
+
+    private fun portraitMode() {
+        activity?.requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
     }
 
     //-------------------

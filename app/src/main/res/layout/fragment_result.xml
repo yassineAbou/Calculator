@@ -7,7 +7,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".ui.emi.ResultFragment"
-        android:background="@color/gray2">
+        android:background="?attr/bgColor4">
 
         <View
             android:id="@+id/background2"
@@ -20,7 +20,7 @@
            app:layout_constraintStart_toStartOf="@id/textView"
            app:layout_constraintTop_toTopOf="@id/textView"
             app:layout_constraintVertical_bias="1.0"
-            android:backgroundTint="@color/white"
+            android:backgroundTint="?attr/bgColor5"
 
             />
 
@@ -33,6 +33,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             android:textSize="@dimen/_15ssp"
+            android:textColor="?attr/textColor2"
             android:paddingTop="@dimen/_26sdp"
             />
 
@@ -42,7 +43,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_15sdp"
             android:text="2,394.32"
-            android:textColor="@color/black"
+            android:textColor="?attr/textColor3"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView"
@@ -53,6 +54,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/per_month"
+            android:textColor="?attr/textColor2"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/emiAmount"
@@ -64,6 +66,7 @@
             android:layout_height="wrap_content"
             android:text="@string/_installments"
             android:layout_marginTop="@dimen/_6sdp"
+            android:textColor="?attr/textColor2"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView5"
@@ -75,8 +78,8 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_26sdp"
             android:text="@string/total"
-            android:textColor="@color/black"
             android:textSize="@dimen/_15ssp"
+            android:textColor="?attr/textColor3"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/installments" />
@@ -88,7 +91,7 @@
             android:layout_marginStart="@dimen/_19sdp"
             android:layout_marginTop="@dimen/_26sdp"
             android:text="5000000"
-            android:textColor="@color/black"
+            android:textColor="?attr/textColor3"
             android:textSize="@dimen/_15ssp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/totalAmount" />
@@ -101,6 +104,7 @@
             android:layout_marginStart="@dimen/_19sdp"
             android:textSize="@dimen/_15ssp"
             android:text="@string/_principal"
+            android:textColor="?attr/textColor2"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/principal" />
 
@@ -109,7 +113,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="55555555"
-            android:textColor="@color/black"
+            android:textColor="?attr/textColor3"
             android:textSize="@dimen/_15ssp"
             android:layout_marginTop="@dimen/_26sdp"
             android:layout_marginEnd="@dimen/_19sdp"
@@ -124,6 +128,7 @@
             android:layout_marginEnd="@dimen/_19sdp"
             android:text="@string/_interest"
             android:textSize="@dimen/_15ssp"
+            android:textColor="?attr/textColor2"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/interest" />
 
@@ -132,7 +137,7 @@
             android:layout_width="@dimen/_270sdp"
             android:layout_height="@dimen/_1sdp"
             android:layout_marginTop="@dimen/_19sdp"
-            android:background="@color/white2"
+            android:background="?attr/bgColor2"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView9" />
@@ -145,15 +150,16 @@
             app:layout_constraintEnd_toEndOf="parent"
             android:text="@string/_compare"
             android:textSize="@dimen/_15ssp"
+            android:textColor="?attr/textColor2"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/view5" />
 
         <View
             android:id="@+id/view6"
-            android:layout_width="@dimen/_15sdp"
-            android:layout_height="@dimen/_1sdp"
+            android:layout_width="12dp"
+            android:layout_height="3dp"
             android:layout_marginTop="@dimen/_17sdp"
-            android:background="@color/white"
+            android:backgroundTint="?attr/bgColor5"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView12" />
@@ -164,14 +170,15 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_115sdp"
             android:background="@drawable/radius_button"
-            android:paddingLeft="@dimen/_45sdp"
+            android:paddingStart="@dimen/_45sdp"
             android:paddingTop="4dp"
-            android:paddingRight="@dimen/_45sdp"
+            android:paddingEnd="@dimen/_45sdp"
             android:paddingBottom="4dp"
             android:text="@string/text5"
             android:textAllCaps="false"
             android:textStyle="bold"
             android:textSize="@dimen/_14ssp"
+            android:textColor="@color/white"
             app:backgroundTint="@color/blue_dark"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -181,12 +188,12 @@
             android:id="@+id/add"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/_19sdp"
+            android:layout_marginTop="@dimen/_11sdp"
             android:layout_marginStart="@dimen/_19sdp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/view5"
             app:srcCompat="@drawable/ic_baseline_add_24"
-            android:background="@color/white"/>
+            android:backgroundTint="?attr/bgColor5"/>
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

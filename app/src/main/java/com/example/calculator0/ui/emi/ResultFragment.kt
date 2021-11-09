@@ -3,6 +3,7 @@ package com.example.calculator0.ui.emi
 
 import android.annotation.SuppressLint
 import android.content.Intent
+import android.content.pm.ActivityInfo
 import android.os.Bundle
 import android.view.*
 import androidx.fragment.app.Fragment
@@ -17,9 +18,12 @@ class ResultFragment : Fragment() {
 
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?,
+    ): View? {
         // Inflate the layout for this fragment
         binding = FragmentResultBinding.inflate(inflater, container, false)
+
+        portraitMode()
 
         setHasOptionsMenu(true)
 
@@ -27,12 +31,7 @@ class ResultFragment : Fragment() {
 
         binding.apply {
 
-            emiAmount.text  = args.emiMonth
-            interest.text = args.interest
-            totalAmount.text = getString(R.string.total, args.total)
-            installments.text = getString(R.string._installments, args.installment)
-            principal.text = args.principal
-
+            showResult(args)
 
             add.setOnClickListener {
                 it.findNavController()
@@ -47,6 +46,24 @@ class ResultFragment : Fragment() {
 
 
         return binding.root
+    }
+
+    private fun showResult(args: ResultFragmentArgs) {
+        binding.apply {
+            emiAmount.text  = args.emiMonth
+            interest.text = args.interest
+            totalAmount.text = getString(R.string.total, args.total)
+            installments.text = getString(R.string._installments, args.installment)
+            principal.text = args.principal
+        }
+    }
+
+    //----------------------
+    // Orientation
+    //-----------------------
+
+    private fun portraitMode() {
+        activity?.requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
     }
 
     //-------------------

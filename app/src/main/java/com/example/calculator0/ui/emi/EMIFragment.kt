@@ -1,6 +1,8 @@
 package com.example.calculator0.ui.emi
 
 import android.annotation.SuppressLint
+import android.content.pm.ActivityInfo
+import android.os.Build
 import android.os.Bundle
 import android.view.*
 import androidx.appcompat.app.AppCompatActivity
@@ -25,17 +27,17 @@ class EMIFragment : Fragment() {
     private var interestRateOutput = ""
 
 
-    @SuppressLint("NewApi")
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?,
     ): View? {
         // Inflate the layout for this fragment
         binding = FragmentEmiBinding.inflate(inflater, container, false)
 
-        setHasOptionsMenu(true)
+        //setHasOptionsMenu(true)
 
-        (activity as AppCompatActivity?)!!.supportActionBar!!.show()
-        requireActivity().window.statusBarColor = requireActivity().getColor(R.color.gray2)
+        //showActionBar()
+        portraitMode()
+
 
         binding.apply {
 
@@ -60,6 +62,12 @@ class EMIFragment : Fragment() {
         }
         
         return binding.root
+    }
+
+
+
+    private fun portraitMode() {
+        activity?.requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
     }
 
     private fun parseDouble(`val`: String?): Double {
@@ -88,7 +96,5 @@ class EMIFragment : Fragment() {
         installment = df.format(N)
         interestRateOutput = df.format(I)
     }
-
-
 
 }

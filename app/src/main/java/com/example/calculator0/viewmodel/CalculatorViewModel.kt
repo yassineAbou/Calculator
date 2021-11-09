@@ -4,6 +4,7 @@ package com.example.calculator0.viewmodel
 
 
 import android.app.Application
+import android.view.View
 import androidx.core.text.isDigitsOnly
 import androidx.lifecycle.*
 import com.example.calculator0.repository.PrevOperationRepository
@@ -14,14 +15,18 @@ import org.mariuszgromada.math.mxparser.Expression
 
 class CalculatorViewModel(
     repository: PrevOperationRepository,
-    application: Application) : ViewModel() {
+    application: Application
+) : ViewModel() {
 
-    /* on below line we are creating a variable
-    for our all prevOperationList list and repository
-    */
+
     private val repository1 = repository
     val allPrevOperations = repository.allPrevOperations
-
+    val symbols = "+-÷×"
+    private val symbols1: List<Char> = listOf(')','e', 'i')
+    private val symbols2: List<Char> = listOf('+','-','×','÷','.')
+    private val symbols5: List<Char> = listOf(')','1','2','3','4','5','6','7','8','9','0','%','e','i')
+    private var isDotClicked = true
+    private var action2 = '+'
 
     val clearHistoryEnabled: LiveData<Boolean?> = Transformations.map(allPrevOperations) {
         it?.isNotEmpty()
@@ -39,32 +44,17 @@ class CalculatorViewModel(
     val invalid: LiveData<Boolean>
         get() = _invalid
 
+    private fun onInvalid() {
+        _invalid.value = true
+    }
+
+    fun onInvalidComplete() {
+        _invalid.value = false
+    }
 
     private val _eventCalculatorFinished = MutableLiveData<Boolean> ()
     val eventCalculatorFinished: LiveData<Boolean>
         get() = _eventCalculatorFinished
-
-
-    val symbols = "+-÷×"
-    private val symbols1: List<Char> = listOf(')','e', 'i')
-    private val symbols2: List<Char> = listOf('+','-','×','÷','.')
-    private val symbols5: List<Char> = listOf(')','1','2','3','4','5','6','7','8','9','0','%','e','i')
-    private var isDotClicked = true
-    private var action2 = '+'
-
-
-    init {
-        _currentInput.value = ""
-        _currentOutput.value = ""
-
-
-    }
-
-
-    fun addNumber(number: String) {
-        val currentValue = _currentInput.value!!
-        _currentInput.value =  currentValue + number
-    }
 
     fun onCalculatorFinish() {
         _eventCalculatorFinished.value = true
@@ -74,15 +64,28 @@ class CalculatorViewModel(
         _eventCalculatorFinished.value = false
     }
 
-    private fun onInvalid() {
-        _invalid.value = true
+    init {
+        _currentInput.value = ""
+        _currentOutput.value = ""
     }
 
-    fun onInvalidComplete() {
-        _invalid.value = false
+    //-----------------------
+    // Calculator functions
+    //-----------------------
+
+
+    fun addToCurrentInput(number: String) {
+        val currentValue = _currentInput.value!!
+        val givenNumber = currentValue.substringAfterLast(action2)
+        with(givenNumber) {
+            when {
+                equals("0") ->  _currentInput.value = (currentValue.dropLast(1) + number)
+                lastOrNull() in symbols1 && !givenNumber.contains('.')  -> _currentInput.value =  ("$currentValue×$number")
+                (lastOrNull() != '%') && !givenNumber.contains('.') -> _currentInput.value =  (currentValue +  number)
+                else  -> onInvalid()
+            }
+        }
     }
-
-
 
     fun updateCurrentValue(keyWord: String) {
         val currentValue = _currentInput.value!!
@@ -114,10 +117,10 @@ class CalculatorViewModel(
                 currentValue = currentValue.replace('×', '*')
                 currentValue = currentValue.replace('÷', '/')
                 val exp = Expression(currentValue)
-                val output = java.lang.String.valueOf(exp.calculate())
+                val output = trimTrailingZero(java.lang.String.valueOf(exp.calculate()))
                 if (output == "NaN")
                     _currentOutput.postValue("")
-                else _currentOutput.postValue(output)
+                else _currentOutput.postValue(output!!)
             }
 
             if (givenNumber.isDigitsOnly())
@@ -127,8 +130,6 @@ class CalculatorViewModel(
                isDotClicked = true
 
            }
-
-
         }
 
     fun backspace() {
@@ -180,6 +181,7 @@ class CalculatorViewModel(
         val resultValue = _currentOutput.value!!
         val currentValue = _currentInput.value!!
         if (resultValue.isNotEmpty()) {
+
             val test = PrevOperation(currentValue, resultValue)
 
             insert(test)
@@ -203,12 +205,12 @@ class CalculatorViewModel(
     fun onNumberClickedButton(number: String) {
         val currentValue = _currentInput.value!!
         val givenNumber = currentValue.substringAfterLast(action2)
-         _currentInput.value =  with(givenNumber) {
+           with(givenNumber) {
              when {
-                 equals("0") -> (currentValue.dropLast(1) + number)
-                 lastOrNull() in symbols1  -> ("$currentValue×$number")
-                 (lastOrNull() != '%') -> (currentValue +  number)
-                 else  -> return
+                 equals("0") ->  _currentInput.value = (currentValue.dropLast(1) + number)
+                 lastOrNull() in symbols1  -> _currentInput.value =  ("$currentValue×$number")
+                 (lastOrNull() != '%') -> _currentInput.value =  (currentValue + number)
+                 else  -> onInvalid()
              }
          }
      }
@@ -236,7 +238,19 @@ class CalculatorViewModel(
         return count == 0
     }
 
+    private fun trimTrailingZero(value: String?): String? {
+        return if (!value.isNullOrEmpty()) {
+            if (value.indexOf(".") < 0) {
+                value
 
+            } else {
+                value.replace("0*$".toRegex(), "").replace("\\.$".toRegex(), "")
+            }
+
+        } else {
+            value
+        }
+    }
 
     //------------------
     // Data
@@ -253,10 +267,9 @@ class CalculatorViewModel(
     }
 
 
-    fun insert(pervOperation: PrevOperation) = viewModelScope.launch(Dispatchers.IO) {
+    private fun insert(pervOperation: PrevOperation) = viewModelScope.launch(Dispatchers.IO) {
         repository1.insert(pervOperation)
     }
-
 
 }
 

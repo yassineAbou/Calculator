@@ -1,16 +1,15 @@
 package com.example.calculator0.ui.calculator
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.example.calculator0.R
 import com.example.calculator0.database.PrevOperation
 import com.example.calculator0.databinding.ListItemPrevOperationBinding
 
-class PrevOperationAdapter(val clickListener: PrevOperationListener)
+
+class PrevOperationAdapter(private val clickListener: PrevOperationListener)
   : ListAdapter<PrevOperation, PrevOperationAdapter.ViewHolder>(PrevOperationDiffCallback()){
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
@@ -57,10 +56,10 @@ class PrevOperationDiffCallback : DiffUtil.ItemCallback<PrevOperation>() {
 
 class PrevOperationListener(val clickListener: (number: String) -> Unit) {
 
-    fun onClick(prevOperation: PrevOperation) =
+    fun onClickInput(prevOperation: PrevOperation) =
       clickListener(prevOperation.previousInput)
 
-    fun onClick2(prevOperation: PrevOperation) =
+    fun onClickOutput(prevOperation: PrevOperation) =
         clickListener(prevOperation.previousOutput)
 }
 

@@ -1,5 +1,6 @@
 package com.example.calculator0
 
+import android.content.pm.ActivityInfo
 import android.os.Bundle
 import android.view.*
 import androidx.fragment.app.Fragment
@@ -27,6 +28,8 @@ class ThreeFragment : Fragment() {
 
         binding = FragmentEmiTwoBinding.inflate(inflater, container, false)
 
+        portraitMode()
+
         setHasOptionsMenu(true)
         binding.apply {
 
@@ -45,6 +48,10 @@ class ThreeFragment : Fragment() {
         }
 
         return binding.root
+    }
+
+    private fun portraitMode() {
+        activity?.requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
     }
 
     private fun parseDouble(`val`: String?): Double {

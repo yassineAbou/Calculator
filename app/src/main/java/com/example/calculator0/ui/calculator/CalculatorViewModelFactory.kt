@@ -1,9 +1,10 @@
-package com.example.calculator0.viewmodel
+package com.example.calculator0.ui.calculator
 
 import android.app.Application
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.example.calculator0.repository.PrevOperationRepository
+
 
 class CalculatorViewModelFactory(
     private val repository: PrevOperationRepository,
@@ -16,6 +17,5 @@ class CalculatorViewModelFactory(
         }
         throw IllegalArgumentException("Unknown ViewModel class")
     }
-
-
 }
+

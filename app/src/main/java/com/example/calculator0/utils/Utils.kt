@@ -18,3 +18,13 @@ fun TextView.setTextOutput(item: PrevOperation?) {
         text = item.previousOutput
     }
 }
+
+fun parseDouble(`val`: String?): Double {
+    return if (`val` == null || `val`.isEmpty()) 0.0 else `val`.toDouble()
+}
+
+inline fun <A, B, R> ifNotNull(a: A?, b: B?, code: (A, B) -> R) {
+    if (a != null && b != null) {
+        code(a, b)
+    }
+}

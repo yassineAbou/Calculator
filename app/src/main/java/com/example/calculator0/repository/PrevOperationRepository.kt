@@ -6,7 +6,7 @@ import com.example.calculator0.database.PrevOperationDoe
 
 class PrevOperationRepository(private val prevOperationDoe: PrevOperationDoe) {
 
-    val allPrevOperations: LiveData<List<PrevOperation>> = prevOperationDoe.getAllPrevOperations()
+    val allPrevOperations = prevOperationDoe.getAllPrevOperations()
 
 
      suspend fun insert(prevOperation: PrevOperation) {
@@ -16,10 +16,5 @@ class PrevOperationRepository(private val prevOperationDoe: PrevOperationDoe) {
     suspend fun clear() {
         prevOperationDoe.clear()
     }
-
-
-
-
-
 
 }

@@ -1,15 +1,15 @@
-package com.example.calculator0.viewmodel
+package com.example.calculator0.ui.calculator
 
 
 
 
 import android.app.Application
-import android.view.View
 import androidx.core.text.isDigitsOnly
 import androidx.lifecycle.*
 import com.example.calculator0.repository.PrevOperationRepository
 import com.example.calculator0.database.PrevOperation
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 import org.mariuszgromada.math.mxparser.Expression
 
@@ -17,7 +17,6 @@ class CalculatorViewModel(
     repository: PrevOperationRepository,
     application: Application
 ) : ViewModel() {
-
 
     private val repository1 = repository
     val allPrevOperations = repository.allPrevOperations
@@ -28,40 +27,19 @@ class CalculatorViewModel(
     private var isDotClicked = true
     private var action2 = '+'
 
-    val clearHistoryEnabled: LiveData<Boolean?> = Transformations.map(allPrevOperations) {
-        it?.isNotEmpty()
-    }
+    private val _currentInput: MutableStateFlow<String?> = MutableStateFlow(null)
+    val currentInput = _currentInput.asStateFlow()
 
-    private val _currentInput = MutableLiveData<String> ()
-    val currentInput: LiveData<String>
-    get() = _currentInput
+    private val _currentOutput: MutableStateFlow<String?> = MutableStateFlow(null)
+    val currentOutput = _currentOutput.asStateFlow()
 
-    private val _currentOutput = MutableLiveData<String> ()
-    val currentOutput: LiveData<String>
-        get() = _currentOutput
-
-    private val _invalid = MutableLiveData<Boolean> ()
-    val invalid: LiveData<Boolean>
-        get() = _invalid
+    private val _invalid = MutableSharedFlow<String>()
+    val invalid = _invalid.asSharedFlow()
 
     private fun onInvalid() {
-        _invalid.value = true
-    }
-
-    fun onInvalidComplete() {
-        _invalid.value = false
-    }
-
-    private val _eventCalculatorFinished = MutableLiveData<Boolean> ()
-    val eventCalculatorFinished: LiveData<Boolean>
-        get() = _eventCalculatorFinished
-
-    fun onCalculatorFinish() {
-        _eventCalculatorFinished.value = true
-    }
-
-    fun onCalculatorFinishComplete() {
-        _eventCalculatorFinished.value = false
+        viewModelScope.launch {
+            _invalid.emit("Invalid format used.")
+        }
     }
 
     init {
@@ -74,8 +52,7 @@ class CalculatorViewModel(
     //-----------------------
 
 
-    fun addToCurrentInput(number: String) {
-        val currentValue = _currentInput.value!!
+    fun addToCurrentInput(number: String, currentValue: String) {
         val givenNumber = currentValue.substringAfterLast(action2)
         with(givenNumber) {
             when {
@@ -87,20 +64,18 @@ class CalculatorViewModel(
         }
     }
 
-    fun updateCurrentValue(keyWord: String) {
-        val currentValue = _currentInput.value!!
+    fun updateCurrentValue(keyWord: String, currentValue: String) {
         _currentInput.value = with(currentValue) {
             when {
-                lastOrNull() in symbols5 -> ("$currentValue×$keyWord")
-                else -> ("$currentValue$keyWord")
+                lastOrNull() in symbols5 -> ("$this×$keyWord")
+                else -> ("$this$keyWord")
             }
         }
     }
 
-    fun exponentiation(input: String) {
-        val currentValue = _currentInput.value!!
+    fun exponentiation(input: String, currentValue: String) {
         val givenNumber = currentValue.substringAfterLast(action2)
-            if (givenNumber.isNotEmpty() and (givenNumber.lastOrNull() in symbols5)) {
+            if (givenNumber.isNotEmpty() && (givenNumber.lastOrNull() in symbols5)) {
                 _currentInput.value =  ("$currentValue$input")
             } else {
                 onInvalid()
@@ -108,46 +83,44 @@ class CalculatorViewModel(
         }
 
 
-    fun getResult() {
+    fun getResult(currentValue: String) {
 
-        var currentValue = _currentInput.value!!
         val givenNumber = currentValue.substringAfterLast(action2)
 
-        viewModelScope.launch(Dispatchers.Default) {
-                currentValue = currentValue.replace('×', '*')
-                currentValue = currentValue.replace('÷', '/')
-                val exp = Expression(currentValue)
-                val output = trimTrailingZero(java.lang.String.valueOf(exp.calculate()))
-                if (output == "NaN")
-                    _currentOutput.postValue("")
-                else _currentOutput.postValue(output!!)
-            }
-
-            if (givenNumber.isDigitsOnly())
-            isDotClicked = true
-
-           if (currentValue.isEmpty()) {
-               isDotClicked = true
-
-           }
+        viewModelScope.launch(Dispatchers.IO) {
+            val value = currentValue.replace('×', '*')
+                                    .replace('÷', '/')
+            val exp = Expression(value)
+            val output = trimTrailingZero(java.lang.String.valueOf(exp.calculate()))
+            if (output == "NaN")
+                _currentOutput.value = ""
+            else _currentOutput.value = output
         }
 
-    fun backspace() {
-        var currentValue = _currentInput.value!!
-        if (currentValue != "") {
-            currentValue = currentValue.substring(0, currentValue.length - 1)
-            _currentInput.value = currentValue
+        if (givenNumber.isDigitsOnly())
+            isDotClicked = true
+
+        if (currentValue.isEmpty()) {
+            isDotClicked = true
+
         }
     }
 
-    fun period() {
-        val currentValue = _currentInput.value!!
+
+    fun backspace(currentValue: String) {
+        if (currentValue != "") {
+            val value  = currentValue.substring(0, currentValue.length - 1)
+            _currentInput.value = value
+        }
+    }
+
+    fun period(currentValue: String) {
         val givenNumber = currentValue.substringAfterLast(action2)
         if ((givenNumber.isEmpty()) and isDotClicked) {
             _currentInput.value = (currentValue + "0.")
             isDotClicked = false
         }
-        if (isDotClicked and (givenNumber.lastOrNull()?.isDigit() == true) and givenNumber.none { it =='.' })  {
+        if (isDotClicked && (givenNumber.lastOrNull()?.isDigit() == true) && givenNumber.none { it =='.' })  {
             _currentInput.value = ("$currentValue.")
             isDotClicked = false
         }
@@ -158,28 +131,24 @@ class CalculatorViewModel(
         _currentOutput.value = ""
     }
 
-    fun sign() {
-        val currentValue = _currentInput.value!!
+    fun sign(currentValue: String) {
         if (currentValue.lastOrNull() in symbols5)
         _currentInput.value = ("$currentValue×(-")
         else _currentInput.value = ("$currentValue(-")
 
     }
 
-    fun betweenBrackets() {
-        val currentValue = _currentInput.value!!
+    fun betweenBrackets(currentValue: String) {
         _currentInput.value = with(currentValue) {
             when {
-                isBalanced(currentValue) && lastOrNull() in symbols5 -> ("$currentValue×(")
-                isBalanced(currentValue) -> ("$currentValue(")
-                else -> ("$currentValue)")
+                isBalanced(this) && lastOrNull() in symbols5 -> ("$this×(")
+                isBalanced(this) -> ("$this(")
+                else -> ("$this)")
             }
         }
     }
 
-    fun equals() {
-        val resultValue = _currentOutput.value!!
-        val currentValue = _currentInput.value!!
+    fun equals(currentValue: String, resultValue: String) {
         if (resultValue.isNotEmpty()) {
 
             val test = PrevOperation(currentValue, resultValue)
@@ -190,10 +159,9 @@ class CalculatorViewModel(
         }
     }
 
-    fun percent() {
-        val currentValue = _currentInput.value!!
+    fun percent(currentValue: String) {
         val givenNumber = currentValue.substringAfterLast(action2)
-        if (givenNumber.isNotEmpty() and (givenNumber.lastOrNull() in symbols5) and (givenNumber.lastOrNull()!= '%')) {
+        if (givenNumber.isNotEmpty() && (givenNumber.lastOrNull() in symbols5) && (givenNumber.lastOrNull()!= '%')) {
             _currentInput.value = ("$currentValue%")
         }
         else {
@@ -202,8 +170,7 @@ class CalculatorViewModel(
         }
     }
 
-    fun onNumberClickedButton(number: String) {
-        val currentValue = _currentInput.value!!
+    fun onNumberClickedButton(number: String, currentValue: String) {
         val givenNumber = currentValue.substringAfterLast(action2)
            with(givenNumber) {
              when {
@@ -215,8 +182,7 @@ class CalculatorViewModel(
          }
      }
 
-    fun onOperationClickedButton(action: String) {
-        val currentValue = _currentInput.value!!
+    fun onOperationClickedButton(action: String, currentValue: String) {
         action2 = action.single()
         if (currentValue.lastOrNull() !in symbols2 && currentValue.isNotEmpty()) {
             _currentInput.value = (currentValue + action)
@@ -272,6 +238,9 @@ class CalculatorViewModel(
     }
 
 }
+
+
+
 
 
 

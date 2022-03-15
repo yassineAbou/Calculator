@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.Query
+import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface PrevOperationDoe {
@@ -15,9 +16,7 @@ interface PrevOperationDoe {
     suspend fun clear()
 
     @Query("SELECT * FROM previous_operation_table ORDER BY id DESC")
-    fun getAllPrevOperations(): LiveData<List<PrevOperation>>
-
-
+    fun getAllPrevOperations(): Flow<List<PrevOperation>>
 
 
 }

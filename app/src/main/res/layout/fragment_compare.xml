@@ -4,6 +4,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
+    <data>
+        <variable
+            name="viewModel"
+            type="com.example.calculator0.ui.emi.EMIViewModel" />
+    </data>
+
 <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -42,8 +48,7 @@
                 android:id="@+id/textview20"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-
-                android:text="textview"
+                tools:text="textview"
                 android:textColor="@color/black"
                 android:textSize="@dimen/_11ssp"
                 android:visibility="invisible" />
@@ -53,7 +58,6 @@
                 android:id="@+id/textview21"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-
                 android:text="@string/_first"
                 android:textColor="?attr/textColor3"
                 android:textSize="@dimen/_11ssp" />
@@ -62,7 +66,6 @@
                 android:id="@+id/textview22"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-
                 android:text="@string/_second"
                 android:textColor="?attr/textColor3"
                 android:textSize="@dimen/_11ssp" />
@@ -86,7 +89,7 @@
                 android:id="@+id/firstLoan"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:freezesText="true"
+                android:text="@{viewModel.emiFirstResult.principal}"
                 android:textColor="?attr/textColor3"
                 android:textSize="@dimen/_11ssp" />
 
@@ -94,7 +97,7 @@
                 android:id="@+id/secondLoan"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-
+                android:text="@{viewModel.emiSecondResult.principal}"
                 android:textColor="?attr/textColor3"
                 android:textSize="@dimen/_11ssp" />
         </TableRow>
@@ -118,14 +121,17 @@
                 android:layout_height="wrap_content"
                 android:textColor="?attr/textColor3"
                 android:textSize="@dimen/_11ssp"
-                android:freezesText="true"/>
+                android:text="@{viewModel.emiFirstResult.emiMonth}"
+                />
 
             <TextView
                 android:id="@+id/secondEmi"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="?attr/textColor3"
-                android:textSize="@dimen/_11ssp" />
+                android:textSize="@dimen/_11ssp"
+                android:text="@{viewModel.emiSecondResult.emiMonth}"
+                />
         </TableRow>
 
         <TableRow
@@ -147,14 +153,15 @@
                 android:layout_height="wrap_content"
                 android:textColor="?attr/textColor3"
                 android:textSize="@dimen/_11ssp"
-                android:freezesText="true"/>
+                android:text="@{viewModel.emiFirstResult.interestRate}"/>
 
             <TextView
                 android:id="@+id/secondInterest"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="?attr/textColor3"
-                android:textSize="@dimen/_11ssp" />
+                android:textSize="@dimen/_11ssp"
+                android:text="@{viewModel.emiSecondResult.interestRate}"/>
         </TableRow>
 
         <TableRow
@@ -177,14 +184,16 @@
                 android:layout_height="wrap_content"
                 android:textColor="?attr/textColor3"
                 android:textSize="@dimen/_11ssp"
-                android:freezesText="true"/>
+                android:text= "@{viewModel.emiFirstResult.installment}"
+                />
 
             <TextView
                 android:id="@+id/secondInstallments"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="?attr/textColor3"
-                android:textSize="@dimen/_11ssp" />
+                android:textSize="@dimen/_11ssp"
+                android:text= "@{viewModel.emiSecondResult.installment}"/>
         </TableRow>
 
 
@@ -231,7 +240,7 @@
         android:id="@+id/firstTotal"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/total"
+        android:text= "@{String.format(@string/total, viewModel.emiFirstResult.total)}"
         android:textSize="@dimen/_13ssp"
         android:textColor="?attr/textColor2"
         android:layout_marginStart="@dimen/_17sdp"
@@ -247,7 +256,8 @@
         android:textColor="@color/black"
         android:textSize="@dimen/_13ssp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/firstTotal" />
+        app:layout_constraintTop_toBottomOf="@+id/firstTotal"
+        android:text="@{viewModel.emiFirstResult.principal}"/>
 
     <TextView
         android:id="@+id/textView27"
@@ -268,7 +278,8 @@
         android:textColor="@color/black"
         android:textSize="@dimen/_13ssp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/firstTotal" />
+        app:layout_constraintTop_toBottomOf="@+id/firstTotal"
+        android:text="@{viewModel.emiFirstResult.interest}"/>
 
     <TextView
         android:id="@+id/textView28"
@@ -306,7 +317,7 @@
         android:id="@+id/secondTotal"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/total"
+        android:text= "@{String.format(@string/total, viewModel.emiSecondResult.total)}"
         android:textSize="@dimen/_13ssp"
         android:layout_marginStart="@dimen/_17sdp"
         android:textColor="?attr/textColor2"
@@ -322,7 +333,8 @@
         android:textColor="@color/black"
         android:textSize="@dimen/_13ssp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/secondTotal" />
+        app:layout_constraintTop_toBottomOf="@+id/secondTotal"
+        android:text="@{viewModel.emiSecondResult.principal}"/>
 
     <TextView
         android:id="@+id/textView32"
@@ -343,7 +355,8 @@
         android:textColor="@color/black"
         android:textSize="@dimen/_13ssp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/secondTotal" />
+        app:layout_constraintTop_toBottomOf="@+id/secondTotal"
+        android:text="@{viewModel.emiSecondResult.interest}"/>
 
     <TextView
         android:id="@+id/textView33"

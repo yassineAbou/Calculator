@@ -7,7 +7,7 @@
     <data>
         <variable
             name="viewModel"
-            type="com.example.calculator0.viewmodel.CalculatorViewModel" />
+            type="com.example.calculator0.ui.calculator.CalculatorViewModel" />
     </data>
     
 <androidx.constraintlayout.widget.ConstraintLayout
@@ -30,7 +30,7 @@
         app:layout_constraintTop_toTopOf="parent"
         tools:ignore="RtlHardcoded"
         android:text="@{viewModel.currentInput}"
-        android:onTextChanged="@{(text, start, before, count) -> viewModel.getResult()}"/>
+        android:onTextChanged="@{(text, start, before, count) -> viewModel.getResult(viewModel.currentInput.toString())}"/>
 
     <TextView
         android:id="@+id/result"
@@ -52,41 +52,42 @@
         android:id="@+id/history"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:srcCompat="@drawable/history"
-        app:layout_constraintTop_toBottomOf = "@+id/result"
-        android:layout_marginTop="@dimen/_3sdp"
         android:layout_marginStart="@dimen/_52sdp"
+        android:layout_marginTop="@dimen/_3sdp"
         android:background="?attr/bgColor"
+        android:contentDescription="@string/imageDes1"
         app:layout_constraintStart_toStartOf="parent"
-        android:contentDescription="@string/imageDes1" />
-
+        app:layout_constraintTop_toBottomOf="@+id/result"
+        app:srcCompat="@drawable/history"
+        tools:ignore="TouchTargetSizeCheck" />
 
 
     <ImageButton
         android:id="@+id/emi"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/_3sdp"
         android:layout_marginStart="@dimen/_53sdp"
+        android:layout_marginTop="@dimen/_3sdp"
         android:background="?attr/bgColor"
-        app:srcCompat="@drawable/dollar"
+        android:contentDescription="@string/imgDes3"
         app:layout_constraintStart_toEndOf="@+id/history"
         app:layout_constraintTop_toBottomOf="@+id/result"
-        android:contentDescription="@string/imgDes3"
-        android:onClick="@{() -> viewModel.onCalculatorFinish()}"/>
+        app:srcCompat="@drawable/dollar"
+        tools:ignore="TouchTargetSizeCheck" />
 
     <ImageButton
         android:id="@+id/no_backspace"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/_382sdp"
         android:layout_marginTop="@dimen/_3sdp"
         android:background="?attr/bgColor"
-        app:srcCompat="@drawable/ic_no_backspace"
-        android:layout_marginStart="@dimen/_382sdp"
+        android:contentDescription="@string/imgDes4"
+        android:onClick="@{() -> viewModel.backspace(viewModel.currentInput.toString())}"
         app:layout_constraintStart_toEndOf="@+id/emi"
         app:layout_constraintTop_toBottomOf="@+id/result"
-        android:contentDescription="@string/imgDes4"
-        android:onClick="@{() -> viewModel.backspace()}"/>
+        app:srcCompat="@drawable/ic_no_backspace"
+        tools:ignore="TouchTargetSizeCheck" />
 
 
 
@@ -160,7 +161,7 @@
         app:layout_constraintEnd_toEndOf="@+id/view11"
         app:layout_constraintTop_toBottomOf="@+id/line_space"
         android:onClick="@{() -> viewModel.onClear()}"
-        android:enabled="@{viewModel.clearHistoryEnabled}"/>
+        />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/clear"
@@ -169,12 +170,13 @@
         android:layout_marginStart="@dimen/_295sdp"
         android:layout_marginTop="@dimen/_5sdp"
         android:background="@drawable/custom_btn_landscape"
+        android:onClick="@{() -> viewModel.clear()}"
         android:text="@string/_clear"
         android:textColor="@color/red"
         android:textSize="@dimen/_18ssp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/line_space"
-        android:onClick="@{() -> viewModel.clear()}"/>
+        tools:ignore="TouchTargetSizeCheck" />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/betweenBrackets"
@@ -183,143 +185,148 @@
         android:layout_marginStart="@dimen/_33sdp"
         android:layout_marginTop="@dimen/_5sdp"
         android:background="@drawable/custom_btn_landscape"
+        android:onClick="@{() -> viewModel.betweenBrackets(viewModel.currentInput.toString())}"
         android:text="@string/_betweenBrackets"
         android:textColor="@color/blue"
         android:textSize="@dimen/_14ssp"
         app:layout_constraintStart_toEndOf="@+id/clear"
         app:layout_constraintTop_toBottomOf="@+id/line_space"
-        android:onClick="@{() -> viewModel.betweenBrackets()}"/>
+        tools:ignore="TouchTargetSizeCheck" />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/percent"
         android:layout_width="@dimen/_40sdp"
         android:layout_height="@dimen/_28sdp"
+        android:layout_marginStart="@dimen/_33sdp"
         android:layout_marginTop="@dimen/_5sdp"
         android:background="@drawable/custom_btn_landscape"
-        android:layout_marginStart="@dimen/_33sdp"
+        android:onClick="@{() -> viewModel.percent(viewModel.currentInput.toString())}"
         android:text="@string/_percent"
         android:textColor="@color/blue"
         android:textSize="@dimen/_18ssp"
         app:layout_constraintStart_toEndOf="@+id/betweenBrackets"
         app:layout_constraintTop_toBottomOf="@+id/line_space"
-        android:onClick="@{() -> viewModel.percent()}"/>
+        tools:ignore="TouchTargetSizeCheck" />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/divided"
         android:layout_width="@dimen/_40sdp"
         android:layout_height="@dimen/_28sdp"
+        android:layout_marginStart="@dimen/_33sdp"
         android:layout_marginTop="@dimen/_5sdp"
         android:background="@drawable/custom_btn_landscape"
-        android:layout_marginStart="@dimen/_33sdp"
+        android:onClick="@{() -> viewModel.onOperationClickedButton(@string/_divided, viewModel.currentInput.toString())}"
         android:text="@string/_divided"
         android:textColor="@color/blue"
         android:textSize="@dimen/_20ssp"
         app:layout_constraintStart_toEndOf="@+id/percent"
         app:layout_constraintTop_toBottomOf="@+id/line_space"
-        android:onClick="@{() -> viewModel.onOperationClickedButton(@string/_divided)}"/>
+        tools:ignore="TouchTargetSizeCheck" />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/seven"
         android:layout_width="@dimen/_40sdp"
         android:layout_height="@dimen/_28sdp"
+        android:layout_marginStart="@dimen/_295sdp"
         android:layout_marginTop="@dimen/_6sdp"
         android:background="@drawable/custom_btn_landscape"
+        android:onClick="@{() -> viewModel.onNumberClickedButton(@string/_7, viewModel.currentInput.toString())}"
         android:text="@string/_7"
-        android:layout_marginStart="@dimen/_295sdp"
+        android:textColor="?attr/textColor"
+        android:textSize="@dimen/_20ssp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/clear"
-        android:textSize="@dimen/_20ssp"
-        android:textColor="?attr/textColor"
-        android:onClick="@{() -> viewModel.onNumberClickedButton(@string/_7)}" />
+        tools:ignore="TouchTargetSizeCheck" />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/eight"
         android:layout_width="@dimen/_40sdp"
         android:layout_height="@dimen/_28sdp"
-        android:layout_marginTop="@dimen/_6sdp"
         android:layout_marginStart="@dimen/_33sdp"
+        android:layout_marginTop="@dimen/_6sdp"
         android:background="@drawable/custom_btn_landscape"
+        android:onClick="@{() -> viewModel.onNumberClickedButton(@string/_8, viewModel.currentInput.toString())}"
         android:text="@string/_8"
-        android:textSize="@dimen/_20ssp"
         android:textColor="?attr/textColor"
+        android:textSize="@dimen/_20ssp"
         app:layout_constraintStart_toEndOf="@+id/seven"
         app:layout_constraintTop_toBottomOf="@+id/clear"
-        android:onClick="@{() -> viewModel.onNumberClickedButton(@string/_8)}"
-        />
+        tools:ignore="TouchTargetSizeCheck" />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/nine"
         android:layout_width="@dimen/_40sdp"
         android:layout_height="@dimen/_28sdp"
-        android:layout_marginTop="@dimen/_6sdp"
         android:layout_marginStart="@dimen/_33sdp"
+        android:layout_marginTop="@dimen/_6sdp"
         android:background="@drawable/custom_btn_landscape"
+        android:onClick="@{() -> viewModel.onNumberClickedButton(@string/_9, viewModel.currentInput.toString())}"
         android:text="@string/_9"
-        android:textSize="@dimen/_20ssp"
         android:textColor="?attr/textColor"
+        android:textSize="@dimen/_20ssp"
         app:layout_constraintStart_toEndOf="@+id/eight"
         app:layout_constraintTop_toBottomOf="@+id/clear"
-        android:onClick="@{() -> viewModel.onNumberClickedButton(@string/_9)}"
-        />
+        tools:ignore="TouchTargetSizeCheck" />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/multiplicand"
         android:layout_width="@dimen/_40sdp"
         android:layout_height="@dimen/_28sdp"
-        android:layout_marginTop="@dimen/_6sdp"
         android:layout_marginStart="@dimen/_33sdp"
+        android:layout_marginTop="@dimen/_6sdp"
         android:background="@drawable/custom_btn_landscape"
+        android:onClick="@{() -> viewModel.onOperationClickedButton(@string/_multiplicand, viewModel.currentInput.toString())}"
         android:text="@string/_multiplicand"
-        android:textSize="@dimen/_20ssp"
         android:textColor="@color/blue"
+        android:textSize="@dimen/_20ssp"
         app:layout_constraintStart_toEndOf="@+id/nine"
         app:layout_constraintTop_toBottomOf="@+id/clear"
-        android:onClick="@{() -> viewModel.onOperationClickedButton(@string/_multiplicand)}"/>
+        tools:ignore="TouchTargetSizeCheck" />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/four"
         android:layout_width="@dimen/_40sdp"
         android:layout_height="@dimen/_28sdp"
+        android:layout_marginStart="@dimen/_295sdp"
         android:layout_marginTop="@dimen/_6sdp"
         android:background="@drawable/custom_btn_landscape"
+        android:onClick="@{() -> viewModel.onNumberClickedButton(@string/_4, viewModel.currentInput.toString())}"
         android:text="@string/_4"
-        android:layout_marginStart="@dimen/_295sdp"
-        android:textSize="@dimen/_20ssp"
         android:textColor="?attr/textColor"
+        android:textSize="@dimen/_20ssp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/seven"
-        android:onClick="@{() -> viewModel.onNumberClickedButton(@string/_4)}"
-        />
+        tools:ignore="TouchTargetSizeCheck" />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/five"
         android:layout_width="@dimen/_40sdp"
         android:layout_height="@dimen/_28sdp"
-        android:layout_marginTop="@dimen/_6sdp"
         android:layout_marginStart="@dimen/_33sdp"
+        android:layout_marginTop="@dimen/_6sdp"
         android:background="@drawable/custom_btn_landscape"
+        android:onClick="@{() -> viewModel.onNumberClickedButton(@string/_5, viewModel.currentInput.toString())}"
         android:text="@string/_5"
-        android:textSize="@dimen/_20ssp"
         android:textColor="?attr/textColor"
+        android:textSize="@dimen/_20ssp"
         app:layout_constraintStart_toEndOf="@+id/four"
         app:layout_constraintTop_toBottomOf="@+id/seven"
-        android:onClick="@{() -> viewModel.onNumberClickedButton(@string/_5)}"
-        />
+        tools:ignore="TouchTargetSizeCheck" />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/six"
         android:layout_width="@dimen/_40sdp"
         android:layout_height="@dimen/_28sdp"
-        android:layout_marginTop="@dimen/_6sdp"
         android:layout_marginStart="@dimen/_33sdp"
+        android:layout_marginTop="@dimen/_6sdp"
         android:background="@drawable/custom_btn_landscape"
+        android:onClick="@{() -> viewModel.onNumberClickedButton(@string/_6, viewModel.currentInput.toString())}"
         android:text="@string/_6"
-        android:textSize="@dimen/_20ssp"
         android:textColor="?attr/textColor"
+        android:textSize="@dimen/_20ssp"
         app:layout_constraintStart_toEndOf="@+id/five"
         app:layout_constraintTop_toBottomOf="@+id/seven"
-        android:onClick="@{() -> viewModel.onNumberClickedButton(@string/_6)}"
-        />
+        tools:ignore="TouchTargetSizeCheck" />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/minus"
@@ -328,7 +335,7 @@
         android:layout_marginStart="@dimen/_33sdp"
         android:layout_marginTop="@dimen/_6sdp"
         android:background="@drawable/custom_btn_landscape"
-        android:onClick="@{() -> viewModel.onOperationClickedButton(@string/_minus)}"
+        android:onClick="@{() -> viewModel.onOperationClickedButton(@string/_minus, viewModel.currentInput.toString())}"
         android:text="@string/_minus"
         android:textColor="@color/blue"
         android:textSize="@dimen/_20ssp"
@@ -340,117 +347,121 @@
         android:id="@+id/one"
         android:layout_width="@dimen/_40sdp"
         android:layout_height="@dimen/_28sdp"
+        android:layout_marginStart="@dimen/_295sdp"
         android:layout_marginTop="@dimen/_6sdp"
         android:background="@drawable/custom_btn_landscape"
+        android:onClick="@{() -> viewModel.onNumberClickedButton(@string/_1, viewModel.currentInput.toString())}"
         android:text="@string/_1"
-        android:layout_marginStart="@dimen/_295sdp"
-        android:textSize="@dimen/_20ssp"
         android:textColor="?attr/textColor"
+        android:textSize="@dimen/_20ssp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/four"
-        android:onClick="@{() -> viewModel.onNumberClickedButton(@string/_1)}"
-       />
+        tools:ignore="TouchTargetSizeCheck" />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/two"
         android:layout_width="@dimen/_40sdp"
         android:layout_height="@dimen/_28sdp"
-        android:layout_marginTop="@dimen/_6sdp"
         android:layout_marginStart="@dimen/_33sdp"
+        android:layout_marginTop="@dimen/_6sdp"
         android:background="@drawable/custom_btn_landscape"
+        android:onClick="@{() -> viewModel.onNumberClickedButton(@string/_2, viewModel.currentInput.toString())}"
         android:text="@string/_2"
-        android:textSize="@dimen/_20ssp"
         android:textColor="?attr/textColor"
+        android:textSize="@dimen/_20ssp"
         app:layout_constraintStart_toEndOf="@+id/one"
         app:layout_constraintTop_toBottomOf="@+id/four"
-        android:onClick="@{() -> viewModel.onNumberClickedButton(@string/_2)}"
-        />
+        tools:ignore="TouchTargetSizeCheck" />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/three"
         android:layout_width="@dimen/_40sdp"
         android:layout_height="@dimen/_28sdp"
-        android:layout_marginTop="@dimen/_6sdp"
         android:layout_marginStart="@dimen/_33sdp"
+        android:layout_marginTop="@dimen/_6sdp"
         android:background="@drawable/custom_btn_landscape"
+        android:onClick="@{() -> viewModel.onNumberClickedButton(@string/_3, viewModel.currentInput.toString())}"
         android:text="@string/_3"
-        android:textSize="@dimen/_20ssp"
         android:textColor="?attr/textColor"
+        android:textSize="@dimen/_20ssp"
         app:layout_constraintStart_toEndOf="@+id/two"
         app:layout_constraintTop_toBottomOf="@+id/four"
-        android:onClick="@{() -> viewModel.onNumberClickedButton(@string/_3)}"
-        />
+        tools:ignore="TouchTargetSizeCheck" />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/plus"
         android:layout_width="@dimen/_40sdp"
         android:layout_height="@dimen/_28sdp"
-        android:layout_marginTop="@dimen/_6sdp"
         android:layout_marginStart="@dimen/_33sdp"
+        android:layout_marginTop="@dimen/_6sdp"
         android:background="@drawable/custom_btn_landscape"
+        android:onClick="@{() -> viewModel.onOperationClickedButton(@string/_plus, viewModel.currentInput.toString())}"
         android:text="@string/_plus"
-        android:textSize="@dimen/_20ssp"
         android:textColor="@color/blue"
+        android:textSize="@dimen/_20ssp"
         app:layout_constraintStart_toEndOf="@+id/three"
         app:layout_constraintTop_toBottomOf="@+id/four"
-        android:onClick="@{() -> viewModel.onOperationClickedButton(@string/_plus)}"/>
+        tools:ignore="TouchTargetSizeCheck" />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/sign"
         android:layout_width="@dimen/_40sdp"
         android:layout_height="@dimen/_28sdp"
+        android:layout_marginStart="@dimen/_295sdp"
         android:layout_marginTop="@dimen/_6sdp"
         android:background="@drawable/custom_btn_landscape"
+        android:onClick="@{() -> viewModel.sign(viewModel.currentInput.toString())}"
         android:text="@string/minus_sign"
-        android:layout_marginStart="@dimen/_295sdp"
-        android:textSize="@dimen/_20ssp"
         android:textColor="?attr/textColor"
+        android:textSize="@dimen/_20ssp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/one"
-        android:onClick="@{() -> viewModel.sign()}"/>
+        tools:ignore="TouchTargetSizeCheck" />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/zero"
         android:layout_width="@dimen/_40sdp"
         android:layout_height="@dimen/_28sdp"
-        android:layout_marginTop="@dimen/_6sdp"
         android:layout_marginStart="@dimen/_33sdp"
+        android:layout_marginTop="@dimen/_6sdp"
         android:background="@drawable/custom_btn_landscape"
+        android:onClick="@{() -> viewModel.onNumberClickedButton(@string/_0, viewModel.currentInput.toString())}"
         android:text="@string/_0"
-        android:textSize="@dimen/_20ssp"
         android:textColor="?attr/textColor"
+        android:textSize="@dimen/_20ssp"
         app:layout_constraintStart_toEndOf="@+id/sign"
         app:layout_constraintTop_toBottomOf="@+id/one"
-        android:onClick="@{() -> viewModel.onNumberClickedButton(@string/_0)}"
-        />
+        tools:ignore="TouchTargetSizeCheck" />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/period"
         android:layout_width="@dimen/_40sdp"
         android:layout_height="@dimen/_28sdp"
-        android:layout_marginTop="@dimen/_6sdp"
         android:layout_marginStart="@dimen/_33sdp"
+        android:layout_marginTop="@dimen/_6sdp"
         android:background="@drawable/custom_btn_landscape"
+        android:onClick="@{() -> viewModel.period(viewModel.currentInput.toString())}"
         android:text="@string/_."
-        android:textSize="@dimen/_20ssp"
         android:textColor="?attr/textColor"
+        android:textSize="@dimen/_20ssp"
         app:layout_constraintStart_toEndOf="@+id/zero"
         app:layout_constraintTop_toBottomOf="@+id/one"
-        android:onClick="@{() -> viewModel.period()}"/>
+        tools:ignore="TouchTargetSizeCheck" />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/equals"
         android:layout_width="@dimen/_40sdp"
         android:layout_height="@dimen/_28sdp"
-        android:layout_marginTop="@dimen/_6sdp"
         android:layout_marginStart="@dimen/_33sdp"
+        android:layout_marginTop="@dimen/_6sdp"
         android:background="@drawable/custom_button_equal"
+        android:onClick="@{() -> viewModel.equals(viewModel.currentInput.toString(), viewModel.currentOutput.toString())}"
         android:text="@string/_equal"
-        android:textSize="@dimen/_20ssp"
         android:textColor="@color/white"
+        android:textSize="@dimen/_20ssp"
         app:layout_constraintStart_toEndOf="@+id/period"
         app:layout_constraintTop_toBottomOf="@+id/one"
-        android:onClick="@{() -> viewModel.equals()}"/>
+        tools:ignore="TouchTargetSizeCheck" />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/switchArrow"
@@ -480,23 +491,23 @@
         android:textSize="@dimen/_12ssp"
         app:layout_constraintStart_toEndOf="@+id/switchArrow"
         app:layout_constraintTop_toBottomOf="@+id/line_space"
-        android:onClick="@{() -> viewModel.updateCurrentValue(@string/value_rad)}"/>
+        android:onClick="@{() -> viewModel.updateCurrentValue(@string/value_rad, viewModel.currentInput.toString())}"/>
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/Deg"
         android:layout_width="@dimen/_40sdp"
         android:layout_height="@dimen/_28sdp"
-        android:layout_marginTop="@dimen/_5sdp"
         android:layout_marginStart="@dimen/_33sdp"
+        android:layout_marginTop="@dimen/_5sdp"
         android:background="@drawable/custom_btn_landscape"
+        android:onClick="@{() -> viewModel.updateCurrentValue(@string/value_deg, viewModel.currentInput.toString())}"
         android:text="@string/_deg"
         android:textAllCaps="false"
         android:textColor="?attr/textColor"
         android:textSize="@dimen/_12ssp"
         app:layout_constraintStart_toEndOf="@+id/switchArrow"
         app:layout_constraintTop_toBottomOf="@+id/line_space"
-        android:onClick="@{() -> viewModel.updateCurrentValue(@string/value_deg)}"
-        />
+        tools:ignore="TouchTargetSizeCheck" />
 
     <androidx.constraintlayout.widget.Group
         android:id="@+id/group1"
@@ -520,7 +531,7 @@
         android:textSize="@dimen/_15ssp"
         app:layout_constraintStart_toEndOf="@+id/Rad"
         app:layout_constraintTop_toBottomOf="@+id/line_space"
-        android:onClick="@{() -> viewModel.updateCurrentValue(@string/value_squareRoot)}"
+        android:onClick="@{() -> viewModel.updateCurrentValue(@string/value_squareRoot, viewModel.currentInput.toString())}"
         />
 
     <androidx.appcompat.widget.AppCompatButton
@@ -536,7 +547,7 @@
         android:textSize="@dimen/_12ssp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/switchArrow"
-        android:onClick="@{() -> viewModel.updateCurrentValue(@string/value_sin)}"
+        android:onClick="@{() -> viewModel.updateCurrentValue(@string/value_sin, viewModel.currentInput.toString())}"
         />
 
     <androidx.appcompat.widget.AppCompatButton
@@ -552,7 +563,7 @@
         android:textSize="@dimen/_12ssp"
         app:layout_constraintStart_toEndOf="@+id/sin"
         app:layout_constraintTop_toBottomOf="@+id/switchArrow"
-        android:onClick="@{() -> viewModel.updateCurrentValue(@string/value_cos)}"
+        android:onClick="@{() -> viewModel.updateCurrentValue(@string/value_cos, viewModel.currentInput.toString())}"
         />
 
     <androidx.appcompat.widget.AppCompatButton
@@ -568,7 +579,7 @@
         android:textSize="@dimen/_12ssp"
         app:layout_constraintStart_toEndOf="@+id/cos"
         app:layout_constraintTop_toBottomOf="@+id/switchArrow"
-        android:onClick="@{() -> viewModel.updateCurrentValue(@string/value_tan)}"
+        android:onClick="@{() -> viewModel.updateCurrentValue(@string/value_tan, viewModel.currentInput.toString())}"
         />
 
     <androidx.appcompat.widget.AppCompatButton
@@ -584,7 +595,7 @@
         android:textSize="@dimen/_12ssp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/sin"
-        android:onClick="@{() -> viewModel.updateCurrentValue(@string/value_ln)}"
+        android:onClick="@{() -> viewModel.updateCurrentValue(@string/value_ln, viewModel.currentInput.toString())}"
         />
 
     <androidx.appcompat.widget.AppCompatButton
@@ -600,7 +611,7 @@
         android:textSize="@dimen/_12ssp"
         app:layout_constraintStart_toEndOf="@+id/ln"
         app:layout_constraintTop_toBottomOf="@+id/sin"
-        android:onClick="@{() -> viewModel.updateCurrentValue(@string/value_log)}"
+        android:onClick="@{() -> viewModel.updateCurrentValue(@string/value_log, viewModel.currentInput.toString())}"
         />
 
     <androidx.appcompat.widget.AppCompatButton
@@ -616,7 +627,7 @@
         android:textSize="@dimen/_12ssp"
         app:layout_constraintStart_toEndOf="@+id/log"
         app:layout_constraintTop_toBottomOf="@+id/sin"
-        android:onClick="@{() -> viewModel.updateCurrentValue(@string/value_one_division_slash)}"
+        android:onClick="@{() -> viewModel.updateCurrentValue(@string/value_one_division_slash, viewModel.currentInput.toString())}"
         />
 
     <androidx.appcompat.widget.AppCompatButton
@@ -632,7 +643,7 @@
         android:textAllCaps="false"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/ln"
-        android:onClick="@{() -> viewModel.updateCurrentValue(@string/value_eˣ)}"/>
+        android:onClick="@{() -> viewModel.updateCurrentValue(@string/value_eˣ, viewModel.currentInput.toString())}"/>
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/squared"
@@ -647,7 +658,7 @@
         android:textSize="@dimen/_12ssp"
         app:layout_constraintStart_toEndOf="@+id/eˣ"
         app:layout_constraintTop_toBottomOf="@+id/ln"
-        android:onClick="@{() -> viewModel.exponentiation(@string/value_2power)}"
+        android:onClick="@{() -> viewModel.exponentiation(@string/value_2power, viewModel.currentInput.toString())}"
         />
 
     <androidx.appcompat.widget.AppCompatButton
@@ -663,7 +674,7 @@
         android:textSize="@dimen/_12ssp"
         app:layout_constraintStart_toEndOf="@+id/squared"
         app:layout_constraintTop_toBottomOf="@+id/ln"
-        android:onClick="@{() -> viewModel.exponentiation(@string/value_power)}"
+        android:onClick="@{() -> viewModel.exponentiation(@string/value_power, viewModel.currentInput.toString())}"
         />
 
     <androidx.appcompat.widget.AppCompatButton
@@ -679,7 +690,7 @@
         android:textSize="@dimen/_12ssp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/eˣ"
-        android:onClick="@{() -> viewModel.updateCurrentValue(@string/value_verticalBars)}"/>
+        android:onClick="@{() -> viewModel.updateCurrentValue(@string/value_verticalBars, viewModel.currentInput.toString())}"/>
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/piConstant"
@@ -693,7 +704,7 @@
         android:textSize="@dimen/_12ssp"
         app:layout_constraintStart_toEndOf="@+id/verticalBars"
         app:layout_constraintTop_toBottomOf="@+id/eˣ"
-        android:onClick="@{() -> viewModel.updateCurrentValue(@string/value_piConstant)}"/>
+        android:onClick="@{() -> viewModel.updateCurrentValue(@string/value_piConstant, viewModel.currentInput.toString())}"/>
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/EConstant"
@@ -708,7 +719,7 @@
         android:textSize="@dimen/_12ssp"
         app:layout_constraintStart_toEndOf="@+id/piConstant"
         app:layout_constraintTop_toBottomOf="@+id/eˣ"
-        android:onClick="@{() -> viewModel.updateCurrentValue(@string/value_EConstant)}"/>
+        android:onClick="@{() -> viewModel.updateCurrentValue(@string/value_EConstant, viewModel.currentInput.toString())}"/>
 
     <androidx.constraintlayout.widget.Group
         android:id="@+id/group2"
@@ -725,15 +736,16 @@
         android:id="@+id/cureRoot"
         android:layout_width="@dimen/_40sdp"
         android:layout_height="@dimen/_28sdp"
+        android:layout_marginStart="@dimen/_30sdp"
         android:layout_marginTop="@dimen/_5sdp"
         android:background="@drawable/custom_btn_landscape"
-        android:layout_marginStart="@dimen/_30sdp"
+        android:onClick="@{() -> viewModel.updateCurrentValue(@string/value_cureRoot, viewModel.currentInput.toString())}"
         android:text="@string/_cubeRoot"
         android:textColor="?attr/textColor"
         android:textSize="@dimen/_15ssp"
         app:layout_constraintStart_toEndOf="@+id/Deg"
         app:layout_constraintTop_toBottomOf="@+id/line_space"
-        android:onClick="@{() -> viewModel.updateCurrentValue(@string/value_cureRoot)}"/>
+        tools:ignore="TouchTargetSizeCheck" />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/sin_minus"
@@ -742,29 +754,30 @@
         android:layout_marginStart="@dimen/_42sdp"
         android:layout_marginTop="@dimen/_6sdp"
         android:background="@drawable/custom_btn_landscape"
+        android:onClick="@{() -> viewModel.updateCurrentValue(@string/value_sinMinus, viewModel.currentInput.toString())}"
         android:text="@string/_sinMinus"
         android:textAllCaps="false"
         android:textColor="?attr/textColor"
         android:textSize="@dimen/_12ssp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/switchArrow"
-        android:onClick="@{() -> viewModel.updateCurrentValue(@string/value_sinMinus)}"
-        />
+        tools:ignore="TouchTargetSizeCheck" />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/cos_minus"
         android:layout_width="@dimen/_40sdp"
         android:layout_height="@dimen/_28sdp"
-        android:layout_marginTop="@dimen/_6sdp"
         android:layout_marginStart="@dimen/_33sdp"
+        android:layout_marginTop="@dimen/_6sdp"
         android:background="@drawable/custom_btn_landscape"
+        android:onClick="@{() -> viewModel.updateCurrentValue(@string/value_cosMinus, viewModel.currentInput.toString())}"
         android:text="@string/cosMinus"
         android:textAllCaps="false"
         android:textColor="?attr/textColor"
         android:textSize="@dimen/_12ssp"
         app:layout_constraintStart_toEndOf="@+id/sin_minus"
         app:layout_constraintTop_toBottomOf="@+id/switchArrow"
-        android:onClick="@{() -> viewModel.updateCurrentValue(@string/value_cosMinus)}" />
+        tools:ignore="TouchTargetSizeCheck" />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/tan_minus"
@@ -773,13 +786,14 @@
         android:layout_marginStart="@dimen/_30sdp"
         android:layout_marginTop="@dimen/_6sdp"
         android:background="@drawable/custom_btn_landscape"
+        android:onClick="@{() -> viewModel.updateCurrentValue(@string/value_tanMinus, viewModel.currentInput.toString())}"
         android:text="@string/tanMinus"
         android:textAllCaps="false"
         android:textColor="?attr/textColor"
         android:textSize="@dimen/_12ssp"
         app:layout_constraintStart_toEndOf="@+id/cos_minus"
         app:layout_constraintTop_toBottomOf="@+id/switchArrow"
-        android:onClick="@{() -> viewModel.updateCurrentValue(@string/value_tanMinus)}"/>
+        tools:ignore="TouchTargetSizeCheck" />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/sinh"
@@ -788,28 +802,30 @@
         android:layout_marginStart="@dimen/_42sdp"
         android:layout_marginTop="@dimen/_6sdp"
         android:background="@drawable/custom_btn_landscape"
+        android:onClick="@{() -> viewModel.updateCurrentValue(@string/value_sinh, viewModel.currentInput.toString())}"
         android:text="@string/_sinh"
         android:textAllCaps="false"
         android:textColor="?attr/textColor"
         android:textSize="@dimen/_12ssp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/sin_minus"
-        android:onClick="@{() -> viewModel.updateCurrentValue(@string/value_sinh)}"/>
+        tools:ignore="TouchTargetSizeCheck" />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/cosh"
         android:layout_width="@dimen/_40sdp"
         android:layout_height="@dimen/_28sdp"
-        android:layout_marginTop="@dimen/_6sdp"
         android:layout_marginStart="@dimen/_33sdp"
+        android:layout_marginTop="@dimen/_6sdp"
         android:background="@drawable/custom_btn_landscape"
+        android:onClick="@{() -> viewModel.updateCurrentValue(@string/value_cosh, viewModel.currentInput.toString())}"
         android:text="@string/_cosh"
         android:textAllCaps="false"
         android:textColor="?attr/textColor"
         android:textSize="@dimen/_12ssp"
         app:layout_constraintStart_toEndOf="@+id/sinh"
         app:layout_constraintTop_toBottomOf="@+id/sin_minus"
-        android:onClick="@{() -> viewModel.updateCurrentValue(@string/value_cosh)}"/>
+        tools:ignore="TouchTargetSizeCheck" />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/tanh"
@@ -818,13 +834,14 @@
         android:layout_marginStart="@dimen/_30sdp"
         android:layout_marginTop="@dimen/_6sdp"
         android:background="@drawable/custom_btn_landscape"
+        android:onClick="@{() -> viewModel.updateCurrentValue(@string/value_tanh, viewModel.currentInput.toString())}"
         android:text="@string/_tanh"
-        android:textColor="?attr/textColor"
         android:textAllCaps="false"
+        android:textColor="?attr/textColor"
         android:textSize="@dimen/_12ssp"
         app:layout_constraintStart_toEndOf="@+id/cosh"
         app:layout_constraintTop_toBottomOf="@+id/sin_minus"
-        android:onClick="@{() -> viewModel.updateCurrentValue(@string/value_tanh)}"/>
+        tools:ignore="TouchTargetSizeCheck" />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/sinh_minus"
@@ -833,28 +850,30 @@
         android:layout_marginStart="@dimen/_42sdp"
         android:layout_marginTop="@dimen/_6sdp"
         android:background="@drawable/custom_btn_landscape"
+        android:onClick="@{() -> viewModel.updateCurrentValue(@string/value_sinhMinus, viewModel.currentInput.toString())}"
         android:text="@string/sinh_minus"
+        android:textAllCaps="false"
         android:textColor="?attr/textColor"
         android:textSize="@dimen/_12ssp"
-        android:textAllCaps="false"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/sinh"
-        android:onClick="@{() -> viewModel.updateCurrentValue(@string/value_sinhMinus)}"/>
+        tools:ignore="TouchTargetSizeCheck" />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/cosh_minus"
         android:layout_width="@dimen/_40sdp"
         android:layout_height="@dimen/_28sdp"
-        android:layout_marginTop="@dimen/_6sdp"
         android:layout_marginStart="@dimen/_33sdp"
+        android:layout_marginTop="@dimen/_6sdp"
         android:background="@drawable/custom_btn_landscape"
+        android:onClick="@{() -> viewModel.updateCurrentValue(@string/value_coshMinus, viewModel.currentInput.toString())}"
         android:text="@string/cosh_minus"
         android:textAllCaps="false"
         android:textColor="?attr/textColor"
         android:textSize="@dimen/_12ssp"
         app:layout_constraintStart_toEndOf="@+id/sinh_minus"
         app:layout_constraintTop_toBottomOf="@+id/sinh"
-        android:onClick="@{() -> viewModel.updateCurrentValue(@string/value_coshMinus)}"/>
+        tools:ignore="TouchTargetSizeCheck" />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/tanh_minus"
@@ -863,13 +882,14 @@
         android:layout_marginStart="@dimen/_30sdp"
         android:layout_marginTop="@dimen/_6sdp"
         android:background="@drawable/custom_btn_landscape"
+        android:onClick="@{() -> viewModel.updateCurrentValue(@string/value_tanhMinus, viewModel.currentInput.toString())}"
         android:text="@string/tanh_minus"
         android:textAllCaps="false"
         android:textColor="?attr/textColor"
         android:textSize="@dimen/_12ssp"
         app:layout_constraintStart_toEndOf="@+id/cosh_minus"
         app:layout_constraintTop_toBottomOf="@+id/sinh"
-        android:onClick="@{() -> viewModel.updateCurrentValue(@string/value_tanhMinus)}"/>
+        tools:ignore="TouchTargetSizeCheck" />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/two_Power"
@@ -878,28 +898,30 @@
         android:layout_marginStart="@dimen/_42sdp"
         android:layout_marginTop="@dimen/_6sdp"
         android:background="@drawable/custom_btn_landscape"
+        android:onClick="@{() -> viewModel.updateCurrentValue(@string/value_twoPower, viewModel.currentInput.toString())}"
         android:text="@string/_2Power"
         android:textAllCaps="false"
         android:textColor="?attr/textColor"
         android:textSize="@dimen/_12ssp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/sinh_minus"
-        android:onClick="@{() -> viewModel.updateCurrentValue(@string/value_twoPower)}"/>
+        tools:ignore="TouchTargetSizeCheck" />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/power_3"
         android:layout_width="@dimen/_40sdp"
         android:layout_height="@dimen/_28sdp"
-        android:layout_marginTop="@dimen/_6sdp"
         android:layout_marginStart="@dimen/_33sdp"
+        android:layout_marginTop="@dimen/_6sdp"
         android:background="@drawable/custom_btn_landscape"
+        android:onClick="@{() -> viewModel.exponentiation(@string/value_3power, viewModel.currentInput.toString())}"
         android:text="@string/_power_3"
         android:textAllCaps="false"
         android:textColor="?attr/textColor"
         android:textSize="@dimen/_12ssp"
         app:layout_constraintStart_toEndOf="@+id/two_Power"
         app:layout_constraintTop_toBottomOf="@+id/sinh_minus"
-        android:onClick="@{() -> viewModel.exponentiation(@string/value_3power)}" />
+        tools:ignore="TouchTargetSizeCheck" />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/factorial"
@@ -908,13 +930,14 @@
         android:layout_marginStart="@dimen/_30sdp"
         android:layout_marginTop="@dimen/_6sdp"
         android:background="@drawable/custom_btn_landscape"
+        android:onClick="@{() -> viewModel.exponentiation(@string/value_factorial, viewModel.currentInput.toString())}"
         android:text="@string/_exclamation_mark"
         android:textAllCaps="false"
         android:textColor="?attr/textColor"
         android:textSize="@dimen/_12ssp"
         app:layout_constraintStart_toEndOf="@+id/power_3"
         app:layout_constraintTop_toBottomOf="@+id/sinh_minus"
-        android:onClick="@{() -> viewModel.exponentiation(@string/value_factorial)}"  />
+        tools:ignore="TouchTargetSizeCheck" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

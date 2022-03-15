@@ -6,10 +6,12 @@ import android.content.pm.ActivityInfo
 import android.os.Bundle
 import android.view.*
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.setFragmentResultListener
 import androidx.navigation.findNavController
 import com.example.calculator0.R
 import com.example.calculator0.databinding.FragmentCompareBinding
+import com.example.calculator0.utils.ifNotNull
 
 
 class CompareFragment : Fragment() {
@@ -17,25 +19,23 @@ class CompareFragment : Fragment() {
 
 
     private lateinit var binding: FragmentCompareBinding
+    private val emiViewModel : EMIViewModel by activityViewModels()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?, ): View? {
         // Inflate the layout for this fragment
         binding = FragmentCompareBinding.inflate(inflater, container, false)
 
+        binding.viewModel = emiViewModel
+        binding.lifecycleOwner = viewLifecycleOwner
+
         portraitMode()
 
         setHasOptionsMenu(true)
 
-        val args2 = CompareFragmentArgs.fromBundle(requireArguments())
 
         binding.apply {
 
-            setFragmentResultListener("requestKey") { key, bundle ->
-                showFirstResult(bundle)
-            }
-
-            showSecondResult(args2)
 
             done2.setOnClickListener {
                 it.findNavController()
@@ -51,31 +51,6 @@ class CompareFragment : Fragment() {
         return binding.root
     }
 
-    private fun showFirstResult(bundle: Bundle) {
-        binding.apply {
-            firstLoan.text = bundle.getString("firstLoan")
-            firstEmi.text = bundle.getString("firstEmi")
-            firsInstallments.text = bundle.getString("firstInstallments")
-            firstTotal.text = getString(R.string.total, bundle.getString("firstTotal"))
-            firstPrincipal.text = bundle.getString("firstLoan")
-            interestOptionOne.text = bundle.getString("interestOptionOne")
-            firstInterest.text = bundle.getString("firstInterest")
-        }
-    }
-
-    private fun showSecondResult(args2: CompareFragmentArgs) {
-         binding.apply {
-             secondLoan.text = args2.principal2
-             secondPrincipal.text = args2.principal2
-             secondInstallments.text = args2.installment2
-             interestOptionTwo.text = args2.interset2
-             secondEmi.text = args2.emiMonth2
-             secondTotal.text = getString(R.string.total, args2.total2)
-             secondInterest.text = args2.intersetOutput2
-         }
-    }
-
-
     private fun portraitMode() {
         activity?.requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
     }
@@ -85,16 +60,25 @@ class CompareFragment : Fragment() {
     //-------------------
 
     private fun getShareIntent() : Intent {
-        val args2 = CompareFragmentArgs.fromBundle(requireArguments())
         val shareIntent = Intent(Intent.ACTION_SEND)
-        binding.apply {
-            shareIntent.setType("text/plain")
-                .putExtra(Intent.EXTRA_TEXT, getString(R.string.share_compare, firstLoan.text.toString(),
-                firstEmi.text.toString(), firstInterest.text.toString(), firsInstallments.text.toString(),
-                args2.principal2, args2.emiMonth2, args2.intersetOutput2, args2.installment2))
-        }
+        ifNotNull(
+            emiViewModel.emiFirstResult.value,
+            emiViewModel.emiSecondResult.value
+        ) { first, second ->
 
+
+            binding.apply {
+                shareIntent.setType("text/plain")
+                    .putExtra(Intent.EXTRA_TEXT,
+                        getString(R.string.share_compare, first.principal,
+                            first.emiMonth, first.interestRate, first.installment,
+                            second.principal, second.emiMonth, second.interestRate, second.installment)
+                    )
+            }
+
+        }
         return shareIntent
+
     }
 
     private fun shareSuccess() {

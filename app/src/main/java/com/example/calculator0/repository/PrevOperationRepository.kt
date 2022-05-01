@@ -3,8 +3,10 @@ package com.example.calculator0.repository
 import androidx.lifecycle.LiveData
 import com.example.calculator0.database.PrevOperation
 import com.example.calculator0.database.PrevOperationDoe
+import javax.inject.Inject
 
-class PrevOperationRepository(private val prevOperationDoe: PrevOperationDoe) {
+class PrevOperationRepository @Inject constructor(private val
+    prevOperationDoe: PrevOperationDoe) {
 
     val allPrevOperations = prevOperationDoe.getAllPrevOperations()
 

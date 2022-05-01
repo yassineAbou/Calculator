@@ -65,6 +65,17 @@
         android:background="?attr/bgColor"
         />
 
+    <ImageButton
+        android:id="@+id/scientific"
+        android:layout_width="@dimen/_57sdp"
+        android:layout_height="@dimen/_57sdp"
+        android:layout_marginTop="@dimen/_10sdp"
+        app:layout_constraintTop_toBottomOf = "@+id/result"
+        app:srcCompat="@drawable/ic_math"
+        app:layout_constraintLeft_toRightOf = "@+id/history"
+        android:contentDescription="@string/imgDes2"
+        android:background="?attr/bgColor"/>
+
 
     <ImageButton
         android:id="@+id/emi"
@@ -72,22 +83,22 @@
         android:layout_height="@dimen/_57sdp"
         android:layout_marginTop="@dimen/_10sdp"
         app:srcCompat="@drawable/dollar"
-        app:layout_constraintStart_toEndOf="@+id/history"
+        app:layout_constraintStart_toEndOf="@+id/scientific"
         app:layout_constraintTop_toBottomOf="@+id/result"
         android:contentDescription="@string/imgDes3"
         android:visibility="visible"
         android:background="?attr/bgColor"/>
 
     <ImageButton
-        android:id="@+id/no_backspace"
+        android:id="@+id/backspace"
         android:layout_width="@dimen/_57sdp"
         android:layout_height="@dimen/_57sdp"
-        android:layout_marginStart="@dimen/_100sdp"
+        android:layout_marginStart="@dimen/_43sdp"
         android:layout_marginTop="12dp"
         android:contentDescription="@string/imgDes4"
         app:layout_constraintStart_toEndOf="@+id/emi"
         app:layout_constraintTop_toBottomOf="@+id/result"
-        app:srcCompat="@drawable/ic_no_backspace"
+        app:srcCompat="@drawable/backspace"
         android:onClick="@{() -> viewModel.backspace(viewModel.currentInput.toString())}"
         android:background="?attr/bgColor"/>
 
@@ -101,7 +112,7 @@
         android:background="?attr/bgColor2"/>
 
     <androidx.constraintlayout.widget.Group
-        android:id="@+id/group3"
+        android:id="@+id/simpleButtonsGroup"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:visibility="visible"
@@ -110,7 +121,7 @@
         tools:visibility="visible" />
 
     <androidx.constraintlayout.widget.Group
-        android:id="@+id/group4"
+        android:id="@+id/historyGroup"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:visibility="gone"

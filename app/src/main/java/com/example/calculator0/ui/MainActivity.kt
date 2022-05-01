@@ -15,8 +15,9 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import com.example.calculator0.R
 import com.example.calculator0.databinding.ActivityMainBinding
 import com.example.calculator0.ui.emi.EMIViewModel
+import dagger.hilt.android.AndroidEntryPoint
 
-
+@AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding

@@ -30,7 +30,8 @@
         app:layout_constraintTop_toTopOf="parent"
         tools:ignore="RtlHardcoded"
         android:text="@{viewModel.currentInput}"
-        android:onTextChanged="@{(text, start, before, count) -> viewModel.getResult(viewModel.currentInput.toString())}"/>
+        android:onTextChanged="@{(text, start, before, count) -> viewModel.getResult(viewModel.currentInput.toString())}"
+        />
 
     <TextView
         android:id="@+id/result"
@@ -61,6 +62,18 @@
         app:srcCompat="@drawable/history"
         tools:ignore="TouchTargetSizeCheck" />
 
+    <ImageButton
+        android:id="@+id/simple"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf = "@+id/result"
+        android:layout_marginStart="@dimen/_53sdp"
+        android:layout_marginTop="@dimen/_3sdp"
+        android:background="?attr/bgColor"
+        app:srcCompat="@drawable/ic_plus"
+        app:layout_constraintLeft_toRightOf = "@+id/history"
+        android:contentDescription="@string/imgDes2" />
+
 
     <ImageButton
         android:id="@+id/emi"
@@ -70,23 +83,23 @@
         android:layout_marginTop="@dimen/_3sdp"
         android:background="?attr/bgColor"
         android:contentDescription="@string/imgDes3"
-        app:layout_constraintStart_toEndOf="@+id/history"
+        app:layout_constraintStart_toEndOf="@+id/simple"
         app:layout_constraintTop_toBottomOf="@+id/result"
         app:srcCompat="@drawable/dollar"
         tools:ignore="TouchTargetSizeCheck" />
 
     <ImageButton
-        android:id="@+id/no_backspace"
+        android:id="@+id/backspace"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/_382sdp"
+        android:layout_marginStart="@dimen/_303sdp"
         android:layout_marginTop="@dimen/_3sdp"
         android:background="?attr/bgColor"
         android:contentDescription="@string/imgDes4"
         android:onClick="@{() -> viewModel.backspace(viewModel.currentInput.toString())}"
         app:layout_constraintStart_toEndOf="@+id/emi"
         app:layout_constraintTop_toBottomOf="@+id/result"
-        app:srcCompat="@drawable/ic_no_backspace"
+        app:srcCompat="@drawable/backspace"
         tools:ignore="TouchTargetSizeCheck" />
 
 
@@ -102,7 +115,7 @@
         android:background="?attr/bgColor2"/>
 
     <androidx.constraintlayout.widget.Group
-        android:id="@+id/group3"
+        android:id="@+id/simpleButtonsGroup"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:visibility="visible"
@@ -110,7 +123,7 @@
         tools:visibility="visible" />
 
     <androidx.constraintlayout.widget.Group
-        android:id="@+id/group4"
+        android:id="@+id/historyGroup"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:visibility="gone"
@@ -510,7 +523,7 @@
         tools:ignore="TouchTargetSizeCheck" />
 
     <androidx.constraintlayout.widget.Group
-        android:id="@+id/group1"
+        android:id="@+id/scientificButtonsGroup1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:visibility="visible"
@@ -722,7 +735,7 @@
         android:onClick="@{() -> viewModel.updateCurrentValue(@string/value_EConstant, viewModel.currentInput.toString())}"/>
 
     <androidx.constraintlayout.widget.Group
-        android:id="@+id/group2"
+        android:id="@+id/scientificButtonsGroup2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:visibility="gone"

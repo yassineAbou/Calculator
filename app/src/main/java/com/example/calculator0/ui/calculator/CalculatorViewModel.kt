@@ -8,18 +8,26 @@ import androidx.core.text.isDigitsOnly
 import androidx.lifecycle.*
 import com.example.calculator0.repository.PrevOperationRepository
 import com.example.calculator0.database.PrevOperation
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 import org.mariuszgromada.math.mxparser.Expression
+import javax.inject.Inject
 
-class CalculatorViewModel(
-    repository: PrevOperationRepository,
-    application: Application
+data class CalculatorState(
+    val invalidFormat: Boolean = false,
+    val showScientificButtons1: Boolean = false,
+    val showScientificButtons2: Boolean = false,
+)
+
+@HiltViewModel
+class CalculatorViewModel @Inject constructor(
+    private val prevOperationRepository: PrevOperationRepository
 ) : ViewModel() {
 
-    private val repository1 = repository
-    val allPrevOperations = repository.allPrevOperations
+
+    val allPrevOperations = prevOperationRepository.allPrevOperations
     val symbols = "+-÷×"
     private val symbols1: List<Char> = listOf(')','e', 'i')
     private val symbols2: List<Char> = listOf('+','-','×','÷','.')
@@ -33,18 +41,20 @@ class CalculatorViewModel(
     private val _currentOutput: MutableStateFlow<String?> = MutableStateFlow(null)
     val currentOutput = _currentOutput.asStateFlow()
 
-    private val _invalid = MutableSharedFlow<String>()
-    val invalid = _invalid.asSharedFlow()
+    private val _calculatorState = MutableStateFlow(CalculatorState())
+    val calculatorState: StateFlow<CalculatorState> = _calculatorState.asStateFlow()
 
-    private fun onInvalid() {
-        viewModelScope.launch {
-            _invalid.emit("Invalid format used.")
-        }
-    }
+
 
     init {
         _currentInput.value = ""
         _currentOutput.value = ""
+    }
+
+    fun onChangeCalculatorState(state: CalculatorState) {
+        viewModelScope.launch {
+            _calculatorState.value = state
+        }
     }
 
     //-----------------------
@@ -59,7 +69,7 @@ class CalculatorViewModel(
                 equals("0") ->  _currentInput.value = (currentValue.dropLast(1) + number)
                 lastOrNull() in symbols1 && !givenNumber.contains('.')  -> _currentInput.value =  ("$currentValue×$number")
                 (lastOrNull() != '%') && !givenNumber.contains('.') -> _currentInput.value =  (currentValue +  number)
-                else  -> onInvalid()
+                else  -> onChangeCalculatorState(CalculatorState(invalidFormat = true))
             }
         }
     }
@@ -78,7 +88,7 @@ class CalculatorViewModel(
             if (givenNumber.isNotEmpty() && (givenNumber.lastOrNull() in symbols5)) {
                 _currentInput.value =  ("$currentValue$input")
             } else {
-                onInvalid()
+                onChangeCalculatorState(CalculatorState(invalidFormat = true))
             }
         }
 
@@ -165,8 +175,7 @@ class CalculatorViewModel(
             _currentInput.value = ("$currentValue%")
         }
         else {
-
-            onInvalid()
+            onChangeCalculatorState(CalculatorState(invalidFormat = true))
         }
     }
 
@@ -177,7 +186,7 @@ class CalculatorViewModel(
                  equals("0") ->  _currentInput.value = (currentValue.dropLast(1) + number)
                  lastOrNull() in symbols1  -> _currentInput.value =  ("$currentValue×$number")
                  (lastOrNull() != '%') -> _currentInput.value =  (currentValue + number)
-                 else  -> onInvalid()
+                 else  -> onChangeCalculatorState(CalculatorState(invalidFormat = true))
              }
          }
      }
@@ -229,12 +238,12 @@ class CalculatorViewModel(
     }
 
     private suspend fun deleteAll() {
-        repository1.clear()
+        prevOperationRepository.clear()
     }
 
 
     private fun insert(pervOperation: PrevOperation) = viewModelScope.launch(Dispatchers.IO) {
-        repository1.insert(pervOperation)
+        prevOperationRepository.insert(pervOperation)
     }
 
 }

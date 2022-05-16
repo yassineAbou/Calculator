@@ -3,14 +3,16 @@ package com.example.calculator0.ui.calculator
 
 
 
-import android.app.Application
 import androidx.core.text.isDigitsOnly
-import androidx.lifecycle.*
-import com.example.calculator0.repository.PrevOperationRepository
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.example.calculator0.database.PrevOperation
+import com.example.calculator0.repository.PrevOperationRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.*
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 import org.mariuszgromada.math.mxparser.Expression
 import javax.inject.Inject
@@ -28,7 +30,6 @@ class CalculatorViewModel @Inject constructor(
 
 
     val allPrevOperations = prevOperationRepository.allPrevOperations
-    val symbols = "+-÷×"
     private val symbols1: List<Char> = listOf(')','e', 'i')
     private val symbols2: List<Char> = listOf('+','-','×','÷','.')
     private val symbols5: List<Char> = listOf(')','1','2','3','4','5','6','7','8','9','0','%','e','i')

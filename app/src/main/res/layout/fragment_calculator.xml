@@ -10,417 +10,442 @@
             type="com.example.calculator0.ui.calculator.CalculatorViewModel" />
     </data>
 
-<androidx.constraintlayout.widget.ConstraintLayout
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".ui.calculator.CalculatorFragment"
-    >
-
-    <TextView
-        android:id="@+id/current_input"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="@dimen/_70sdp"
-        android:gravity="end"
-        android:paddingStart="@dimen/_25sdp"
-        android:paddingTop="@dimen/_24sdp"
-        android:paddingEnd="@dimen/_25sdp"
-        app:autoSizeTextType="uniform"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:ignore="RtlHardcoded"
-        android:textSize="@dimen/_36ssp"
-        android:textColor="?attr/textColor"
-        android:text="@{viewModel.currentInput}"
-        android:onTextChanged="@{(text, start, before, count) -> viewModel.getResult(viewModel.currentInput.toString())}"
-        />
+        android:layout_height="match_parent"
+        tools:context=".ui.calculator.CalculatorFragment"
+        >
 
-    <TextView
-        android:id="@+id/result"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/_60sdp"
-        android:layout_marginTop="@dimen/_2sdp"
-        android:gravity="bottom"
-        android:textAlignment="viewEnd"
-        android:paddingStart="0dp"
-        android:paddingEnd="@dimen/_25sdp"
-        android:textSize="@dimen/_22ssp"
-        android:textColor="?attr/textColor2"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/current_input"
-        tools:ignore="RtlCompat"
-        android:text="@{viewModel.currentOutput}"/>
+        <TextView
+            android:id="@+id/current_input"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_70sdp"
+            android:gravity="end"
+            android:paddingStart="@dimen/_25sdp"
+            android:paddingTop="@dimen/_24sdp"
+            android:paddingEnd="@dimen/_25sdp"
+            app:autoSizeTextType="uniform"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="RtlHardcoded"
+            android:textSize="@dimen/_36ssp"
+            android:textColor="?attr/textColor"
+            android:text="@{viewModel.currentInput}"
+            android:onTextChanged="@{(text, start, before, count) -> viewModel.getResult(viewModel.currentInput.toString())}"
+            />
 
-    <ImageButton
-        android:id="@+id/history"
-        android:layout_width="@dimen/_57sdp"
-        android:layout_height="@dimen/_57sdp"
-        app:srcCompat="@drawable/history"
-        app:layout_constraintTop_toBottomOf = "@+id/result"
-        android:layout_marginTop="@dimen/_10sdp"
-        android:layout_marginStart="@dimen/_15sdp"
-        app:layout_constraintStart_toStartOf="parent"
-        android:contentDescription="@string/imageDes1"
-        android:background="?attr/bgColor"
-        />
+        <TextView
+            android:id="@+id/result"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layout_constraintHeight_percent="0.1"
+            android:layout_marginTop="@dimen/_2sdp"
+            android:gravity="bottom"
+            android:textAlignment="viewEnd"
+            android:paddingStart="0dp"
+            android:paddingEnd="@dimen/_25sdp"
+            android:textSize="@dimen/_22ssp"
+            android:textColor="?attr/textColor2"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/current_input"
+            tools:ignore="RtlCompat"
+            android:text="@{viewModel.currentOutput}"/>
 
-    <ImageButton
-        android:id="@+id/scientific"
-        android:layout_width="@dimen/_57sdp"
-        android:layout_height="@dimen/_57sdp"
-        android:layout_marginTop="@dimen/_10sdp"
-        app:layout_constraintTop_toBottomOf = "@+id/result"
-        app:srcCompat="@drawable/ic_math"
-        app:layout_constraintLeft_toRightOf = "@+id/history"
-        android:contentDescription="@string/imgDes2"
-        android:background="?attr/bgColor"/>
+        <ImageButton
+            android:id="@+id/history"
+            android:layout_width="@dimen/_57sdp"
+            android:layout_height="0dp"
+            app:layout_constraintHeight_percent="0.1"
+            app:srcCompat="@drawable/history"
+            app:layout_constraintTop_toBottomOf = "@+id/result"
+            android:layout_marginTop="10dp"
+            android:layout_marginStart="@dimen/_15sdp"
+            app:layout_constraintStart_toStartOf="parent"
+            android:contentDescription="@string/imageDes1"
+            android:background="?attr/bgColor"
+            />
+
+        <ImageButton
+            android:id="@+id/scientific"
+            android:layout_width="@dimen/_57sdp"
+            android:layout_height="0dp"
+            app:layout_constraintHeight_percent="0.1"
+            android:layout_marginTop="10dp"
+            app:layout_constraintTop_toBottomOf = "@+id/result"
+            app:srcCompat="@drawable/ic_math"
+            app:layout_constraintLeft_toRightOf = "@+id/history"
+            android:contentDescription="@string/imgDes2"
+            android:background="?attr/bgColor"/>
 
 
-    <ImageButton
-        android:id="@+id/emi"
-        android:layout_width="@dimen/_57sdp"
-        android:layout_height="@dimen/_57sdp"
-        android:layout_marginTop="@dimen/_10sdp"
-        app:srcCompat="@drawable/dollar"
-        app:layout_constraintStart_toEndOf="@+id/scientific"
-        app:layout_constraintTop_toBottomOf="@+id/result"
-        android:contentDescription="@string/imgDes3"
-        android:visibility="visible"
-        android:background="?attr/bgColor"/>
+        <ImageButton
+            android:id="@+id/emi"
+            android:layout_width="@dimen/_57sdp"
+            android:layout_height="0dp"
+            app:layout_constraintHeight_percent="0.1"
+            android:layout_marginTop="10dp"
+            app:srcCompat="@drawable/dollar"
+            app:layout_constraintStart_toEndOf="@+id/scientific"
+            app:layout_constraintTop_toBottomOf="@+id/result"
+            android:contentDescription="@string/imgDes3"
+            android:visibility="visible"
+            android:background="?attr/bgColor"/>
 
-    <ImageButton
-        android:id="@+id/backspace"
-        android:layout_width="@dimen/_57sdp"
-        android:layout_height="@dimen/_57sdp"
-        android:layout_marginStart="@dimen/_43sdp"
-        android:layout_marginTop="12dp"
-        android:contentDescription="@string/imgDes4"
-        app:layout_constraintStart_toEndOf="@+id/emi"
-        app:layout_constraintTop_toBottomOf="@+id/result"
-        app:srcCompat="@drawable/backspace"
-        android:onClick="@{() -> viewModel.backspace(viewModel.currentInput.toString())}"
-        android:background="?attr/bgColor"/>
+        <ImageButton
+            android:id="@+id/backspace"
+            android:layout_width="@dimen/_57sdp"
+            android:layout_height="0dp"
+            app:layout_constraintHeight_percent="0.1"
+            android:layout_marginEnd="@dimen/_5sdp"
+            android:layout_marginTop="12dp"
+            android:contentDescription="@string/imgDes4"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/result"
+            app:srcCompat="@drawable/backspace"
+            android:onClick="@{() -> viewModel.backspace(viewModel.currentInput.toString())}"
+            android:background="?attr/bgColor"/>
 
-    <View
-        android:id="@+id/view10"
-        android:layout_width="@dimen/_270sdp"
-        android:layout_height="@dimen/_1sdp"
-        app:layout_constraintTop_toBottomOf="@+id/history"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        android:background="?attr/bgColor2"/>
+        <View
+            android:id="@+id/view10"
+            android:layout_width="@dimen/_270sdp"
+            android:layout_height="1dp"
+            app:layout_constraintTop_toBottomOf="@+id/history"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:background="?attr/bgColor2"/>
 
-    <androidx.constraintlayout.widget.Group
-        android:id="@+id/simpleButtonsGroup"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:visibility="visible"
-        app:constraint_referenced_ids="clear,betweenBrackets,percent,
+        <androidx.constraintlayout.widget.Group
+            android:id="@+id/simpleButtonsGroup"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="visible"
+            app:constraint_referenced_ids="clear,betweenBrackets,percent,
         seven,eight,nine,four,five,six,one,two,three,sign,zero,period"
-        tools:visibility="visible" />
+            tools:visibility="visible" />
 
-    <androidx.constraintlayout.widget.Group
-        android:id="@+id/historyGroup"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:visibility="gone"
-        app:constraint_referenced_ids="view11,clearHistory,recyclerview"
-        tools:visibility="gone" />
+        <androidx.constraintlayout.widget.Group
+            android:id="@+id/historyGroup"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            app:constraint_referenced_ids="view11,clearHistory,recyclerview"
+            tools:visibility="gone" />
 
-    <View
-        android:id="@+id/view11"
-        android:layout_width="@dimen/_1sdp"
-        android:layout_height="@dimen/_340sdp"
-        android:background="?attr/bgColor2"
-        app:layout_constraintEnd_toEndOf="@+id/nine"
-        android:layout_marginEnd="@dimen/_11sdp"
-        app:layout_constraintTop_toBottomOf="@+id/view10"
-        android:layout_marginTop="@dimen/_17sdp"
-        />
+        <View
+            android:id="@+id/view11"
+            android:layout_width="@dimen/_1sdp"
+            android:layout_height="0dp"
+            app:layout_constraintHeight_percent="0.6"
+            android:background="?attr/bgColor2"
+            app:layout_constraintEnd_toEndOf="@+id/nine"
+            android:layout_marginEnd="@dimen/_11sdp"
+            app:layout_constraintTop_toBottomOf="@+id/view10"
+            android:layout_marginTop="17dp"
+            />
 
-    <!--recycler view for displaying all notes-->
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerview"
-        android:layout_width="0dp"
-        android:layout_height="@dimen/_280sdp"
-        app:layout_constraintEnd_toEndOf="@+id/view11"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/view10"
-        android:layout_marginEnd="@dimen/_15sdp"
-        tools:listitem="@layout/list_item_prev_operation"
-        />
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerview"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintHeight_percent="0.4"
+            app:layout_constraintEnd_toEndOf="@+id/view11"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/view10"
+            android:layout_marginEnd="@dimen/_15sdp"
+            tools:listitem="@layout/list_item_prev_operation"
+            />
 
-    <Button
-        android:id="@+id/clearHistory"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/_300sdp"
-        android:background="@drawable/radius_button"
-        android:paddingStart="@dimen/_30sdp"
-        android:paddingBottom="@dimen/_4sdp"
-        android:paddingEnd="@dimen/_30sdp"
-        android:paddingTop="@dimen/_4sdp"
-        android:text="@string/text8"
-        android:textAllCaps="false"
-        android:textColor="@color/white"
-        android:textSize="@dimen/_13ssp"
-        android:textStyle="bold"
-        app:backgroundTint="@color/blue"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/view11"
-        app:layout_constraintTop_toBottomOf="@+id/view10"
-        android:onClick="@{() -> viewModel.onClear()}"
-        />
+        <Button
+            android:id="@+id/clearHistory"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/radius_button"
+            android:paddingStart="@dimen/_30sdp"
+            android:paddingBottom="4dp"
+            android:paddingEnd="@dimen/_30sdp"
+            android:paddingTop="4dp"
+            android:text="@string/text8"
+            android:textAllCaps="false"
+            android:textColor="@color/white"
+            android:textSize="@dimen/_13ssp"
+            android:textStyle="bold"
+            app:backgroundTint="@color/purple"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/view11"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:onClick="@{() -> viewModel.onClear()}"
+            />
 
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/clear"
-        android:layout_width="@dimen/_66sdp"
-        android:layout_height="@dimen/_59sdp"
-        android:layout_marginStart="@dimen/_10sdp"
-        android:layout_marginTop="@dimen/_22sdp"
-        android:background="@drawable/custom_button"
-        android:fontFamily="@font/roboto"
-        android:text="@string/_clear"
-        android:textColor="@color/red"
-        android:textSize="@dimen/_25ssp"
-        android:textStyle="normal"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/history"
-        android:onClick="@{() -> viewModel.clear()}"/>
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/clear"
+            android:layout_width="@dimen/_66sdp"
+            android:layout_height="0dp"
+            app:layout_constraintHeight_percent="0.1"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:layout_marginTop="22dp"
+            android:background="@drawable/custom_button"
+            android:fontFamily="@font/roboto"
+            android:text="@string/_clear"
+            android:textColor="@color/red"
+            android:textSize="@dimen/_25ssp"
+            android:textStyle="normal"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/history"
+            android:onClick="@{() -> viewModel.clear()}"/>
 
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/betweenBrackets"
-        android:layout_width="@dimen/_66sdp"
-        android:layout_height="@dimen/_59sdp"
-        android:layout_marginTop="@dimen/_22sdp"
-        android:text="@string/_betweenBrackets"
-        android:textSize="@dimen/_20ssp"
-        app:layout_constraintStart_toEndOf="@+id/clear"
-        app:layout_constraintTop_toBottomOf="@+id/history"
-        style="@style/operations"
-        android:onClick="@{() -> viewModel.betweenBrackets(viewModel.currentInput.toString())}"/>
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/betweenBrackets"
+            android:layout_width="@dimen/_66sdp"
+            android:layout_height="0dp"
+            app:layout_constraintHeight_percent="0.1"
+            android:layout_marginTop="22dp"
+            android:text="@string/_betweenBrackets"
+            android:textSize="@dimen/_20ssp"
+            app:layout_constraintStart_toEndOf="@+id/clear"
+            app:layout_constraintTop_toBottomOf="@+id/history"
+            style="@style/operations"
+            android:onClick="@{() -> viewModel.betweenBrackets(viewModel.currentInput.toString())}"/>
 
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/percent"
-        android:layout_width="@dimen/_66sdp"
-        android:layout_height="@dimen/_59sdp"
-        android:layout_marginTop="@dimen/_22sdp"
-        android:text="@string/_percent"
-        android:textSize="@dimen/_25ssp"
-        app:layout_constraintStart_toEndOf="@+id/betweenBrackets"
-        app:layout_constraintTop_toBottomOf="@+id/history"
-        style="@style/operations"
-        android:onClick="@{() -> viewModel.percent(viewModel.currentInput.toString())}"/>
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/percent"
+            android:layout_width="@dimen/_66sdp"
+            android:layout_height="0dp"
+            app:layout_constraintHeight_percent="0.1"
+            android:layout_marginTop="22dp"
+            android:text="@string/_percent"
+            android:textSize="@dimen/_25ssp"
+            app:layout_constraintStart_toEndOf="@+id/betweenBrackets"
+            app:layout_constraintTop_toBottomOf="@+id/history"
+            style="@style/operations"
+            android:onClick="@{() -> viewModel.percent(viewModel.currentInput.toString())}"/>
 
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/divided"
-        android:layout_width="@dimen/_66sdp"
-        android:layout_height="@dimen/_59sdp"
-        android:layout_marginTop="@dimen/_22sdp"
-        android:text="@string/_divided"
-        android:textSize="@dimen/_30ssp"
-        app:layout_constraintStart_toEndOf="@+id/percent"
-        app:layout_constraintTop_toBottomOf="@+id/history"
-        style="@style/operations"
-        android:onClick="@{() -> viewModel.onOperationClickedButton(@string/_divided, viewModel.currentInput.toString())}"/>
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/divided"
+            android:layout_width="@dimen/_66sdp"
+            android:layout_height="0dp"
+            app:layout_constraintHeight_percent="0.1"
+            android:layout_marginTop="22dp"
+            android:text="@string/_divided"
+            android:textSize="@dimen/_30ssp"
+            app:layout_constraintStart_toEndOf="@+id/percent"
+            app:layout_constraintTop_toBottomOf="@+id/history"
+            style="@style/operations"
+            android:onClick="@{() -> viewModel.onOperationClickedButton(@string/_divided, viewModel.currentInput.toString())}"/>
 
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/seven"
-        android:layout_width="@dimen/_66sdp"
-        android:layout_height="@dimen/_59sdp"
-        android:text="@string/_7"
-        android:layout_marginStart="@dimen/_10sdp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/clear"
-        android:textSize="@dimen/_30ssp"
-        style="@style/numbers"
-        android:onClick="@{() -> viewModel.onNumberClickedButton(@string/_7, viewModel.currentInput.toString())}"
-        />
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/seven"
+            android:layout_width="@dimen/_66sdp"
+            android:layout_height="0dp"
+            app:layout_constraintHeight_percent="0.1"
+            android:text="@string/_7"
+            android:layout_marginStart="@dimen/_10sdp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/clear"
+            android:textSize="@dimen/_30ssp"
+            style="@style/numbers"
+            android:onClick="@{() -> viewModel.onNumberClickedButton(@string/_7, viewModel.currentInput.toString())}"
+            />
 
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/eight"
-        android:layout_width="@dimen/_66sdp"
-        android:layout_height="@dimen/_59sdp"
-        android:layout_marginStart="@dimen/_5sdp"
-        android:text="@string/_8"
-        android:textSize="@dimen/_30ssp"
-        app:layout_constraintStart_toEndOf="@+id/seven"
-        app:layout_constraintTop_toBottomOf="@+id/clear"
-        style="@style/numbers"
-        android:onClick="@{() -> viewModel.onNumberClickedButton(@string/_8, viewModel.currentInput.toString())}"/>
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/eight"
+            android:layout_width="@dimen/_66sdp"
+            android:layout_height="0dp"
+            app:layout_constraintHeight_percent="0.1"
+            android:layout_marginStart="@dimen/_5sdp"
+            android:text="@string/_8"
+            android:textSize="@dimen/_30ssp"
+            app:layout_constraintStart_toEndOf="@+id/seven"
+            app:layout_constraintTop_toBottomOf="@+id/clear"
+            style="@style/numbers"
+            android:onClick="@{() -> viewModel.onNumberClickedButton(@string/_8, viewModel.currentInput.toString())}"/>
 
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/nine"
-        android:layout_width="@dimen/_66sdp"
-        android:layout_height="@dimen/_59sdp"
-        android:layout_marginStart="@dimen/_5sdp"
-        android:text="@string/_9"
-        android:textSize="@dimen/_30ssp"
-        app:layout_constraintStart_toEndOf="@+id/eight"
-        app:layout_constraintTop_toBottomOf="@+id/clear"
-        style="@style/numbers"
-        android:onClick="@{() -> viewModel.onNumberClickedButton(@string/_9, viewModel.currentInput.toString())}"/>
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/nine"
+            android:layout_width="@dimen/_66sdp"
+            android:layout_height="0dp"
+            app:layout_constraintHeight_percent="0.1"
+            android:layout_marginStart="@dimen/_5sdp"
+            android:text="@string/_9"
+            android:textSize="@dimen/_30ssp"
+            app:layout_constraintStart_toEndOf="@+id/eight"
+            app:layout_constraintTop_toBottomOf="@+id/clear"
+            style="@style/numbers"
+            android:onClick="@{() -> viewModel.onNumberClickedButton(@string/_9, viewModel.currentInput.toString())}"/>
 
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/multiplicand"
-        android:layout_width="@dimen/_66sdp"
-        android:layout_height="@dimen/_59sdp"
-        android:layout_marginTop="@dimen/_5sdp"
-        android:text="@string/_multiplicand"
-        android:textSize="@dimen/_30ssp"
-        app:layout_constraintStart_toEndOf="@+id/nine"
-        app:layout_constraintTop_toBottomOf="@+id/clear"
-        style="@style/operations"
-        android:onClick="@{() -> viewModel.onOperationClickedButton(@string/_multiplicand, viewModel.currentInput.toString())}"/>
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/multiplicand"
+            android:layout_width="@dimen/_66sdp"
+            android:layout_height="0dp"
+            app:layout_constraintHeight_percent="0.1"
+            android:layout_marginTop="5dp"
+            android:text="@string/_multiplicand"
+            android:textSize="@dimen/_30ssp"
+            app:layout_constraintStart_toEndOf="@+id/nine"
+            app:layout_constraintTop_toBottomOf="@+id/clear"
+            style="@style/operations"
+            android:onClick="@{() -> viewModel.onOperationClickedButton(@string/_multiplicand, viewModel.currentInput.toString())}"/>
 
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/four"
-        android:layout_width="@dimen/_66sdp"
-        android:layout_height="@dimen/_59sdp"
-        android:layout_marginStart="@dimen/_10sdp"
-        android:text="@string/_4"
-        android:textSize="@dimen/_30ssp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/seven"
-        style="@style/numbers"
-        android:onClick="@{() -> viewModel.onNumberClickedButton(@string/_4, viewModel.currentInput.toString())}"/>
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/four"
+            android:layout_width="@dimen/_66sdp"
+            android:layout_height="0dp"
+            app:layout_constraintHeight_percent="0.1"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:text="@string/_4"
+            android:textSize="@dimen/_30ssp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/seven"
+            style="@style/numbers"
+            android:onClick="@{() -> viewModel.onNumberClickedButton(@string/_4, viewModel.currentInput.toString())}"/>
 
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/five"
-        android:layout_width="@dimen/_66sdp"
-        android:layout_height="@dimen/_59sdp"
-        android:layout_marginStart="@dimen/_5sdp"
-        android:text="@string/_5"
-        android:textSize="@dimen/_30ssp"
-        app:layout_constraintStart_toEndOf="@+id/four"
-        app:layout_constraintTop_toBottomOf="@+id/seven"
-        style="@style/numbers"
-        android:onClick="@{() -> viewModel.onNumberClickedButton(@string/_5, viewModel.currentInput.toString())}"/>
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/five"
+            android:layout_width="@dimen/_66sdp"
+            android:layout_height="0dp"
+            app:layout_constraintHeight_percent="0.1"
+            android:layout_marginStart="@dimen/_5sdp"
+            android:text="@string/_5"
+            android:textSize="@dimen/_30ssp"
+            app:layout_constraintStart_toEndOf="@+id/four"
+            app:layout_constraintTop_toBottomOf="@+id/seven"
+            style="@style/numbers"
+            android:onClick="@{() -> viewModel.onNumberClickedButton(@string/_5, viewModel.currentInput.toString())}"/>
 
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/six"
-        android:layout_width="@dimen/_66sdp"
-        android:layout_height="@dimen/_59sdp"
-        android:layout_marginStart="@dimen/_5sdp"
-        android:text="@string/_6"
-        android:textSize="@dimen/_30ssp"
-        app:layout_constraintStart_toEndOf="@+id/five"
-        app:layout_constraintTop_toBottomOf="@+id/seven"
-        style="@style/numbers"
-        android:onClick="@{() -> viewModel.onNumberClickedButton(@string/_6, viewModel.currentInput.toString())}"/>
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/six"
+            android:layout_width="@dimen/_66sdp"
+            android:layout_height="0dp"
+            app:layout_constraintHeight_percent="0.1"
+            android:layout_marginStart="@dimen/_5sdp"
+            android:text="@string/_6"
+            android:textSize="@dimen/_30ssp"
+            app:layout_constraintStart_toEndOf="@+id/five"
+            app:layout_constraintTop_toBottomOf="@+id/seven"
+            style="@style/numbers"
+            android:onClick="@{() -> viewModel.onNumberClickedButton(@string/_6, viewModel.currentInput.toString())}"/>
 
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/minus"
-        android:layout_width="@dimen/_66sdp"
-        android:layout_height="@dimen/_59sdp"
-        android:layout_marginTop="@dimen/_5sdp"
-        android:text="@string/_minus"
-        android:textSize="@dimen/_30ssp"
-        app:layout_constraintStart_toEndOf="@+id/six"
-        app:layout_constraintTop_toBottomOf="@+id/seven"
-        style="@style/operations"
-        android:onClick="@{() -> viewModel.onOperationClickedButton(@string/_minus, viewModel.currentInput.toString())}"/>
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/minus"
+            android:layout_width="@dimen/_66sdp"
+            android:layout_height="0dp"
+            app:layout_constraintHeight_percent="0.1"
+            android:layout_marginTop="5dp"
+            android:text="@string/_minus"
+            android:textSize="@dimen/_30ssp"
+            app:layout_constraintStart_toEndOf="@+id/six"
+            app:layout_constraintTop_toBottomOf="@+id/seven"
+            style="@style/operations"
+            android:onClick="@{() -> viewModel.onOperationClickedButton(@string/_minus, viewModel.currentInput.toString())}"/>
 
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/one"
-        android:layout_width="@dimen/_66sdp"
-        android:layout_height="@dimen/_59sdp"
-        android:layout_marginStart="@dimen/_10sdp"
-        android:text="@string/_1"
-        android:textSize="@dimen/_30ssp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/four"
-        style="@style/numbers"
-        android:onClick="@{() -> viewModel.onNumberClickedButton(@string/_1, viewModel.currentInput.toString())}"/>
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/one"
+            android:layout_width="@dimen/_66sdp"
+            android:layout_height="0dp"
+            app:layout_constraintHeight_percent="0.1"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:text="@string/_1"
+            android:textSize="@dimen/_30ssp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/four"
+            style="@style/numbers"
+            android:onClick="@{() -> viewModel.onNumberClickedButton(@string/_1, viewModel.currentInput.toString())}"/>
 
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/two"
-        android:layout_width="@dimen/_66sdp"
-        android:layout_height="@dimen/_59sdp"
-        android:layout_marginStart="@dimen/_5sdp"
-        android:text="@string/_2"
-        android:textSize="@dimen/_30ssp"
-        app:layout_constraintStart_toEndOf="@+id/one"
-        app:layout_constraintTop_toBottomOf="@+id/four"
-        style="@style/numbers"
-        android:onClick="@{() -> viewModel.onNumberClickedButton(@string/_2, viewModel.currentInput.toString())}"/>
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/two"
+            android:layout_width="@dimen/_66sdp"
+            android:layout_height="0dp"
+            app:layout_constraintHeight_percent="0.1"
+            android:layout_marginStart="@dimen/_5sdp"
+            android:text="@string/_2"
+            android:textSize="@dimen/_30ssp"
+            app:layout_constraintStart_toEndOf="@+id/one"
+            app:layout_constraintTop_toBottomOf="@+id/four"
+            style="@style/numbers"
+            android:onClick="@{() -> viewModel.onNumberClickedButton(@string/_2, viewModel.currentInput.toString())}"/>
 
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/three"
-        android:layout_width="@dimen/_66sdp"
-        android:layout_height="@dimen/_59sdp"
-        android:layout_marginStart="@dimen/_5sdp"
-        android:text="@string/_3"
-        android:textSize="@dimen/_30ssp"
-        app:layout_constraintStart_toEndOf="@+id/two"
-        app:layout_constraintTop_toBottomOf="@+id/four"
-        style="@style/numbers"
-        android:onClick="@{() -> viewModel.onNumberClickedButton(@string/_3, viewModel.currentInput.toString())}"/>
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/three"
+            android:layout_width="@dimen/_66sdp"
+            android:layout_height="0dp"
+            app:layout_constraintHeight_percent="0.1"
+            android:layout_marginStart="@dimen/_5sdp"
+            android:text="@string/_3"
+            android:textSize="@dimen/_30ssp"
+            app:layout_constraintStart_toEndOf="@+id/two"
+            app:layout_constraintTop_toBottomOf="@+id/four"
+            style="@style/numbers"
+            android:onClick="@{() -> viewModel.onNumberClickedButton(@string/_3, viewModel.currentInput.toString())}"/>
 
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/plus"
-        android:layout_width="@dimen/_66sdp"
-        android:layout_height="@dimen/_59sdp"
-        android:layout_marginTop="@dimen/_5sdp"
-        android:text="@string/_plus"
-        android:textSize="@dimen/_30ssp"
-        app:layout_constraintStart_toEndOf="@+id/three"
-        app:layout_constraintTop_toBottomOf="@+id/four"
-        style="@style/operations"
-        android:onClick="@{() -> viewModel.onOperationClickedButton(@string/_plus, viewModel.currentInput.toString())}"/>
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/plus"
+            android:layout_width="@dimen/_66sdp"
+            android:layout_height="0dp"
+            app:layout_constraintHeight_percent="0.1"
+            android:layout_marginTop="5dp"
+            android:text="@string/_plus"
+            android:textSize="@dimen/_30ssp"
+            app:layout_constraintStart_toEndOf="@+id/three"
+            app:layout_constraintTop_toBottomOf="@+id/four"
+            style="@style/operations"
+            android:onClick="@{() -> viewModel.onOperationClickedButton(@string/_plus, viewModel.currentInput.toString())}"/>
 
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/sign"
-        android:layout_width="@dimen/_66sdp"
-        android:layout_height="@dimen/_59sdp"
-        android:layout_marginStart="@dimen/_10sdp"
-        android:text="@string/minus_sign"
-        android:textSize="@dimen/_25ssp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/one"
-        style="@style/numbers"
-        android:onClick="@{() -> viewModel.sign(viewModel.currentInput.toString())}"/>
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/sign"
+            android:layout_width="@dimen/_66sdp"
+            android:layout_height="0dp"
+            app:layout_constraintHeight_percent="0.1"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:text="@string/minus_sign"
+            android:textSize="@dimen/_25ssp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/one"
+            style="@style/numbers"
+            android:onClick="@{() -> viewModel.sign(viewModel.currentInput.toString())}"/>
 
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/zero"
-        android:layout_width="@dimen/_66sdp"
-        android:layout_height="@dimen/_59sdp"
-        android:layout_marginStart="@dimen/_5sdp"
-        android:text="@string/_0"
-        android:textSize="@dimen/_30ssp"
-        app:layout_constraintStart_toEndOf="@+id/sign"
-        app:layout_constraintTop_toBottomOf="@+id/one"
-        style="@style/numbers"
-        android:onClick="@{() -> viewModel.onNumberClickedButton(@string/_0, viewModel.currentInput.toString())}"/>
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/zero"
+            android:layout_width="@dimen/_66sdp"
+            android:layout_height="0dp"
+            app:layout_constraintHeight_percent="0.1"
+            android:layout_marginStart="@dimen/_5sdp"
+            android:text="@string/_0"
+            android:textSize="@dimen/_30ssp"
+            app:layout_constraintStart_toEndOf="@+id/sign"
+            app:layout_constraintTop_toBottomOf="@+id/one"
+            style="@style/numbers"
+            android:onClick="@{() -> viewModel.onNumberClickedButton(@string/_0, viewModel.currentInput.toString())}"/>
 
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/period"
-        android:layout_width="@dimen/_66sdp"
-        android:layout_height="@dimen/_59sdp"
-        android:layout_marginStart="@dimen/_5sdp"
-        android:text="@string/_."
-        android:textSize="@dimen/_30ssp"
-        app:layout_constraintStart_toEndOf="@+id/zero"
-        app:layout_constraintTop_toBottomOf="@+id/one"
-        style="@style/numbers"
-        android:onClick="@{() -> viewModel.period(viewModel.currentInput.toString())}"/>
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/period"
+            style="@style/numbers"
+            android:layout_width="@dimen/_66sdp"
+            android:layout_height="0dp"
+            android:layout_marginStart="@dimen/_5sdp"
+            app:layout_constraintHeight_percent="0.1"
+            android:onClick="@{() -> viewModel.period(viewModel.currentInput.toString())}"
+            android:text="@string/_."
+            android:textSize="@dimen/_30ssp"
+            app:layout_constraintStart_toEndOf="@+id/zero"
+            app:layout_constraintTop_toBottomOf="@+id/one" />
 
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/equals"
-        style="@style/operations"
-        android:layout_width="@dimen/_66sdp"
-        android:layout_height="@dimen/_59sdp"
-        android:layout_marginTop="@dimen/_5sdp"
-        android:background="@drawable/custom_button_equal"
-        android:text="@string/_equal"
-        android:textColor="@color/white"
-        android:textSize="@dimen/_30ssp"
-        app:layout_constraintStart_toEndOf="@+id/period"
-        app:layout_constraintTop_toBottomOf="@+id/one"
-        android:onClick="@{() -> viewModel.equals(viewModel.currentInput.toString(), viewModel.currentOutput.toString())}"/>
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/equals"
+            style="@style/operations"
+            android:layout_width="@dimen/_66sdp"
+            android:layout_height="0dp"
+            app:layout_constraintHeight_percent="0.1"
+            android:layout_marginTop="5dp"
+            android:background="@drawable/custom_button_equal"
+            android:text="@string/_equal"
+            android:textColor="@color/white"
+            android:textSize="@dimen/_30ssp"
+            app:layout_constraintStart_toEndOf="@+id/period"
+            app:layout_constraintTop_toBottomOf="@+id/one"
+            android:onClick="@{() -> viewModel.equals(viewModel.currentInput.toString(), viewModel.currentOutput.toString())}"/>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

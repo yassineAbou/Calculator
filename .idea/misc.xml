@@ -21,11 +21,15 @@
         <entry key="..\:/Users/Pc666/AndroidStudioProjects/Calculator0/app/src/main/res/mipmap-anydpi-v26/ic_launcher2.xml" value="0.21614583333333334" />
         <entry key="..\:/Users/Pc666/AndroidStudioProjects/Calculator0/app/src/main/res/mipmap-anydpi-v26/ic_launcher2_round.xml" value="0.21614583333333334" />
         <entry key="..\:/Users/Pc666/AndroidStudioProjects/PP/Calculator0/app/src/main/res/drawable/backspace.xml" value="0.1" />
+        <entry key="..\:/Users/Pc666/AndroidStudioProjects/PP/Calculator0/app/src/main/res/drawable/custom_button.xml" value="0.1" />
+        <entry key="..\:/Users/Pc666/AndroidStudioProjects/PP/Calculator0/app/src/main/res/drawable/custom_button_equal.xml" value="0.1" />
         <entry key="..\:/Users/Pc666/AndroidStudioProjects/PP/Calculator0/app/src/main/res/drawable/dollar.xml" value="0.1" />
         <entry key="..\:/Users/Pc666/AndroidStudioProjects/PP/Calculator0/app/src/main/res/drawable/history.xml" value="0.1" />
+        <entry key="..\:/Users/Pc666/AndroidStudioProjects/PP/Calculator0/app/src/main/res/drawable/ic_baseline_add_24.xml" value="0.1" />
         <entry key="..\:/Users/Pc666/AndroidStudioProjects/PP/Calculator0/app/src/main/res/drawable/ic_no_backspace.xml" value="0.1" />
         <entry key="..\:/Users/Pc666/AndroidStudioProjects/PP/Calculator0/app/src/main/res/drawable/no_history.xml" value="0.1" />
-        <entry key="..\:/Users/Pc666/AndroidStudioProjects/PP/Calculator0/app/src/main/res/layout-land/fragment_calculator.xml" value="0.22" />
+        <entry key="..\:/Users/Pc666/AndroidStudioProjects/PP/Calculator0/app/src/main/res/layout-land/fragment_calculator.xml" value="0.25" />
+        <entry key="..\:/Users/Pc666/AndroidStudioProjects/PP/Calculator0/app/src/main/res/layout-v21/fragment_result.xml" value="0.2" />
         <entry key="..\:/Users/Pc666/AndroidStudioProjects/PP/Calculator0/app/src/main/res/layout/activity_main.xml" value="0.1" />
         <entry key="..\:/Users/Pc666/AndroidStudioProjects/PP/Calculator0/app/src/main/res/layout/fragment_calculator.xml" value="0.15625" />
         <entry key="..\:/Users/Pc666/AndroidStudioProjects/PP/Calculator0/app/src/main/res/layout/fragment_compare.xml" value="0.22505800464037123" />
@@ -33,6 +37,8 @@
         <entry key="..\:/Users/Pc666/AndroidStudioProjects/PP/Calculator0/app/src/main/res/layout/fragment_emi_two.xml" value="0.2" />
         <entry key="..\:/Users/Pc666/AndroidStudioProjects/PP/Calculator0/app/src/main/res/layout/fragment_result.xml" value="0.2" />
         <entry key="..\:/Users/Pc666/AndroidStudioProjects/PP/Calculator0/app/src/main/res/layout/list_item_prev_operation.xml" value="0.2" />
+        <entry key="..\:/Users/Pc666/AndroidStudioProjects/PP/Calculator0/app/src/main/res/mipmap-anydpi-v26/ic_launcher2.xml" value="0.1" />
+        <entry key="..\:/Users/Pc666/AndroidStudioProjects/PP/Calculator0/app/src/main/res/mipmap-anydpi-v26/ic_launcher2_round.xml" value="0.1" />
       </map>
     </option>
   </component>

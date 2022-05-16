@@ -40,7 +40,7 @@
     </fragment>
     <fragment
         android:id="@+id/emiTwoFragment"
-        android:name="com.example.calculator0.ThreeFragment"
+        android:name="com.example.calculator0.ui.emi.ThreeFragment"
         android:label="EMI calculator"
         tools:layout="@layout/fragment_emi_two">
         <action

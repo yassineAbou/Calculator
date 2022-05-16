@@ -1,4 +1,4 @@
-package com.example.calculator0
+package com.example.calculator0.ui.emi
 
 import android.content.pm.ActivityInfo
 import android.os.Bundle
@@ -7,8 +7,6 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.findNavController
 import com.example.calculator0.databinding.FragmentEmiTwoBinding
-import com.example.calculator0.ui.emi.EMIViewModel
-import com.example.calculator0.ui.emi.EmiScreen
 import com.example.calculator0.utils.parseDouble
 
 
@@ -30,11 +28,11 @@ class ThreeFragment : Fragment() {
 
             compare.setOnClickListener {
 
-                val P = parseDouble(loanAmount2.text.toString())
-                val N = parseDouble(numberOfInstallments2.text.toString())
-                val I = parseDouble(interestRate2.text.toString())
+                val secondLoanAmount = parseDouble(loanAmount2.text.toString())
+                val secondNumberOfInstallments = parseDouble(numberOfInstallments2.text.toString())
+                val secondInterestRate = parseDouble(interestRate2.text.toString())
 
-                emiViewModel.emi(P, I, N, EmiScreen.Second)
+                emiViewModel.emi(secondLoanAmount , secondInterestRate, secondNumberOfInstallments, EmiScreen.Second)
 
                 it.findNavController()
                     .navigate(ThreeFragmentDirections.actionEmiTwoFragmentToCompareFragment())

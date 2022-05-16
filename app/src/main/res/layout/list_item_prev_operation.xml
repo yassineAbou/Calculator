@@ -15,13 +15,15 @@
 
 <androidx.constraintlayout.widget.ConstraintLayout
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+
+    >
 
     <TextView
         android:id="@+id/textInput"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/_17sdp"
+        android:layout_marginTop="17dp"
         android:gravity="end"
         android:paddingStart="@dimen/_15sdp"
         android:textAlignment="viewEnd"
@@ -40,10 +42,10 @@
         android:id="@+id/textOutput"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/_5sdp"
+        android:layout_marginTop="5dp"
         android:gravity="end"
         android:paddingStart="@dimen/_15sdp"
-        android:textColor="@color/blue"
+        android:textColor="@color/purple"
         android:textSize="@dimen/_18ssp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textInput"

@@ -7,7 +7,6 @@ import android.os.Bundle
 import android.view.*
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import androidx.fragment.app.setFragmentResultListener
 import androidx.navigation.findNavController
 import com.example.calculator0.R
 import com.example.calculator0.databinding.FragmentCompareBinding

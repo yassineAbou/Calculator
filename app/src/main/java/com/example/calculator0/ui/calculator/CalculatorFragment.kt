@@ -1,28 +1,22 @@
 package com.example.calculator0.ui.calculator
 
 import android.annotation.SuppressLint
-import android.content.Context
 import android.content.pm.ActivityInfo
 import android.graphics.PorterDuff
-import android.hardware.Sensor
-import android.hardware.SensorEvent
-import android.hardware.SensorEventListener
-import android.hardware.SensorManager
 import android.os.Bundle
-import android.text.TextUtils.isEmpty
 import android.view.LayoutInflater
 import android.view.View
 import android.view.View.*
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.core.content.ContextCompat
-import androidx.core.content.ContextCompat.getSystemService
-import androidx.core.view.isInvisible
 import androidx.core.view.isVisible
-import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.*
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.coroutineScope
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.NavHostFragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -37,7 +31,6 @@ class CalculatorFragment : Fragment() {
 
     private val calculatorViewModel: CalculatorViewModel by viewModels()
     private lateinit var binding: FragmentCalculatorBinding
-    private lateinit var sensorManager: SensorManager
 
     @SuppressLint("SourceLockedOrientationActivity")
     override fun onCreateView(
@@ -71,15 +64,13 @@ class CalculatorFragment : Fragment() {
             }
 
             switchArrow?.setOnClickListener {
-                if (scientificButtonsGroup1?.isVisible == true) {
-                    onChangeScientificButtons2State()
-                }
-                else if (binding.scientificButtonsGroup2?.isVisible == true) {
-                    onChangeScientificButtons1State()
-                }
+                onChangeScientificButtonsVisibility()
             }
 
             history.setOnClickListener {
+                if (!calculatorViewModel.calculatorState.value.showScientificButtons1 && !calculatorViewModel.calculatorState.value.showScientificButtons2) {
+                    calculatorViewModel.onChangeCalculatorState(CalculatorState(showScientificButtons1 = true))
+                }
                 showAndHideHistory()
                 binding.recyclerview.scrollToPosition(0)
             }
@@ -91,11 +82,11 @@ class CalculatorFragment : Fragment() {
                 it?.let {
                     if (it.isNotEmpty()) {
                         binding.backspace.setColorFilter(
-                            ContextCompat.getColor(requireContext(), R.color.blue),
+                            ContextCompat.getColor(requireContext(), R.color.purple),
                             PorterDuff.Mode.SRC_ATOP)
                     } else {
                         binding.backspace.setColorFilter(
-                            ContextCompat.getColor(requireContext(), R.color.blue_light),
+                            ContextCompat.getColor(requireContext(), R.color.purple_light),
                             PorterDuff.Mode.SRC_ATOP)
                     }
                 }
@@ -120,15 +111,15 @@ class CalculatorFragment : Fragment() {
                 adapter.submitList(allPrevOperations)
 
                 when (allPrevOperations.size) {
-                   0 -> {
-                       disableHistoryButton()
-                       hideHistoryGroup()
-                   }
-                   else -> enableHistoryButton()
+                    0 -> {
+                        disableHistoryButton()
+                        hideHistoryGroup()
+                    }
+                    else -> enableHistoryButton()
                 }
-                
-              }
+
             }
+        }
 
 
 
@@ -137,6 +128,14 @@ class CalculatorFragment : Fragment() {
         }
 
         return binding.root
+    }
+
+    private fun onChangeScientificButtonsVisibility() {
+        if (binding.scientificButtonsGroup1?.isVisible == true) {
+            onChangeScientificButtons2State()
+        } else if (binding.scientificButtonsGroup2?.isVisible == true) {
+            onChangeScientificButtons1State()
+        }
     }
 
     private fun onChangeScientificButtons1State() {
@@ -175,7 +174,7 @@ class CalculatorFragment : Fragment() {
     }
 
     private fun showScientificButtons2() {
-        binding.scientificButtonsGroup1?.visibility  = GONE
+        binding.scientificButtonsGroup1?.visibility  = INVISIBLE
         binding.scientificButtonsGroup2?.visibility = VISIBLE
     }
 

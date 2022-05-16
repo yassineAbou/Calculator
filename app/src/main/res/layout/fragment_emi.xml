@@ -4,171 +4,169 @@
     xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-<androidx.constraintlayout.widget.ConstraintLayout
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="?attr/bgColor4"
-    tools:context=".ui.emi.EMIFragment">
-
-    <View
-        android:id="@+id/background"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:background="@drawable/radius_border"
-        app:layout_constraintBottom_toBottomOf="@+id/view4"
-        app:layout_constraintEnd_toEndOf="@+id/textView11"
-        app:layout_constraintHorizontal_bias="0.079"
-        app:layout_constraintStart_toStartOf="@+id/textView11"
-        app:layout_constraintTop_toTopOf="@+id/textView11"
-        app:layout_constraintVertical_bias="1.0"
-        android:backgroundTint="?attr/bgColor5"
-        />
+        android:layout_height="match_parent"
+        android:background="?attr/bgColor4"
+        tools:context=".ui.emi.EMIFragment">
 
-    <TextView
-        android:id="@+id/textView11"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/_20sdp"
-        android:text="@string/text1"
-        android:textColor="@color/blue_dark"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:paddingTop="@dimen/_26sdp"/>
+        <View
+            android:id="@+id/background"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:background="@drawable/radius_border"
+            app:layout_constraintBottom_toBottomOf="@+id/view4"
+            app:layout_constraintEnd_toEndOf="@+id/textView11"
+            app:layout_constraintHorizontal_bias="0.079"
+            app:layout_constraintStart_toStartOf="@+id/textView11"
+            app:layout_constraintTop_toTopOf="@+id/textView11"
+            app:layout_constraintVertical_bias="1.0"
+            android:backgroundTint="?attr/bgColor5"
+            />
 
-    <EditText
-        android:id="@+id/loanAmount"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/_20sdp"
-        android:layout_marginTop="@dimen/_2sdp"
-        android:background="@null"
-        android:ems="10"
-        android:hint="@string/hint_amount"
-        android:inputType="numberDecimal"
-        android:textColor="?attr/textColor2"
-        android:textColorHint="?attr/textColor2"
-        android:textSize="@dimen/_16ssp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView11"
-        android:importantForAutofill="no" />
+        <TextView
+            android:id="@+id/textView11"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_20sdp"
+            android:text="@string/text1"
+            android:textColor="@color/purple_dark"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:paddingTop="26dp"/>
 
-    <View
-        android:id="@+id/view"
-        android:layout_width="@dimen/_270sdp"
-        android:layout_height="@dimen/_1sdp"
-        android:layout_marginStart="@dimen/_20sdp"
-        android:layout_marginTop="@dimen/_4sdp"
-        android:background="?attr/bgColor2"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/loanAmount" />
+        <EditText
+            android:id="@+id/loanAmount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_20sdp"
+            android:layout_marginTop="@dimen/_2sdp"
+            android:background="@null"
+            android:ems="10"
+            android:hint="@string/hint_amount"
+            android:inputType="numberDecimal"
+            android:textColor="?attr/textColor2"
+            android:textColorHint="?attr/textColor2"
+            android:textSize="@dimen/_16ssp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView11"
+            android:importantForAutofill="no" />
 
-    <TextView
-        android:id="@+id/textView12"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/_20sdp"
-        android:layout_marginTop="@dimen/_26sdp"
-        android:text="@string/text2"
-        android:textColor="@color/blue_dark"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/view" />
+        <View
+            android:id="@+id/view"
+            android:layout_width="@dimen/_270sdp"
+            android:layout_height="@dimen/_1sdp"
+            android:layout_marginStart="@dimen/_20sdp"
+            android:layout_marginTop="4dp"
+            android:background="?attr/bgColor2"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/loanAmount" />
 
-    <EditText
-        android:id="@+id/interestRate"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/_20sdp"
-        android:layout_marginTop="@dimen/_2sdp"
-        android:background="@null"
-        android:ems="10"
-        android:hint="@string/hint_interest"
-        android:inputType="numberDecimal"
-        android:textColor="?attr/textColor2"
-        android:textColorHint="?attr/textColor2"
-        android:textSize="@dimen/_16ssp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView12"
-        android:importantForAutofill="no" />
+        <TextView
+            android:id="@+id/textView12"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_20sdp"
+            android:layout_marginTop="26dp"
+            android:text="@string/text2"
+            android:textColor="@color/purple_dark"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/view" />
 
-    <View
-        android:id="@+id/view2"
-        android:layout_width="@dimen/_270sdp"
-        android:layout_height="@dimen/_1sdp"
-        android:layout_marginStart="@dimen/_20sdp"
-        android:layout_marginTop="@dimen/_4sdp"
-        android:background="?attr/bgColor2"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/interestRate" />
+        <EditText
+            android:id="@+id/interestRate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_20sdp"
+            android:layout_marginTop="2dp"
+            android:background="@null"
+            android:ems="10"
+            android:hint="@string/hint_interest"
+            android:inputType="numberDecimal"
+            android:textColor="?attr/textColor2"
+            android:textColorHint="?attr/textColor2"
+            android:textSize="@dimen/_16ssp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView12"
+            android:importantForAutofill="no" />
 
-    <TextView
-        android:id="@+id/textView13"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/_20sdp"
-        android:layout_marginTop="@dimen/_26sdp"
-        android:text="@string/text3"
-        android:textColor="@color/blue_dark"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/view2" />
+        <View
+            android:id="@+id/view2"
+            android:layout_width="@dimen/_270sdp"
+            android:layout_height="@dimen/_1sdp"
+            android:layout_marginStart="@dimen/_20sdp"
+            android:layout_marginTop="4dp"
+            android:background="?attr/bgColor2"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/interestRate" />
 
-    <EditText
-        android:id="@+id/number_of_installments"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/_20sdp"
-        android:layout_marginTop="@dimen/_2sdp"
-        android:background="@null"
-        android:hint="@string/hint_installments"
-        android:inputType="number"
-        android:textColor="?attr/textColor2"
-        android:textColorHint="?attr/textColor2"
-        app:layout_constraintStart_toStartOf="parent"
-        android:textSize="@dimen/_16ssp"
-        app:layout_constraintTop_toBottomOf="@+id/textView13"
+        <TextView
+            android:id="@+id/textView13"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_20sdp"
+            android:layout_marginTop="26dp"
+            android:text="@string/text3"
+            android:textColor="@color/purple_dark"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/view2" />
 
-        />
+        <EditText
+            android:id="@+id/number_of_installments"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_20sdp"
+            android:layout_marginTop="2dp"
+            android:background="@null"
+            android:hint="@string/hint_installments"
+            android:inputType="number"
+            android:textColor="?attr/textColor2"
+            android:textColorHint="?attr/textColor2"
+            app:layout_constraintStart_toStartOf="parent"
+            android:textSize="@dimen/_16ssp"
+            app:layout_constraintTop_toBottomOf="@+id/textView13"
 
-    <View
-        android:id="@+id/view3"
-        android:layout_width="@dimen/_270sdp"
-        android:layout_height="@dimen/_1sdp"
-        android:layout_marginStart="@dimen/_20sdp"
-        android:layout_marginTop="@dimen/_4sdp"
-        android:background="?attr/bgColor2"
-        app:layout_constraintBottom_toTopOf="@+id/calculate"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/number_of_installments" />
+            />
 
-    <View
-        android:id="@+id/view4"
-        android:layout_width="@dimen/_50sdp"
-        android:layout_height="@dimen/_1sdp"
-        android:layout_marginTop="@dimen/_20sdp"
-        android:background="?attr/bgColor5"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/view3" />
+        <View
+            android:id="@+id/view3"
+            android:layout_width="@dimen/_270sdp"
+            android:layout_height="@dimen/_1sdp"
+            android:layout_marginStart="@dimen/_20sdp"
+            android:background="?attr/bgColor2"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toBottomOf="@id/number_of_installments" />
 
-    <Button
-        android:id="@+id/calculate"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/_249sdp"
-        android:background="@drawable/radius_button"
-        android:paddingStart="@dimen/_29sdp"
-        android:paddingTop="4dp"
-        android:paddingEnd="@dimen/_29sdp"
-        android:paddingBottom="4dp"
-        android:text="@string/text4"
-        android:textAllCaps="false"
-        android:textSize="@dimen/_14ssp"
-        android:textColor="@color/white"
-        app:backgroundTint="@color/blue_dark"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/view3" />
+        <View
+            android:id="@+id/view4"
+            android:layout_width="@dimen/_50sdp"
+            android:layout_height="@dimen/_1sdp"
+            android:layout_marginTop="20dp"
+            android:background="?attr/bgColor5"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/view3" />
+
+        <Button
+            android:id="@+id/calculate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="230dp"
+            android:background="@drawable/radius_button"
+            android:paddingStart="@dimen/_29sdp"
+            android:paddingTop="4dp"
+            android:paddingEnd="@dimen/_29sdp"
+            android:paddingBottom="4dp"
+            android:text="@string/text4"
+            android:textAllCaps="false"
+            android:textSize="@dimen/_14ssp"
+            android:textColor="@color/white"
+            app:backgroundTint="@color/purple_dark"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent" />
 
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

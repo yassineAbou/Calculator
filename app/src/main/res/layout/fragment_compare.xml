@@ -10,417 +10,417 @@
             type="com.example.calculator0.ui.emi.EMIViewModel" />
     </data>
 
-<androidx.constraintlayout.widget.ConstraintLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".ui.emi.CompareFragment"
-    android:background="?attr/bgColor4">
+        android:background="?attr/bgColor4">
 
-    <View
-        android:id="@+id/background3"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:background="@drawable/radius_border"
-        app:layout_constraintBottom_toBottomOf="@+id/view7"
-        app:layout_constraintEnd_toEndOf="@+id/tableLayout"
-        app:layout_constraintHorizontal_bias="0.079"
-        app:layout_constraintStart_toStartOf="@+id/tableLayout"
-        app:layout_constraintTop_toTopOf="@+id/tableLayout"
-        app:layout_constraintVertical_bias="1.0"
-        android:backgroundTint="?attr/bgColor5"
-        />
-
-    <TableLayout
-        android:id="@+id/tableLayout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:stretchColumns="*"
-        android:layout_marginStart="@dimen/_17sdp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <TableRow
+        <View
+            android:id="@+id/background3"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginTop="@dimen/_19sdp">
-            <!-- first element of the row-->
-            <TextView
-                android:id="@+id/textview20"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                tools:text="textview"
-                android:textColor="@color/black"
-                android:textSize="@dimen/_11ssp"
-                android:visibility="invisible" />
+            android:layout_height="0dp"
+            android:background="@drawable/radius_border"
+            app:layout_constraintBottom_toBottomOf="@+id/view7"
+            app:layout_constraintEnd_toEndOf="@+id/tableLayout"
+            app:layout_constraintHorizontal_bias="0.079"
+            app:layout_constraintStart_toStartOf="@+id/tableLayout"
+            app:layout_constraintTop_toTopOf="@+id/tableLayout"
+            app:layout_constraintVertical_bias="1.0"
+            android:backgroundTint="?attr/bgColor5"
+            />
 
-            <TextView
-
-                android:id="@+id/textview21"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/_first"
-                android:textColor="?attr/textColor3"
-                android:textSize="@dimen/_11ssp" />
-
-            <TextView
-                android:id="@+id/textview22"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/_second"
-                android:textColor="?attr/textColor3"
-                android:textSize="@dimen/_11ssp" />
-        </TableRow>
-
-        <TableRow
+        <TableLayout
+            android:id="@+id/tableLayout"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginTop="@dimen/_19sdp">
-            <!-- first element of the row-->
-            <TextView
-                android:id="@+id/textview23"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textColor="?attr/textColor2"
-                android:text="@string/text1"
-                android:textSize="@dimen/_11ssp" />
+            android:layout_height="wrap_content"
+            android:stretchColumns="*"
+            android:layout_marginStart="@dimen/_17sdp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
-            <TextView
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="17dp">
+                <!-- first element of the row-->
+                <TextView
+                    android:id="@+id/textview20"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    tools:text="textview"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_11ssp"
+                    android:visibility="invisible" />
 
-                android:id="@+id/firstLoan"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@{viewModel.emiFirstResult.principal}"
-                android:textColor="?attr/textColor3"
-                android:textSize="@dimen/_11ssp" />
+                <TextView
 
-            <TextView
-                android:id="@+id/secondLoan"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@{viewModel.emiSecondResult.principal}"
-                android:textColor="?attr/textColor3"
-                android:textSize="@dimen/_11ssp" />
-        </TableRow>
+                    android:id="@+id/textview21"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/_first"
+                    android:textColor="?attr/textColor3"
+                    android:textSize="@dimen/_11ssp" />
 
-        <TableRow
+                <TextView
+                    android:id="@+id/textview22"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/_second"
+                    android:textColor="?attr/textColor3"
+                    android:textSize="@dimen/_11ssp" />
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="19dp">
+                <!-- first element of the row-->
+                <TextView
+                    android:id="@+id/textview23"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="?attr/textColor2"
+                    android:text="@string/text1"
+                    android:textSize="@dimen/_11ssp" />
+
+                <TextView
+
+                    android:id="@+id/firstLoan"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@{viewModel.emiFirstResult.principal}"
+                    android:textColor="?attr/textColor3"
+                    android:textSize="@dimen/_11ssp" />
+
+                <TextView
+                    android:id="@+id/secondLoan"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@{viewModel.emiSecondResult.principal}"
+                    android:textColor="?attr/textColor3"
+                    android:textSize="@dimen/_11ssp" />
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="19dp">
+                <!-- first element of the row-->
+                <TextView
+                    android:id="@+id/textview24"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="?attr/textColor2"
+                    android:text="@string/emi_amount"
+                    android:textSize="@dimen/_11ssp" />
+
+                <TextView
+                    android:id="@+id/firstEmi"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="?attr/textColor3"
+                    android:textSize="@dimen/_11ssp"
+                    android:text="@{viewModel.emiFirstResult.emiMonth}"
+                    />
+
+                <TextView
+                    android:id="@+id/secondEmi"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="?attr/textColor3"
+                    android:textSize="@dimen/_11ssp"
+                    android:text="@{viewModel.emiSecondResult.emiMonth}"
+                    />
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="19dp">
+                <!-- first element of the row-->
+                <TextView
+                    android:id="@+id/textview25"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="?attr/textColor2"
+                    android:text="@string/text2"
+                    android:textSize="@dimen/_11ssp" />
+
+                <TextView
+                    android:id="@+id/firstInterest"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="?attr/textColor3"
+                    android:textSize="@dimen/_11ssp"
+                    android:text="@{viewModel.emiFirstResult.interestRate}"/>
+
+                <TextView
+                    android:id="@+id/secondInterest"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="?attr/textColor3"
+                    android:textSize="@dimen/_11ssp"
+                    android:text="@{viewModel.emiSecondResult.interestRate}"/>
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="19dp">
+                <!-- first element of the row-->
+                <TextView
+                    android:id="@+id/textview26"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="?attr/textColor2"
+                    android:text="@string/text3"
+                    android:textSize="@dimen/_11ssp" />
+
+                <TextView
+
+                    android:id="@+id/firsInstallments"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="?attr/textColor3"
+                    android:textSize="@dimen/_11ssp"
+                    android:text= "@{viewModel.emiFirstResult.installment}"
+                    />
+
+                <TextView
+                    android:id="@+id/secondInstallments"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="?attr/textColor3"
+                    android:textSize="@dimen/_11ssp"
+                    android:text= "@{viewModel.emiSecondResult.installment}"/>
+            </TableRow>
+
+
+        </TableLayout>
+
+        <View
+            android:id="@+id/view7"
+            android:layout_width="@dimen/_15sdp"
+            android:layout_height="@dimen/_1sdp"
+            android:layout_marginTop="8dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tableLayout"
+            android:background="?attr/bgColor5"/>
+
+        <View
+            android:id="@+id/background4"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginTop="@dimen/_19sdp">
-            <!-- first element of the row-->
-            <TextView
-                android:id="@+id/textview24"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textColor="?attr/textColor2"
-                android:text="@string/emi_amount"
-                android:textSize="@dimen/_11ssp" />
+            android:layout_height="0dp"
+            android:background="@drawable/radius_border"
+            app:layout_constraintBottom_toBottomOf="@+id/view9"
+            app:layout_constraintEnd_toEndOf="@+id/textView30"
+            app:layout_constraintHorizontal_bias="0.079"
+            app:layout_constraintStart_toStartOf="@+id/textView30"
+            app:layout_constraintTop_toTopOf="@+id/textView30"
+            app:layout_constraintVertical_bias="1.0"
+            android:backgroundTint="?attr/bgColor5"
 
-            <TextView
-                android:id="@+id/firstEmi"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textColor="?attr/textColor3"
-                android:textSize="@dimen/_11ssp"
-                android:text="@{viewModel.emiFirstResult.emiMonth}"
-                />
+            />
 
-            <TextView
-                android:id="@+id/secondEmi"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textColor="?attr/textColor3"
-                android:textSize="@dimen/_11ssp"
-                android:text="@{viewModel.emiSecondResult.emiMonth}"
-                />
-        </TableRow>
+        <TextView
+            android:id="@+id/textView30"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_17sdp"
+            android:text="@string/option_one"
+            android:textColor="?attr/textColor3"
+            android:textSize="@dimen/_15ssp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/view7"
+            android:paddingTop="17dp"
+            android:layout_marginTop="13dp"/>
+        <TextView
+            android:id="@+id/firstTotal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text= "@{String.format(@string/total, viewModel.emiFirstResult.total)}"
+            android:textSize="@dimen/_13ssp"
+            android:textColor="?attr/textColor2"
+            android:layout_marginStart="@dimen/_17sdp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView30" />
 
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginTop="@dimen/_19sdp">
-            <!-- first element of the row-->
-            <TextView
-                android:id="@+id/textview25"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textColor="?attr/textColor2"
-                android:text="@string/text2"
-                android:textSize="@dimen/_11ssp" />
+        <TextView
+            android:id="@+id/firstPrincipal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_19sdp"
+            android:layout_marginTop="26dp"
+            android:textColor="@color/black"
+            android:textSize="@dimen/_13ssp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/firstTotal"
+            android:text="@{viewModel.emiFirstResult.principal}"/>
 
-            <TextView
-                android:id="@+id/firstInterest"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textColor="?attr/textColor3"
-                android:textSize="@dimen/_11ssp"
-                android:text="@{viewModel.emiFirstResult.interestRate}"/>
+        <TextView
+            android:id="@+id/textView27"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_19sdp"
+            android:text="@string/_principal"
+            android:textColor="?attr/textColor2"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/firstPrincipal" />
 
-            <TextView
-                android:id="@+id/secondInterest"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textColor="?attr/textColor3"
-                android:textSize="@dimen/_11ssp"
-                android:text="@{viewModel.emiSecondResult.interestRate}"/>
-        </TableRow>
+        <TextView
+            android:id="@+id/interestOptionOne"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="26dp"
+            android:layout_marginEnd="@dimen/_19sdp"
+            android:textColor="@color/black"
+            android:textSize="@dimen/_13ssp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/firstTotal"
+            android:text="@{viewModel.emiFirstResult.interest}"/>
 
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginTop="@dimen/_19sdp">
-            <!-- first element of the row-->
-            <TextView
-                android:id="@+id/textview26"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textColor="?attr/textColor2"
-                android:text="@string/text3"
-                android:textSize="@dimen/_11ssp" />
+        <TextView
+            android:id="@+id/textView28"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/_19sdp"
+            android:text="@string/_interest"
+            android:textColor="?attr/textColor2"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/interestOptionOne" />
 
-            <TextView
+        <View
+            android:id="@+id/view8"
+            android:layout_width="@dimen/_270sdp"
+            android:layout_height="@dimen/_1sdp"
+            android:layout_marginTop="7dp"
+            android:background="@color/white2"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView28" />
 
-                android:id="@+id/firsInstallments"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textColor="?attr/textColor3"
-                android:textSize="@dimen/_11ssp"
-                android:text= "@{viewModel.emiFirstResult.installment}"
-                />
+        <TextView
+            android:id="@+id/textView31"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_17sdp"
+            android:text="@string/option_two"
+            android:textColor="?attr/textColor3"
+            android:textSize="@dimen/_15ssp"
+            android:layout_marginTop="13dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/view8" />
 
-            <TextView
-                android:id="@+id/secondInstallments"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textColor="?attr/textColor3"
-                android:textSize="@dimen/_11ssp"
-                android:text= "@{viewModel.emiSecondResult.installment}"/>
-        </TableRow>
+        <TextView
+            android:id="@+id/secondTotal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text= "@{String.format(@string/total, viewModel.emiSecondResult.total)}"
+            android:textSize="@dimen/_13ssp"
+            android:layout_marginStart="@dimen/_17sdp"
+            android:textColor="?attr/textColor2"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView31" />
 
+        <TextView
+            android:id="@+id/secondPrincipal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_19sdp"
+            android:layout_marginTop="26dp"
+            android:textColor="@color/black"
+            android:textSize="@dimen/_13ssp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/secondTotal"
+            android:text="@{viewModel.emiSecondResult.principal}"/>
 
-    </TableLayout>
+        <TextView
+            android:id="@+id/textView32"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_19sdp"
+            android:text="@string/_principal"
+            android:textColor="?attr/textColor2"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/secondPrincipal" />
 
-    <View
-        android:id="@+id/view7"
-        android:layout_width="@dimen/_15sdp"
-        android:layout_height="@dimen/_1sdp"
-        android:layout_marginTop="@dimen/_17sdp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tableLayout"
-        android:background="?attr/bgColor5"/>
+        <TextView
+            android:id="@+id/interestOptionTwo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="26dp"
+            android:layout_marginEnd="@dimen/_19sdp"
+            android:textColor="@color/black"
+            android:textSize="@dimen/_13ssp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/secondTotal"
+            android:text="@{viewModel.emiSecondResult.interest}"/>
 
-    <View
-        android:id="@+id/background4"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:background="@drawable/radius_border"
-        app:layout_constraintBottom_toBottomOf="@+id/view9"
-        app:layout_constraintEnd_toEndOf="@+id/textView30"
-        app:layout_constraintHorizontal_bias="0.079"
-        app:layout_constraintStart_toStartOf="@+id/textView30"
-        app:layout_constraintTop_toTopOf="@+id/textView30"
-        app:layout_constraintVertical_bias="1.0"
-        android:backgroundTint="?attr/bgColor5"
+        <TextView
+            android:id="@+id/textView33"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/_19sdp"
+            android:text="@string/_interest"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:textColor="?attr/textColor2"
+            app:layout_constraintTop_toBottomOf="@+id/interestOptionTwo" />
 
-        />
+        <View
+            android:id="@+id/view9"
+            android:layout_width="@dimen/_270sdp"
+            android:layout_height="@dimen/_1sdp"
+            android:layout_marginTop="8dp"
+            android:background="?attr/bgColor5"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView33" />
 
-    <TextView
-        android:id="@+id/textView30"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/_17sdp"
-        android:text="@string/option_one"
-        android:textColor="?attr/textColor3"
-        android:textSize="@dimen/_15ssp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/view7"
-        android:paddingTop="@dimen/_13sdp"
-        android:layout_marginTop="@dimen/_13sdp"/>
-    <TextView
-        android:id="@+id/firstTotal"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text= "@{String.format(@string/total, viewModel.emiFirstResult.total)}"
-        android:textSize="@dimen/_13ssp"
-        android:textColor="?attr/textColor2"
-        android:layout_marginStart="@dimen/_17sdp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView30" />
+        <Button
+            android:id="@+id/done2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="14dp"
+            android:layout_marginStart="@dimen/_7sdp"
+            android:layout_marginEnd="@dimen/_19sdp"
+            android:background="@drawable/radius_button"
+            android:paddingStart="@dimen/_45sdp"
+            android:paddingBottom="4dp"
+            android:paddingEnd="@dimen/_45sdp"
+            android:paddingTop="4dp"
+            android:text="@string/text5"
+            android:textColor="@color/white"
+            android:textAllCaps="false"
+            android:textSize="@dimen/_14ssp"
+            android:textStyle="bold"
+            app:backgroundTint="@color/purple_dark"
+            app:layout_constraintStart_toEndOf="@+id/reset"
+            app:layout_constraintBottom_toBottomOf="parent" />
 
-    <TextView
-        android:id="@+id/firstPrincipal"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/_19sdp"
-        android:layout_marginTop="@dimen/_26sdp"
-        android:textColor="@color/black"
-        android:textSize="@dimen/_13ssp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/firstTotal"
-        android:text="@{viewModel.emiFirstResult.principal}"/>
-
-    <TextView
-        android:id="@+id/textView27"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/_19sdp"
-        android:text="@string/_principal"
-        android:textColor="?attr/textColor2"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/firstPrincipal" />
-
-    <TextView
-        android:id="@+id/interestOptionOne"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/_26sdp"
-        android:layout_marginEnd="@dimen/_19sdp"
-        android:textColor="@color/black"
-        android:textSize="@dimen/_13ssp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/firstTotal"
-        android:text="@{viewModel.emiFirstResult.interest}"/>
-
-    <TextView
-        android:id="@+id/textView28"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="@dimen/_19sdp"
-        android:text="@string/_interest"
-        android:textColor="?attr/textColor2"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/interestOptionOne" />
-
-    <View
-        android:id="@+id/view8"
-        android:layout_width="@dimen/_270sdp"
-        android:layout_height="@dimen/_1sdp"
-        android:layout_marginTop="@dimen/_7sdp"
-        android:background="@color/white2"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView28" />
-
-    <TextView
-        android:id="@+id/textView31"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/_17sdp"
-        android:text="@string/option_two"
-        android:textColor="?attr/textColor3"
-        android:textSize="@dimen/_15ssp"
-        android:layout_marginTop="@dimen/_13sdp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/view8" />
-
-    <TextView
-        android:id="@+id/secondTotal"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text= "@{String.format(@string/total, viewModel.emiSecondResult.total)}"
-        android:textSize="@dimen/_13ssp"
-        android:layout_marginStart="@dimen/_17sdp"
-        android:textColor="?attr/textColor2"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView31" />
-
-    <TextView
-        android:id="@+id/secondPrincipal"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/_19sdp"
-        android:layout_marginTop="@dimen/_26sdp"
-        android:textColor="@color/black"
-        android:textSize="@dimen/_13ssp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/secondTotal"
-        android:text="@{viewModel.emiSecondResult.principal}"/>
-
-    <TextView
-        android:id="@+id/textView32"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/_19sdp"
-        android:text="@string/_principal"
-        android:textColor="?attr/textColor2"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/secondPrincipal" />
-
-    <TextView
-        android:id="@+id/interestOptionTwo"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/_26sdp"
-        android:layout_marginEnd="@dimen/_19sdp"
-        android:textColor="@color/black"
-        android:textSize="@dimen/_13ssp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/secondTotal"
-        android:text="@{viewModel.emiSecondResult.interest}"/>
-
-    <TextView
-        android:id="@+id/textView33"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="@dimen/_19sdp"
-        android:text="@string/_interest"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:textColor="?attr/textColor2"
-        app:layout_constraintTop_toBottomOf="@+id/interestOptionTwo" />
-
-    <View
-        android:id="@+id/view9"
-        android:layout_width="@dimen/_270sdp"
-        android:layout_height="@dimen/_1sdp"
-        android:layout_marginTop="@dimen/_26sdp"
-        android:background="?attr/bgColor5"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView33" />
-
-    <Button
-        android:id="@+id/done2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/_7sdp"
-        android:layout_marginStart="@dimen/_7sdp"
-        android:layout_marginEnd="@dimen/_19sdp"
-        android:background="@drawable/radius_button"
-        android:paddingStart="@dimen/_45sdp"
-        android:paddingBottom="@dimen/_4sdp"
-        android:paddingEnd="@dimen/_45sdp"
-        android:paddingTop="@dimen/_4sdp"
-        android:text="@string/text5"
-        android:textColor="@color/white"
-        android:textAllCaps="false"
-        android:textSize="@dimen/_14ssp"
-        android:textStyle="bold"
-        app:backgroundTint="@color/blue_dark"
-        app:layout_constraintStart_toEndOf="@+id/reset"
-        app:layout_constraintTop_toBottomOf="@+id/background4" />
-
-    <Button
-        android:id="@+id/reset"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/_19sdp"
-        android:layout_marginTop="@dimen/_7sdp"
-        android:background="@drawable/radius_button"
-        android:paddingStart="@dimen/_45sdp"
-        android:paddingBottom="@dimen/_4sdp"
-        android:paddingEnd="@dimen/_45sdp"
-        android:paddingTop="@dimen/_4sdp"
-        android:text="@string/text7"
-        android:textColor="?attr/textColor3"
-        android:textAllCaps="false"
-        android:textSize="@dimen/_14ssp"
-        android:textStyle="bold"
-        app:backgroundTint="?attr/textColor6"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/background4" />
+        <Button
+            android:id="@+id/reset"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_19sdp"
+            android:layout_marginTop="14dp"
+            android:background="@drawable/radius_button"
+            android:paddingStart="@dimen/_45sdp"
+            android:paddingBottom="4dp"
+            android:paddingEnd="@dimen/_45sdp"
+            android:paddingTop="4dp"
+            android:text="@string/text7"
+            android:textColor="?attr/textColor3"
+            android:textAllCaps="false"
+            android:textSize="@dimen/_14ssp"
+            android:textStyle="bold"
+            app:backgroundTint="?attr/textColor6"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"/>
 
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 
 

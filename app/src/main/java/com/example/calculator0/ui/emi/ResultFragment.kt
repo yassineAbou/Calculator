@@ -2,20 +2,15 @@ package com.example.calculator0.ui.emi
 
 
 import android.annotation.SuppressLint
-
 import android.content.Intent
 import android.content.pm.ActivityInfo
 import android.os.Bundle
 import android.view.*
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import androidx.fragment.app.viewModels
-import androidx.lifecycle.lifecycleScope
 import androidx.navigation.findNavController
 import com.example.calculator0.R
 import com.example.calculator0.databinding.FragmentResultBinding
-import kotlinx.coroutines.flow.collectLatest
 
 
 class ResultFragment : Fragment() {
@@ -87,6 +82,7 @@ class ResultFragment : Fragment() {
 
 
 
+
     @SuppressLint("QueryPermissionsNeeded")
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         super.onCreateOptionsMenu(menu, inflater)
@@ -95,6 +91,7 @@ class ResultFragment : Fragment() {
             menu.findItem(R.id.share).isVisible = false
         }
     }
+
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when(item.itemId){

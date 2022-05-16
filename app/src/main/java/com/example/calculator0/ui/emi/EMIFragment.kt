@@ -30,11 +30,11 @@ class EMIFragment : Fragment() {
 
             calculate.setOnClickListener {
 
-                val P = parseDouble(loanAmount.text.toString())
-                val N = parseDouble(numberOfInstallments.text.toString())
-                val I = parseDouble(interestRate.text.toString())
+                val loanAmount = parseDouble(loanAmount.text.toString())
+                val numberOfInstallments = parseDouble(numberOfInstallments.text.toString())
+                val interestRate = parseDouble(interestRate.text.toString())
 
-                emiViewModel.emi(P, I, N, EmiScreen.First)
+                emiViewModel.emi(loanAmount, interestRate, numberOfInstallments, EmiScreen.First)
 
                 it.findNavController()
                     .navigate(EMIFragmentDirections.actionEmiOneFragmentToResultFragment())

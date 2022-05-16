@@ -23,9 +23,10 @@
     <color name="gray3">#E6E6E6</color>
     <color name="gray4">#656565</color>
 
-    <color name="blue">#58AFF4</color>
-    <color name="blue_light">#ADD8E6</color>
-    <color name="blue_dark">#0174D4</color>
+    <color name="purple">#997592</color>
+    <color name="purple_light">#D8BFD8</color>
+    <color name="purple_dark">#755A6E</color>
+
 
     <color name="red">#D46E57</color>
     <color name="brown">#8C8C8C</color>

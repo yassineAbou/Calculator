@@ -8,6 +8,7 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 import java.math.RoundingMode
 import java.text.DecimalFormat
+import kotlin.math.pow
 
 enum class EmiScreen { First, Second }
 
@@ -19,30 +20,29 @@ class EMIViewModel : ViewModel() {
     private val _emiSecondResult: MutableStateFlow<Emi?> = MutableStateFlow(null)
     val emiSecondResult = _emiSecondResult.asStateFlow()
 
-     fun emi(P: Double, I: Double, N: Double, emiScreen: EmiScreen) {
+     fun emi(loanAmount: Double, interestRate: Double, numberOfInstallments: Double, emiScreen: EmiScreen) {
 
          viewModelScope.launch(Dispatchers.IO) {
              val df = DecimalFormat("#.##")
              df.roundingMode = RoundingMode.CEILING
 
-             val Month = N
-             val InterestValue = I / 12 / 100
-             val CommonPart = Math.pow(1 + InterestValue, Month)
-             val DivUp = (P * InterestValue * CommonPart)
-             val DivDown = CommonPart - 1
-             val emiCalculationPerMonth: Float = ((DivUp / DivDown)).toFloat()
+             val interestValue = interestRate / 12 / 100
+             val commonPart = (1 + interestValue).pow(numberOfInstallments)
+             val divUp = (loanAmount * interestValue * commonPart)
+             val divDown = commonPart - 1
+             val emiCalculationPerMonth: Float = ((divUp / divDown)).toFloat()
              emiCalculationPerMonth * 12
-             val totalInterest = (emiCalculationPerMonth * Month) - P
-             val totalPayment = totalInterest + P
+             val totalInterest = (emiCalculationPerMonth * numberOfInstallments) - loanAmount
+             val totalPayment = totalInterest + loanAmount
 
              val  emiMonth = df.format(emiCalculationPerMonth)
              val  interest = df.format(totalInterest)
              val  total = df.format(totalPayment)
-             val  principal =  df.format(P)
-             val  installment = df.format(N)
-             val  interestRateOutput = df.format(I)
+             val  principal =  df.format(loanAmount)
+             val  installment = df.format(numberOfInstallments)
+             val  interestRateOutput = df.format(interestRate)
 
-             val result = Emi(emiMonth, interest,  I.toString(), total, principal, installment, interestRateOutput)
+             val result = Emi(emiMonth, interest,  interestRate.toString(), total, principal, installment, interestRateOutput)
 
              when (emiScreen) {
                  EmiScreen.First -> _emiFirstResult.value = result

@@ -9,18 +9,17 @@
             name="prevOperation"
             type="com.example.calculator0.database.PrevOperation" />
         <variable
-            name="clickListener"
-            type="com.example.calculator0.ui.calculator.PrevOperationListener" />
+            name="prevOperationActions"
+            type="com.example.calculator0.ui.calculator.PrevOperationActions" />
     </data>
 
 <androidx.constraintlayout.widget.ConstraintLayout
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-
     >
 
     <TextView
-        android:id="@+id/textInput"
+        android:id="@+id/input"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="17dp"
@@ -32,14 +31,14 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:autoSizeTextType="uniform"
-        input="@{prevOperation}"
+        setTextInput="@{prevOperation}"
         tools:text="15+15"
         android:paddingEnd="0dp"
-        android:onClick="@{() -> clickListener.onClickInput(prevOperation)}"
+        android:onClick="@{() -> prevOperationActions.addPrevInput(prevOperation)}"
         />
 
     <TextView
-        android:id="@+id/textOutput"
+        android:id="@+id/result"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
@@ -48,12 +47,12 @@
         android:textColor="@color/purple"
         android:textSize="@dimen/_18ssp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textInput"
+        app:layout_constraintTop_toBottomOf="@+id/input"
         app:autoSizeTextType="uniform"
-        output="@{prevOperation}"
+        setTextResult="@{prevOperation}"
         tools:text="30"
         android:paddingEnd="0dp"
-        android:onClick="@{() -> clickListener.onClickOutput(prevOperation)}"
+        android:onClick="@{() -> prevOperationActions.addPrevResult(prevOperation)}"
         />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

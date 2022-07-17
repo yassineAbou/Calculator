@@ -8,6 +8,9 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.calculator0.database.PrevOperation
 import com.example.calculator0.repository.PrevOperationRepository
+import com.example.calculator0.utils.isBalancedBrackets
+import com.example.calculator0.utils.safeLet
+import com.example.calculator0.utils.trimTrailingZero
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -18,9 +21,9 @@ import org.mariuszgromada.math.mxparser.Expression
 import javax.inject.Inject
 
 data class CalculatorState(
-    val invalidFormat: Boolean = false,
-    val showScientificButtons1: Boolean = false,
-    val showScientificButtons2: Boolean = false,
+    val isInvalidFormat: Boolean = false,
+    val isFirstGroupFunctions: Boolean = false,
+    val isSecondGroupFunctions: Boolean = false,
 )
 
 @HiltViewModel
@@ -29,219 +32,209 @@ class CalculatorViewModel @Inject constructor(
 ) : ViewModel() {
 
 
-    val allPrevOperations = prevOperationRepository.allPrevOperations
-    private val symbols1: List<Char> = listOf(')','e', 'i')
-    private val symbols2: List<Char> = listOf('+','-','×','÷','.')
-    private val symbols5: List<Char> = listOf(')','1','2','3','4','5','6','7','8','9','0','%','e','i')
-    private var isDotClicked = true
-    private var action2 = '+'
+    val listPrevOperations = prevOperationRepository.listPrevOperations
+    private val listChars: List<Char> = listOf(')','e', 'i')
+    private val listArithmeticSymbols: List<Char> = listOf('+','-','×','÷','.')
+    private val listNumbers: List<Char> = listOf(')','1','2','3','4','5','6','7','8','9','0','%','e','i')
+    private var isDecimalPointClicked = true
+    private var arithmeticOperation = '+'
 
     private val _currentInput: MutableStateFlow<String?> = MutableStateFlow(null)
     val currentInput = _currentInput.asStateFlow()
 
-    private val _currentOutput: MutableStateFlow<String?> = MutableStateFlow(null)
-    val currentOutput = _currentOutput.asStateFlow()
+    private val _result: MutableStateFlow<String?> = MutableStateFlow(null)
+    val result = _result.asStateFlow()
 
     private val _calculatorState = MutableStateFlow(CalculatorState())
     val calculatorState: StateFlow<CalculatorState> = _calculatorState.asStateFlow()
 
-
-
     init {
         _currentInput.value = ""
-        _currentOutput.value = ""
+        _result.value = ""
     }
 
-    fun onChangeCalculatorState(state: CalculatorState) {
+    fun onChangeCurrentInput(input: String) {
+        _currentInput.value = input
+    }
+
+    fun onChangeResult(result: String) {
+        _result.value = result
+    }
+
+    fun onChangeCalculatorState(calculatorState: CalculatorState) {
         viewModelScope.launch {
-            _calculatorState.value = state
+            _calculatorState.value = calculatorState
         }
     }
 
-    //-----------------------
-    // Calculator functions
-    //-----------------------
-
-
-    fun addToCurrentInput(number: String, currentValue: String) {
-        val givenNumber = currentValue.substringAfterLast(action2)
-        with(givenNumber) {
+    fun addToCurrentInput(number: String) {
+        val input = _currentInput.value?.substringAfterLast(arithmeticOperation)
+        input?.let{
             when {
-                equals("0") ->  _currentInput.value = (currentValue.dropLast(1) + number)
-                lastOrNull() in symbols1 && !givenNumber.contains('.')  -> _currentInput.value =  ("$currentValue×$number")
-                (lastOrNull() != '%') && !givenNumber.contains('.') -> _currentInput.value =  (currentValue +  number)
-                else  -> onChangeCalculatorState(CalculatorState(invalidFormat = true))
+                it == "0" ->  _currentInput.value = (_currentInput.value?.dropLast(1) + number)
+                it.lastOrNull() in listChars && !it.contains('.')  -> _currentInput.value =  ("${_currentInput.value}×$number")
+                (it.lastOrNull() != '%') && !it.contains('.') -> _currentInput.value =  (_currentInput.value +  number)
+                else  -> onChangeCalculatorState(CalculatorState(isInvalidFormat = true))
             }
         }
     }
 
-    fun updateCurrentValue(keyWord: String, currentValue: String) {
-        _currentInput.value = with(currentValue) {
-            when {
-                lastOrNull() in symbols5 -> ("$this×$keyWord")
-                else -> ("$this$keyWord")
+    fun addFunctions(function: String) {
+        _currentInput.value?.let {
+            _currentInput.value = with(it) {
+                when {
+                    lastOrNull() in listNumbers -> ("$this×$function")
+                    else -> ("$this$function")
+                }
             }
         }
     }
 
-    fun exponentiation(input: String, currentValue: String) {
-        val givenNumber = currentValue.substringAfterLast(action2)
-            if (givenNumber.isNotEmpty() && (givenNumber.lastOrNull() in symbols5)) {
-                _currentInput.value =  ("$currentValue$input")
+
+    fun addPower(power: String) {
+        _currentInput.value?.let {
+            val afterArithmeticOperation = it.substringAfterLast(arithmeticOperation)
+            if (afterArithmeticOperation.isNotEmpty() && (afterArithmeticOperation.lastOrNull() in listNumbers)) {
+                _currentInput.value =  ("$it$power")
             } else {
-                onChangeCalculatorState(CalculatorState(invalidFormat = true))
+                onChangeCalculatorState(CalculatorState(isInvalidFormat = true))
+            }
+        }
+    }
+
+
+    fun calculateCurrentInput() {
+        _currentInput.value?.let {
+            val afterArithmeticOperation = it.substringAfterLast(arithmeticOperation)
+
+            viewModelScope.launch(Dispatchers.IO) {
+
+                val input = it.replace('×', '*')
+                    .replace('÷', '/')
+                val expression = Expression(input)
+                val output = trimTrailingZero(java.lang.String.valueOf(expression.calculate()))
+                if (output == "NaN")
+                    _result.value = ""
+                else _result.value = output
+
+            }
+
+            if (afterArithmeticOperation.isDigitsOnly())
+                isDecimalPointClicked = true
+
+            if (afterArithmeticOperation.isEmpty()) {
+                isDecimalPointClicked = true
+
+            }
+        }
+    }
+
+
+    fun removeCharsCurrentInput() {
+        _currentInput.value?.let {
+            if (it != "") {
+                _currentInput.value  = it.substring(0, it.length - 1)
+
+            }
+        }
+    }
+
+    fun addDecimalPoint() {
+        _currentInput.value?.let {
+            val afterArithmeticOperation = it.substringAfterLast(arithmeticOperation)
+            if ((afterArithmeticOperation.isEmpty()) && isDecimalPointClicked) {
+                _currentInput.value = (it + "0.")
+                isDecimalPointClicked = false
+            }
+            if (isDecimalPointClicked && (afterArithmeticOperation.lastOrNull()?.isDigit() == true) && afterArithmeticOperation.none { it =='.' })  {
+                _currentInput.value = ("$it.")
+                isDecimalPointClicked = false
             }
         }
 
-
-    fun getResult(currentValue: String) {
-
-        val givenNumber = currentValue.substringAfterLast(action2)
-
-        viewModelScope.launch(Dispatchers.IO) {
-            val value = currentValue.replace('×', '*')
-                                    .replace('÷', '/')
-            val exp = Expression(value)
-            val output = trimTrailingZero(java.lang.String.valueOf(exp.calculate()))
-            if (output == "NaN")
-                _currentOutput.value = ""
-            else _currentOutput.value = output
-        }
-
-        if (givenNumber.isDigitsOnly())
-            isDotClicked = true
-
-        if (currentValue.isEmpty()) {
-            isDotClicked = true
-
-        }
     }
 
-
-    fun backspace(currentValue: String) {
-        if (currentValue != "") {
-            val value  = currentValue.substring(0, currentValue.length - 1)
-            _currentInput.value = value
-        }
-    }
-
-    fun period(currentValue: String) {
-        val givenNumber = currentValue.substringAfterLast(action2)
-        if ((givenNumber.isEmpty()) and isDotClicked) {
-            _currentInput.value = (currentValue + "0.")
-            isDotClicked = false
-        }
-        if (isDotClicked && (givenNumber.lastOrNull()?.isDigit() == true) && givenNumber.none { it =='.' })  {
-            _currentInput.value = ("$currentValue.")
-            isDotClicked = false
-        }
-    }
-
-    fun clear() {
+    fun clearCurrentInput() {
         _currentInput.value = ""
-        _currentOutput.value = ""
+        _result.value = ""
     }
 
-    fun sign(currentValue: String) {
-        if (currentValue.lastOrNull() in symbols5)
-        _currentInput.value = ("$currentValue×(-")
-        else _currentInput.value = ("$currentValue(-")
-
+    fun addMinusSign() {
+        _currentInput.value?.let {
+            if (it.lastOrNull() in listNumbers)
+                _currentInput.value = ("$it×(-")
+            else _currentInput.value = ("$it(-")
+        }
     }
 
-    fun betweenBrackets(currentValue: String) {
-        _currentInput.value = with(currentValue) {
-            when {
-                isBalanced(this) && lastOrNull() in symbols5 -> ("$this×(")
-                isBalanced(this) -> ("$this(")
-                else -> ("$this)")
+    fun addBrackets() {
+        _currentInput.value?.let {
+            _currentInput.value = with(it) {
+                when {
+                    isBalancedBrackets(this) && lastOrNull() in listNumbers -> ("$this×(")
+                    isBalancedBrackets(this) -> ("$this(")
+                    else -> ("$this)")
+                }
+           }
+        }
+    }
+
+
+    fun onInsert() {
+        safeLet(_currentInput.value, _result.value) { currentInputValue, resultValue ->
+            if (resultValue.isNotEmpty()) {
+                val prevOperation = PrevOperation(currentInputValue, resultValue)
+                insert(prevOperation)
+                _currentInput.value = resultValue
+                _result.value = ""
             }
         }
     }
 
-    fun equals(currentValue: String, resultValue: String) {
-        if (resultValue.isNotEmpty()) {
 
-            val test = PrevOperation(currentValue, resultValue)
-
-            insert(test)
-            _currentInput.value = resultValue
-            _currentOutput.value = ""
+    fun addPercentage() {
+        _currentInput.value?.let {
+            val afterArithmeticOperation = it.substringAfterLast(arithmeticOperation)
+            if (afterArithmeticOperation.isNotEmpty() && (afterArithmeticOperation.lastOrNull() in listNumbers) && (afterArithmeticOperation.lastOrNull()!= '%')) {
+                _currentInput.value = ("$it%")
+            }
+            else {
+                onChangeCalculatorState(CalculatorState(isInvalidFormat = true))
+            }
         }
     }
 
-    fun percent(currentValue: String) {
-        val givenNumber = currentValue.substringAfterLast(action2)
-        if (givenNumber.isNotEmpty() && (givenNumber.lastOrNull() in symbols5) && (givenNumber.lastOrNull()!= '%')) {
-            _currentInput.value = ("$currentValue%")
+    fun addNumber(number: String) {
+        _currentInput.value?.let {
+            val afterArithmeticOperation = it.substringAfterLast(arithmeticOperation)
+            with(afterArithmeticOperation) {
+                when {
+                    equals("0") ->  _currentInput.value = (it.dropLast(1) + number)
+                    lastOrNull() in listChars  -> _currentInput.value =  ("$it×$number")
+                    (lastOrNull() != '%') -> _currentInput.value =  (it + number)
+                    else  -> onChangeCalculatorState(CalculatorState(isInvalidFormat = true))
+                }
         }
-        else {
-            onChangeCalculatorState(CalculatorState(invalidFormat = true))
-        }
-    }
-
-    fun onNumberClickedButton(number: String, currentValue: String) {
-        val givenNumber = currentValue.substringAfterLast(action2)
-           with(givenNumber) {
-             when {
-                 equals("0") ->  _currentInput.value = (currentValue.dropLast(1) + number)
-                 lastOrNull() in symbols1  -> _currentInput.value =  ("$currentValue×$number")
-                 (lastOrNull() != '%') -> _currentInput.value =  (currentValue + number)
-                 else  -> onChangeCalculatorState(CalculatorState(invalidFormat = true))
-             }
          }
      }
 
-    fun onOperationClickedButton(action: String, currentValue: String) {
-        action2 = action.single()
-        if (currentValue.lastOrNull() !in symbols2 && currentValue.isNotEmpty()) {
-            _currentInput.value = (currentValue + action)
-            isDotClicked = true
-        }
-        else if (currentValue.lastOrNull() in symbols2) {
-            _currentInput.value = (currentValue.dropLast(1) + action)
-            isDotClicked = true
-        }
-    }
-
-     private fun isBalanced(str: String): Boolean {
-        var count = 0
-        var i = 0
-        while (i < str.length && count >= 0) {
-            if (str[i] == '(') count++ else if (str[i] == ')') count--
-            i++
-        }
-        return count == 0
-    }
-
-    private fun trimTrailingZero(value: String?): String? {
-        return if (!value.isNullOrEmpty()) {
-            if (value.indexOf(".") < 0) {
-                value
-
-            } else {
-                value.replace("0*$".toRegex(), "").replace("\\.$".toRegex(), "")
+    fun addArithmeticOperation(arithmeticSymbol: String) {
+        _currentInput.value?.let {
+            arithmeticOperation = arithmeticSymbol.single()
+            if (it.lastOrNull() !in listArithmeticSymbols && it.isNotEmpty()) {
+                _currentInput.value = (it + arithmeticSymbol)
+                isDecimalPointClicked = true
             }
-
-        } else {
-            value
+            else if (it.lastOrNull() in listArithmeticSymbols) {
+                _currentInput.value = (it.dropLast(1) + arithmeticSymbol)
+                isDecimalPointClicked = true
+            }
         }
     }
 
-    //------------------
-    // Data
-    //------------------
-
-    fun onClear() {
-        viewModelScope.launch {
-            deleteAll()
-        }
-    }
-
-    private suspend fun deleteAll() {
+    fun clear()  = viewModelScope.launch(Dispatchers.IO) {
         prevOperationRepository.clear()
     }
-
 
     private fun insert(pervOperation: PrevOperation) = viewModelScope.launch(Dispatchers.IO) {
         prevOperationRepository.insert(pervOperation)

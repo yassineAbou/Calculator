@@ -9,13 +9,13 @@ import kotlinx.coroutines.flow.Flow
 interface PrevOperationDoe {
 
     @Insert
-    suspend fun insert(history: PrevOperation)
+    suspend fun insert(prevOperation: PrevOperation)
 
     @Query("DELETE FROM previous_operation_table")
     suspend fun clear()
 
     @Query("SELECT * FROM previous_operation_table ORDER BY id DESC")
-    fun getAllPrevOperations(): Flow<List<PrevOperation>>
+    fun getListPrevOperations(): Flow<List<PrevOperation>>
 
 
 }

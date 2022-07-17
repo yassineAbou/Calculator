@@ -11,41 +11,34 @@
         android:label="CalculatorFragment"
         tools:layout="@layout/fragment_calculator">
         <action
-            android:id="@+id/action_calculatorFragment_to_emiOneFragment"
-            app:destination="@id/emiOneFragment" />
+            android:id="@+id/action_calculatorFragment_to_emiCalculator"
+            app:destination="@id/emiCalculatorFragment" />
     </fragment>
     <fragment
-        android:id="@+id/emiOneFragment"
-        android:name="com.example.calculator0.ui.emi.EMIFragment"
-        android:label="EMI calculator"
-        tools:layout="@layout/fragment_emi" >
+        android:id="@+id/emiCalculationFragment"
+        android:name="com.example.calculator0.ui.emi.EmiCalculationFragment"
+        android:label="EMI calculation"
+        tools:layout="@layout/fragment_emi_calculation">
         <action
-            android:id="@+id/action_emiOneFragment_to_resultFragment"
-            app:destination="@id/resultFragment" >
-        </action>
-    </fragment>
-    <fragment
-        android:id="@+id/resultFragment"
-        android:name="com.example.calculator0.ui.emi.ResultFragment"
-        android:label="EMI calculator"
-        tools:layout="@layout/fragment_result">
-        <action
-            android:id="@+id/action_resultFragment_to_emiTwoFragment"
-            app:destination="@id/emiTwoFragment"
+            android:id="@+id/action_emiCalculation_to_emiCalculator"
+            app:destination="@id/emiCalculatorFragment"
             app:popUpTo="@id/calculatorFragment"
             app:popUpToInclusive="false" />
         <action
-            android:id="@+id/action_resultFragment_to_calculatorFragment"
+            android:id="@+id/action_emiCalculation_to_calculatorFragment"
             app:destination="@id/calculatorFragment" />
     </fragment>
     <fragment
-        android:id="@+id/emiTwoFragment"
-        android:name="com.example.calculator0.ui.emi.ThreeFragment"
+        android:id="@+id/emiCalculatorFragment"
+        android:name="com.example.calculator0.ui.emi.EmiCalculatorFragment"
         android:label="EMI calculator"
-        tools:layout="@layout/fragment_emi_two">
+        tools:layout="@layout/fragment_emi_calculator">
         <action
-            android:id="@+id/action_emiTwoFragment_to_compareFragment"
+            android:id="@+id/action_emiCalculator_to_compareFragment"
             app:destination="@id/compareFragment" />
+        <action
+            android:id="@+id/action_emiCalculator_to_emiCalculation"
+            app:destination="@id/emiCalculationFragment" />
     </fragment>
     <fragment
         android:id="@+id/compareFragment"
@@ -53,11 +46,11 @@
         android:label="Compare"
         tools:layout="@layout/fragment_compare">
         <action
-            android:id="@+id/action_compareFragment_to_emiOneFragment"
-            app:destination="@id/emiOneFragment" />
-        <action
             android:id="@+id/action_compareFragment_to_calculatorFragment"
             app:destination="@id/calculatorFragment" />
+        <action
+            android:id="@+id/action_compareFragment_to_emiCalculator"
+            app:destination="@id/emiCalculatorFragment" />
 
     </fragment>
 </navigation>

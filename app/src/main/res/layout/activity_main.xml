@@ -14,7 +14,7 @@
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
-        android:background="?attr/bgColor4"
+        android:background="?attr/fourthBgColor"
         android:theme="@style/ThemeOverlay.MaterialComponents.Dark.ActionBar"
        />
 

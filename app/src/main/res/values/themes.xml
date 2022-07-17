@@ -21,25 +21,25 @@
         <item name="toolbarStyle">@style/custom_toolbar</item>
         <item name="drawerArrowStyle">@style/MyDrawerArrowToggleStyle</item>
         <item name="textColor">@color/light_black</item>
-        <item name="textColor2">@color/gray</item>
+        <item name="secondTextColor">@color/gray</item>
         <item name="bgColor">@color/white</item>
-        <item name="bgColor2">@color/white2</item>
-        <item name="bgColor3">@color/white_dark</item>
-        <item name="bgColor4">@color/gray2</item>
-        <item name="bgColor5">@color/white</item>
-        <item name="textColor3">@color/black</item>
-        <item name="textColor6">@color/gray_dark</item>
+        <item name="secondBgColor">@color/white2</item>
+        <item name="thirdBgColor">@color/white_dark</item>
+        <item name="fourthBgColor">@color/gray2</item>
+        <item name="fifthBgColor">@color/white</item>
+        <item name="thirdTextColor">@color/black</item>
+        <item name="sixthTextColor">@color/gray_dark</item>
 
     </style>
 
 
 
     <style name="custom_toolbar" parent="@style/Widget.AppCompat.Toolbar">
-        <item name="titleTextColor">?attr/textColor3</item>
+        <item name="titleTextColor">?attr/thirdTextColor</item>
     </style>
 
     <style name="MyDrawerArrowToggleStyle" parent="Widget.AppCompat.DrawerArrowToggle">
-        <item name="color">?attr/textColor3</item>
+        <item name="color">?attr/thirdTextColor</item>
     </style>
 
 

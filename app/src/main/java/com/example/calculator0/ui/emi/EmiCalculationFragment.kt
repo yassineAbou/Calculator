@@ -1,9 +1,13 @@
 package com.example.calculator0.ui.emi
 
+
 import android.content.Intent
 import android.content.pm.ActivityInfo
 import android.os.Bundle
-import android.view.*
+import android.view.Menu
+import android.view.MenuInflater
+import android.view.MenuItem
+import android.view.View
 import androidx.core.view.MenuHost
 import androidx.core.view.MenuProvider
 import androidx.fragment.app.Fragment
@@ -11,16 +15,14 @@ import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Lifecycle
 import androidx.navigation.fragment.NavHostFragment
 import com.example.calculator0.R
-import com.example.calculator0.databinding.FragmentCompareBinding
-import com.example.calculator0.utils.safeLet
+import com.example.calculator0.databinding.FragmentEmiCalculationBinding
 import com.example.calculator0.utils.viewBinding
-import dagger.hilt.android.AndroidEntryPoint
 
-@AndroidEntryPoint
-class CompareFragment : Fragment(R.layout.fragment_compare) {
+
+class EmiCalculationFragment : Fragment(R.layout.fragment_emi_calculation) {
 
     private val emiViewModel : EMIViewModel by activityViewModels()
-    private val binding by viewBinding(FragmentCompareBinding::bind)
+    private val binding by viewBinding(FragmentEmiCalculationBinding::bind)
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -33,8 +35,8 @@ class CompareFragment : Fragment(R.layout.fragment_compare) {
             override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
                 menuInflater.inflate(R.menu.share_menu, menu)
             }
-            override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
 
+            override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
                 return when (menuItem.itemId) {
                     R.id.share -> {
                         shareSuccess()
@@ -48,21 +50,20 @@ class CompareFragment : Fragment(R.layout.fragment_compare) {
         binding.apply {
 
             emiViewModel?.let { emiViewModel ->
+                compare.setOnClickListener {
+                    emiViewModel.changeEmiCalculatorState(
+                        EmiCalculatorState(isFirstEmiCalculator = false, isSecondEmiCalculator = true)
+                    )
+                    val action = EmiCalculationFragmentDirections.actionEmiCalculationToEmiCalculator()
+                    NavHostFragment.findNavController(this@EmiCalculationFragment).navigate(action)
+                }
+
                 done.setOnClickListener {
                     emiViewModel.changeEmiCalculatorState(
                         EmiCalculatorState(isFirstEmiCalculator = false, isSecondEmiCalculator = false)
                     )
-                    val action = CompareFragmentDirections.actionCompareFragmentToCalculatorFragment()
-                    NavHostFragment.findNavController(this@CompareFragment).navigate(action)
-
-                }
-
-                reset.setOnClickListener {
-                    emiViewModel.changeEmiCalculatorState(
-                        EmiCalculatorState(isFirstEmiCalculator = true, isSecondEmiCalculator = false)
-                    )
-                    val action = CompareFragmentDirections.actionCompareFragmentToEmiCalculator()
-                    NavHostFragment.findNavController(this@CompareFragment).navigate(action)
+                    val action = EmiCalculationFragmentDirections.actionEmiCalculationToCalculatorFragment()
+                    NavHostFragment.findNavController(this@EmiCalculationFragment).navigate(action)
                 }
             }
 
@@ -80,26 +81,20 @@ class CompareFragment : Fragment(R.layout.fragment_compare) {
 
     private fun getShareIntent() : Intent {
         val shareIntent = Intent(Intent.ACTION_SEND)
-        safeLet(
-            emiViewModel.firstEmiCalculation.value,
-            emiViewModel.secondEmiCalculation.value
-        ) { firstEmiCalculation, secondEmiCalculation ->
-
-                shareIntent.setType("text/plain")
-                    .putExtra(Intent.EXTRA_TEXT,
-                        getString(R.string.shareCompare, firstEmiCalculation.principal, firstEmiCalculation.emiAmount,
-                            firstEmiCalculation.interestRate, firstEmiCalculation.numberInstallments, secondEmiCalculation.principal,
-                            secondEmiCalculation.emiAmount, secondEmiCalculation.interestRate,
-                            secondEmiCalculation.numberInstallments)
-                    )
-        }
-
+        shareIntent.setType("text/plain")
+            .putExtra(Intent.EXTRA_TEXT,
+                emiViewModel.firstEmiCalculation.value?.let {
+                    getString(R.string.shareEmiCalculation, it.principal, it.emiAmount,
+                        it.interestRate, it.numberInstallments)
+                 }
+            )
         return shareIntent
-
     }
+
 
     private fun shareSuccess() {
         startActivity(getShareIntent())
     }
 
 }
+

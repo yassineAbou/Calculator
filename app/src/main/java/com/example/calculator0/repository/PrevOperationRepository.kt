@@ -7,7 +7,7 @@ import javax.inject.Inject
 class PrevOperationRepository @Inject constructor(private val
     prevOperationDoe: PrevOperationDoe) {
 
-    val allPrevOperations = prevOperationDoe.getAllPrevOperations()
+    val listPrevOperations = prevOperationDoe.getListPrevOperations()
 
 
      suspend fun insert(prevOperation: PrevOperation) {

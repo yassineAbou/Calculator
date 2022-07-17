@@ -1,132 +1,130 @@
 <resources>
     <string name="app_name">Calculator</string>
 
-    <!-- Numbers -->
-    <string name="_7">7</string>
-    <string name="_8">8</string>
-    <string name="_9">9</string>
-    <string name="_4">4</string>
-    <string name="_5">5</string>
-    <string name="_6">6</string>
-    <string name="_.">.</string>
-    <string name="_1">1</string>
-    <string name="_2">2</string>
-    <string name="_3">3</string>
-    <string name="minus_sign">+/-</string>
-    <string name="_0">0</string>
+
+    <string name="numberSeven">7</string>
+    <string name="numberEight">8</string>
+    <string name="numberNine">9</string>
+    <string name="numberFour">4</string>
+    <string name="numberFive">5</string>
+    <string name="numberSix">6</string>
+    <string name="decimalPoint">.</string>
+    <string name="numberOne">1</string>
+    <string name="numberTwo">2</string>
+    <string name="numberThree">3</string>
+    <string name="minusSign">+/-</string>
+    <string name="numberZero">0</string>
     <string name="number">%d</string>
 
-    <!-- ImageButton -->
-    <string name="imageDes1">history</string>
-    <string name="imgDes2">scientific</string>
-    <string name="imgDes3">EMI</string>
-    <string name="imgDes4">backspace</string>
-    <string name="text8">Clear history</string>
 
-    <!-- Operations -->
-    <string name="_clear">C</string>
-    <string name="_betweenBrackets">( )</string>
-    <string name="_percent">%</string>
-    <string name="_divided">÷</string>
-    <string name="_multiplicand">×</string>
-    <string name="_minus">-</string>
-    <string name="_plus">+</string>
-    <string name="_equal">=</string>
-    <string name="_input">15 + 15</string>
-    <string name="_result">30</string>
+    <string name="history">history</string>
+    <string name="scientificMode">scientificMode</string>
+    <string name="emiCalculator">emiCalculator</string>
+    <string name="backspace">backspace</string>
+    <string name="clearHistory">Clear history</string>
 
-    <!-- messages -->
-    <string name="_invalid">Invalid format used.</string>
 
-    <!-- Scientific -->
-    <string name="_switch">⇆</string>
-    <string name="_squareRoot">√</string>
-    <string name="_sin">sin</string>
-    <string name="_cos">cos</string>
-    <string name="_tan">tan</string>
-    <string name="_in">In</string>
-    <string name="_log">log</string>
-    <string name="_1_divisionSlash">1/x</string>
-    <string name="_eˣ">eˣ</string>
-    <string name="_squared">x²</string>
-    <string name="power">xʸ</string>
-    <string name="_verticalBars">|x|</string>
-    <string name="_piConstant">𝝅</string>
-    <string name="_EConstant">e</string>
-    <string name="_rad">Rad</string>
-    <string name="_cubeRoot">∛</string>
-    <string name="_sinMinus">sin⁻¹</string>
-    <string name="cosMinus">cos⁻¹</string>
-    <string name="tanMinus">tan⁻¹</string>
-    <string name="_sinh">sinh</string>
-    <string name="_cosh">cosh</string>
-    <string name="_tanh">tanh</string>
-    <string name="sinh_minus">sinh⁻¹</string>
-    <string name="cosh_minus">cosh⁻¹</string>
-    <string name="tanh_minus">tanh⁻¹</string>
-    <string name="_2Power">2ˣ</string>
-    <string name="_power_3">x³</string>
-    <string name="_exclamation_mark">x!</string>
-    <string name="_deg">Deg</string>
+    <string name="clear">C</string>
+    <string name="brackets">( )</string>
+    <string name="percentage">%</string>
+    <string name="division">÷</string>
+    <string name="multiplication">×</string>
+    <string name="minus">-</string>
+    <string name="plus">+</string>
+    <string name="equal">=</string>
+    <string name="input">15 + 15</string>
+    <string name="result">30</string>
 
-    <!-- Scientific values -->
-    <string name="value_2power">^(2)</string>
-    <string name="value_power">^(</string>
-    <string name="value_3power">^(3)</string>
-    <string name="value_factorial">!</string>
-    <string name="value_squareRoot">sqrt(</string>
-    <string name="value_cos">cos(</string>
-    <string name="value_sin">sin(</string>
-    <string name="value_tan">tan(</string>
-    <string name="value_ln">ln(</string>
-    <string name="value_log">log10(</string>
-    <string name="value_one_division_slash">1÷</string>
-    <string name="value_eˣ">exp(</string>
-    <string name="value_verticalBars">abs(</string>
-    <string name="value_EConstant">e</string>
-    <string name="value_piConstant">pi</string>
-    <string name="value_sinMinus">asin(</string>
-    <string name="value_cosMinus">acos(</string>
-    <string name="value_tanMinus">atan(</string>
-    <string name="value_sinh">sinh(</string>
-    <string name="value_cosh">cosh(</string>
-    <string name="value_tanh">tanh(</string>
-    <string name="value_sinhMinus">asinh(</string>
-    <string name="value_coshMinus">acosh(</string>
-    <string name="value_tanhMinus">atanh(</string>
-    <string name="value_twoPower">2^(</string>
-    <string name="value_cureRoot">root(3,</string>
-    <string name="value_rad">rad(</string>
-    <string name="value_deg">deg(</string>
 
-    <!-- EMI-->
+    <string name="invalidFormat">Invalid format used.</string>
+
+
+    <string name="alternativeOperation">⇆</string>
+    <string name="root">√</string>
+    <string name="sine">sin</string>
+    <string name="cosine">cos</string>
+    <string name="tangent">tan</string>
+    <string name="naturalLog">In</string>
+    <string name="logarithm">log</string>
+    <string name="inverseNumber">1/x</string>
+    <string name="ePowerX">eˣ</string>
+    <string name="xSquared">x²</string>
+    <string name="xPowerY">xʸ</string>
+    <string name="absoluteValue">|x|</string>
+    <string name="pi">𝝅</string>
+    <string name="eulerNumber">e</string>
+    <string name="radian">Rad</string>
+    <string name="cubeRoot">∛</string>
+    <string name="inverseSine">sin⁻¹</string>
+    <string name="inverseCosine">cos⁻¹</string>
+    <string name="inverseTangent">tan⁻¹</string>
+    <string name="hyperbolicSine">sinh</string>
+    <string name="hyperbolicCosine">cosh</string>
+    <string name="hyperbolicTangent">tanh</string>
+    <string name="inverseHyperbolicSine">sinh⁻¹</string>
+    <string name="inverseHyperbolicCosine">cosh⁻¹</string>
+    <string name="inverseHyperbolicTangent">tanh⁻¹</string>
+    <string name="twoPowerX">2ˣ</string>
+    <string name="cube">x³</string>
+    <string name="factorial">x!</string>
+    <string name="degree">Deg</string>
+
+
+    <string name="symbolXSquared">^(2)</string>
+    <string name="symbolXPowerY">^(</string>
+    <string name="symbolCube">^(3)</string>
+    <string name="symbolFactorial">!</string>
+    <string name="symbolRoot">sqrt(</string>
+    <string name="symbolCosine">cos(</string>
+    <string name="symbolSine">sin(</string>
+    <string name="symbolTangent">tan(</string>
+    <string name="symbolNaturalLog">ln(</string>
+    <string name="symbolLogarithm">log10(</string>
+    <string name="symbolInverseNumber">1÷</string>
+    <string name="symbolEPowerX">exp(</string>
+    <string name="symbolAbsoluteValue">abs(</string>
+    <string name="symbolEulerNumber">e</string>
+    <string name="symbolPi">pi</string>
+    <string name="symbolInverseSine">asin(</string>
+    <string name="symbolInverseCosine">acos(</string>
+    <string name="symbolInverseTangent">atan(</string>
+    <string name="symbolHyperbolicSine">sinh(</string>
+    <string name="symbolHyperbolicCosine">cosh(</string>
+    <string name="symbolHyperbolicTangent">tanh(</string>
+    <string name="symbolInverseHyperbolicSine">asinh(</string>
+    <string name="symbolInverseHyperbolicCosine">acosh(</string>
+    <string name="symbolInverseHyperbolicTangent">atanh(</string>
+    <string name="symbolTwoPowerX">2^(</string>
+    <string name="symbolCubeRoot">root(3,</string>
+    <string name="symbolRadian">rad(</string>
+    <string name="SymbolDegree">deg(</string>
+
+
     <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="text1">Loan amount</string>
-    <string name="text2">Interest rate</string>
-    <string name="text3">Number of installments</string>
-    <string name="text4">Calculate</string>
-    <string name="emi_amount">EMI amount</string>
-    <string name="per_month">per month</string>
-    <string name="_installments">%s installments</string>
-    <string name="total">Total amount to pay is %s</string>
-    <string name="_principal">Principal</string>
-    <string name="_interest">Interest</string>
-    <string name="_compare">Compare with another</string>
-    <string name="text5">Done</string>
-    <string name="_guide">Enter the details of the second EMI option.</string>
-    <string name="text6">Compare</string>
-    <string name="_first">First option</string>
-    <string name="_second">Second option</string>
-    <string name="option_one">First option</string>
-    <string name="option_two">Second option</string>
-    <string name="text7">Reset</string>
-    <string name="hint_amount">Enter cost of purchase</string>
-    <string name="hint_interest">Enter annual rate</string>
-    <string name="hint_installments">Enter number of installments</string>
-    <string name="_share">SHARE</string>
-    <string name="share_result">Loan amount: %1$s\nEMI amount: %2$s\nInterest rate: %3$s\nNumber of installments: %4$s
+    <string name="loanAmount">Loan amount</string>
+    <string name="InterestRate">Interest rate</string>
+    <string name="numberInstallments">Number of installments</string>
+    <string name="calculate">Calculate</string>
+    <string name="emiAmount">EMI amount</string>
+    <string name="perMonth">per month</string>
+    <string name="installments">%s installments</string>
+    <string name="totalAmount">Total amount to pay is %s</string>
+    <string name="principal">Principal</string>
+    <string name="interest">Interest</string>
+    <string name="labelCompare">Compare with another</string>
+    <string name="done">Done</string>
+    <string name="labelSecondEmiCalculator">Enter the details of the second EMI option.</string>
+    <string name="compare">Compare</string>
+    <string name="firstOption">First option</string>
+    <string name="secondOption">Second option</string>
+    <string name="reset">Reset</string>
+    <string name="hintLoanAmount">Enter cost of purchase</string>
+    <string name="hintInterestRate">Enter annual rate</string>
+    <string name="hintNumberInstallments">Enter number of installments</string>
+    <string name="share">SHARE</string>
+    <string name="shareEmiCalculation">Loan amount: %1$s\nEMI amount: %2$s\nInterest rate: %3$s\nNumber of installments: %4$s
     </string>
-    <string name="share_compare">First option \nLoan amount: %1$s\nEMI amount: %2$s\nInterest rate: %3$s\nNumber of installments: %4$s\nSecond option \nLoan amount: %5$s\nEMI amount: %6$s\nInterest rate: %7$s\nNumber of installments: %8$s
+    <string name="shareCompare">First option \nLoan amount: %1$s\nEMI amount: %2$s\nInterest rate: %3$s\nNumber of installments: %4$s\nSecond option \nLoan amount: %5$s\nEMI amount: %6$s\nInterest rate: %7$s\nNumber of installments: %8$s
     </string>
 
 

@@ -5,16 +5,17 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import androidx.viewbinding.ViewBinding
 import com.example.calculator0.database.PrevOperation
-import com.example.calculator0.databinding.ListItemPrevOperationBinding
+import com.example.calculator0.databinding.ListPrevOperationsBinding
 
 
-class PrevOperationAdapter(private val clickListener: PrevOperationListener)
+class PrevOperationAdapter(private val prevOperationActions: PrevOperationActions)
   : ListAdapter<PrevOperation, PrevOperationAdapter.ViewHolder>(PrevOperationDiffCallback()){
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val item = getItem(position)!!
-        holder.bind(item, clickListener)
+        val prevOperation = getItem(position)!!
+        holder.bind(prevOperation, prevOperationActions)
 
     }
 
@@ -22,21 +23,22 @@ class PrevOperationAdapter(private val clickListener: PrevOperationListener)
         return ViewHolder.from(parent)
     }
 
-    class ViewHolder private constructor(val binding: ListItemPrevOperationBinding) : RecyclerView.ViewHolder(binding.root) {
+    class ViewHolder private constructor(val listPrevOperationsBinding: ListPrevOperationsBinding)
+        : RecyclerView.ViewHolder(listPrevOperationsBinding.root) {
 
         fun bind(
-            item: PrevOperation,
-            clickListener: PrevOperationListener,
+            prevOperation: PrevOperation,
+            prevOperationActions: PrevOperationActions,
         ) {
-            binding.prevOperation = item
-            binding.clickListener = clickListener
-            binding.executePendingBindings()
+            listPrevOperationsBinding.prevOperation = prevOperation
+            listPrevOperationsBinding.prevOperationActions = prevOperationActions
+            listPrevOperationsBinding.executePendingBindings()
         }
 
         companion object {
             fun from(parent: ViewGroup): ViewHolder {
                 val layoutInflater = LayoutInflater.from(parent.context)
-                val binding = ListItemPrevOperationBinding.inflate(layoutInflater, parent, false)
+                val binding = ListPrevOperationsBinding.inflate(layoutInflater, parent, false)
                 return ViewHolder(binding)
             }
         }
@@ -54,14 +56,13 @@ class PrevOperationDiffCallback : DiffUtil.ItemCallback<PrevOperation>() {
     }
 }
 
-class PrevOperationListener(val clickListener: (number: String) -> Unit) {
+class PrevOperationActions(val prevOperationActions: (number: String) -> Unit) {
 
-    fun onClickInput(prevOperation: PrevOperation) =
-      clickListener(prevOperation.previousInput)
+    fun addPrevInput(prevOperation: PrevOperation) = prevOperationActions(prevOperation.input)
 
-    fun onClickOutput(prevOperation: PrevOperation) =
-        clickListener(prevOperation.previousOutput)
+    fun addPrevResult(prevOperation: PrevOperation) = prevOperationActions(prevOperation.result)
 }
+
 
 
 

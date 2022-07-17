@@ -10,8 +10,8 @@ apply plugin: 'androidx.navigation.safeargs'
 
 android {
 
-    buildFeatures {
-        dataBinding true
+    dataBinding {
+        enabled true
     }
 
     compileSdkVersion 31
@@ -87,4 +87,9 @@ dependencies {
     kapt "com.google.dagger:hilt-compiler:2.38.1"
 
 
+
+
+
+
 }
+

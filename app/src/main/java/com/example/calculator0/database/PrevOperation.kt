@@ -7,11 +7,11 @@ import androidx.room.PrimaryKey
 @Entity(tableName = "previous_operation_table")
 data class PrevOperation(
 
-      @ColumnInfo(name = "previous_input")
-      val previousInput: String,
+      @ColumnInfo(name = "input")
+      val input: String,
 
-      @ColumnInfo(name = "previous_output")
-      val previousOutput: String,
+      @ColumnInfo(name = "result")
+      val result: String,
 
       @PrimaryKey(autoGenerate = true) var id: Int = 0)
 

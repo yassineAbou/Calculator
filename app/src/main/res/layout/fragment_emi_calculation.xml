@@ -5,40 +5,40 @@
 
     <data>
         <variable
-            name="viewModel"
+            name="emiViewModel"
             type="com.example.calculator0.ui.emi.EMIViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".ui.emi.ResultFragment"
-        android:background="?attr/bgColor4">
+        tools:context=".ui.emi.EmiCalculationFragment"
+        android:background="?attr/fourthBgColor">
 
         <View
-            android:id="@+id/background2"
+            android:id="@+id/background"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:background="@drawable/radius_border"
-            app:layout_constraintBottom_toBottomOf="@id/view6"
-            app:layout_constraintEnd_toEndOf="@id/textView"
+            app:layout_constraintBottom_toBottomOf="@id/lineSeparatorBackground"
+            app:layout_constraintEnd_toEndOf="@id/labelEmiAmount"
             app:layout_constraintHorizontal_bias="0.079"
-            app:layout_constraintStart_toStartOf="@id/textView"
-            app:layout_constraintTop_toTopOf="@id/textView"
+            app:layout_constraintStart_toStartOf="@id/labelEmiAmount"
+            app:layout_constraintTop_toTopOf="@id/labelEmiAmount"
             app:layout_constraintVertical_bias="1.0"
-            android:backgroundTint="?attr/bgColor5"
+            android:backgroundTint="?attr/fifthBgColor"
             />
 
         <TextView
-            android:id="@+id/textView"
+            android:id="@+id/labelEmiAmount"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/emi_amount"
+            android:text="@string/emiAmount"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             android:textSize="@dimen/_15ssp"
-            android:textColor="?attr/textColor2"
+            android:textColor="?attr/secondTextColor"
             android:paddingTop="26dp"
             />
 
@@ -48,49 +48,49 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="15dp"
             tools:text="2,394.32"
-            android:textColor="?attr/textColor3"
+            android:textColor="?attr/thirdTextColor"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView"
+            app:layout_constraintTop_toBottomOf="@+id/labelEmiAmount"
             android:textSize="@dimen/_35ssp"
-            android:text="@{viewModel.emiFirstResult.emiMonth}"/>
+            android:text="@{emiViewModel.firstEmiCalculation.emiAmount}"/>
 
         <TextView
-            android:id="@+id/textView5"
+            android:id="@+id/perMonth"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/per_month"
-            android:textColor="?attr/textColor2"
+            android:text="@string/perMonth"
+            android:textColor="?attr/secondTextColor"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/emiAmount"
             android:textSize="@dimen/_15ssp"/>
 
         <TextView
-            android:id="@+id/installments"
+            android:id="@+id/numberInstallments"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            tools:text="@string/_installments"
+            tools:text="@string/installments"
             android:layout_marginTop="6dp"
-            android:textColor="?attr/textColor2"
+            android:textColor="?attr/secondTextColor"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView5"
+            app:layout_constraintTop_toBottomOf="@+id/perMonth"
             android:textSize="@dimen/_15ssp"
-            android:text= "@{String.format(@string/_installments, viewModel.emiFirstResult.installment)}"/>
+            android:text= "@{String.format(@string/installments, emiViewModel.firstEmiCalculation.numberInstallments)}"/>
 
         <TextView
             android:id="@+id/totalAmount"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="26dp"
-            tools:text="@string/total"
+            tools:text="@string/totalAmount"
             android:textSize="@dimen/_15ssp"
-            android:textColor="?attr/textColor3"
+            android:textColor="?attr/thirdTextColor"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/installments"
-            android:text= "@{String.format(@string/total, viewModel.emiFirstResult.total)}"/>
+            app:layout_constraintTop_toBottomOf="@+id/numberInstallments"
+            android:text= "@{String.format(@string/totalAmount, emiViewModel.firstEmiCalculation.totalAmount)}"/>
 
         <TextView
             android:id="@+id/principal"
@@ -99,21 +99,21 @@
             android:layout_marginStart="@dimen/_19sdp"
             android:layout_marginTop="26dp"
             tools:text="5000000"
-            android:textColor="?attr/textColor3"
+            android:textColor="?attr/thirdTextColor"
             android:textSize="@dimen/_15ssp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/totalAmount"
-            android:text="@{viewModel.emiFirstResult.principal}"/>
+            android:text="@{emiViewModel.firstEmiCalculation.principal}"/>
 
         <TextView
-            android:id="@+id/textView9"
+            android:id="@+id/labelPrincipal"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="3dp"
             android:layout_marginStart="@dimen/_19sdp"
             android:textSize="@dimen/_15ssp"
-            android:text="@string/_principal"
-            android:textColor="?attr/textColor2"
+            android:text="@string/principal"
+            android:textColor="?attr/secondTextColor"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/principal" />
 
@@ -122,57 +122,57 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             tools:text="55555555"
-            android:textColor="?attr/textColor3"
+            android:textColor="?attr/thirdTextColor"
             android:textSize="@dimen/_15ssp"
             android:layout_marginTop="26dp"
             android:layout_marginEnd="@dimen/_19sdp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/totalAmount"
-            android:text="@{viewModel.emiFirstResult.interest}"/>
+            android:text="@{emiViewModel.firstEmiCalculation.interest}"/>
 
         <TextView
-            android:id="@+id/textView11"
+            android:id="@+id/labelInterest"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="3dp"
             android:layout_marginEnd="@dimen/_19sdp"
-            android:text="@string/_interest"
+            android:text="@string/interest"
             android:textSize="@dimen/_15ssp"
-            android:textColor="?attr/textColor2"
+            android:textColor="?attr/secondTextColor"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/interest" />
 
         <View
-            android:id="@+id/view5"
+            android:id="@+id/lineSeparatorCompare"
             android:layout_width="@dimen/_270sdp"
             android:layout_height="@dimen/_1sdp"
             android:layout_marginTop="19dp"
-            android:background="?attr/bgColor2"
+            android:background="?attr/secondBgColor"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView9" />
+            app:layout_constraintTop_toBottomOf="@+id/labelPrincipal" />
 
         <TextView
-            android:id="@+id/textView12"
+            android:id="@+id/labelInterestRate"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="19dp"
             app:layout_constraintEnd_toEndOf="parent"
-            android:text="@string/_compare"
+            android:text="@string/labelCompare"
             android:textSize="@dimen/_15ssp"
-            android:textColor="?attr/textColor2"
+            android:textColor="?attr/secondTextColor"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/view5" />
+            app:layout_constraintTop_toBottomOf="@+id/lineSeparatorCompare" />
 
         <View
-            android:id="@+id/view6"
+            android:id="@+id/lineSeparatorBackground"
             android:layout_width="12dp"
             android:layout_height="3dp"
             android:layout_marginTop="19dp"
-            android:backgroundTint="?attr/bgColor5"
+            android:backgroundTint="?attr/fifthBgColor"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView12" />
+            app:layout_constraintTop_toBottomOf="@+id/labelInterestRate" />
 
         <Button
             android:id="@+id/done"
@@ -184,7 +184,7 @@
             android:paddingTop="4dp"
             android:paddingEnd="@dimen/_45sdp"
             android:paddingBottom="4dp"
-            android:text="@string/text5"
+            android:text="@string/done"
             android:textAllCaps="false"
             android:textStyle="bold"
             android:textSize="@dimen/_14ssp"
@@ -196,16 +196,16 @@
             />
 
         <ImageButton
-            android:id="@+id/add"
+            android:id="@+id/compare"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="11dp"
             android:layout_marginStart="@dimen/_19sdp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/view5"
+            app:layout_constraintTop_toBottomOf="@+id/lineSeparatorCompare"
             app:srcCompat="@drawable/ic_baseline_add_24"
-            android:backgroundTint="?attr/bgColor5"
-            android:contentDescription="add" />
+            android:backgroundTint="?attr/fifthBgColor"
+            android:contentDescription="compare" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

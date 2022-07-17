@@ -1,17 +1,15 @@
 package com.example.calculator0.ui.calculator
 
-import android.annotation.SuppressLint
 import android.content.pm.ActivityInfo
 import android.graphics.PorterDuff
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
 import android.view.View.*
-import android.view.ViewGroup
 import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.coroutineScope
@@ -22,57 +20,58 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.calculator0.R
 import com.example.calculator0.databinding.FragmentCalculatorBinding
+import com.example.calculator0.ui.emi.EMIViewModel
+import com.example.calculator0.ui.emi.EmiCalculatorState
+import com.example.calculator0.utils.viewBinding
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
-class CalculatorFragment : Fragment() {
+class CalculatorFragment : Fragment(R.layout.fragment_calculator) {
 
     private val calculatorViewModel: CalculatorViewModel by viewModels()
-    private lateinit var binding: FragmentCalculatorBinding
+    private val emiViewModel : EMIViewModel by activityViewModels()
+    private val fragmentCalculatorBinding by viewBinding(FragmentCalculatorBinding::bind)
 
-    @SuppressLint("SourceLockedOrientationActivity")
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?,
-    ): View? {
-        // Inflate the layout for this fragment
-        binding = FragmentCalculatorBinding.inflate(inflater, container, false)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        fragmentCalculatorBinding.calculatorViewModel = calculatorViewModel
+        fragmentCalculatorBinding.lifecycleOwner = viewLifecycleOwner
 
-        binding.viewModel = calculatorViewModel
-        binding.lifecycleOwner = viewLifecycleOwner
 
-        val adapter = PrevOperationAdapter(PrevOperationListener { number ->
-            calculatorViewModel.currentInput.value?.let { calculatorViewModel.addToCurrentInput(number, it) }
+        val adapter = PrevOperationAdapter(PrevOperationActions { number ->
+            calculatorViewModel.currentInput.value?.let { calculatorViewModel.addToCurrentInput(number) }
         })
 
-        binding.recyclerview.adapter = adapter
+        fragmentCalculatorBinding.listPrevOperations.adapter = adapter
         val manager = LinearLayoutManager(context, RecyclerView.VERTICAL, true)
-        binding.recyclerview.layoutManager = manager
+        fragmentCalculatorBinding.listPrevOperations.layoutManager = manager
 
+        fragmentCalculatorBinding.apply {
 
-
-        binding.apply {
-
-            simple?.setOnClickListener {
+            normalMode?.setOnClickListener {
                 activity?.requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
             }
 
-            scientific?.setOnClickListener {
+            scientificMode?.setOnClickListener {
                 activity?.requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE
             }
 
-            switchArrow?.setOnClickListener {
-                onChangeScientificButtonsVisibility()
+            alternativeFunctions?.setOnClickListener {
+                changeGroupFunctionsVisibility()
             }
 
             history.setOnClickListener {
-                if (!calculatorViewModel.calculatorState.value.showScientificButtons1 && !calculatorViewModel.calculatorState.value.showScientificButtons2) {
-                    calculatorViewModel.onChangeCalculatorState(CalculatorState(showScientificButtons1 = true))
+                calculatorViewModel?.let {
+                    val isFirstGroupFunctions = !it.calculatorState.value.isFirstGroupFunctions
+                    val isSecondGroupFunctions = !it.calculatorState.value.isSecondGroupFunctions
+                    if (isFirstGroupFunctions && isSecondGroupFunctions) {
+                        it.onChangeCalculatorState(CalculatorState(isFirstGroupFunctions = true))
+                    }
+                    changeHistoryVisibility()
+                    fragmentCalculatorBinding.listPrevOperations.scrollToPosition(0)
                 }
-                showAndHideHistory()
-                binding.recyclerview.scrollToPosition(0)
             }
 
         }
@@ -81,14 +80,23 @@ class CalculatorFragment : Fragment() {
             calculatorViewModel.currentInput.collectLatest {
                 it?.let {
                     if (it.isNotEmpty()) {
-                        binding.backspace.setColorFilter(
+                        fragmentCalculatorBinding.backspace.setColorFilter(
                             ContextCompat.getColor(requireContext(), R.color.purple),
                             PorterDuff.Mode.SRC_ATOP)
                     } else {
-                        binding.backspace.setColorFilter(
+                        fragmentCalculatorBinding.backspace.setColorFilter(
                             ContextCompat.getColor(requireContext(), R.color.purple_light),
                             PorterDuff.Mode.SRC_ATOP)
                     }
+                    calculatorViewModel.onChangeCurrentInput(it)
+                }
+            }
+        }
+
+        viewLifecycleOwner.lifecycleScope.launchWhenStarted {
+            calculatorViewModel.result.collectLatest {
+                it?.let {
+                    calculatorViewModel.onChangeResult(it)
                 }
             }
         }
@@ -97,9 +105,9 @@ class CalculatorFragment : Fragment() {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
                 calculatorViewModel.calculatorState.collect { calculatorState ->
                     when {
-                        calculatorState.invalidFormat -> invalidFormat()
-                        calculatorState.showScientificButtons2 -> showScientificButtons2()
-                        calculatorState.showScientificButtons1 -> showScientificButtons1()
+                        calculatorState.isInvalidFormat -> showInvalidFormat()
+                        calculatorState.isSecondGroupFunctions -> showSecondGroupFunctions()
+                        calculatorState.isFirstGroupFunctions -> showFirstGroupFunctions()
                     }
                 }
             }
@@ -107,10 +115,10 @@ class CalculatorFragment : Fragment() {
 
 
         viewLifecycleOwner.lifecycle.coroutineScope.launch {
-            calculatorViewModel.allPrevOperations.collectLatest { allPrevOperations ->
-                adapter.submitList(allPrevOperations)
+            calculatorViewModel.listPrevOperations.collectLatest { listPrevOperations ->
+                adapter.submitList(listPrevOperations)
 
-                when (allPrevOperations.size) {
+                when (listPrevOperations.size) {
                     0 -> {
                         disableHistoryButton()
                         hideHistoryGroup()
@@ -123,63 +131,61 @@ class CalculatorFragment : Fragment() {
 
 
 
-        binding.emi.setOnClickListener {
-            calculatorFinished()
-        }
-
-        return binding.root
-    }
-
-    private fun onChangeScientificButtonsVisibility() {
-        if (binding.scientificButtonsGroup1?.isVisible == true) {
-            onChangeScientificButtons2State()
-        } else if (binding.scientificButtonsGroup2?.isVisible == true) {
-            onChangeScientificButtons1State()
+        fragmentCalculatorBinding.emiCalculator.setOnClickListener {
+            navigateToEmiCalculator()
         }
     }
 
-    private fun onChangeScientificButtons1State() {
-        calculatorViewModel.onChangeCalculatorState(CalculatorState(showScientificButtons2 = false))
-        calculatorViewModel.onChangeCalculatorState(CalculatorState(showScientificButtons1 = true))
+    private fun changeGroupFunctionsVisibility() {
+        if (fragmentCalculatorBinding.firstGroupFunctions?.isVisible == true) {
+            changeSecondFunctionsState()
+        } else if (fragmentCalculatorBinding.secondGroupFunctions?.isVisible == true) {
+            changeFirstFunctionsState()
+        }
     }
 
-    private fun onChangeScientificButtons2State() {
-        calculatorViewModel.onChangeCalculatorState(CalculatorState(showScientificButtons1 = false))
-        calculatorViewModel.onChangeCalculatorState(CalculatorState(showScientificButtons2 = true))
+    private fun changeFirstFunctionsState() {
+        calculatorViewModel.onChangeCalculatorState(CalculatorState(isSecondGroupFunctions = false))
+        calculatorViewModel.onChangeCalculatorState(CalculatorState(isFirstGroupFunctions = true))
+    }
+
+    private fun changeSecondFunctionsState() {
+        calculatorViewModel.onChangeCalculatorState(CalculatorState(isFirstGroupFunctions = false))
+        calculatorViewModel.onChangeCalculatorState(CalculatorState(isSecondGroupFunctions = true))
     }
 
     private fun enableHistoryButton() {
-        binding.history.isEnabled = true
-        binding.history.setColorFilter(
+        fragmentCalculatorBinding.history.isEnabled = true
+        fragmentCalculatorBinding.history.setColorFilter(
             ContextCompat.getColor(requireContext(), R.color.light_black),
             PorterDuff.Mode.SRC_ATOP)
     }
 
     private fun disableHistoryButton() {
-        binding.history.isEnabled = false
-        binding.history.setColorFilter(
+        fragmentCalculatorBinding.history.isEnabled = false
+        fragmentCalculatorBinding.history.setColorFilter(
             ContextCompat.getColor(requireContext(), R.color.gray_light),
             PorterDuff.Mode.SRC_ATOP)
     }
 
 
-    private fun invalidFormat() {
+    private fun showInvalidFormat() {
         Toast.makeText(requireContext(), "Invalid format used.", Toast.LENGTH_SHORT).show()
-        calculatorViewModel.onChangeCalculatorState(CalculatorState(invalidFormat = false))
+        calculatorViewModel.onChangeCalculatorState(CalculatorState(isInvalidFormat = false))
     }
 
-    private fun showScientificButtons1() {
-        binding.scientificButtonsGroup2?.visibility = GONE
-        binding.scientificButtonsGroup1?.visibility = VISIBLE
+    private fun showFirstGroupFunctions() {
+        fragmentCalculatorBinding.secondGroupFunctions?.visibility = GONE
+        fragmentCalculatorBinding.firstGroupFunctions?.visibility = VISIBLE
     }
 
-    private fun showScientificButtons2() {
-        binding.scientificButtonsGroup1?.visibility  = INVISIBLE
-        binding.scientificButtonsGroup2?.visibility = VISIBLE
+    private fun showSecondGroupFunctions() {
+        fragmentCalculatorBinding.firstGroupFunctions?.visibility  = INVISIBLE
+        fragmentCalculatorBinding.secondGroupFunctions?.visibility = VISIBLE
     }
 
-    private fun showAndHideHistory() {
-        binding.apply {
+    private fun changeHistoryVisibility() {
+        fragmentCalculatorBinding.apply {
             if (historyGroup.isVisible) {
                 hideHistoryGroup()
             } else {
@@ -189,38 +195,42 @@ class CalculatorFragment : Fragment() {
     }
 
     private fun hideHistoryGroup() {
-        binding.apply {
+        fragmentCalculatorBinding.apply {
             history.setImageResource(R.drawable.history)
             historyGroup.visibility = GONE
-            simpleButtonsGroup.visibility =  VISIBLE
+            normalModeGroup.visibility =  VISIBLE
 
-            if (calculatorViewModel.calculatorState.value.showScientificButtons1) {
-                scientificButtonsGroup1?.visibility = VISIBLE
-            } else if (calculatorViewModel.calculatorState.value.showScientificButtons2) {
-                scientificButtonsGroup2?.visibility = VISIBLE
+            calculatorViewModel?.let {
+                if (it.calculatorState.value.isFirstGroupFunctions) {
+                    firstGroupFunctions?.visibility = VISIBLE
+                } else if (it.calculatorState.value.isSecondGroupFunctions) {
+                    secondGroupFunctions?.visibility = VISIBLE
+                }
             }
         }
     }
 
     private fun showHistoryGroup() {
-        binding.apply {
+        fragmentCalculatorBinding.apply {
             history.setImageResource(R.drawable.ic_baseline_calculate_24)
             historyGroup.visibility = VISIBLE
-            simpleButtonsGroup.visibility =  INVISIBLE
+            normalModeGroup.visibility =  INVISIBLE
 
-            if (scientificButtonsGroup1?.isVisible == true) {
-                scientificButtonsGroup1.visibility = INVISIBLE
-            } else if (scientificButtonsGroup2?.isVisible == true) {
-                scientificButtonsGroup2.visibility = INVISIBLE
+            if (firstGroupFunctions?.isVisible == true) {
+                firstGroupFunctions.visibility = INVISIBLE
+            } else if (secondGroupFunctions?.isVisible == true) {
+                secondGroupFunctions.visibility = INVISIBLE
 
             }
         }
     }
 
 
-    private fun calculatorFinished() {
-        val action =
-            CalculatorFragmentDirections.actionCalculatorFragmentToEmiOneFragment()
+    private fun navigateToEmiCalculator() {
+        emiViewModel.changeEmiCalculatorState(
+            EmiCalculatorState(isFirstEmiCalculator = true, isSecondEmiCalculator = false)
+        )
+        val action = CalculatorFragmentDirections.actionCalculatorFragmentToEmiCalculator()
         findNavController(this).navigate(action)
     }
 

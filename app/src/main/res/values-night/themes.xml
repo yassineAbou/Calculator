@@ -16,14 +16,14 @@
         <item name="fontFamily">@font/roboto</item>
         <item name="toolbarStyle">@style/custom_toolbar</item>
         <item name="textColor">@color/white_dark</item>
-        <item name="textColor2">@color/gray4</item>
+        <item name="secondTextColor">@color/gray4</item>
         <item name="bgColor">@color/black_holo</item>
-        <item name="bgColor2">@color/light_black</item>
-        <item name="bgColor3">@color/black</item>
-        <item name="bgColor4">@color/black_holo</item>
-        <item name="bgColor5">@color/black</item>
-        <item name="textColor3">@color/white</item>
-        <item name="textColor6">@color/black</item>
+        <item name="secondBgColor">@color/light_black</item>
+        <item name="thirdBgColor">@color/black</item>
+        <item name="fourthBgColor">@color/black_holo</item>
+        <item name="fifthBgColor">@color/black</item>
+        <item name="thirdTextColor">@color/white</item>
+        <item name="sixthTextColor">@color/black</item>
 
     </style>
 </resources>

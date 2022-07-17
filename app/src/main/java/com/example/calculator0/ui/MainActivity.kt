@@ -11,28 +11,26 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.setupActionBarWithNavController
 import com.example.calculator0.R
 import com.example.calculator0.databinding.ActivityMainBinding
+import com.example.calculator0.utils.viewBinding
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
-    private lateinit var binding: ActivityMainBinding
+    private val activityMainBinding by viewBinding(ActivityMainBinding::inflate)
     private lateinit var navController: NavController
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
-
+        setContentView(activityMainBinding.root)
         setupNavigation()
-
 
         navController.addOnDestinationChangedListener { _, destination, _ ->
             if(destination.id == R.id.calculatorFragment) {
-                binding.toolbar.visibility = View.GONE
+                activityMainBinding.toolbar.visibility = View.GONE
 
             } else {
-                binding.toolbar.visibility = View.VISIBLE
+                activityMainBinding.toolbar.visibility = View.VISIBLE
             }
         }
 
@@ -42,7 +40,7 @@ class MainActivity : AppCompatActivity() {
         val navHostFragment = supportFragmentManager.findFragmentById(R.id.myNavHostFragment) as NavHostFragment
         navController = navHostFragment.findNavController()
 
-        setSupportActionBar(binding.toolbar)
+        setSupportActionBar(activityMainBinding.toolbar)
         setupActionBarWithNavController(navController)
     }
 

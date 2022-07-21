@@ -1,7 +1,7 @@
-package com.example.calculator0.repository
+package com.example.calculator.repository
 
-import com.example.calculator0.database.PrevOperation
-import com.example.calculator0.database.PrevOperationDoe
+import com.example.calculator.database.PrevOperation
+import com.example.calculator.database.PrevOperationDoe
 import javax.inject.Inject
 
 class PrevOperationRepository @Inject constructor(private val

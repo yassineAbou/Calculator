@@ -7,10 +7,10 @@
     <data>
         <variable
             name="prevOperation"
-            type="com.example.calculator0.database.PrevOperation" />
+            type="com.example.calculator.database.PrevOperation" />
         <variable
             name="prevOperationActions"
-            type="com.example.calculator0.ui.calculator.PrevOperationActions" />
+            type="com.example.calculator.ui.calculator.PrevOperationActions" />
     </data>
 
 <androidx.constraintlayout.widget.ConstraintLayout

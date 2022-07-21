@@ -1,4 +1,4 @@
-package com.example.calculator0.ui.calculator
+package com.example.calculator.ui.calculator
 
 
 
@@ -6,11 +6,11 @@ package com.example.calculator0.ui.calculator
 import androidx.core.text.isDigitsOnly
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.calculator0.database.PrevOperation
-import com.example.calculator0.repository.PrevOperationRepository
-import com.example.calculator0.utils.isBalancedBrackets
-import com.example.calculator0.utils.safeLet
-import com.example.calculator0.utils.trimTrailingZero
+import com.example.calculator.database.PrevOperation
+import com.example.calculator.repository.PrevOperationRepository
+import com.example.calculator.utils.isBalancedBrackets
+import com.example.calculator.utils.safeLet
+import com.example.calculator.utils.trimTrailingZero
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -146,7 +146,7 @@ class CalculatorViewModel @Inject constructor(
                 _currentInput.value = (it + "0.")
                 isDecimalPointClicked = false
             }
-            if (isDecimalPointClicked && (afterArithmeticOperation.lastOrNull()?.isDigit() == true) && afterArithmeticOperation.none { it =='.' })  {
+            if (isDecimalPointClicked && (afterArithmeticOperation.lastOrNull()?.isDigit() == true) && afterArithmeticOperation.none { char -> char =='.' })  {
                 _currentInput.value = ("$it.")
                 isDecimalPointClicked = false
             }

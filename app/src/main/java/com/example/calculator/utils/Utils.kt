@@ -1,10 +1,8 @@
-package com.example.calculator0.utils
+package com.example.calculator.utils
 
-import android.content.Context
-import android.content.pm.ActivityInfo
 import android.widget.TextView
 import androidx.databinding.BindingAdapter
-import com.example.calculator0.database.PrevOperation
+import com.example.calculator.database.PrevOperation
 
 @BindingAdapter("setTextInput")
 fun TextView.setTextInput(item: PrevOperation?) {

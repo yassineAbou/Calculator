@@ -6,7 +6,7 @@
     <data>
         <variable
             name="emiViewModel"
-            type="com.example.calculator0.ui.emi.EMIViewModel" />
+            type="com.example.calculator.ui.emi.EMIViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -26,7 +26,7 @@
             app:layout_constraintStart_toStartOf="@id/labelEmiAmount"
             app:layout_constraintTop_toTopOf="@id/labelEmiAmount"
             app:layout_constraintVertical_bias="1.0"
-            android:backgroundTint="?attr/fifthBgColor"
+
             />
 
         <TextView
@@ -169,7 +169,7 @@
             android:layout_width="12dp"
             android:layout_height="3dp"
             android:layout_marginTop="19dp"
-            android:backgroundTint="?attr/fifthBgColor"
+            android:background="?attr/fifthBgColor"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/labelInterestRate" />
@@ -204,8 +204,8 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/lineSeparatorCompare"
             app:srcCompat="@drawable/ic_baseline_add_24"
-            android:backgroundTint="?attr/fifthBgColor"
-            android:contentDescription="compare" />
+            android:contentDescription="compare"
+            />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

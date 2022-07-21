@@ -1,13 +1,12 @@
-package com.example.calculator0.ui.calculator
+package com.example.calculator.ui.calculator
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import androidx.viewbinding.ViewBinding
-import com.example.calculator0.database.PrevOperation
-import com.example.calculator0.databinding.ListPrevOperationsBinding
+import com.example.calculator.database.PrevOperation
+import com.example.calculator.databinding.ListPrevOperationsBinding
 
 
 class PrevOperationAdapter(private val prevOperationActions: PrevOperationActions)
@@ -23,7 +22,7 @@ class PrevOperationAdapter(private val prevOperationActions: PrevOperationAction
         return ViewHolder.from(parent)
     }
 
-    class ViewHolder private constructor(val listPrevOperationsBinding: ListPrevOperationsBinding)
+    class ViewHolder private constructor(private val listPrevOperationsBinding: ListPrevOperationsBinding)
         : RecyclerView.ViewHolder(listPrevOperationsBinding.root) {
 
         fun bind(

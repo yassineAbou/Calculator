@@ -1,4 +1,4 @@
-package com.example.calculator0.ui.emi
+package com.example.calculator.ui.emi
 
 import android.content.pm.ActivityInfo
 import android.os.Bundle
@@ -9,10 +9,10 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.NavHostFragment
-import com.example.calculator0.R
-import com.example.calculator0.databinding.FragmentEmiCalculatorBinding
-import com.example.calculator0.utils.parseDouble
-import com.example.calculator0.utils.viewBinding
+import com.example.calculator.R
+import com.example.calculator.databinding.FragmentEmiCalculatorBinding
+import com.example.calculator.utils.parseDouble
+import com.example.calculator.utils.viewBinding
 import kotlinx.coroutines.launch
 
 

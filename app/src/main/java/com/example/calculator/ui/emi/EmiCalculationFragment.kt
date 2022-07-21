@@ -1,4 +1,4 @@
-package com.example.calculator0.ui.emi
+package com.example.calculator.ui.emi
 
 
 import android.content.Intent
@@ -14,9 +14,9 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Lifecycle
 import androidx.navigation.fragment.NavHostFragment
-import com.example.calculator0.R
-import com.example.calculator0.databinding.FragmentEmiCalculationBinding
-import com.example.calculator0.utils.viewBinding
+import com.example.calculator.R
+import com.example.calculator.databinding.FragmentEmiCalculationBinding
+import com.example.calculator.utils.viewBinding
 
 
 class EmiCalculationFragment : Fragment(R.layout.fragment_emi_calculation) {

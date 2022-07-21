@@ -1,4 +1,4 @@
-package com.example.calculator0.ui.emi
+package com.example.calculator.ui.emi
 
 import android.content.Intent
 import android.content.pm.ActivityInfo
@@ -10,10 +10,10 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Lifecycle
 import androidx.navigation.fragment.NavHostFragment
-import com.example.calculator0.R
-import com.example.calculator0.databinding.FragmentCompareBinding
-import com.example.calculator0.utils.safeLet
-import com.example.calculator0.utils.viewBinding
+import com.example.calculator.R
+import com.example.calculator.databinding.FragmentCompareBinding
+import com.example.calculator.utils.safeLet
+import com.example.calculator.utils.viewBinding
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint

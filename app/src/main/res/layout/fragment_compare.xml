@@ -7,7 +7,7 @@
     <data>
         <variable
             name="emiViewModel"
-            type="com.example.calculator0.ui.emi.EMIViewModel" />
+            type="com.example.calculator.ui.emi.EMIViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -27,7 +27,7 @@
             app:layout_constraintStart_toStartOf="@+id/compareTable"
             app:layout_constraintTop_toTopOf="@+id/compareTable"
             app:layout_constraintVertical_bias="1.0"
-            android:backgroundTint="?attr/fifthBgColor"
+
             />
 
         <TableLayout
@@ -220,8 +220,6 @@
             app:layout_constraintStart_toStartOf="@+id/labelFirstOption"
             app:layout_constraintTop_toTopOf="@+id/labelFirstOption"
             app:layout_constraintVertical_bias="1.0"
-            android:backgroundTint="?attr/fifthBgColor"
-
             />
 
         <TextView

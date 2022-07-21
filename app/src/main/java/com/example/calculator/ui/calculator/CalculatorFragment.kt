@@ -1,4 +1,4 @@
-package com.example.calculator0.ui.calculator
+package com.example.calculator.ui.calculator
 
 import android.content.pm.ActivityInfo
 import android.graphics.PorterDuff
@@ -15,14 +15,16 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.coroutineScope
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
-import androidx.navigation.fragment.NavHostFragment.findNavController
+import androidx.navigation.fragment.NavHostFragment.Companion.findNavController
+
+
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.calculator0.R
-import com.example.calculator0.databinding.FragmentCalculatorBinding
-import com.example.calculator0.ui.emi.EMIViewModel
-import com.example.calculator0.ui.emi.EmiCalculatorState
-import com.example.calculator0.utils.viewBinding
+import com.example.calculator.R
+import com.example.calculator.databinding.FragmentCalculatorBinding
+import com.example.calculator.ui.emi.EMIViewModel
+import com.example.calculator.ui.emi.EmiCalculatorState
+import com.example.calculator.utils.viewBinding
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch

@@ -1,17 +1,15 @@
-package com.example.calculator0.ui
+package com.example.calculator.ui
 
 
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
-import androidx.databinding.DataBindingUtil
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
-import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.setupActionBarWithNavController
-import com.example.calculator0.R
-import com.example.calculator0.databinding.ActivityMainBinding
-import com.example.calculator0.utils.viewBinding
+import com.example.calculator.R
+import com.example.calculator.databinding.ActivityMainBinding
+import com.example.calculator.utils.viewBinding
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -38,7 +36,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun setupNavigation() {
         val navHostFragment = supportFragmentManager.findFragmentById(R.id.myNavHostFragment) as NavHostFragment
-        navController = navHostFragment.findNavController()
+        navController = navHostFragment.navController
 
         setSupportActionBar(activityMainBinding.toolbar)
         setupActionBarWithNavController(navController)

@@ -1,4 +1,4 @@
-package com.example.calculator0.ui.emi
+package com.example.calculator.ui.emi
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope

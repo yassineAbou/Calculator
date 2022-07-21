@@ -3,17 +3,33 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/Users/Pc666/AndroidStudioProjects/PP/Calculator0/app/src/main/res/layout-land/fragment_calculator.xml" value="0.18" />
-        <entry key="..\:/Users/Pc666/AndroidStudioProjects/PP/Calculator0/app/src/main/res/layout/fragment_calculator.xml" value="0.15106580166821132" />
-        <entry key="..\:/Users/Pc666/AndroidStudioProjects/PP/Calculator0/app/src/main/res/layout/fragment_compare.xml" value="0.15291936978683968" />
-        <entry key="..\:/Users/Pc666/AndroidStudioProjects/PP/Calculator0/app/src/main/res/layout/fragment_emi_calculator.xml" value="0.16417272338606242" />
-        <entry key="..\:/Users/Pc666/AndroidStudioProjects/PP/Calculator0/app/src/main/res/layout/fragment_emi_two.xml" value="0.15291936978683968" />
-        <entry key="..\:/Users/Pc666/AndroidStudioProjects/PP/Calculator0/app/src/main/res/layout/fragment_result.xml" value="0.16417272338606242" />
-        <entry key="..\:/Users/Pc666/AndroidStudioProjects/PP/Calculator0/app/src/main/res/layout/list_prev_operations.xml" value="0.15291936978683968" />
-        <entry key="..\:/Users/Pc666/AndroidStudioProjects/PP/Calculator0/app/src/main/res/menu/share_menu.xml" value="0.16417272338606242" />
+        <entry key="..\:/Users/Pc666/AndroidStudioProjects/PP/Calculator0/app/src/main/res/drawable-v24/radius_button.xml" value="0.106" />
+        <entry key="..\:/Users/Pc666/AndroidStudioProjects/PP/Calculator0/app/src/main/res/drawable/backspace.xml" value="0.106" />
+        <entry key="..\:/Users/Pc666/AndroidStudioProjects/PP/Calculator0/app/src/main/res/drawable/custom_btn_landscape.xml" value="0.106" />
+        <entry key="..\:/Users/Pc666/AndroidStudioProjects/PP/Calculator0/app/src/main/res/drawable/custom_button.xml" value="0.106" />
+        <entry key="..\:/Users/Pc666/AndroidStudioProjects/PP/Calculator0/app/src/main/res/drawable/custom_button_equal.xml" value="0.106" />
+        <entry key="..\:/Users/Pc666/AndroidStudioProjects/PP/Calculator0/app/src/main/res/drawable/dollar.xml" value="0.106" />
+        <entry key="..\:/Users/Pc666/AndroidStudioProjects/PP/Calculator0/app/src/main/res/drawable/history.xml" value="0.106" />
+        <entry key="..\:/Users/Pc666/AndroidStudioProjects/PP/Calculator0/app/src/main/res/drawable/ic_baseline_add_24.xml" value="0.106" />
+        <entry key="..\:/Users/Pc666/AndroidStudioProjects/PP/Calculator0/app/src/main/res/drawable/ic_baseline_calculate_24.xml" value="0.106" />
+        <entry key="..\:/Users/Pc666/AndroidStudioProjects/PP/Calculator0/app/src/main/res/drawable/ic_baseline_share_24.xml" value="0.106" />
+        <entry key="..\:/Users/Pc666/AndroidStudioProjects/PP/Calculator0/app/src/main/res/drawable/ic_math.xml" value="0.106" />
+        <entry key="..\:/Users/Pc666/AndroidStudioProjects/PP/Calculator0/app/src/main/res/drawable/ic_no_backspace.xml" value="0.106" />
+        <entry key="..\:/Users/Pc666/AndroidStudioProjects/PP/Calculator0/app/src/main/res/drawable/ic_plus.xml" value="0.106" />
+        <entry key="..\:/Users/Pc666/AndroidStudioProjects/PP/Calculator0/app/src/main/res/drawable/no_history.xml" value="0.106" />
+        <entry key="..\:/Users/Pc666/AndroidStudioProjects/PP/Calculator0/app/src/main/res/drawable/radius_border.xml" value="0.106" />
+        <entry key="..\:/Users/Pc666/AndroidStudioProjects/PP/Calculator0/app/src/main/res/font/roboto.xml" value="0.1865766146053187" />
+        <entry key="..\:/Users/Pc666/AndroidStudioProjects/PP/Calculator0/app/src/main/res/layout-land/fragment_calculator.xml" value="0.21502590673575128" />
+        <entry key="..\:/Users/Pc666/AndroidStudioProjects/PP/Calculator0/app/src/main/res/layout/activity_main.xml" value="0.15384615384615385" />
+        <entry key="..\:/Users/Pc666/AndroidStudioProjects/PP/Calculator0/app/src/main/res/layout/fragment_calculator.xml" value="0.15384615384615385" />
+        <entry key="..\:/Users/Pc666/AndroidStudioProjects/PP/Calculator0/app/src/main/res/layout/fragment_compare.xml" value="0.15384615384615385" />
+        <entry key="..\:/Users/Pc666/AndroidStudioProjects/PP/Calculator0/app/src/main/res/layout/fragment_emi_calculation.xml" value="0.15384615384615385" />
+        <entry key="..\:/Users/Pc666/AndroidStudioProjects/PP/Calculator0/app/src/main/res/layout/fragment_emi_calculator.xml" value="0.15384615384615385" />
+        <entry key="..\:/Users/Pc666/AndroidStudioProjects/PP/Calculator0/app/src/main/res/layout/list_prev_operations.xml" value="0.15384615384615385" />
+        <entry key="..\:/Users/Pc666/AndroidStudioProjects/PP/Calculator0/app/src/main/res/menu/share_menu.xml" value="0.15384615384615385" />
       </map>
     </option>
   </component>
   <component name="ExternalStorageConfigurationManager" enabled="true" />
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_16" project-jdk-name="16" project-jdk-type="JavaSDK" />
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_16_PREVIEW" project-jdk-name="16" project-jdk-type="JavaSDK" />
 </project>

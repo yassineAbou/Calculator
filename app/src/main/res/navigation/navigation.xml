@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/calculatorFragment"
-        android:name="com.example.calculator0.ui.calculator.CalculatorFragment"
+        android:name="com.example.calculator.ui.calculator.CalculatorFragment"
         android:label="CalculatorFragment"
         tools:layout="@layout/fragment_calculator">
         <action
@@ -16,7 +16,7 @@
     </fragment>
     <fragment
         android:id="@+id/emiCalculationFragment"
-        android:name="com.example.calculator0.ui.emi.EmiCalculationFragment"
+        android:name="com.example.calculator.ui.emi.EmiCalculationFragment"
         android:label="EMI calculation"
         tools:layout="@layout/fragment_emi_calculation">
         <action
@@ -30,7 +30,7 @@
     </fragment>
     <fragment
         android:id="@+id/emiCalculatorFragment"
-        android:name="com.example.calculator0.ui.emi.EmiCalculatorFragment"
+        android:name="com.example.calculator.ui.emi.EmiCalculatorFragment"
         android:label="EMI calculator"
         tools:layout="@layout/fragment_emi_calculator">
         <action
@@ -42,7 +42,7 @@
     </fragment>
     <fragment
         android:id="@+id/compareFragment"
-        android:name="com.example.calculator0.ui.emi.CompareFragment"
+        android:name="com.example.calculator.ui.emi.CompareFragment"
         android:label="Compare"
         tools:layout="@layout/fragment_compare">
         <action

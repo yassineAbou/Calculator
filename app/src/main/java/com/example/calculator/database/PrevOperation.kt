@@ -1,4 +1,4 @@
-package com.example.calculator0.database
+package com.example.calculator.database
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity

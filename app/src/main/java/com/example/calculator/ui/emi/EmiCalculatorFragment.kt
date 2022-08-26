@@ -24,8 +24,6 @@ class EmiCalculatorFragment : Fragment(R.layout.fragment_emi_calculator) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        //setHasOptionsMenu(true)
-
         viewLifecycleOwner.lifecycleScope.launch {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
                 emiViewModel.emiCalculatorState.collect { emiCalculatorState ->

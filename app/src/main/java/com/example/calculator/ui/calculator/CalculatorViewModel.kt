@@ -6,8 +6,8 @@ package com.example.calculator.ui.calculator
 import androidx.core.text.isDigitsOnly
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.calculator.database.PrevOperation
-import com.example.calculator.repository.PrevOperationRepository
+import com.example.calculator.data.PreviousOperation
+import com.example.calculator.repository.PreviousOperationRepository
 import com.example.calculator.utils.isBalancedBrackets
 import com.example.calculator.utils.safeLet
 import com.example.calculator.utils.trimTrailingZero
@@ -28,11 +28,11 @@ data class CalculatorState(
 
 @HiltViewModel
 class CalculatorViewModel @Inject constructor(
-    private val prevOperationRepository: PrevOperationRepository
+    private val previousOperationRepository: PreviousOperationRepository
 ) : ViewModel() {
 
 
-    val listPrevOperations = prevOperationRepository.listPrevOperations
+    val listPreviousOperationsFlow = previousOperationRepository.listPreviousOperationsFlow
     private val listChars: List<Char> = listOf(')','e', 'i')
     private val listArithmeticSymbols: List<Char> = listOf('+','-','×','÷','.')
     private val listNumbers: List<Char> = listOf(')','1','2','3','4','5','6','7','8','9','0','%','e','i')
@@ -183,8 +183,8 @@ class CalculatorViewModel @Inject constructor(
     fun onInsert() {
         safeLet(_currentInput.value, _result.value) { currentInputValue, resultValue ->
             if (resultValue.isNotEmpty()) {
-                val prevOperation = PrevOperation(currentInputValue, resultValue)
-                insert(prevOperation)
+                val previousOperation = PreviousOperation(currentInputValue, resultValue)
+                insert(previousOperation)
                 _currentInput.value = resultValue
                 _result.value = ""
             }
@@ -233,11 +233,11 @@ class CalculatorViewModel @Inject constructor(
     }
 
     fun clear()  = viewModelScope.launch(Dispatchers.IO) {
-        prevOperationRepository.clear()
+        previousOperationRepository.clear()
     }
 
-    private fun insert(pervOperation: PrevOperation) = viewModelScope.launch(Dispatchers.IO) {
-        prevOperationRepository.insert(pervOperation)
+    private fun insert(previousOperation: PreviousOperation) = viewModelScope.launch(Dispatchers.IO) {
+        previousOperationRepository.insert(previousOperation)
     }
 
 }

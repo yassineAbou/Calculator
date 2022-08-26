@@ -156,7 +156,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/lineSeparatorCalculator"
             android:layout_marginEnd="@dimen/_15sdp"
-            tools:listitem="@layout/list_prev_operations"
+            tools:listitem="@layout/list_previous_operations"
             />
 
         <Button

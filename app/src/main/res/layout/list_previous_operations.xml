@@ -6,11 +6,11 @@
 
     <data>
         <variable
-            name="prevOperation"
-            type="com.example.calculator.database.PrevOperation" />
+            name="previousOperation"
+            type="com.example.calculator.data.PreviousOperation" />
         <variable
-            name="prevOperationActions"
-            type="com.example.calculator.ui.calculator.PrevOperationActions" />
+            name="previousOperationActions"
+            type="com.example.calculator.ui.calculator.PreviousOperationActions" />
     </data>
 
 <androidx.constraintlayout.widget.ConstraintLayout
@@ -31,10 +31,10 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:autoSizeTextType="uniform"
-        setTextInput="@{prevOperation}"
+        setTextInput="@{previousOperation}"
         tools:text="15+15"
         android:paddingEnd="0dp"
-        android:onClick="@{() -> prevOperationActions.addPrevInput(prevOperation)}"
+        android:onClick="@{() -> previousOperationActions.addPreviousNumber(previousOperation.input)}"
         />
 
     <TextView
@@ -49,10 +49,10 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/input"
         app:autoSizeTextType="uniform"
-        setTextResult="@{prevOperation}"
+        setTextResult="@{previousOperation}"
         tools:text="30"
         android:paddingEnd="0dp"
-        android:onClick="@{() -> prevOperationActions.addPrevResult(prevOperation)}"
+        android:onClick="@{() -> previousOperationActions.addPreviousNumber(previousOperation.result)}"
         />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

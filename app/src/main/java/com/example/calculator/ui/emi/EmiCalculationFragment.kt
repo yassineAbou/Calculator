@@ -8,6 +8,7 @@ import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
 import android.view.View
+import androidx.core.content.ContextCompat.startActivity
 import androidx.core.view.MenuHost
 import androidx.core.view.MenuProvider
 import androidx.fragment.app.Fragment
@@ -21,14 +22,15 @@ import com.example.calculator.utils.viewBinding
 
 class EmiCalculationFragment : Fragment(R.layout.fragment_emi_calculation) {
 
-    private val emiViewModel : EMIViewModel by activityViewModels()
     private val binding by viewBinding(FragmentEmiCalculationBinding::bind)
+    private val emiViewModel: EMIViewModel by activityViewModels()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.emiViewModel = emiViewModel
         binding.lifecycleOwner = viewLifecycleOwner
+        binding.emiViewModel = emiViewModel
+
         val menuHost: MenuHost = requireActivity()
 
         menuHost.addMenuProvider(object : MenuProvider {
@@ -49,9 +51,8 @@ class EmiCalculationFragment : Fragment(R.layout.fragment_emi_calculation) {
 
         binding.apply {
 
-            emiViewModel?.let { emiViewModel ->
                 compare.setOnClickListener {
-                    emiViewModel.changeEmiCalculatorState(
+                    emiViewModel?.changeEmiCalculatorState(
                         EmiCalculatorState(isFirstEmiCalculator = false, isSecondEmiCalculator = true)
                     )
                     val action = EmiCalculationFragmentDirections.actionEmiCalculationToEmiCalculator()
@@ -59,13 +60,12 @@ class EmiCalculationFragment : Fragment(R.layout.fragment_emi_calculation) {
                 }
 
                 done.setOnClickListener {
-                    emiViewModel.changeEmiCalculatorState(
+                    emiViewModel?.changeEmiCalculatorState(
                         EmiCalculatorState(isFirstEmiCalculator = false, isSecondEmiCalculator = false)
                     )
                     val action = EmiCalculationFragmentDirections.actionEmiCalculationToCalculatorFragment()
                     NavHostFragment.findNavController(this@EmiCalculationFragment).navigate(action)
                 }
-            }
 
         }
     }

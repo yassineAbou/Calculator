@@ -1,4 +1,4 @@
-package com.example.calculator.database
+package com.example.calculator.data
 
 import android.content.Context
 import androidx.room.Room
@@ -15,19 +15,19 @@ object DatabaseModule {
 
     @Singleton
     @Provides
-    fun providePrevOperationDatabase(
+    fun providePreviousOperationDatabase(
         @ApplicationContext app: Context
     ) = Room.databaseBuilder(
         app,
-        PrevOperationDatabase::class.java,
+        PreviousOperationDatabase::class.java,
         "calculator_history_database"
-    ).build()
+    ).createFromAsset("database/previous_operation.db").fallbackToDestructiveMigration().build()
 
     @Singleton
     @Provides
-    fun providePrevOperationDoe(prevOperationDatabase: PrevOperationDatabase):
-            PrevOperationDoe {
-        return prevOperationDatabase.getPrevOperationDoe()
+    fun providePreviousOperationDao(previousOperationDatabase: PreviousOperationDatabase):
+            PreviousOperationDao {
+        return previousOperationDatabase.getPreviousOperationDao()
     }
 
 

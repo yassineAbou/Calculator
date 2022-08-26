@@ -4,6 +4,7 @@ import android.content.Intent
 import android.content.pm.ActivityInfo
 import android.os.Bundle
 import android.view.*
+import androidx.core.content.ContextCompat.startActivity
 import androidx.core.view.MenuHost
 import androidx.core.view.MenuProvider
 import androidx.fragment.app.Fragment
@@ -19,14 +20,15 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class CompareFragment : Fragment(R.layout.fragment_compare) {
 
-    private val emiViewModel : EMIViewModel by activityViewModels()
     private val binding by viewBinding(FragmentCompareBinding::bind)
+    private val emiViewModel : EMIViewModel by activityViewModels()
+
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.emiViewModel = emiViewModel
         binding.lifecycleOwner = viewLifecycleOwner
+        binding.emiViewModel = emiViewModel
         val menuHost: MenuHost = requireActivity()
 
         menuHost.addMenuProvider(object : MenuProvider {
@@ -47,9 +49,8 @@ class CompareFragment : Fragment(R.layout.fragment_compare) {
 
         binding.apply {
 
-            emiViewModel?.let { emiViewModel ->
                 done.setOnClickListener {
-                    emiViewModel.changeEmiCalculatorState(
+                    emiViewModel?.changeEmiCalculatorState(
                         EmiCalculatorState(isFirstEmiCalculator = false, isSecondEmiCalculator = false)
                     )
                     val action = CompareFragmentDirections.actionCompareFragmentToCalculatorFragment()
@@ -58,13 +59,13 @@ class CompareFragment : Fragment(R.layout.fragment_compare) {
                 }
 
                 reset.setOnClickListener {
-                    emiViewModel.changeEmiCalculatorState(
+                    emiViewModel?.changeEmiCalculatorState(
                         EmiCalculatorState(isFirstEmiCalculator = true, isSecondEmiCalculator = false)
                     )
                     val action = CompareFragmentDirections.actionCompareFragmentToEmiCalculator()
                     NavHostFragment.findNavController(this@CompareFragment).navigate(action)
                 }
-            }
+
 
         }
     }

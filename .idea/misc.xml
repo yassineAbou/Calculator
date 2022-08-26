@@ -3,6 +3,10 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/Pc666/AndroidStudioProjects/PP/Calculator/app/src/main/res/layout/fragment_compare.xml" value="0.16417272338606242" />
+        <entry key="..\:/Users/Pc666/AndroidStudioProjects/PP/Calculator/app/src/main/res/layout/fragment_emi_calculation.xml" value="0.16417272338606242" />
+        <entry key="..\:/Users/Pc666/AndroidStudioProjects/PP/Calculator/app/src/main/res/layout/list_prev_operations.xml" value="0.15384615384615385" />
+        <entry key="..\:/Users/Pc666/AndroidStudioProjects/PP/Calculator/app/src/main/res/layout/list_previous_operations.xml" value="0.15384615384615385" />
         <entry key="..\:/Users/Pc666/AndroidStudioProjects/PP/Calculator0/app/src/main/res/drawable-v24/radius_button.xml" value="0.106" />
         <entry key="..\:/Users/Pc666/AndroidStudioProjects/PP/Calculator0/app/src/main/res/drawable/backspace.xml" value="0.106" />
         <entry key="..\:/Users/Pc666/AndroidStudioProjects/PP/Calculator0/app/src/main/res/drawable/custom_btn_landscape.xml" value="0.106" />

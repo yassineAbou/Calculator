@@ -35,16 +35,18 @@ class CalculatorFragment : Fragment(R.layout.fragment_calculator) {
     private val calculatorViewModel: CalculatorViewModel by viewModels()
     private val emiViewModel : EMIViewModel by activityViewModels()
     private val fragmentCalculatorBinding by viewBinding(FragmentCalculatorBinding::bind)
+    private val adapter by lazy { ListPreviousOperationsAdapter(object : PreviousOperationActions {
+        override fun addPreviousNumber(number: String) {
+            calculatorViewModel.addToCurrentInput(number)
+        }
+    })
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         fragmentCalculatorBinding.calculatorViewModel = calculatorViewModel
         fragmentCalculatorBinding.lifecycleOwner = viewLifecycleOwner
 
-
-        val adapter = PrevOperationAdapter(PrevOperationActions { number ->
-            calculatorViewModel.currentInput.value?.let { calculatorViewModel.addToCurrentInput(number) }
-        })
 
         fragmentCalculatorBinding.listPrevOperations.adapter = adapter
         val manager = LinearLayoutManager(context, RecyclerView.VERTICAL, true)
@@ -78,27 +80,31 @@ class CalculatorFragment : Fragment(R.layout.fragment_calculator) {
 
         }
 
-        viewLifecycleOwner.lifecycleScope.launchWhenStarted {
-            calculatorViewModel.currentInput.collectLatest {
-                it?.let {
-                    if (it.isNotEmpty()) {
-                        fragmentCalculatorBinding.backspace.setColorFilter(
-                            ContextCompat.getColor(requireContext(), R.color.purple),
-                            PorterDuff.Mode.SRC_ATOP)
-                    } else {
-                        fragmentCalculatorBinding.backspace.setColorFilter(
-                            ContextCompat.getColor(requireContext(), R.color.purple_light),
-                            PorterDuff.Mode.SRC_ATOP)
+        viewLifecycleOwner.lifecycleScope.launch {
+            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
+                calculatorViewModel.currentInput.collectLatest {
+                    it?.let {
+                        if (it.isNotEmpty()) {
+                            fragmentCalculatorBinding.backspace.setColorFilter(
+                                ContextCompat.getColor(requireContext(), R.color.purple),
+                                PorterDuff.Mode.SRC_ATOP)
+                        } else {
+                            fragmentCalculatorBinding.backspace.setColorFilter(
+                                ContextCompat.getColor(requireContext(), R.color.purple_light),
+                                PorterDuff.Mode.SRC_ATOP)
+                        }
+                        calculatorViewModel.onChangeCurrentInput(it)
                     }
-                    calculatorViewModel.onChangeCurrentInput(it)
                 }
             }
         }
 
-        viewLifecycleOwner.lifecycleScope.launchWhenStarted {
-            calculatorViewModel.result.collectLatest {
-                it?.let {
-                    calculatorViewModel.onChangeResult(it)
+        viewLifecycleOwner.lifecycleScope.launch {
+            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
+                calculatorViewModel.result.collectLatest {
+                    it?.let {
+                        calculatorViewModel.onChangeResult(it)
+                    }
                 }
             }
         }
@@ -117,17 +123,18 @@ class CalculatorFragment : Fragment(R.layout.fragment_calculator) {
 
 
         viewLifecycleOwner.lifecycle.coroutineScope.launch {
-            calculatorViewModel.listPrevOperations.collectLatest { listPrevOperations ->
-                adapter.submitList(listPrevOperations)
+            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
+                calculatorViewModel.listPreviousOperationsFlow.collect{
+                    adapter.submitList(it)
 
-                when (listPrevOperations.size) {
-                    0 -> {
-                        disableHistoryButton()
-                        hideHistoryGroup()
+                    when (it.size) {
+                        0 -> {
+                            disableHistoryButton()
+                            hideHistoryGroup()
+                        }
+                        else -> enableHistoryButton()
                     }
-                    else -> enableHistoryButton()
                 }
-
             }
         }
 

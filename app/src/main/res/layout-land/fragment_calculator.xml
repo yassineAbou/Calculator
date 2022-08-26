@@ -151,7 +151,7 @@
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintEnd_toStartOf="@+id/clear"
             app:layout_constraintTop_toBottomOf="@+id/lineSeparatorCalculator"
-            tools:listitem="@layout/list_prev_operations" />
+            tools:listitem="@layout/list_previous_operations" />
 
         <Button
             android:id="@+id/clearHistory"

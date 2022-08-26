@@ -2,17 +2,17 @@ package com.example.calculator.utils
 
 import android.widget.TextView
 import androidx.databinding.BindingAdapter
-import com.example.calculator.database.PrevOperation
+import com.example.calculator.data.PreviousOperation
 
 @BindingAdapter("setTextInput")
-fun TextView.setTextInput(item: PrevOperation?) {
+fun TextView.setTextInput(item: PreviousOperation?) {
     item?.let {
         text = item.input
     }
 }
 
 @BindingAdapter("setTextResult")
-fun TextView.setTextResult(item: PrevOperation?) {
+fun TextView.setTextResult(item: PreviousOperation?) {
     item?.let {
         text = item.result
     }

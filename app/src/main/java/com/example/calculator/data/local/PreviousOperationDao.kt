@@ -1,8 +1,9 @@
-package com.example.calculator.data
+package com.example.calculator.data.local
 
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.Query
+import com.example.calculator.data.model.PreviousOperation
 import kotlinx.coroutines.flow.Flow
 
 @Dao

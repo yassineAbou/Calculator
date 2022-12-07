@@ -6,7 +6,7 @@
 
     <data>
         <variable
-            name="emiViewModel"
+            name="viewModel"
             type="com.example.calculator.ui.emi.EMIViewModel" />
     </data>
 
@@ -80,16 +80,17 @@
                     android:id="@+id/loanAmount"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="?attr/secondTextColor"
                     android:text="@string/loanAmount"
-                    android:textSize="@dimen/_11ssp" />
+                    android:textColor="?attr/secondTextColor"
+                    android:textSize="@dimen/_11ssp"
+                    tools:ignore="TextContrastCheck" />
 
                 <TextView
 
                     android:id="@+id/firstLoanAmount"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@{emiViewModel.firstEmiCalculation.principal}"
+                    android:text="@{viewModel.firstEmiCalculation.principal}"
                     android:textColor="?attr/thirdTextColor"
                     android:textSize="@dimen/_11ssp" />
 
@@ -97,7 +98,7 @@
                     android:id="@+id/secondLoanAmount"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@{emiViewModel.secondEmiCalculation.principal}"
+                    android:text="@{viewModel.secondEmiCalculation.principal}"
                     android:textColor="?attr/thirdTextColor"
                     android:textSize="@dimen/_11ssp" />
             </TableRow>
@@ -111,9 +112,10 @@
                     android:id="@+id/emiAmount"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="?attr/secondTextColor"
                     android:text="@string/emiAmount"
-                    android:textSize="@dimen/_11ssp" />
+                    android:textColor="?attr/secondTextColor"
+                    android:textSize="@dimen/_11ssp"
+                    tools:ignore="TextContrastCheck" />
 
                 <TextView
                     android:id="@+id/firstEmiAmount"
@@ -121,7 +123,7 @@
                     android:layout_height="wrap_content"
                     android:textColor="?attr/thirdTextColor"
                     android:textSize="@dimen/_11ssp"
-                    android:text="@{emiViewModel.firstEmiCalculation.emiAmount}"
+                    android:text="@{viewModel.firstEmiCalculation.emiAmount}"
                     />
 
                 <TextView
@@ -130,7 +132,7 @@
                     android:layout_height="wrap_content"
                     android:textColor="?attr/thirdTextColor"
                     android:textSize="@dimen/_11ssp"
-                    android:text="@{emiViewModel.secondEmiCalculation.emiAmount}"
+                    android:text="@{viewModel.secondEmiCalculation.emiAmount}"
                     />
             </TableRow>
 
@@ -143,9 +145,10 @@
                     android:id="@+id/interestRate"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="?attr/secondTextColor"
                     android:text="@string/InterestRate"
-                    android:textSize="@dimen/_11ssp" />
+                    android:textColor="?attr/secondTextColor"
+                    android:textSize="@dimen/_11ssp"
+                    tools:ignore="TextContrastCheck" />
 
                 <TextView
                     android:id="@+id/firstInterestRate"
@@ -153,7 +156,7 @@
                     android:layout_height="wrap_content"
                     android:textColor="?attr/thirdTextColor"
                     android:textSize="@dimen/_11ssp"
-                    android:text="@{emiViewModel.firstEmiCalculation.interestRate}"/>
+                    android:text="@{viewModel.firstEmiCalculation.interestRate}"/>
 
                 <TextView
                     android:id="@+id/secondInterestRate"
@@ -161,7 +164,7 @@
                     android:layout_height="wrap_content"
                     android:textColor="?attr/thirdTextColor"
                     android:textSize="@dimen/_11ssp"
-                    android:text="@{emiViewModel.secondEmiCalculation.interestRate}"/>
+                    android:text="@{viewModel.secondEmiCalculation.interestRate}"/>
             </TableRow>
 
             <TableRow
@@ -173,9 +176,10 @@
                     android:id="@+id/numberInstallments"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="?attr/secondTextColor"
                     android:text="@string/numberInstallments"
-                    android:textSize="@dimen/_11ssp" />
+                    android:textColor="?attr/secondTextColor"
+                    android:textSize="@dimen/_11ssp"
+                    tools:ignore="TextContrastCheck" />
 
                 <TextView
 
@@ -184,7 +188,7 @@
                     android:layout_height="wrap_content"
                     android:textColor="?attr/thirdTextColor"
                     android:textSize="@dimen/_11ssp"
-                    android:text= "@{emiViewModel.firstEmiCalculation.numberInstallments}"
+                    android:text= "@{viewModel.firstEmiCalculation.numberInstallments}"
                     />
 
                 <TextView
@@ -193,7 +197,7 @@
                     android:layout_height="wrap_content"
                     android:textColor="?attr/thirdTextColor"
                     android:textSize="@dimen/_11ssp"
-                    android:text= "@{emiViewModel.secondEmiCalculation.numberInstallments}"/>
+                    android:text= "@{viewModel.secondEmiCalculation.numberInstallments}"/>
             </TableRow>
 
 
@@ -238,7 +242,7 @@
             android:id="@+id/firstTotalAmount"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text= "@{String.format(@string/totalAmount, emiViewModel.firstEmiCalculation.totalAmount)}"
+            android:text= "@{String.format(@string/totalAmount, viewModel.firstEmiCalculation.totalAmount)}"
             android:textSize="@dimen/_13ssp"
             android:textColor="?attr/secondTextColor"
             android:layout_marginStart="@dimen/_17sdp"
@@ -255,7 +259,7 @@
             android:textSize="@dimen/_13ssp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/firstTotalAmount"
-            android:text="@{emiViewModel.firstEmiCalculation.principal}"/>
+            android:text="@{viewModel.firstEmiCalculation.principal}"/>
 
         <TextView
             android:id="@+id/labelFirstPrincipal"
@@ -265,7 +269,8 @@
             android:text="@string/principal"
             android:textColor="?attr/secondTextColor"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/firstPrincipal" />
+            app:layout_constraintTop_toBottomOf="@+id/firstPrincipal"
+            tools:ignore="TextContrastCheck" />
 
         <TextView
             android:id="@+id/firstInterest"
@@ -277,7 +282,7 @@
             android:textSize="@dimen/_13ssp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/firstTotalAmount"
-            android:text="@{emiViewModel.firstEmiCalculation.interest}"/>
+            android:text="@{viewModel.firstEmiCalculation.interest}"/>
 
         <TextView
             android:id="@+id/labelFirstInterest"
@@ -287,7 +292,8 @@
             android:text="@string/interest"
             android:textColor="?attr/secondTextColor"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/firstInterest" />
+            app:layout_constraintTop_toBottomOf="@+id/firstInterest"
+            tools:ignore="TextContrastCheck" />
 
         <View
             android:id="@+id/lineSeparatorFirstOption"
@@ -315,7 +321,7 @@
             android:id="@+id/secondTotalAmount"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text= "@{String.format(@string/totalAmount, emiViewModel.secondEmiCalculation.totalAmount)}"
+            android:text= "@{String.format(@string/totalAmount, viewModel.secondEmiCalculation.totalAmount)}"
             android:textSize="@dimen/_13ssp"
             android:layout_marginStart="@dimen/_17sdp"
             android:textColor="?attr/secondTextColor"
@@ -332,7 +338,7 @@
             android:textSize="@dimen/_13ssp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/secondTotalAmount"
-            android:text="@{emiViewModel.secondEmiCalculation.principal}"/>
+            android:text="@{viewModel.secondEmiCalculation.principal}"/>
 
         <TextView
             android:id="@+id/labelSecondPrincipal"
@@ -342,7 +348,8 @@
             android:text="@string/principal"
             android:textColor="?attr/secondTextColor"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/secondPrincipal" />
+            app:layout_constraintTop_toBottomOf="@+id/secondPrincipal"
+            tools:ignore="TextContrastCheck" />
 
         <TextView
             android:id="@+id/secondInterest"
@@ -354,7 +361,7 @@
             android:textSize="@dimen/_13ssp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/secondTotalAmount"
-            android:text="@{emiViewModel.secondEmiCalculation.interest}"/>
+            android:text="@{viewModel.secondEmiCalculation.interest}"/>
 
         <TextView
             android:id="@+id/labelSecondInterest"
@@ -362,9 +369,10 @@
             android:layout_height="wrap_content"
             android:layout_marginEnd="@dimen/_19sdp"
             android:text="@string/interest"
-            app:layout_constraintEnd_toEndOf="parent"
             android:textColor="?attr/secondTextColor"
-            app:layout_constraintTop_toBottomOf="@+id/secondInterest" />
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/secondInterest"
+            tools:ignore="TextContrastCheck" />
 
         <View
             android:id="@+id/lineSeparatorSecondBackground"
@@ -378,43 +386,36 @@
 
         <Button
             android:id="@+id/done"
-            android:layout_width="wrap_content"
+            android:layout_width="150dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="14dp"
-            android:layout_marginStart="@dimen/_7sdp"
-            android:layout_marginEnd="@dimen/_19sdp"
             android:background="@drawable/radius_button"
-            android:paddingStart="@dimen/_45sdp"
-            android:paddingBottom="4dp"
-            android:paddingEnd="@dimen/_45sdp"
-            android:paddingTop="4dp"
             android:text="@string/done"
+            android:layout_marginStart="@dimen/_7sdp"
             android:textColor="@color/white"
             android:textAllCaps="false"
-            android:textSize="@dimen/_14ssp"
+            android:textSize="16sp"
             android:textStyle="bold"
+            android:layout_marginBottom="@dimen/_8sdp"
             app:backgroundTint="@color/purple_dark"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/reset"
             app:layout_constraintBottom_toBottomOf="parent" />
 
         <Button
             android:id="@+id/reset"
-            android:layout_width="wrap_content"
+            android:layout_width="150dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/_19sdp"
-            android:layout_marginTop="14dp"
             android:background="@drawable/radius_button"
-            android:paddingStart="@dimen/_45sdp"
-            android:paddingBottom="4dp"
-            android:paddingEnd="@dimen/_45sdp"
-            android:paddingTop="4dp"
             android:text="@string/reset"
             android:textColor="?attr/thirdTextColor"
             android:textAllCaps="false"
-            android:textSize="@dimen/_14ssp"
+            android:textSize="16sp"
             android:textStyle="bold"
+            android:layout_marginBottom="@dimen/_8sdp"
+            app:layout_constraintHorizontal_chainStyle="packed"
             app:backgroundTint="?attr/sixthTextColor"
             app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/done"
             app:layout_constraintBottom_toBottomOf="parent"/>
 
 

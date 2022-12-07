@@ -1,10 +1,14 @@
 package com.example.calculator.ui.emi
 
+import android.content.ActivityNotFoundException
 import android.content.Intent
 import android.content.pm.ActivityInfo
 import android.os.Bundle
-import android.view.*
-import androidx.core.content.ContextCompat.startActivity
+import android.view.Menu
+import android.view.MenuInflater
+import android.view.MenuItem
+import android.view.View
+import android.widget.Toast
 import androidx.core.view.MenuHost
 import androidx.core.view.MenuProvider
 import androidx.fragment.app.Fragment
@@ -13,22 +17,20 @@ import androidx.lifecycle.Lifecycle
 import androidx.navigation.fragment.NavHostFragment
 import com.example.calculator.R
 import com.example.calculator.databinding.FragmentCompareBinding
-import com.example.calculator.utils.safeLet
-import com.example.calculator.utils.viewBinding
-import dagger.hilt.android.AndroidEntryPoint
+import com.example.calculator.util.safeLet
+import com.example.calculator.util.viewBinding
 
-@AndroidEntryPoint
 class CompareFragment : Fragment(R.layout.fragment_compare) {
 
-    private val binding by viewBinding(FragmentCompareBinding::bind)
+    private val fragmentCompareBinding by viewBinding(FragmentCompareBinding::bind)
     private val emiViewModel : EMIViewModel by activityViewModels()
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.lifecycleOwner = viewLifecycleOwner
-        binding.emiViewModel = emiViewModel
+        fragmentCompareBinding.lifecycleOwner = viewLifecycleOwner
+        fragmentCompareBinding.viewModel = emiViewModel
         val menuHost: MenuHost = requireActivity()
 
         menuHost.addMenuProvider(object : MenuProvider {
@@ -39,7 +41,7 @@ class CompareFragment : Fragment(R.layout.fragment_compare) {
 
                 return when (menuItem.itemId) {
                     R.id.share -> {
-                        shareSuccess()
+                        shareCompareResult()
                         true
                     }
                     else -> false
@@ -47,27 +49,33 @@ class CompareFragment : Fragment(R.layout.fragment_compare) {
             }
         }, viewLifecycleOwner, Lifecycle.State.RESUMED)
 
-        binding.apply {
+        fragmentCompareBinding.apply {
 
                 done.setOnClickListener {
-                    emiViewModel?.changeEmiCalculatorState(
-                        EmiCalculatorState(isFirstEmiCalculator = false, isSecondEmiCalculator = false)
-                    )
-                    val action = CompareFragmentDirections.actionCompareFragmentToCalculatorFragment()
-                    NavHostFragment.findNavController(this@CompareFragment).navigate(action)
+                    navigateToCalculator()
 
                 }
 
                 reset.setOnClickListener {
-                    emiViewModel?.changeEmiCalculatorState(
-                        EmiCalculatorState(isFirstEmiCalculator = true, isSecondEmiCalculator = false)
-                    )
-                    val action = CompareFragmentDirections.actionCompareFragmentToEmiCalculator()
-                    NavHostFragment.findNavController(this@CompareFragment).navigate(action)
+                    navigateToEmiCalculator()
                 }
-
-
         }
+    }
+
+    private fun navigateToCalculator() {
+        emiViewModel.changeEmiCalculatorState(
+            EmiCalculatorState(isFirstEmiCalculator = false, isSecondEmiCalculator = false)
+        )
+        val action = CompareFragmentDirections.actionCompareFragmentToCalculatorFragment()
+        NavHostFragment.findNavController(this@CompareFragment).navigate(action)
+    }
+
+    private fun navigateToEmiCalculator() {
+        emiViewModel.changeEmiCalculatorState(
+            EmiCalculatorState(isFirstEmiCalculator = true, isSecondEmiCalculator = false)
+        )
+        val action = CompareFragmentDirections.actionCompareFragmentToEmiCalculator()
+        NavHostFragment.findNavController(this@CompareFragment).navigate(action)
     }
 
     override fun onResume() {
@@ -81,6 +89,7 @@ class CompareFragment : Fragment(R.layout.fragment_compare) {
 
     private fun getShareIntent() : Intent {
         val shareIntent = Intent(Intent.ACTION_SEND)
+
         safeLet(
             emiViewModel.firstEmiCalculation.value,
             emiViewModel.secondEmiCalculation.value
@@ -99,8 +108,16 @@ class CompareFragment : Fragment(R.layout.fragment_compare) {
 
     }
 
-    private fun shareSuccess() {
-        startActivity(getShareIntent())
+    /*
+    After the process death, when the user shares the result, the app crashes.
+    So I surrounded the code with a try-catch block.
+     */
+    private fun shareCompareResult() {
+        try {
+            startActivity(getShareIntent())
+        } catch (e: ActivityNotFoundException) {
+            Toast.makeText(requireContext(), "Close and open the app again", Toast.LENGTH_SHORT).show()
+        }
     }
 
 }

@@ -11,20 +11,15 @@ import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.Lifecycle
-import androidx.lifecycle.coroutineScope
-import androidx.lifecycle.lifecycleScope
-import androidx.lifecycle.repeatOnLifecycle
+import androidx.lifecycle.*
 import androidx.navigation.fragment.NavHostFragment.Companion.findNavController
-
-
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.calculator.R
 import com.example.calculator.databinding.FragmentCalculatorBinding
 import com.example.calculator.ui.emi.EMIViewModel
 import com.example.calculator.ui.emi.EmiCalculatorState
-import com.example.calculator.utils.viewBinding
+import com.example.calculator.util.viewBinding
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
@@ -35,7 +30,7 @@ class CalculatorFragment : Fragment(R.layout.fragment_calculator) {
     private val calculatorViewModel: CalculatorViewModel by viewModels()
     private val emiViewModel : EMIViewModel by activityViewModels()
     private val fragmentCalculatorBinding by viewBinding(FragmentCalculatorBinding::bind)
-    private val adapter by lazy { ListPreviousOperationsAdapter(object : PreviousOperationActions {
+    private val adapter by lazy { ListPreviousOperationsAdapter(object : PreviousOperationAction {
         override fun addPreviousNumber(number: String) {
             calculatorViewModel.addToCurrentInput(number)
         }
@@ -44,7 +39,8 @@ class CalculatorFragment : Fragment(R.layout.fragment_calculator) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        fragmentCalculatorBinding.calculatorViewModel = calculatorViewModel
+
+        fragmentCalculatorBinding.viewModel = calculatorViewModel
         fragmentCalculatorBinding.lifecycleOwner = viewLifecycleOwner
 
 
@@ -52,7 +48,18 @@ class CalculatorFragment : Fragment(R.layout.fragment_calculator) {
         val manager = LinearLayoutManager(context, RecyclerView.VERTICAL, true)
         fragmentCalculatorBinding.listPrevOperations.layoutManager = manager
 
+        viewLifecycleOwner.lifecycle.addObserver(object : DefaultLifecycleObserver {
+            override fun onDestroy(owner: LifecycleOwner) {
+                fragmentCalculatorBinding.listPrevOperations.adapter = null
+                super.onDestroy(owner)
+            }
+        })
+
         fragmentCalculatorBinding.apply {
+
+            emiCalculator.setOnClickListener {
+                navigateToEmiCalculator()
+            }
 
             normalMode?.setOnClickListener {
                 activity?.requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
@@ -67,15 +74,8 @@ class CalculatorFragment : Fragment(R.layout.fragment_calculator) {
             }
 
             history.setOnClickListener {
-                calculatorViewModel?.let {
-                    val isFirstGroupFunctions = !it.calculatorState.value.isFirstGroupFunctions
-                    val isSecondGroupFunctions = !it.calculatorState.value.isSecondGroupFunctions
-                    if (isFirstGroupFunctions && isSecondGroupFunctions) {
-                        it.onChangeCalculatorState(CalculatorState(isFirstGroupFunctions = true))
-                    }
-                    changeHistoryVisibility()
-                    fragmentCalculatorBinding.listPrevOperations.scrollToPosition(0)
-                }
+                changeHistoryVisibility()
+                fragmentCalculatorBinding.listPrevOperations.scrollToPosition(0)
             }
 
         }
@@ -83,19 +83,21 @@ class CalculatorFragment : Fragment(R.layout.fragment_calculator) {
         viewLifecycleOwner.lifecycleScope.launch {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
                 calculatorViewModel.currentInput.collectLatest {
-                    it?.let {
-                        if (it.isNotEmpty()) {
-                            fragmentCalculatorBinding.backspace.setColorFilter(
-                                ContextCompat.getColor(requireContext(), R.color.purple),
-                                PorterDuff.Mode.SRC_ATOP)
-                        } else {
-                            fragmentCalculatorBinding.backspace.setColorFilter(
-                                ContextCompat.getColor(requireContext(), R.color.purple_light),
-                                PorterDuff.Mode.SRC_ATOP)
+                        it?.let {
+                            calculatorViewModel.changeCurrentInput(it)
+                            if (it.isNotEmpty()) {
+                                fragmentCalculatorBinding.backspace.setColorFilter(
+                                    ContextCompat.getColor(requireContext(), R.color.purple),
+                                    PorterDuff.Mode.SRC_ATOP
+                                )
+                            } else {
+                                fragmentCalculatorBinding.backspace.setColorFilter(
+                                    ContextCompat.getColor(requireContext(), R.color.purple_light),
+                                    PorterDuff.Mode.SRC_ATOP
+                                )
+                            }
                         }
-                        calculatorViewModel.onChangeCurrentInput(it)
                     }
-                }
             }
         }
 
@@ -103,7 +105,7 @@ class CalculatorFragment : Fragment(R.layout.fragment_calculator) {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
                 calculatorViewModel.result.collectLatest {
                     it?.let {
-                        calculatorViewModel.onChangeResult(it)
+                        calculatorViewModel.changeResult(it)
                     }
                 }
             }
@@ -138,29 +140,19 @@ class CalculatorFragment : Fragment(R.layout.fragment_calculator) {
             }
         }
 
-
-
-        fragmentCalculatorBinding.emiCalculator.setOnClickListener {
-            navigateToEmiCalculator()
-        }
     }
 
     private fun changeGroupFunctionsVisibility() {
-        if (fragmentCalculatorBinding.firstGroupFunctions?.isVisible == true) {
-            changeSecondFunctionsState()
-        } else if (fragmentCalculatorBinding.secondGroupFunctions?.isVisible == true) {
-            changeFirstFunctionsState()
+
+        if (calculatorViewModel.calculatorState.value.isSecondGroupFunctions) {
+            calculatorViewModel.changeCalculatorState(
+                CalculatorState(isFirstGroupFunctions = true, isSecondGroupFunctions = false)
+            )
+        } else {
+            calculatorViewModel.changeCalculatorState(
+                CalculatorState(isFirstGroupFunctions = false, isSecondGroupFunctions = true)
+            )
         }
-    }
-
-    private fun changeFirstFunctionsState() {
-        calculatorViewModel.onChangeCalculatorState(CalculatorState(isSecondGroupFunctions = false))
-        calculatorViewModel.onChangeCalculatorState(CalculatorState(isFirstGroupFunctions = true))
-    }
-
-    private fun changeSecondFunctionsState() {
-        calculatorViewModel.onChangeCalculatorState(CalculatorState(isFirstGroupFunctions = false))
-        calculatorViewModel.onChangeCalculatorState(CalculatorState(isSecondGroupFunctions = true))
     }
 
     private fun enableHistoryButton() {
@@ -180,7 +172,7 @@ class CalculatorFragment : Fragment(R.layout.fragment_calculator) {
 
     private fun showInvalidFormat() {
         Toast.makeText(requireContext(), "Invalid format used.", Toast.LENGTH_SHORT).show()
-        calculatorViewModel.onChangeCalculatorState(CalculatorState(isInvalidFormat = false))
+        calculatorViewModel.changeCalculatorState(CalculatorState(isInvalidFormat = false))
     }
 
     private fun showFirstGroupFunctions() {
@@ -209,12 +201,10 @@ class CalculatorFragment : Fragment(R.layout.fragment_calculator) {
             historyGroup.visibility = GONE
             normalModeGroup.visibility =  VISIBLE
 
-            calculatorViewModel?.let {
-                if (it.calculatorState.value.isFirstGroupFunctions) {
-                    firstGroupFunctions?.visibility = VISIBLE
-                } else if (it.calculatorState.value.isSecondGroupFunctions) {
-                    secondGroupFunctions?.visibility = VISIBLE
-                }
+            if (calculatorViewModel.calculatorState.value.isSecondGroupFunctions) {
+                secondGroupFunctions?.visibility = VISIBLE
+            } else {
+                firstGroupFunctions?.visibility = VISIBLE
             }
         }
     }
@@ -225,12 +215,11 @@ class CalculatorFragment : Fragment(R.layout.fragment_calculator) {
             historyGroup.visibility = VISIBLE
             normalModeGroup.visibility =  INVISIBLE
 
-            if (firstGroupFunctions?.isVisible == true) {
-                firstGroupFunctions.visibility = INVISIBLE
-            } else if (secondGroupFunctions?.isVisible == true) {
-                secondGroupFunctions.visibility = INVISIBLE
-
-            }
+             if (calculatorViewModel.calculatorState.value.isSecondGroupFunctions) {
+                secondGroupFunctions?.visibility = INVISIBLE
+            } else {
+                 firstGroupFunctions?.visibility = INVISIBLE
+             }
         }
     }
 
@@ -242,7 +231,5 @@ class CalculatorFragment : Fragment(R.layout.fragment_calculator) {
         val action = CalculatorFragmentDirections.actionCalculatorFragmentToEmiCalculator()
         findNavController(this).navigate(action)
     }
-
-
-
 }
+

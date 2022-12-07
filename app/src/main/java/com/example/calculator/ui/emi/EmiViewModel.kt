@@ -2,7 +2,7 @@ package com.example.calculator.ui.emi
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import kotlinx.coroutines.Dispatchers
+import com.example.calculator.util.decimalFormat
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -10,7 +10,6 @@ import kotlinx.coroutines.launch
 import java.math.RoundingMode
 import java.text.DecimalFormat
 import kotlin.math.pow
-
 
 
 data class EmiCalculatorState(
@@ -45,9 +44,7 @@ class EMIViewModel : ViewModel() {
 
      fun calculateEmi(loanAmount: Double, interestRate: Double, numberInstallments: Double) {
 
-         viewModelScope.launch(Dispatchers.IO) {
-             val df = DecimalFormat("#.##")
-             df.roundingMode = RoundingMode.CEILING
+         viewModelScope.launch {
 
              val interestValue = interestRate / 12 / 100
              val commonPart = (1 + interestValue).pow(numberInstallments)
@@ -58,20 +55,20 @@ class EMIViewModel : ViewModel() {
              val totalInterest = (emiCalculationPerMonth * numberInstallments) - loanAmount
              val totalPayment = totalInterest + loanAmount
 
-             val  emiAmount = df.format(emiCalculationPerMonth)
-             val  interest = df.format(totalInterest)
-             val  totalAmount = df.format(totalPayment)
-             val  principal =  df.format(loanAmount)
-             val  installments = df.format(numberInstallments)
 
-             val emi = Emi(emiAmount, interest,  interestRate.toString(), totalAmount, principal, installments)
-             val isFirstEmiCalculator = _emiCalculatorState.value.isFirstEmiCalculator
-             val isSecondEmiCalculator = _emiCalculatorState.value.isSecondEmiCalculator
 
-             when  {
-                isFirstEmiCalculator -> _firstEmiCalculation.value = emi
-                isSecondEmiCalculator -> _secondEmiCalculation.value = emi
+             val emi = Emi(
+                 emiAmount = emiCalculationPerMonth.decimalFormat(), interest = totalInterest.decimalFormat(),
+                 interestRate = interestRate.decimalFormat(), totalAmount = totalPayment.decimalFormat(),
+                 principal = loanAmount.decimalFormat(), numberInstallments = numberInstallments.decimalFormat()
+             )
+
+             if (_emiCalculatorState.value.isSecondEmiCalculator) {
+                 _secondEmiCalculation.value = emi
+             } else {
+                 _firstEmiCalculation.value = emi
              }
+
          }
 
     }

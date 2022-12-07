@@ -11,8 +11,8 @@ import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.NavHostFragment
 import com.example.calculator.R
 import com.example.calculator.databinding.FragmentEmiCalculatorBinding
-import com.example.calculator.utils.parseDouble
-import com.example.calculator.utils.viewBinding
+import com.example.calculator.util.parseDouble
+import com.example.calculator.util.viewBinding
 import kotlinx.coroutines.launch
 
 
@@ -39,18 +39,18 @@ class EmiCalculatorFragment : Fragment(R.layout.fragment_emi_calculator) {
 
             emiCalculatorAction.setOnClickListener {
 
-                val loanAmount = parseDouble(loanAmount.text.toString())
-                val numberInstallments = parseDouble(numberInstallments.text.toString())
-                val interestRate = parseDouble(interestRate.text.toString())
-                val isFirstEmiCalculator = emiViewModel.emiCalculatorState.value.isFirstEmiCalculator
-                val isSecondEmiCalculator = emiViewModel.emiCalculatorState.value.isSecondEmiCalculator
+                val loanAmount = loanAmount.text.toString().parseDouble()
+                val numberInstallments = numberInstallments.text.toString().parseDouble()
+                val interestRate = interestRate.text.toString().parseDouble()
 
                 emiViewModel.calculateEmi(loanAmount , interestRate, numberInstallments)
 
-                when {
-                    isFirstEmiCalculator -> navigateToEmiCalculation()
-                    isSecondEmiCalculator -> navigateToCompareFragment()
+                if (emiViewModel.emiCalculatorState.value.isSecondEmiCalculator) {
+                    navigateToCompareFragment()
+                } else {
+                    navigateToEmiCalculation()
                 }
+
             }
         }
     }
@@ -62,21 +62,21 @@ class EmiCalculatorFragment : Fragment(R.layout.fragment_emi_calculator) {
 
     private fun showFirstEmiCalculator() {
         fragmentEmiCalculatorBinding.labelSecondEmiCalculator.visibility = View.GONE
-        fragmentEmiCalculatorBinding.emiCalculatorAction.text = "Calculate"
+        fragmentEmiCalculatorBinding.emiCalculatorAction.text = getString(R.string.calculate)
     }
 
     private fun showSecondEmiCalculator() {
         fragmentEmiCalculatorBinding.labelSecondEmiCalculator.visibility = View.VISIBLE
-        fragmentEmiCalculatorBinding.emiCalculatorAction.text = "Compare"
-    }
-
-    private fun navigateToEmiCalculation() {
-        val action = EmiCalculatorFragmentDirections.actionEmiCalculatorToEmiCalculation()
-        NavHostFragment.findNavController(this).navigate(action)
+        fragmentEmiCalculatorBinding.emiCalculatorAction.text = getString(R.string.compare)
     }
 
     private fun navigateToCompareFragment() {
         val action = EmiCalculatorFragmentDirections.actionEmiCalculatorToCompareFragment()
+        NavHostFragment.findNavController(this).navigate(action)
+    }
+
+    private fun navigateToEmiCalculation() {
+        val action = EmiCalculatorFragmentDirections.actionEmiCalculatorToEmiCalculation()
         NavHostFragment.findNavController(this).navigate(action)
     }
 

@@ -6,11 +6,11 @@ package com.example.calculator.ui.calculator
 import androidx.core.text.isDigitsOnly
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.calculator.data.PreviousOperation
-import com.example.calculator.repository.PreviousOperationRepository
-import com.example.calculator.utils.isBalancedBrackets
-import com.example.calculator.utils.safeLet
-import com.example.calculator.utils.trimTrailingZero
+import com.example.calculator.data.model.PreviousOperation
+import com.example.calculator.data.repository.PreviousOperationRepository
+import com.example.calculator.util.isBalancedBrackets
+import com.example.calculator.util.safeLet
+import com.example.calculator.util.trimTrailingZero
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -33,14 +33,15 @@ class CalculatorViewModel @Inject constructor(
 
 
     val listPreviousOperationsFlow = previousOperationRepository.listPreviousOperationsFlow
-    private val listChars: List<Char> = listOf(')','e', 'i')
+    private val listChars: List<Char> = listOf(')','e', 'i', '%')
     private val listArithmeticSymbols: List<Char> = listOf('+','-','×','÷','.')
-    private val listNumbers: List<Char> = listOf(')','1','2','3','4','5','6','7','8','9','0','%','e','i')
+    private val listNumbers: List<Char> = listOf(')','1','2','3','4','5','6','7','8','9','0','%','e','i','ℼ')
     private var isDecimalPointClicked = true
     private var arithmeticOperation = '+'
 
     private val _currentInput: MutableStateFlow<String?> = MutableStateFlow(null)
-    val currentInput = _currentInput.asStateFlow()
+    val currentInput =  _currentInput.asStateFlow()
+
 
     private val _result: MutableStateFlow<String?> = MutableStateFlow(null)
     val result = _result.asStateFlow()
@@ -53,15 +54,15 @@ class CalculatorViewModel @Inject constructor(
         _result.value = ""
     }
 
-    fun onChangeCurrentInput(input: String) {
+    fun changeCurrentInput(input: String) {
         _currentInput.value = input
     }
 
-    fun onChangeResult(result: String) {
+    fun changeResult(result: String) {
         _result.value = result
     }
 
-    fun onChangeCalculatorState(calculatorState: CalculatorState) {
+    fun changeCalculatorState(calculatorState: CalculatorState) {
         viewModelScope.launch {
             _calculatorState.value = calculatorState
         }
@@ -74,19 +75,17 @@ class CalculatorViewModel @Inject constructor(
                 it == "0" ->  _currentInput.value = (_currentInput.value?.dropLast(1) + number)
                 it.lastOrNull() in listChars && !it.contains('.')  -> _currentInput.value =  ("${_currentInput.value}×$number")
                 (it.lastOrNull() != '%') && !it.contains('.') -> _currentInput.value =  (_currentInput.value +  number)
-                else  -> onChangeCalculatorState(CalculatorState(isInvalidFormat = true))
+                else  -> changeCalculatorState(CalculatorState(isInvalidFormat = true))
             }
         }
     }
 
-    fun addFunctions(function: String) {
+    fun addFunction(function: String) {
         _currentInput.value?.let {
-            _currentInput.value = with(it) {
-                when {
-                    lastOrNull() in listNumbers -> ("$this×$function")
-                    else -> ("$this$function")
+            _currentInput.value = when  {
+                    it.lastOrNull() in listNumbers -> ("$it×$function")
+                    else -> ("$it$function")
                 }
-            }
         }
     }
 
@@ -97,7 +96,7 @@ class CalculatorViewModel @Inject constructor(
             if (afterArithmeticOperation.isNotEmpty() && (afterArithmeticOperation.lastOrNull() in listNumbers)) {
                 _currentInput.value =  ("$it$power")
             } else {
-                onChangeCalculatorState(CalculatorState(isInvalidFormat = true))
+                changeCalculatorState(CalculatorState(isInvalidFormat = true))
             }
         }
     }
@@ -105,32 +104,31 @@ class CalculatorViewModel @Inject constructor(
 
     fun calculateCurrentInput() {
         _currentInput.value?.let {
-            val afterArithmeticOperation = it.substringAfterLast(arithmeticOperation)
-
             viewModelScope.launch(Dispatchers.IO) {
+                val afterArithmeticOperation = it.substringAfterLast(arithmeticOperation)
 
                 val input = it.replace('×', '*')
                     .replace('÷', '/')
                 val expression = Expression(input)
-                val output = trimTrailingZero(java.lang.String.valueOf(expression.calculate()))
-                if (output == "NaN")
-                    _result.value = ""
-                else _result.value = output
+                val output = trimTrailingZero(java.lang.String.valueOf(expression.calculate().toFloat()))
+                _result.value = if (it.lastOrNull() in listOf('+', '-') || output == "NaN") "" else output
 
+
+
+                if (afterArithmeticOperation.isDigitsOnly())
+                    isDecimalPointClicked = true
+
+                if (afterArithmeticOperation.isEmpty()) {
+                    isDecimalPointClicked = true
+
+                }
             }
 
-            if (afterArithmeticOperation.isDigitsOnly())
-                isDecimalPointClicked = true
-
-            if (afterArithmeticOperation.isEmpty()) {
-                isDecimalPointClicked = true
-
-            }
         }
     }
 
 
-    fun removeCharsCurrentInput() {
+    fun removeCurrentInputChars() {
         _currentInput.value?.let {
             if (it != "") {
                 _currentInput.value  = it.substring(0, it.length - 1)
@@ -161,32 +159,30 @@ class CalculatorViewModel @Inject constructor(
 
     fun addMinusSign() {
         _currentInput.value?.let {
-            if (it.lastOrNull() in listNumbers)
-                _currentInput.value = ("$it×(-")
-            else _currentInput.value = ("$it(-")
+            _currentInput.value = if (it.lastOrNull() in listNumbers) ("$it×(-") else ("$it(-")
         }
     }
 
     fun addBrackets() {
         _currentInput.value?.let {
-            _currentInput.value = with(it) {
-                when {
-                    isBalancedBrackets(this) && lastOrNull() in listNumbers -> ("$this×(")
-                    isBalancedBrackets(this) -> ("$this(")
-                    else -> ("$this)")
-                }
-           }
+            _currentInput.value = when {
+                isBalancedBrackets(it) && it.lastOrNull() in listNumbers -> ("$it×(")
+                isBalancedBrackets(it) -> ("$it(")
+                else -> ("$it)")
+            }
         }
     }
 
 
-    fun onInsert() {
+    fun insert() {
         safeLet(_currentInput.value, _result.value) { currentInputValue, resultValue ->
             if (resultValue.isNotEmpty()) {
-                val previousOperation = PreviousOperation(currentInputValue, resultValue)
-                insert(previousOperation)
-                _currentInput.value = resultValue
-                _result.value = ""
+                viewModelScope.launch(Dispatchers.IO) {
+                    val previousOperation = PreviousOperation(currentInputValue, resultValue)
+                    previousOperationRepository.insert(previousOperation)
+                    _currentInput.value = resultValue
+                    _result.value = ""
+                }
             }
         }
     }
@@ -197,9 +193,10 @@ class CalculatorViewModel @Inject constructor(
             val afterArithmeticOperation = it.substringAfterLast(arithmeticOperation)
             if (afterArithmeticOperation.isNotEmpty() && (afterArithmeticOperation.lastOrNull() in listNumbers) && (afterArithmeticOperation.lastOrNull()!= '%')) {
                 _currentInput.value = ("$it%")
+                isDecimalPointClicked = true
             }
             else {
-                onChangeCalculatorState(CalculatorState(isInvalidFormat = true))
+                changeCalculatorState(CalculatorState(isInvalidFormat = true))
             }
         }
     }
@@ -207,16 +204,13 @@ class CalculatorViewModel @Inject constructor(
     fun addNumber(number: String) {
         _currentInput.value?.let {
             val afterArithmeticOperation = it.substringAfterLast(arithmeticOperation)
-            with(afterArithmeticOperation) {
-                when {
+                when  {
                     equals("0") ->  _currentInput.value = (it.dropLast(1) + number)
-                    lastOrNull() in listChars  -> _currentInput.value =  ("$it×$number")
-                    (lastOrNull() != '%') -> _currentInput.value =  (it + number)
-                    else  -> onChangeCalculatorState(CalculatorState(isInvalidFormat = true))
+                    afterArithmeticOperation.lastOrNull() in listChars  -> _currentInput.value =  ("$it×$number")
+                    else  -> _currentInput.value =  (it + number)
                 }
         }
-         }
-     }
+    }
 
     fun addArithmeticOperation(arithmeticSymbol: String) {
         _currentInput.value?.let {
@@ -232,13 +226,10 @@ class CalculatorViewModel @Inject constructor(
         }
     }
 
-    fun clear()  = viewModelScope.launch(Dispatchers.IO) {
+    fun clearListPreviousOperations()  = viewModelScope.launch(Dispatchers.IO) {
         previousOperationRepository.clear()
     }
 
-    private fun insert(previousOperation: PreviousOperation) = viewModelScope.launch(Dispatchers.IO) {
-        previousOperationRepository.insert(previousOperation)
-    }
 
 }
 

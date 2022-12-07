@@ -1,7 +1,9 @@
-package com.example.calculator.data
+package com.example.calculator.di
 
 import android.content.Context
 import androidx.room.Room
+import com.example.calculator.data.local.PreviousOperationDao
+import com.example.calculator.data.local.PreviousOperationDatabase
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

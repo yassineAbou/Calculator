@@ -43,6 +43,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/_20sdp"
             android:text="@string/loanAmount"
+            android:textSize="@dimen/_11ssp"
             android:textColor="@color/purple_dark"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/labelSecondEmiCalculator"
@@ -56,16 +57,15 @@
             android:layout_marginStart="@dimen/_20sdp"
             android:layout_marginTop="2dp"
             android:background="@null"
-            android:ems="10"
             android:hint="@string/hintLoanAmount"
+            android:importantForAutofill="no"
+            android:inputType="numberDecimal"
             android:textColor="?attr/secondTextColor"
             android:textColorHint="?attr/secondTextColor"
-            android:inputType="numberDecimal"
             android:textSize="@dimen/_16ssp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/labelLoanAmount"
-            android:importantForAutofill="no"
-            />
+            tools:ignore="TouchTargetSizeCheck,TextContrastCheck" />
 
         <View
             android:id="@+id/lineSeparatorLoanAmount"
@@ -84,6 +84,7 @@
             android:layout_marginStart="@dimen/_20sdp"
             android:layout_marginTop="26dp"
             android:text="@string/InterestRate"
+            android:textSize="@dimen/_11ssp"
             android:textColor="@color/purple_dark"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/lineSeparatorLoanAmount" />
@@ -95,15 +96,15 @@
             android:layout_marginStart="@dimen/_20sdp"
             android:layout_marginTop="2dp"
             android:background="@null"
-            android:ems="10"
             android:hint="@string/hintInterestRate"
+            android:importantForAutofill="no"
             android:inputType="numberDecimal"
             android:textColor="?attr/secondTextColor"
             android:textColorHint="?attr/secondTextColor"
             android:textSize="@dimen/_16ssp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/labelInterestRate"
-            android:importantForAutofill="no" />
+            tools:ignore="TouchTargetSizeCheck,TextContrastCheck" />
 
         <View
             android:id="@+id/lineSeparatorInterestRate"
@@ -121,6 +122,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/_20sdp"
             android:layout_marginTop="26dp"
+            android:textSize="@dimen/_11ssp"
             android:text="@string/numberInstallments"
             android:textColor="@color/purple_dark"
             app:layout_constraintStart_toStartOf="parent"
@@ -132,16 +134,16 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/_20sdp"
             android:layout_marginTop="2dp"
-            android:ems="10"
             android:background="@null"
+            android:hint="@string/hintNumberInstallments"
+            android:importantForAutofill="no"
             android:inputType="number"
             android:textColor="?attr/secondTextColor"
             android:textColorHint="?attr/secondTextColor"
-            android:hint="@string/hintNumberInstallments"
-            app:layout_constraintStart_toStartOf="parent"
             android:textSize="@dimen/_16ssp"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/labelNumberInstallment"
-            android:importantForAutofill="no" />
+            tools:ignore="TouchTargetSizeCheck,TextContrastCheck" />
 
         <View
             android:id="@+id/lineSeparatorNumberInstallments"
@@ -165,23 +167,19 @@
 
         <Button
             android:id="@+id/emiCalculatorAction"
-            android:layout_width="wrap_content"
+            android:layout_width="150dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="195dp"
             android:background="@drawable/radius_button"
-            android:paddingStart="@dimen/_45sdp"
-            android:paddingTop="4dp"
-            android:paddingEnd="@dimen/_45sdp"
-            android:paddingBottom="4dp"
-            android:text=""
             android:textAllCaps="false"
-            android:textColor="@color/white"
-            android:textSize="@dimen/_14ssp"
-            app:backgroundTint="@color/purple_dark"
+            android:textSize="16sp"
             android:textStyle="bold"
+            android:textColor="@color/white"
+            app:backgroundTint="@color/purple_dark"
+            android:layout_marginBottom="@dimen/_8sdp"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"/>
+            tools:ignore="SpeakableTextPresentCheck" />
 
 
 

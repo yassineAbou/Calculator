@@ -6,7 +6,7 @@
 
     <data>
         <variable
-            name="calculatorViewModel"
+            name="viewModel"
             type="com.example.calculator.ui.calculator.CalculatorViewModel" />
     </data>
 
@@ -25,33 +25,35 @@
             android:paddingTop="@dimen/_24sdp"
             android:paddingEnd="@dimen/_25sdp"
             app:autoSizeTextType="uniform"
+            tools:text="15+15"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:ignore="RtlHardcoded"
             android:textSize="@dimen/_36ssp"
             android:textColor="?attr/textColor"
-            android:text="@{calculatorViewModel.currentInput}"
-            android:onTextChanged="@{(text, start, before, count) -> calculatorViewModel.calculateCurrentInput()}"
+            android:text="@{viewModel.currentInput}"
+            android:onTextChanged="@{(text, start, before, count) -> viewModel.calculateCurrentInput()}"
             />
 
         <TextView
             android:id="@+id/result"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            app:layout_constraintHeight_percent="0.1"
             android:layout_marginTop="@dimen/_2sdp"
-            android:gravity="bottom"
-            android:textAlignment="viewEnd"
+            android:gravity="bottom|end"
             android:paddingStart="0dp"
             android:paddingEnd="@dimen/_25sdp"
-            android:textSize="@dimen/_22ssp"
+            android:text="@{viewModel.result}"
+            android:textAlignment="viewEnd"
             android:textColor="?attr/secondTextColor"
+            android:textSize="@dimen/_22ssp"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHeight_percent="0.1"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/currentInput"
-            tools:ignore="RtlCompat"
-            android:text="@{calculatorViewModel.result}"/>
+            tools:ignore="RtlCompat,TextContrastCheck"
+            tools:text="30" />
 
         <ImageButton
             android:id="@+id/history"
@@ -104,7 +106,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/result"
             app:srcCompat="@drawable/backspace"
-            android:onClick="@{() -> calculatorViewModel.removeCharsCurrentInput()}"
+            android:onClick="@{() -> viewModel.removeCurrentInputChars()}"
             android:background="?attr/bgColor"/>
 
         <View
@@ -131,7 +133,7 @@
             android:layout_height="wrap_content"
             android:visibility="gone"
             app:constraint_referenced_ids="LineSeparatorHistory,clearHistory,listPrevOperations"
-            tools:visibility="gone" />
+            tools:visibility="invisible" />
 
         <View
             android:id="@+id/LineSeparatorHistory"
@@ -150,34 +152,31 @@
             android:id="@+id/listPrevOperations"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            app:layout_constraintHeight_percent="0.4"
+            app:layout_constraintHeight_percent="0.55"
             app:layout_constraintEnd_toEndOf="@+id/LineSeparatorHistory"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/lineSeparatorCalculator"
             android:layout_marginEnd="@dimen/_15sdp"
-            tools:listitem="@layout/list_previous_operations"
+            tools:listitem="@layout/previous_operation_item"
             />
 
         <Button
             android:id="@+id/clearHistory"
-            android:layout_width="wrap_content"
+            android:layout_width="160dp"
             android:layout_height="wrap_content"
             android:background="@drawable/radius_button"
-            android:paddingStart="@dimen/_30sdp"
-            android:paddingBottom="4dp"
-            android:paddingEnd="@dimen/_30sdp"
-            android:paddingTop="4dp"
             android:text="@string/clearHistory"
             android:textAllCaps="false"
             android:textColor="@color/white"
-            android:textSize="@dimen/_13ssp"
+            android:textSize="16sp"
             android:textStyle="bold"
+            android:layout_marginBottom="@dimen/_8sdp"
             app:backgroundTint="@color/purple"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="@+id/LineSeparatorHistory"
             app:layout_constraintBottom_toBottomOf="parent"
-            android:onClick="@{() -> calculatorViewModel.clear()}"
+            android:onClick="@{() -> viewModel.clearListPreviousOperations()}"
             />
 
         <androidx.appcompat.widget.AppCompatButton
@@ -195,7 +194,7 @@
             android:textStyle="normal"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/history"
-            android:onClick="@{() -> calculatorViewModel.clearCurrentInput()}"/>
+            android:onClick="@{() -> viewModel.clearCurrentInput()}"/>
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/brackets"
@@ -208,7 +207,7 @@
             app:layout_constraintStart_toEndOf="@+id/clear"
             app:layout_constraintTop_toBottomOf="@+id/history"
             style="@style/operations"
-            android:onClick="@{() -> calculatorViewModel.addBrackets()}"/>
+            android:onClick="@{() -> viewModel.addBrackets()}"/>
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/percentage"
@@ -221,7 +220,7 @@
             app:layout_constraintStart_toEndOf="@+id/brackets"
             app:layout_constraintTop_toBottomOf="@+id/history"
             style="@style/operations"
-            android:onClick="@{() -> calculatorViewModel.addPercentage()}"/>
+            android:onClick="@{() -> viewModel.addPercentage()}"/>
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/division"
@@ -234,7 +233,7 @@
             app:layout_constraintStart_toEndOf="@+id/percentage"
             app:layout_constraintTop_toBottomOf="@+id/history"
             style="@style/operations"
-            android:onClick="@{() -> calculatorViewModel.addArithmeticOperation(@string/division)}"/>
+            android:onClick="@{() -> viewModel.addArithmeticOperation(@string/division)}"/>
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/numberSeven"
@@ -247,7 +246,7 @@
             app:layout_constraintTop_toBottomOf="@+id/clear"
             android:textSize="@dimen/_30ssp"
             style="@style/numbers"
-            android:onClick="@{() -> calculatorViewModel.addNumber(@string/numberSeven)}"
+            android:onClick="@{() -> viewModel.addNumber(@string/numberSeven)}"
             />
 
         <androidx.appcompat.widget.AppCompatButton
@@ -261,7 +260,7 @@
             app:layout_constraintStart_toEndOf="@+id/numberSeven"
             app:layout_constraintTop_toBottomOf="@+id/clear"
             style="@style/numbers"
-            android:onClick="@{() -> calculatorViewModel.addNumber(@string/numberEight)}"/>
+            android:onClick="@{() -> viewModel.addNumber(@string/numberEight)}"/>
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/numberNine"
@@ -274,7 +273,7 @@
             app:layout_constraintStart_toEndOf="@+id/numberEight"
             app:layout_constraintTop_toBottomOf="@+id/clear"
             style="@style/numbers"
-            android:onClick="@{() -> calculatorViewModel.addNumber(@string/numberNine)}"/>
+            android:onClick="@{() -> viewModel.addNumber(@string/numberNine)}"/>
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/multiplication"
@@ -287,7 +286,7 @@
             app:layout_constraintStart_toEndOf="@+id/numberNine"
             app:layout_constraintTop_toBottomOf="@+id/clear"
             style="@style/operations"
-            android:onClick="@{() -> calculatorViewModel.addArithmeticOperation(@string/multiplication)}"/>
+            android:onClick="@{() -> viewModel.addArithmeticOperation(@string/multiplication)}"/>
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/numberFour"
@@ -300,7 +299,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/numberSeven"
             style="@style/numbers"
-            android:onClick="@{() -> calculatorViewModel.addNumber(@string/numberFour)}"/>
+            android:onClick="@{() -> viewModel.addNumber(@string/numberFour)}"/>
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/numberFive"
@@ -313,7 +312,7 @@
             app:layout_constraintStart_toEndOf="@+id/numberFour"
             app:layout_constraintTop_toBottomOf="@+id/numberSeven"
             style="@style/numbers"
-            android:onClick="@{() -> calculatorViewModel.addNumber(@string/numberFive)}"/>
+            android:onClick="@{() -> viewModel.addNumber(@string/numberFive)}"/>
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/numberSix"
@@ -326,7 +325,7 @@
             app:layout_constraintStart_toEndOf="@+id/numberFive"
             app:layout_constraintTop_toBottomOf="@+id/numberSeven"
             style="@style/numbers"
-            android:onClick="@{() -> calculatorViewModel.addNumber(@string/numberSix)}"/>
+            android:onClick="@{() -> viewModel.addNumber(@string/numberSix)}"/>
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/minus"
@@ -339,7 +338,7 @@
             app:layout_constraintStart_toEndOf="@+id/numberSix"
             app:layout_constraintTop_toBottomOf="@+id/numberSeven"
             style="@style/operations"
-            android:onClick="@{() -> calculatorViewModel.addArithmeticOperation(@string/minus)}"/>
+            android:onClick="@{() -> viewModel.addArithmeticOperation(@string/minus)}"/>
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/numberOne"
@@ -352,7 +351,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/numberFour"
             style="@style/numbers"
-            android:onClick="@{() -> calculatorViewModel.addNumber(@string/numberOne)}"/>
+            android:onClick="@{() -> viewModel.addNumber(@string/numberOne)}"/>
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/numberTwo"
@@ -365,7 +364,7 @@
             app:layout_constraintStart_toEndOf="@+id/numberOne"
             app:layout_constraintTop_toBottomOf="@+id/numberFour"
             style="@style/numbers"
-            android:onClick="@{() -> calculatorViewModel.addNumber(@string/numberTwo)}"/>
+            android:onClick="@{() -> viewModel.addNumber(@string/numberTwo)}"/>
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/numberThree"
@@ -378,7 +377,7 @@
             app:layout_constraintStart_toEndOf="@+id/numberTwo"
             app:layout_constraintTop_toBottomOf="@+id/numberFour"
             style="@style/numbers"
-            android:onClick="@{() -> calculatorViewModel.addNumber(@string/numberThree)}"/>
+            android:onClick="@{() -> viewModel.addNumber(@string/numberThree)}"/>
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/plus"
@@ -391,7 +390,7 @@
             app:layout_constraintStart_toEndOf="@+id/numberThree"
             app:layout_constraintTop_toBottomOf="@+id/numberFour"
             style="@style/operations"
-            android:onClick="@{() -> calculatorViewModel.addArithmeticOperation(@string/plus)}"/>
+            android:onClick="@{() -> viewModel.addArithmeticOperation(@string/plus)}"/>
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/minusSign"
@@ -404,7 +403,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/numberOne"
             style="@style/numbers"
-            android:onClick="@{() -> calculatorViewModel.addMinusSign()}"/>
+            android:onClick="@{() -> viewModel.addMinusSign()}"/>
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/numberZero"
@@ -417,7 +416,7 @@
             app:layout_constraintStart_toEndOf="@+id/minusSign"
             app:layout_constraintTop_toBottomOf="@+id/numberOne"
             style="@style/numbers"
-            android:onClick="@{() -> calculatorViewModel.addNumber(@string/numberZero)}"/>
+            android:onClick="@{() -> viewModel.addNumber(@string/numberZero)}"/>
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/decimalPoint"
@@ -426,7 +425,7 @@
             android:layout_height="0dp"
             android:layout_marginStart="@dimen/_5sdp"
             app:layout_constraintHeight_percent="0.1"
-            android:onClick="@{() -> calculatorViewModel.addDecimalPoint()}"
+            android:onClick="@{() -> viewModel.addDecimalPoint()}"
             android:text="@string/decimalPoint"
             android:textSize="@dimen/_30ssp"
             app:layout_constraintStart_toEndOf="@+id/numberZero"
@@ -445,7 +444,7 @@
             android:textSize="@dimen/_30ssp"
             app:layout_constraintStart_toEndOf="@+id/decimalPoint"
             app:layout_constraintTop_toBottomOf="@+id/numberOne"
-            android:onClick="@{() -> calculatorViewModel.onInsert()}"/>
+            android:onClick="@{() -> viewModel.insert()}"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

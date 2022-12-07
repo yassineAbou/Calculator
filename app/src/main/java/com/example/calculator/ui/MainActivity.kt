@@ -9,7 +9,7 @@ import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupActionBarWithNavController
 import com.example.calculator.R
 import com.example.calculator.databinding.ActivityMainBinding
-import com.example.calculator.utils.viewBinding
+import com.example.calculator.util.viewBinding
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint

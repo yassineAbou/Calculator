@@ -51,7 +51,7 @@
     <string name="xSquared">x²</string>
     <string name="xPowerY">xʸ</string>
     <string name="absoluteValue">|x|</string>
-    <string name="pi">𝝅</string>
+    <string name="pi">ℼ</string>
     <string name="eulerNumber">e</string>
     <string name="radian">Rad</string>
     <string name="cubeRoot">∛</string>
@@ -74,14 +74,14 @@
     <string name="symbolXPowerY">^(</string>
     <string name="symbolCube">^(3)</string>
     <string name="symbolFactorial">!</string>
-    <string name="symbolRoot">sqrt(</string>
+    <string name="symbolRoot">√(</string>
     <string name="symbolCosine">cos(</string>
     <string name="symbolSine">sin(</string>
     <string name="symbolTangent">tan(</string>
     <string name="symbolNaturalLog">ln(</string>
     <string name="symbolLogarithm">log10(</string>
     <string name="symbolInverseNumber">1÷</string>
-    <string name="symbolEPowerX">exp(</string>
+    <string name="symbolEPowerX">e^(</string>
     <string name="symbolAbsoluteValue">abs(</string>
     <string name="symbolEulerNumber">e</string>
     <string name="symbolPi">pi</string>
@@ -95,7 +95,7 @@
     <string name="symbolInverseHyperbolicCosine">acosh(</string>
     <string name="symbolInverseHyperbolicTangent">atanh(</string>
     <string name="symbolTwoPowerX">2^(</string>
-    <string name="symbolCubeRoot">root(3,</string>
+    <string name="symbolCubeRoot">∛(</string>
     <string name="symbolRadian">rad(</string>
     <string name="SymbolDegree">deg(</string>
 

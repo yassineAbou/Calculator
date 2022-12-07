@@ -5,7 +5,7 @@
 
     <data>
         <variable
-            name="emiViewModel"
+            name="viewModel"
             type="com.example.calculator.ui.emi.EMIViewModel" />
     </data>
 
@@ -33,14 +33,14 @@
             android:id="@+id/labelEmiAmount"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:paddingTop="26dp"
             android:text="@string/emiAmount"
+            android:textColor="?attr/secondTextColor"
+            android:textSize="@dimen/_15ssp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            android:textSize="@dimen/_15ssp"
-            android:textColor="?attr/secondTextColor"
-            android:paddingTop="26dp"
-            />
+            tools:ignore="TextContrastCheck" />
 
         <TextView
             android:id="@+id/emiAmount"
@@ -53,7 +53,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/labelEmiAmount"
             android:textSize="@dimen/_35ssp"
-            android:text="@{emiViewModel.firstEmiCalculation.emiAmount}"/>
+            android:text="@{viewModel.firstEmiCalculation.emiAmount}"/>
 
         <TextView
             android:id="@+id/perMonth"
@@ -61,23 +61,25 @@
             android:layout_height="wrap_content"
             android:text="@string/perMonth"
             android:textColor="?attr/secondTextColor"
+            android:textSize="@dimen/_15ssp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/emiAmount"
-            android:textSize="@dimen/_15ssp"/>
+            tools:ignore="TextContrastCheck" />
 
         <TextView
             android:id="@+id/numberInstallments"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            tools:text="@string/installments"
             android:layout_marginTop="6dp"
+            android:text="@{String.format(@string/installments, viewModel.firstEmiCalculation.numberInstallments)}"
             android:textColor="?attr/secondTextColor"
+            android:textSize="@dimen/_15ssp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/perMonth"
-            android:textSize="@dimen/_15ssp"
-            android:text= "@{String.format(@string/installments, emiViewModel.firstEmiCalculation.numberInstallments)}"/>
+            tools:ignore="TextContrastCheck"
+            tools:text="@string/installments" />
 
         <TextView
             android:id="@+id/totalAmount"
@@ -90,7 +92,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/numberInstallments"
-            android:text= "@{String.format(@string/totalAmount, emiViewModel.firstEmiCalculation.totalAmount)}"/>
+            android:text= "@{String.format(@string/totalAmount, viewModel.firstEmiCalculation.totalAmount)}"/>
 
         <TextView
             android:id="@+id/principal"
@@ -103,19 +105,20 @@
             android:textSize="@dimen/_15ssp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/totalAmount"
-            android:text="@{emiViewModel.firstEmiCalculation.principal}"/>
+            android:text="@{viewModel.firstEmiCalculation.principal}"/>
 
         <TextView
             android:id="@+id/labelPrincipal"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="3dp"
             android:layout_marginStart="@dimen/_19sdp"
-            android:textSize="@dimen/_15ssp"
+            android:layout_marginTop="3dp"
             android:text="@string/principal"
             android:textColor="?attr/secondTextColor"
+            android:textSize="@dimen/_15ssp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/principal" />
+            app:layout_constraintTop_toBottomOf="@+id/principal"
+            tools:ignore="TextContrastCheck" />
 
         <TextView
             android:id="@+id/interest"
@@ -128,7 +131,7 @@
             android:layout_marginEnd="@dimen/_19sdp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/totalAmount"
-            android:text="@{emiViewModel.firstEmiCalculation.interest}"/>
+            android:text="@{viewModel.firstEmiCalculation.interest}"/>
 
         <TextView
             android:id="@+id/labelInterest"
@@ -137,10 +140,11 @@
             android:layout_marginTop="3dp"
             android:layout_marginEnd="@dimen/_19sdp"
             android:text="@string/interest"
-            android:textSize="@dimen/_15ssp"
             android:textColor="?attr/secondTextColor"
+            android:textSize="@dimen/_15ssp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/interest" />
+            app:layout_constraintTop_toBottomOf="@+id/interest"
+            tools:ignore="TextContrastCheck" />
 
         <View
             android:id="@+id/lineSeparatorCompare"
@@ -153,16 +157,17 @@
             app:layout_constraintTop_toBottomOf="@+id/labelPrincipal" />
 
         <TextView
-            android:id="@+id/labelInterestRate"
+            android:id="@+id/labelCompare"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="19dp"
-            app:layout_constraintEnd_toEndOf="parent"
             android:text="@string/labelCompare"
-            android:textSize="@dimen/_15ssp"
             android:textColor="?attr/secondTextColor"
+            android:textSize="@dimen/_15ssp"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/lineSeparatorCompare" />
+            app:layout_constraintTop_toBottomOf="@+id/lineSeparatorCompare"
+            tools:ignore="TextContrastCheck" />
 
         <View
             android:id="@+id/lineSeparatorBackground"
@@ -172,23 +177,19 @@
             android:background="?attr/fifthBgColor"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/labelInterestRate" />
+            app:layout_constraintTop_toBottomOf="@+id/labelCompare" />
 
         <Button
             android:id="@+id/done"
-            android:layout_width="wrap_content"
+            android:layout_width="150dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="65dp"
             android:background="@drawable/radius_button"
-            android:paddingStart="@dimen/_45sdp"
-            android:paddingTop="4dp"
-            android:paddingEnd="@dimen/_45sdp"
-            android:paddingBottom="4dp"
             android:text="@string/done"
             android:textAllCaps="false"
-            android:textStyle="bold"
-            android:textSize="@dimen/_14ssp"
             android:textColor="@color/white"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:layout_marginBottom="@dimen/_8sdp"
             app:backgroundTint="@color/purple_dark"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -199,13 +200,13 @@
             android:id="@+id/compare"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="11dp"
             android:layout_marginStart="@dimen/_19sdp"
+            android:layout_marginTop="11dp"
+            android:contentDescription="compare"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/lineSeparatorCompare"
             app:srcCompat="@drawable/ic_baseline_add_24"
-            android:contentDescription="compare"
-            />
+            tools:ignore="TouchTargetSizeCheck,ImageContrastCheck" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

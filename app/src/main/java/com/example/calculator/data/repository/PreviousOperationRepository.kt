@@ -1,7 +1,7 @@
-package com.example.calculator.repository
+package com.example.calculator.data.repository
 
-import com.example.calculator.data.PreviousOperation
-import com.example.calculator.data.PreviousOperationDao
+import com.example.calculator.data.model.PreviousOperation
+import com.example.calculator.data.local.PreviousOperationDao
 import kotlinx.coroutines.flow.distinctUntilChanged
 import javax.inject.Inject
 

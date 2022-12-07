@@ -5,16 +5,16 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.example.calculator.data.PreviousOperation
-import com.example.calculator.databinding.ListPreviousOperationsBinding
+import com.example.calculator.data.model.PreviousOperation
+import com.example.calculator.databinding.PreviousOperationItemBinding
 
 
-class ListPreviousOperationsAdapter(private val previousOperationActions: PreviousOperationActions)
+class ListPreviousOperationsAdapter(private val previousOperationAction: PreviousOperationAction)
   : ListAdapter<PreviousOperation, ListPreviousOperationsAdapter.ViewHolder>(PrevOperationDiffCallback()){
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val prevOperation = getItem(position)!!
-        holder.bind(prevOperation, previousOperationActions)
+        val prevOperation = getItem(position)
+        holder.bind(prevOperation, previousOperationAction)
 
     }
 
@@ -22,22 +22,22 @@ class ListPreviousOperationsAdapter(private val previousOperationActions: Previo
         return ViewHolder.from(parent)
     }
 
-    class ViewHolder private constructor(private val listPreviousOperationsBinding: ListPreviousOperationsBinding)
-        : RecyclerView.ViewHolder(listPreviousOperationsBinding.root) {
+    class ViewHolder private constructor(private val previousOperationItemBinding: PreviousOperationItemBinding)
+        : RecyclerView.ViewHolder(previousOperationItemBinding.root) {
 
         fun bind(
             previousOperation: PreviousOperation,
-            previousOperationActions: PreviousOperationActions,
+            previousOperationAction: PreviousOperationAction,
         ) {
-            listPreviousOperationsBinding.previousOperation = previousOperation
-            listPreviousOperationsBinding.previousOperationActions = previousOperationActions
-            listPreviousOperationsBinding.executePendingBindings()
+            previousOperationItemBinding.previousOperation = previousOperation
+            previousOperationItemBinding.previousOperationActions = previousOperationAction
+            previousOperationItemBinding.executePendingBindings()
         }
 
         companion object {
             fun from(parent: ViewGroup): ViewHolder {
                 val layoutInflater = LayoutInflater.from(parent.context)
-                val binding = com.example.calculator.databinding.ListPreviousOperationsBinding.inflate(layoutInflater, parent, false)
+                val binding = PreviousOperationItemBinding.inflate(layoutInflater, parent, false)
                 return ViewHolder(binding)
             }
         }
@@ -55,7 +55,7 @@ class PrevOperationDiffCallback : DiffUtil.ItemCallback<PreviousOperation>() {
     }
 }
 
-interface PreviousOperationActions {
+interface PreviousOperationAction {
     fun addPreviousNumber(number: String)
 }
 

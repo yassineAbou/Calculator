@@ -44,7 +44,7 @@
             android:layout_marginStart="@dimen/_20sdp"
             android:text="@string/loanAmount"
             android:textSize="@dimen/_11ssp"
-            android:textColor="@color/purple_dark"
+            android:textColor="@color/purple_300"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/labelSecondEmiCalculator"
             android:layout_marginTop="26dp"
@@ -85,7 +85,7 @@
             android:layout_marginTop="26dp"
             android:text="@string/InterestRate"
             android:textSize="@dimen/_11ssp"
-            android:textColor="@color/purple_dark"
+            android:textColor="@color/purple_300"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/lineSeparatorLoanAmount" />
 
@@ -124,7 +124,7 @@
             android:layout_marginTop="26dp"
             android:textSize="@dimen/_11ssp"
             android:text="@string/numberInstallments"
-            android:textColor="@color/purple_dark"
+            android:textColor="@color/purple_300"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/lineSeparatorInterestRate" />
 
@@ -174,7 +174,7 @@
             android:textSize="16sp"
             android:textStyle="bold"
             android:textColor="@color/white"
-            app:backgroundTint="@color/purple_dark"
+            app:backgroundTint="@color/purple_300"
             android:layout_marginBottom="@dimen/_8sdp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

@@ -1,16 +1,18 @@
 package com.example.calculator.util
 
-import android.view.View
+import android.content.Context
+import android.content.res.Configuration
 import android.widget.TextView
 import androidx.databinding.BindingAdapter
+import androidx.lifecycle.Observer
 import androidx.lifecycle.SavedStateHandle
-import androidx.recyclerview.widget.RecyclerView
 import com.example.calculator.data.model.PreviousOperation
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.*
-import kotlinx.coroutines.runBlocking
 import java.math.RoundingMode
 import java.text.DecimalFormat
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.*
+import kotlinx.coroutines.withContext
 
 @BindingAdapter("setInput")
 fun TextView.setInput(previousOperation: PreviousOperation?) {
@@ -26,11 +28,16 @@ fun TextView.setResult(previousOperation: PreviousOperation?) {
     }
 }
 
+fun Context.isDarkMode(): Boolean {
+    val darkModeFlag = this.resources.configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK
+    return darkModeFlag == Configuration.UI_MODE_NIGHT_YES
+}
+
 fun String.parseDouble(): Double {
     return if (this.isEmpty()) 0.0 else this.toDouble()
 }
 
-inline fun <T1: Any, T2: Any, R: Any> safeLet(p1: T1?, p2: T2?, block: (T1, T2)->R?): R? {
+inline fun <T1 : Any, T2 : Any, R : Any> safeLet(p1: T1?, p2: T2?, block: (T1, T2) -> R?): R? {
     return if (p1 != null && p2 != null) block(p1, p2) else null
 }
 
@@ -53,13 +60,43 @@ fun trimTrailingZero(value: String?): String? {
     return if (!value.isNullOrEmpty()) {
         if (value.indexOf(".") < 0) {
             value
-
         } else {
             value.replace("0*$".toRegex(), "").replace("\\.$".toRegex(), "")
         }
-
     } else {
         value
     }
 }
 
+fun <T> SavedStateHandle.getStateFlow(
+    scope: CoroutineScope,
+    key: String,
+    initialValue: T
+): MutableStateFlow<T> {
+    val liveData = getLiveData(key, initialValue)
+    val stateFlow = MutableStateFlow(initialValue)
+
+    // Synchronize the LiveData with the StateFlow
+    val observer = Observer<T> { value ->
+        if (stateFlow.value != value) {
+            stateFlow.value = value
+        }
+    }
+    liveData.observeForever(observer)
+
+    stateFlow.onCompletion {
+        // Stop observing the LiveData if the StateFlow completes
+        withContext(Dispatchers.Main.immediate) {
+            liveData.removeObserver(observer)
+        }
+    }.onEach { value ->
+        // Synchronize the StateFlow with the LiveData
+        withContext(Dispatchers.Main.immediate) {
+            if (liveData.value != value) {
+                liveData.value = value
+            }
+        }
+    }.launchIn(scope)
+
+    return stateFlow
+}

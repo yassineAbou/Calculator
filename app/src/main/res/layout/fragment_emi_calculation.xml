@@ -190,7 +190,7 @@
             android:textSize="16sp"
             android:textStyle="bold"
             android:layout_marginBottom="@dimen/_8sdp"
-            app:backgroundTint="@color/purple_dark"
+            app:backgroundTint="@color/purple_300"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"

@@ -1,6 +1,5 @@
 package com.example.calculator.ui.emi
 
-
 import android.content.Intent
 import android.content.pm.ActivityInfo
 import android.os.Bundle
@@ -18,7 +17,6 @@ import com.example.calculator.R
 import com.example.calculator.databinding.FragmentEmiCalculationBinding
 import com.example.calculator.util.viewBinding
 
-
 class EmiCalculationFragment : Fragment(R.layout.fragment_emi_calculation) {
 
     private val fragmentEmiCalculationBinding by viewBinding(FragmentEmiCalculationBinding::bind)
@@ -32,32 +30,34 @@ class EmiCalculationFragment : Fragment(R.layout.fragment_emi_calculation) {
 
         val menuHost: MenuHost = requireActivity()
 
-        menuHost.addMenuProvider(object : MenuProvider {
-            override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
-                menuInflater.inflate(R.menu.share_menu, menu)
-            }
-
-            override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
-                return when (menuItem.itemId) {
-                    R.id.share -> {
-                        shareEmiCalculationResult()
-                        true
-                    }
-                    else -> false
+        menuHost.addMenuProvider(
+            object : MenuProvider {
+                override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
+                    menuInflater.inflate(R.menu.share_menu, menu)
                 }
-            }
-        }, viewLifecycleOwner, Lifecycle.State.RESUMED)
+
+                override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
+                    return when (menuItem.itemId) {
+                        R.id.share -> {
+                            shareEmiCalculationResult()
+                            true
+                        }
+                        else -> false
+                    }
+                }
+            },
+            viewLifecycleOwner, Lifecycle.State.RESUMED
+        )
 
         fragmentEmiCalculationBinding.apply {
 
-                compare.setOnClickListener {
-                    navigateToEmiCalculator()
-                }
+            compare.setOnClickListener {
+                navigateToEmiCalculator()
+            }
 
-                done.setOnClickListener {
-                    navigateToCalculator()
-                }
-
+            done.setOnClickListener {
+                navigateToCalculator()
+            }
         }
     }
 
@@ -86,22 +86,25 @@ class EmiCalculationFragment : Fragment(R.layout.fragment_emi_calculation) {
         activity?.requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
     }
 
-    private fun getShareIntent() : Intent {
-        val shareIntent = Intent(Intent.ACTION_SEND)
-        shareIntent.setType("text/plain")
-            .putExtra(Intent.EXTRA_TEXT,
-                emiViewModel.firstEmiCalculation.value?.let {
-                    getString(R.string.shareEmiCalculation, it.principal, it.emiAmount,
-                        it.interestRate, it.numberInstallments)
-                 }
-            )
-        return shareIntent
-    }
-
-
     private fun shareEmiCalculationResult() {
         startActivity(getShareIntent())
     }
 
-}
+    private fun getShareIntent(): Intent {
+        val shareIntent = Intent().apply {
+            action = Intent.ACTION_SEND
+            type = "text/plain"
+            putExtra(
+                Intent.EXTRA_TEXT,
+                emiViewModel.firstEmiCalculation.value?.let {
+                    getString(
+                        R.string.shareEmiCalculation, it.principal, it.emiAmount,
+                        it.interestRate, it.numberInstallments
+                    )
+                }
+            )
+        }
 
+        return Intent.createChooser(shareIntent, null)
+    }
+}

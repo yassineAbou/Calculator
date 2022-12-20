@@ -1,9 +1,9 @@
 package com.example.calculator.data.repository
 
-import com.example.calculator.data.model.PreviousOperation
 import com.example.calculator.data.local.PreviousOperationDao
-import kotlinx.coroutines.flow.distinctUntilChanged
+import com.example.calculator.data.model.PreviousOperation
 import javax.inject.Inject
+import kotlinx.coroutines.flow.distinctUntilChanged
 
 class PreviousOperationRepository @Inject constructor(
     private val previousOperationDao: PreviousOperationDao
@@ -11,12 +11,11 @@ class PreviousOperationRepository @Inject constructor(
 
     val listPreviousOperationsFlow = previousOperationDao.getListPreviousOperations().distinctUntilChanged()
 
-     suspend fun insert(previousOperation: PreviousOperation) {
-         previousOperationDao.insert(previousOperation)
-     }
+    suspend fun insert(previousOperation: PreviousOperation) {
+        previousOperationDao.insert(previousOperation)
+    }
 
     suspend fun clear() {
         previousOperationDao.clear()
     }
-
 }

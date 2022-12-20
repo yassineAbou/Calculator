@@ -15,10 +15,9 @@ import com.example.calculator.util.parseDouble
 import com.example.calculator.util.viewBinding
 import kotlinx.coroutines.launch
 
-
 class EmiCalculatorFragment : Fragment(R.layout.fragment_emi_calculator) {
 
-    private val emiViewModel : EMIViewModel by activityViewModels()
+    private val emiViewModel: EMIViewModel by activityViewModels()
     private val fragmentEmiCalculatorBinding by viewBinding(FragmentEmiCalculatorBinding::bind)
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -43,14 +42,13 @@ class EmiCalculatorFragment : Fragment(R.layout.fragment_emi_calculator) {
                 val numberInstallments = numberInstallments.text.toString().parseDouble()
                 val interestRate = interestRate.text.toString().parseDouble()
 
-                emiViewModel.calculateEmi(loanAmount , interestRate, numberInstallments)
+                emiViewModel.calculateEmi(loanAmount, interestRate, numberInstallments)
 
                 if (emiViewModel.emiCalculatorState.value.isSecondEmiCalculator) {
                     navigateToCompareFragment()
                 } else {
                     navigateToEmiCalculation()
                 }
-
             }
         }
     }
@@ -83,7 +81,4 @@ class EmiCalculatorFragment : Fragment(R.layout.fragment_emi_calculator) {
     private fun setOrientationPortraitMode() {
         activity?.requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
     }
-
-
-
 }

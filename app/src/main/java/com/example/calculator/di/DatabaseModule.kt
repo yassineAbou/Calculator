@@ -23,14 +23,12 @@ object DatabaseModule {
         app,
         PreviousOperationDatabase::class.java,
         "calculator_history_database"
-    ).createFromAsset("database/previous_operation.db").fallbackToDestructiveMigration().build()
+    ).createFromAsset("database/previous_operation.db").build()
 
     @Singleton
     @Provides
     fun providePreviousOperationDao(previousOperationDatabase: PreviousOperationDatabase):
-            PreviousOperationDao {
+        PreviousOperationDao {
         return previousOperationDatabase.getPreviousOperationDao()
     }
-
-
 }

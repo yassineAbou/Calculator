@@ -2,9 +2,9 @@
     <!-- Base application theme. -->
     <style name="Theme.Calculator0" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <!-- Primary brand color. -->
-        <item name="colorPrimary">@color/black_holo</item>
-        <item name="colorPrimaryVariant">@color/black_holo</item>
-        <item name="colorOnPrimary">@color/black_holo</item>
+        <item name="colorPrimary">@color/black_100</item>
+        <item name="colorPrimaryVariant">@color/black_100</item>
+        <item name="colorOnPrimary">@color/black_100</item>
         <!-- Secondary brand color. -->
         <item name="colorSecondary">@color/purple</item>
         <item name="colorSecondaryVariant">@color/purple</item>
@@ -15,12 +15,12 @@
         <item name="android:fontFamily">@font/roboto</item>
         <item name="fontFamily">@font/roboto</item>
         <item name="toolbarStyle">@style/custom_toolbar</item>
-        <item name="textColor">@color/white_dark</item>
-        <item name="secondTextColor">@color/gray4</item>
-        <item name="bgColor">@color/black_holo</item>
-        <item name="secondBgColor">@color/light_black</item>
+        <item name="textColor">@color/white_200</item>
+        <item name="secondTextColor">@color/gray_500</item>
+        <item name="bgColor">@color/black_100</item>
+        <item name="secondBgColor">@color/black_200</item>
         <item name="thirdBgColor">@color/black</item>
-        <item name="fourthBgColor">@color/black_holo</item>
+        <item name="fourthBgColor">@color/black_100</item>
         <item name="fifthBgColor">@color/black</item>
         <item name="thirdTextColor">@color/white</item>
         <item name="sixthTextColor">@color/black</item>

@@ -499,7 +499,7 @@
             android:layout_width="0dp"
             android:layout_height="@dimen/_28sdp"
             android:layout_marginTop="@dimen/_6sdp"
-            android:background="@drawable/custom_button_landscape"
+            android:background="@drawable/custom_button_equal_landscape"
             android:onClick="@{() -> viewModel.insert()}"
             android:text="@string/equal"
             android:textColor="@color/white"

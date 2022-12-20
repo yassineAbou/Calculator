@@ -1,6 +1,5 @@
 package com.example.calculator.ui
 
-
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
@@ -24,14 +23,12 @@ class MainActivity : AppCompatActivity() {
         setupNavigation()
 
         navController.addOnDestinationChangedListener { _, destination, _ ->
-            if(destination.id == R.id.calculatorFragment) {
+            if (destination.id == R.id.calculatorFragment) {
                 activityMainBinding.toolbar.visibility = View.GONE
-
             } else {
                 activityMainBinding.toolbar.visibility = View.VISIBLE
             }
         }
-
     }
 
     private fun setupNavigation() {
@@ -45,20 +42,4 @@ class MainActivity : AppCompatActivity() {
     override fun onSupportNavigateUp(): Boolean {
         return navController.navigateUp() || super.onSupportNavigateUp()
     }
-
-
-
 }
-
-
-
-
-
-
-
-
-
-
-
-
-

@@ -6,15 +6,9 @@ import androidx.room.PrimaryKey
 @Entity(tableName = "previous_operation")
 data class PreviousOperation(
 
-      val input: String,
+    val input: String,
 
-      val result: String,
+    val result: String,
 
-      @PrimaryKey(autoGenerate = true) var id: Int = 0
+    @PrimaryKey(autoGenerate = true) var id: Int = 0
 )
-
-
-
-
-
-

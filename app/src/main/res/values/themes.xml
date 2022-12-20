@@ -2,8 +2,8 @@
     <!-- Base application theme. -->
     <style name="Theme.Calculator0" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <!-- Primary brand color. -->
-        <item name="colorPrimary">@color/gray2</item>
-        <item name="colorPrimaryVariant" >@color/gray2</item>
+        <item name="colorPrimary">@color/gray_300</item>
+        <item name="colorPrimaryVariant" >@color/gray_300</item>
         <item name="android:windowLightStatusBar" tools:targetApi="23">true</item>
         <item name="colorOnPrimary">@color/white</item>
         <!-- Secondary brand color. -->
@@ -20,15 +20,15 @@
         <item name="fontFamily">@font/roboto</item>
         <item name="toolbarStyle">@style/custom_toolbar</item>
         <item name="drawerArrowStyle">@style/MyDrawerArrowToggleStyle</item>
-        <item name="textColor">@color/light_black</item>
+        <item name="textColor">@color/black_200</item>
         <item name="secondTextColor">@color/gray</item>
         <item name="bgColor">@color/white</item>
-        <item name="secondBgColor">@color/white2</item>
-        <item name="thirdBgColor">@color/white_dark</item>
-        <item name="fourthBgColor">@color/gray2</item>
+        <item name="secondBgColor">@color/white_100</item>
+        <item name="thirdBgColor">@color/white_200</item>
+        <item name="fourthBgColor">@color/gray_300</item>
         <item name="fifthBgColor">@color/white</item>
         <item name="thirdTextColor">@color/black</item>
-        <item name="sixthTextColor">@color/gray_dark</item>
+        <item name="sixthTextColor">@color/gray_200</item>
 
     </style>
 

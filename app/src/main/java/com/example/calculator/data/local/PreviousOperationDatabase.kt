@@ -9,4 +9,3 @@ abstract class PreviousOperationDatabase : RoomDatabase() {
 
     abstract fun getPreviousOperationDao(): PreviousOperationDao
 }
-

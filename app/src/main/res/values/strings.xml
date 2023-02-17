@@ -14,7 +14,6 @@
     <string name="numberThree">3</string>
     <string name="minusSign">+/-</string>
     <string name="numberZero">0</string>
-    <string name="number">%d</string>
 
 
     <string name="history">history</string>
@@ -32,11 +31,6 @@
     <string name="minus">-</string>
     <string name="plus">+</string>
     <string name="equal">=</string>
-    <string name="input">15 + 15</string>
-    <string name="result">30</string>
-
-
-    <string name="invalidFormat">Invalid format used.</string>
 
 
     <string name="alternativeOperation">⇆</string>
@@ -84,7 +78,6 @@
     <string name="symbolEPowerX">e^(</string>
     <string name="symbolAbsoluteValue">abs(</string>
     <string name="symbolEulerNumber">e</string>
-    <string name="symbolPi">pi</string>
     <string name="symbolInverseSine">asin(</string>
     <string name="symbolInverseCosine">acos(</string>
     <string name="symbolInverseTangent">atan(</string>
@@ -100,7 +93,6 @@
     <string name="SymbolDegree">deg(</string>
 
 
-    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="loanAmount">Loan amount</string>
     <string name="InterestRate">Interest rate</string>
     <string name="numberInstallments">Number of installments</string>
@@ -126,7 +118,6 @@
     </string>
     <string name="shareCompare">First option \nLoan amount: %1$s\nEMI amount: %2$s\nInterest rate: %3$s\nNumber of installments: %4$s\nSecond option \nLoan amount: %5$s\nEMI amount: %6$s\nInterest rate: %7$s\nNumber of installments: %8$s
     </string>
-
 
 
 </resources>

@@ -35,7 +35,7 @@
             app:layout_constraintTop_toTopOf="parent"
             android:visibility="gone"
             android:paddingTop="19dp"
-            android:textSize="@dimen/_13ssp"/>
+            android:textSize="@dimen/_13ssp" />
 
         <TextView
             android:id="@+id/labelLoanAmount"
@@ -47,8 +47,7 @@
             android:textColor="@color/purple_300"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/labelSecondEmiCalculator"
-            android:layout_marginTop="26dp"
-            />
+            android:layout_marginTop="26dp" />
 
         <EditText
             android:id="@+id/loanAmount"
@@ -180,8 +179,6 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             tools:ignore="SpeakableTextPresentCheck" />
-
-
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

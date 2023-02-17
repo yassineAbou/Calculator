@@ -4,6 +4,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
+
         <variable
             name="viewModel"
             type="com.example.calculator.ui.emi.EMIViewModel" />
@@ -53,7 +54,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/labelEmiAmount"
             android:textSize="@dimen/_35ssp"
-            android:text="@{viewModel.firstEmiCalculation.emiAmount}"/>
+            android:text="@{viewModel.firstEmiCalculation.emiAmount}" />
 
         <TextView
             android:id="@+id/perMonth"
@@ -92,7 +93,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/numberInstallments"
-            android:text= "@{String.format(@string/totalAmount, viewModel.firstEmiCalculation.totalAmount)}"/>
+            android:text="@{String.format(@string/totalAmount, viewModel.firstEmiCalculation.totalAmount)}" />
 
         <TextView
             android:id="@+id/principal"
@@ -105,7 +106,7 @@
             android:textSize="@dimen/_15ssp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/totalAmount"
-            android:text="@{viewModel.firstEmiCalculation.principal}"/>
+            android:text="@{viewModel.firstEmiCalculation.principal}" />
 
         <TextView
             android:id="@+id/labelPrincipal"
@@ -131,7 +132,7 @@
             android:layout_marginEnd="@dimen/_19sdp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/totalAmount"
-            android:text="@{viewModel.firstEmiCalculation.interest}"/>
+            android:text="@{viewModel.firstEmiCalculation.interest}" />
 
         <TextView
             android:id="@+id/labelInterest"
@@ -193,8 +194,7 @@
             app:backgroundTint="@color/purple_300"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            />
+            app:layout_constraintBottom_toBottomOf="parent" />
 
         <ImageButton
             android:id="@+id/compare"

@@ -5,6 +5,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
+
         <variable
             name="viewModel"
             type="com.example.calculator.ui.calculator.CalculatorViewModel" />
@@ -13,19 +14,19 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".ui.calculator.CalculatorFragment"
-        >
+        tools:context=".ui.calculator.CalculatorFragment">
 
         <TextView
             android:id="@+id/currentInput"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/_70sdp"
+            android:layout_height="0dp"
             android:gravity="end"
             android:paddingStart="@dimen/_25sdp"
             android:paddingTop="@dimen/_24sdp"
             android:paddingEnd="@dimen/_25sdp"
             app:autoSizeTextType="uniform"
             tools:text="15+15"
+            app:layout_constraintHeight_percent="0.13"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -33,8 +34,7 @@
             android:textSize="@dimen/_36ssp"
             android:textColor="?attr/textColor"
             android:text="@{viewModel.currentInput}"
-            android:onTextChanged="@{(text, start, before, count) -> viewModel.calculateCurrentInput()}"
-            />
+            android:onTextChanged="@{(text, start, before, count) -> viewModel.calculateCurrentInput()}" />
 
         <TextView
             android:id="@+id/result"
@@ -49,7 +49,7 @@
             android:textColor="?attr/secondTextColor"
             android:textSize="@dimen/_22ssp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHeight_percent="0.1"
+            app:layout_constraintHeight_percent="0.13"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/currentInput"
             tools:ignore="RtlCompat,TextContrastCheck"
@@ -61,13 +61,12 @@
             android:layout_height="0dp"
             app:layout_constraintHeight_percent="0.1"
             app:srcCompat="@drawable/history"
-            app:layout_constraintTop_toBottomOf = "@+id/result"
+            app:layout_constraintTop_toBottomOf="@+id/result"
             android:layout_marginTop="10dp"
             android:layout_marginStart="@dimen/_15sdp"
             app:layout_constraintStart_toStartOf="parent"
             android:contentDescription="@string/history"
-            android:background="?attr/bgColor"
-            />
+            android:background="?attr/bgColor" />
 
         <ImageButton
             android:id="@+id/scientificMode"
@@ -75,11 +74,11 @@
             android:layout_height="0dp"
             app:layout_constraintHeight_percent="0.1"
             android:layout_marginTop="10dp"
-            app:layout_constraintTop_toBottomOf = "@+id/result"
+            app:layout_constraintTop_toBottomOf="@+id/result"
             app:srcCompat="@drawable/ic_math"
-            app:layout_constraintLeft_toRightOf = "@+id/history"
+            app:layout_constraintLeft_toRightOf="@+id/history"
             android:contentDescription="@string/scientificMode"
-            android:background="?attr/bgColor"/>
+            android:background="?attr/bgColor" />
 
 
         <ImageButton
@@ -93,7 +92,7 @@
             app:layout_constraintTop_toBottomOf="@+id/result"
             android:contentDescription="@string/emiCalculator"
             android:visibility="visible"
-            android:background="?attr/bgColor"/>
+            android:background="?attr/bgColor" />
 
         <ImageButton
             android:id="@+id/backspace"
@@ -107,7 +106,7 @@
             app:layout_constraintTop_toBottomOf="@+id/result"
             app:srcCompat="@drawable/backspace"
             android:onClick="@{() -> viewModel.removeCurrentInputChars()}"
-            android:background="?attr/bgColor"/>
+            android:background="?attr/bgColor" />
 
         <View
             android:id="@+id/lineSeparatorCalculator"
@@ -116,7 +115,7 @@
             app:layout_constraintTop_toBottomOf="@+id/history"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            android:background="?attr/secondBgColor"/>
+            android:background="?attr/secondBgColor" />
 
         <androidx.constraintlayout.widget.Group
             android:id="@+id/normal_mode_group"
@@ -144,8 +143,7 @@
             app:layout_constraintEnd_toEndOf="@+id/numberNine"
             android:layout_marginEnd="@dimen/_11sdp"
             app:layout_constraintTop_toBottomOf="@+id/lineSeparatorCalculator"
-            android:layout_marginTop="17dp"
-            />
+            android:layout_marginTop="17dp" />
 
 
         <androidx.recyclerview.widget.RecyclerView
@@ -158,8 +156,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/lineSeparatorCalculator"
             android:layout_marginEnd="@dimen/_15sdp"
-            tools:listitem="@layout/previous_operation_item"
-            />
+            tools:listitem="@layout/previous_operation_item" />
 
         <Button
             android:id="@+id/clearHistory"
@@ -176,8 +173,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="@+id/LineSeparatorHistory"
             app:layout_constraintBottom_toBottomOf="parent"
-            android:onClick="@{() -> viewModel.clearListPreviousOperations()}"
-            />
+            android:onClick="@{() -> viewModel.clearListPreviousOperations()}" />
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/clear"
@@ -194,7 +190,7 @@
             android:textStyle="normal"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/history"
-            android:onClick="@{() -> viewModel.clearCurrentInput()}"/>
+            android:onClick="@{() -> viewModel.clearCurrentInput()}" />
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/brackets"
@@ -207,7 +203,7 @@
             app:layout_constraintStart_toEndOf="@+id/clear"
             app:layout_constraintTop_toBottomOf="@+id/history"
             style="@style/operations"
-            android:onClick="@{() -> viewModel.addBrackets()}"/>
+            android:onClick="@{() -> viewModel.addBrackets()}" />
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/percentage"
@@ -220,7 +216,7 @@
             app:layout_constraintStart_toEndOf="@+id/brackets"
             app:layout_constraintTop_toBottomOf="@+id/history"
             style="@style/operations"
-            android:onClick="@{() -> viewModel.addPercentage()}"/>
+            android:onClick="@{() -> viewModel.addPercentage()}" />
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/division"
@@ -233,7 +229,7 @@
             app:layout_constraintStart_toEndOf="@+id/percentage"
             app:layout_constraintTop_toBottomOf="@+id/history"
             style="@style/operations"
-            android:onClick="@{() -> viewModel.addArithmeticOperation(@string/division)}"/>
+            android:onClick="@{() -> viewModel.addArithmeticOperation(@string/division)}" />
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/numberSeven"
@@ -246,8 +242,7 @@
             app:layout_constraintTop_toBottomOf="@+id/clear"
             android:textSize="@dimen/_30ssp"
             style="@style/numbers"
-            android:onClick="@{() -> viewModel.addNumber(@string/numberSeven)}"
-            />
+            android:onClick="@{() -> viewModel.addNumber(@string/numberSeven)}" />
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/numberEight"
@@ -260,7 +255,7 @@
             app:layout_constraintStart_toEndOf="@+id/numberSeven"
             app:layout_constraintTop_toBottomOf="@+id/clear"
             style="@style/numbers"
-            android:onClick="@{() -> viewModel.addNumber(@string/numberEight)}"/>
+            android:onClick="@{() -> viewModel.addNumber(@string/numberEight)}" />
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/numberNine"
@@ -273,7 +268,7 @@
             app:layout_constraintStart_toEndOf="@+id/numberEight"
             app:layout_constraintTop_toBottomOf="@+id/clear"
             style="@style/numbers"
-            android:onClick="@{() -> viewModel.addNumber(@string/numberNine)}"/>
+            android:onClick="@{() -> viewModel.addNumber(@string/numberNine)}" />
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/multiplication"
@@ -286,7 +281,7 @@
             app:layout_constraintStart_toEndOf="@+id/numberNine"
             app:layout_constraintTop_toBottomOf="@+id/clear"
             style="@style/operations"
-            android:onClick="@{() -> viewModel.addArithmeticOperation(@string/multiplication)}"/>
+            android:onClick="@{() -> viewModel.addArithmeticOperation(@string/multiplication)}" />
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/numberFour"
@@ -299,7 +294,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/numberSeven"
             style="@style/numbers"
-            android:onClick="@{() -> viewModel.addNumber(@string/numberFour)}"/>
+            android:onClick="@{() -> viewModel.addNumber(@string/numberFour)}" />
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/numberFive"
@@ -312,7 +307,7 @@
             app:layout_constraintStart_toEndOf="@+id/numberFour"
             app:layout_constraintTop_toBottomOf="@+id/numberSeven"
             style="@style/numbers"
-            android:onClick="@{() -> viewModel.addNumber(@string/numberFive)}"/>
+            android:onClick="@{() -> viewModel.addNumber(@string/numberFive)}" />
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/numberSix"
@@ -325,7 +320,7 @@
             app:layout_constraintStart_toEndOf="@+id/numberFive"
             app:layout_constraintTop_toBottomOf="@+id/numberSeven"
             style="@style/numbers"
-            android:onClick="@{() -> viewModel.addNumber(@string/numberSix)}"/>
+            android:onClick="@{() -> viewModel.addNumber(@string/numberSix)}" />
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/minus"
@@ -338,7 +333,7 @@
             app:layout_constraintStart_toEndOf="@+id/numberSix"
             app:layout_constraintTop_toBottomOf="@+id/numberSeven"
             style="@style/operations"
-            android:onClick="@{() -> viewModel.addArithmeticOperation(@string/minus)}"/>
+            android:onClick="@{() -> viewModel.addArithmeticOperation(@string/minus)}" />
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/numberOne"
@@ -351,7 +346,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/numberFour"
             style="@style/numbers"
-            android:onClick="@{() -> viewModel.addNumber(@string/numberOne)}"/>
+            android:onClick="@{() -> viewModel.addNumber(@string/numberOne)}" />
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/numberTwo"
@@ -364,7 +359,7 @@
             app:layout_constraintStart_toEndOf="@+id/numberOne"
             app:layout_constraintTop_toBottomOf="@+id/numberFour"
             style="@style/numbers"
-            android:onClick="@{() -> viewModel.addNumber(@string/numberTwo)}"/>
+            android:onClick="@{() -> viewModel.addNumber(@string/numberTwo)}" />
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/numberThree"
@@ -377,7 +372,7 @@
             app:layout_constraintStart_toEndOf="@+id/numberTwo"
             app:layout_constraintTop_toBottomOf="@+id/numberFour"
             style="@style/numbers"
-            android:onClick="@{() -> viewModel.addNumber(@string/numberThree)}"/>
+            android:onClick="@{() -> viewModel.addNumber(@string/numberThree)}" />
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/plus"
@@ -390,7 +385,7 @@
             app:layout_constraintStart_toEndOf="@+id/numberThree"
             app:layout_constraintTop_toBottomOf="@+id/numberFour"
             style="@style/operations"
-            android:onClick="@{() -> viewModel.addArithmeticOperation(@string/plus)}"/>
+            android:onClick="@{() -> viewModel.addArithmeticOperation(@string/plus)}" />
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/minusSign"
@@ -403,7 +398,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/numberOne"
             style="@style/numbers"
-            android:onClick="@{() -> viewModel.addMinusSign()}"/>
+            android:onClick="@{() -> viewModel.addMinusSign()}" />
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/numberZero"
@@ -416,7 +411,7 @@
             app:layout_constraintStart_toEndOf="@+id/minusSign"
             app:layout_constraintTop_toBottomOf="@+id/numberOne"
             style="@style/numbers"
-            android:onClick="@{() -> viewModel.addNumber(@string/numberZero)}"/>
+            android:onClick="@{() -> viewModel.addNumber(@string/numberZero)}" />
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/decimalPoint"
@@ -444,7 +439,7 @@
             android:textSize="@dimen/_30ssp"
             app:layout_constraintStart_toEndOf="@+id/decimalPoint"
             app:layout_constraintTop_toBottomOf="@+id/numberOne"
-            android:onClick="@{() -> viewModel.insert()}"/>
+            android:onClick="@{() -> viewModel.insert()}" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

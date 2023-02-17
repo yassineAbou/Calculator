@@ -3,7 +3,7 @@
     <style name="Theme.Calculator0" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <!-- Primary brand color. -->
         <item name="colorPrimary">@color/gray_300</item>
-        <item name="colorPrimaryVariant" >@color/gray_300</item>
+        <item name="colorPrimaryVariant">@color/gray_300</item>
         <item name="android:windowLightStatusBar" tools:targetApi="23">true</item>
         <item name="colorOnPrimary">@color/white</item>
         <!-- Secondary brand color. -->
@@ -33,7 +33,6 @@
     </style>
 
 
-
     <style name="custom_toolbar" parent="@style/Widget.AppCompat.Toolbar">
         <item name="titleTextColor">?attr/thirdTextColor</item>
     </style>
@@ -41,9 +40,6 @@
     <style name="MyDrawerArrowToggleStyle" parent="Widget.AppCompat.DrawerArrowToggle">
         <item name="color">?attr/thirdTextColor</item>
     </style>
-
-
-
 
 
 </resources>

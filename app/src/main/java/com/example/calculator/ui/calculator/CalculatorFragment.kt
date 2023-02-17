@@ -5,14 +5,21 @@ import android.graphics.Color
 import android.graphics.PorterDuff
 import android.os.Bundle
 import android.view.View
-import android.view.View.*
+import android.view.View.GONE
+import android.view.View.INVISIBLE
+import android.view.View.VISIBLE
 import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.*
+import androidx.lifecycle.DefaultLifecycleObserver
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.LifecycleOwner
+import androidx.lifecycle.coroutineScope
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.NavHostFragment.Companion.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -58,7 +65,6 @@ class CalculatorFragment : Fragment(R.layout.fragment_calculator) {
         })
 
         fragmentCalculatorBinding.apply {
-
             emiCalculator.setOnClickListener {
                 navigateToEmiCalculator()
             }
@@ -87,7 +93,8 @@ class CalculatorFragment : Fragment(R.layout.fragment_calculator) {
                     it?.let {
                         calculatorViewModel.changeCurrentInput(it)
                         val backSpaceColor = if (it.isNotEmpty()) "#997592" else "#D8BFD8"
-                        fragmentCalculatorBinding.backspace.setColorFilter(Color.parseColor(backSpaceColor),
+                        fragmentCalculatorBinding.backspace.setColorFilter(
+                            Color.parseColor(backSpaceColor),
                             PorterDuff.Mode.SRC_ATOP
                         )
                     }
@@ -135,7 +142,6 @@ class CalculatorFragment : Fragment(R.layout.fragment_calculator) {
     }
 
     private fun changeGroupFunctionsVisibility() {
-
         if (calculatorViewModel.calculatorState.value.isSecondGroupFunctions) {
             calculatorViewModel.changeCalculatorState(
                 CalculatorState(isFirstGroupFunctions = true, isSecondGroupFunctions = false)
@@ -155,11 +161,13 @@ class CalculatorFragment : Fragment(R.layout.fragment_calculator) {
         )
     }
 
-
     private fun disableHistoryButton() {
         fragmentCalculatorBinding.history.isEnabled = false
-        val disabledColor = if (requireContext().isDarkMode())  "#333333" else "#CACACA"
-        fragmentCalculatorBinding.history.setColorFilter(Color.parseColor(disabledColor), PorterDuff.Mode.SRC_ATOP)
+        val disabledColor = if (requireContext().isDarkMode()) "#333333" else "#CACACA"
+        fragmentCalculatorBinding.history.setColorFilter(
+            Color.parseColor(disabledColor),
+            PorterDuff.Mode.SRC_ATOP
+        )
     }
 
     private fun showInvalidFormat() {

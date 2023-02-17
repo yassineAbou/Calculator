@@ -10,18 +10,18 @@ import com.example.calculator.util.isBalancedBrackets
 import com.example.calculator.util.safeLet
 import com.example.calculator.util.trimTrailingZero
 import dagger.hilt.android.lifecycle.HiltViewModel
-import javax.inject.Inject
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 import org.mariuszgromada.math.mxparser.Expression
+import javax.inject.Inject
 
 data class CalculatorState(
     val isInvalidFormat: Boolean = false,
     val isFirstGroupFunctions: Boolean = false,
-    val isSecondGroupFunctions: Boolean = false,
+    val isSecondGroupFunctions: Boolean = false
 )
 
 @HiltViewModel
@@ -33,7 +33,8 @@ class CalculatorViewModel @Inject constructor(
     val listPreviousOperationsFlow = previousOperationRepository.listPreviousOperationsFlow
     private val listChars: List<Char> = listOf(')', 'e', 'i', '%')
     private val listArithmeticSymbols: List<Char> = listOf('+', '-', '×', '÷', '.')
-    private val listNumbers: List<Char> = listOf(')', '1', '2', '3', '4', '5', '6', '7', '8', '9', '0', '%', 'e', 'i', 'ℼ')
+    private val listNumbers: List<Char> =
+        listOf(')', '1', '2', '3', '4', '5', '6', '7', '8', '9', '0', '%', 'e', 'i', 'ℼ')
     private var isDecimalPointClicked = true
     private var arithmeticOperation = '+'
 
@@ -70,8 +71,12 @@ class CalculatorViewModel @Inject constructor(
         input?.let {
             when {
                 it == "0" -> _currentInput.value = (_currentInput.value?.dropLast(1) + number)
-                it.lastOrNull() in listChars && !it.contains('.') -> _currentInput.value = ("${_currentInput.value}×$number")
-                (it.lastOrNull() != '%') && !it.contains('.') -> _currentInput.value = (_currentInput.value + number)
+                it.lastOrNull() in listChars && !it.contains('.') ->
+                    _currentInput.value =
+                        ("${_currentInput.value}×$number")
+                (it.lastOrNull() != '%') && !it.contains('.') ->
+                    _currentInput.value =
+                        (_currentInput.value + number)
                 else -> changeCalculatorState(CalculatorState(isInvalidFormat = true))
             }
         }
@@ -106,11 +111,14 @@ class CalculatorViewModel @Inject constructor(
                 val input = it.replace('×', '*')
                     .replace('÷', '/')
                 val expression = Expression(input)
-                val output = trimTrailingZero(java.lang.String.valueOf(expression.calculate().toFloat()))
-                _result.value = if (it.lastOrNull() in listOf('+', '-') || output == "NaN") "" else output
+                val output =
+                    trimTrailingZero(java.lang.String.valueOf(expression.calculate().toFloat()))
+                _result.value =
+                    if (it.lastOrNull() in listOf('+', '-') || output == "NaN") "" else output
 
-                if (afterArithmeticOperation.isDigitsOnly())
+                if (afterArithmeticOperation.isDigitsOnly()) {
                     isDecimalPointClicked = true
+                }
 
                 if (afterArithmeticOperation.isEmpty()) {
                     isDecimalPointClicked = true
@@ -134,7 +142,11 @@ class CalculatorViewModel @Inject constructor(
                 _currentInput.value = (it + "0.")
                 isDecimalPointClicked = false
             }
-            if (isDecimalPointClicked && (afterArithmeticOperation.lastOrNull()?.isDigit() == true) && afterArithmeticOperation.none { char -> char == '.' }) {
+            if (isDecimalPointClicked && (
+                afterArithmeticOperation.lastOrNull()
+                    ?.isDigit() == true
+                ) && afterArithmeticOperation.none { char -> char == '.' }
+            ) {
                 _currentInput.value = ("$it.")
                 isDecimalPointClicked = false
             }
@@ -192,7 +204,9 @@ class CalculatorViewModel @Inject constructor(
             val afterArithmeticOperation = it.substringAfterLast(arithmeticOperation)
             when {
                 equals("0") -> _currentInput.value = (it.dropLast(1) + number)
-                afterArithmeticOperation.lastOrNull() in listChars -> _currentInput.value = ("$it×$number")
+                afterArithmeticOperation.lastOrNull() in listChars ->
+                    _currentInput.value =
+                        ("$it×$number")
                 else -> _currentInput.value = (it + number)
             }
         }

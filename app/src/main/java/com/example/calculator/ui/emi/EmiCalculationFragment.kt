@@ -46,11 +46,11 @@ class EmiCalculationFragment : Fragment(R.layout.fragment_emi_calculation) {
                     }
                 }
             },
-            viewLifecycleOwner, Lifecycle.State.RESUMED
+            viewLifecycleOwner,
+            Lifecycle.State.RESUMED
         )
 
         fragmentEmiCalculationBinding.apply {
-
             compare.setOnClickListener {
                 navigateToEmiCalculator()
             }
@@ -98,8 +98,11 @@ class EmiCalculationFragment : Fragment(R.layout.fragment_emi_calculation) {
                 Intent.EXTRA_TEXT,
                 emiViewModel.firstEmiCalculation.value?.let {
                     getString(
-                        R.string.shareEmiCalculation, it.principal, it.emiAmount,
-                        it.interestRate, it.numberInstallments
+                        R.string.shareEmiCalculation,
+                        it.principal,
+                        it.emiAmount,
+                        it.interestRate,
+                        it.numberInstallments
                     )
                 }
             )

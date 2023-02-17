@@ -4,15 +4,9 @@ import android.content.Context
 import android.content.res.Configuration
 import android.widget.TextView
 import androidx.databinding.BindingAdapter
-import androidx.lifecycle.Observer
-import androidx.lifecycle.SavedStateHandle
 import com.example.calculator.data.model.PreviousOperation
 import java.math.RoundingMode
 import java.text.DecimalFormat
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.*
-import kotlinx.coroutines.withContext
 
 @BindingAdapter("setInput")
 fun TextView.setInput(previousOperation: PreviousOperation?) {
@@ -56,6 +50,7 @@ fun Number.decimalFormat(): String {
     df.roundingMode = RoundingMode.CEILING
     return df.format(this).takeIf { it != "NaN" } ?: "Not applicable"
 }
+
 fun trimTrailingZero(value: String?): String? {
     return if (!value.isNullOrEmpty()) {
         if (value.indexOf(".") < 0) {
@@ -68,35 +63,3 @@ fun trimTrailingZero(value: String?): String? {
     }
 }
 
-fun <T> SavedStateHandle.getStateFlow(
-    scope: CoroutineScope,
-    key: String,
-    initialValue: T
-): MutableStateFlow<T> {
-    val liveData = getLiveData(key, initialValue)
-    val stateFlow = MutableStateFlow(initialValue)
-
-    // Synchronize the LiveData with the StateFlow
-    val observer = Observer<T> { value ->
-        if (stateFlow.value != value) {
-            stateFlow.value = value
-        }
-    }
-    liveData.observeForever(observer)
-
-    stateFlow.onCompletion {
-        // Stop observing the LiveData if the StateFlow completes
-        withContext(Dispatchers.Main.immediate) {
-            liveData.removeObserver(observer)
-        }
-    }.onEach { value ->
-        // Synchronize the StateFlow with the LiveData
-        withContext(Dispatchers.Main.immediate) {
-            if (liveData.value != value) {
-                liveData.value = value
-            }
-        }
-    }.launchIn(scope)
-
-    return stateFlow
-}

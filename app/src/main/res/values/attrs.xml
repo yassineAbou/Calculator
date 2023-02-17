@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <attr name="secondTextColor" format="color"/>
-    <attr name="textColor" format="color"/>
-    <attr name="bgColor" format="color"/>
-    <attr name="secondBgColor" format="color"/>
-    <attr name="thirdBgColor" format="color"/>
-    <attr name="fourthBgColor" format="color"/>
-    <attr name="fifthBgColor" format="color"/>
-    <attr name="thirdTextColor" format="color"/>
-    <attr name="sixthTextColor" format="color"/>
+    <attr name="secondTextColor" format="color" />
+    <attr name="textColor" format="color" />
+    <attr name="bgColor" format="color" />
+    <attr name="secondBgColor" format="color" />
+    <attr name="thirdBgColor" format="color" />
+    <attr name="fourthBgColor" format="color" />
+    <attr name="fifthBgColor" format="color" />
+    <attr name="thirdTextColor" format="color" />
+    <attr name="sixthTextColor" format="color" />
 </resources>

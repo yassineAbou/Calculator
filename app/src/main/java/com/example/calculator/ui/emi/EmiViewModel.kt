@@ -3,15 +3,15 @@ package com.example.calculator.ui.emi
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.calculator.util.decimalFormat
-import kotlin.math.pow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
+import kotlin.math.pow
 
 data class EmiCalculatorState(
     val isFirstEmiCalculator: Boolean = true,
-    val isSecondEmiCalculator: Boolean = false,
+    val isSecondEmiCalculator: Boolean = false
 )
 
 data class Emi(
@@ -39,9 +39,7 @@ class EMIViewModel : ViewModel() {
     }
 
     fun calculateEmi(loanAmount: Double, interestRate: Double, numberInstallments: Double) {
-
         viewModelScope.launch {
-
             val interestValue = interestRate / 12 / 100
             val commonPart = (1 + interestValue).pow(numberInstallments)
             val divUp = (loanAmount * interestValue * commonPart)
@@ -52,9 +50,12 @@ class EMIViewModel : ViewModel() {
             val totalPayment = totalInterest + loanAmount
 
             val emi = Emi(
-                emiAmount = emiCalculationPerMonth.decimalFormat(), interest = totalInterest.decimalFormat(),
-                interestRate = interestRate.decimalFormat(), totalAmount = totalPayment.decimalFormat(),
-                principal = loanAmount.decimalFormat(), numberInstallments = numberInstallments.decimalFormat()
+                emiAmount = emiCalculationPerMonth.decimalFormat(),
+                interest = totalInterest.decimalFormat(),
+                interestRate = interestRate.decimalFormat(),
+                totalAmount = totalPayment.decimalFormat(),
+                principal = loanAmount.decimalFormat(),
+                numberInstallments = numberInstallments.decimalFormat()
             )
 
             if (_emiCalculatorState.value.isSecondEmiCalculator) {

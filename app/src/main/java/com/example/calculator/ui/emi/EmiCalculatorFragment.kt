@@ -2,7 +2,7 @@ package com.example.calculator.ui.emi
 
 import android.content.pm.ActivityInfo
 import android.os.Bundle
-import android.view.*
+import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Lifecycle
@@ -35,9 +35,7 @@ class EmiCalculatorFragment : Fragment(R.layout.fragment_emi_calculator) {
         }
 
         fragmentEmiCalculatorBinding.apply {
-
             emiCalculatorAction.setOnClickListener {
-
                 val loanAmount = loanAmount.text.toString().parseDouble()
                 val numberInstallments = numberInstallments.text.toString().parseDouble()
                 val interestRate = interestRate.text.toString().parseDouble()

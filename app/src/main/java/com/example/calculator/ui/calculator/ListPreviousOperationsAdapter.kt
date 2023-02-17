@@ -9,7 +9,9 @@ import com.example.calculator.data.model.PreviousOperation
 import com.example.calculator.databinding.PreviousOperationItemBinding
 
 class ListPreviousOperationsAdapter(private val previousOperationAction: PreviousOperationAction) :
-    ListAdapter<PreviousOperation, ListPreviousOperationsAdapter.ViewHolder>(PrevOperationDiffCallback()) {
+    ListAdapter<PreviousOperation, ListPreviousOperationsAdapter.ViewHolder>(
+        PrevOperationDiffCallback()
+    ) {
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val prevOperation = getItem(position)
@@ -27,7 +29,7 @@ class ListPreviousOperationsAdapter(private val previousOperationAction: Previou
 
         fun bind(
             previousOperation: PreviousOperation,
-            previousOperationAction: PreviousOperationAction,
+            previousOperationAction: PreviousOperationAction
         ) {
             previousOperationItemBinding.previousOperation = previousOperation
             previousOperationItemBinding.previousOperationActions = previousOperationAction
@@ -48,7 +50,11 @@ class PrevOperationDiffCallback : DiffUtil.ItemCallback<PreviousOperation>() {
     override fun areItemsTheSame(oldItem: PreviousOperation, newItem: PreviousOperation): Boolean {
         return oldItem.id == newItem.id
     }
-    override fun areContentsTheSame(oldItem: PreviousOperation, newItem: PreviousOperation): Boolean {
+
+    override fun areContentsTheSame(
+        oldItem: PreviousOperation,
+        newItem: PreviousOperation
+    ): Boolean {
         return oldItem == newItem
     }
 }

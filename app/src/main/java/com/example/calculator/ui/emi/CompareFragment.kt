@@ -1,6 +1,5 @@
 package com.example.calculator.ui.emi
 
-import android.content.ActivityNotFoundException
 import android.content.Intent
 import android.content.pm.ActivityInfo
 import android.os.Bundle
@@ -8,7 +7,6 @@ import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
 import android.view.View
-import android.widget.Toast
 import androidx.core.view.MenuHost
 import androidx.core.view.MenuProvider
 import androidx.fragment.app.Fragment
@@ -37,8 +35,8 @@ class CompareFragment : Fragment(R.layout.fragment_compare) {
                 override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
                     menuInflater.inflate(R.menu.share_menu, menu)
                 }
-                override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
 
+                override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
                     return when (menuItem.itemId) {
                         R.id.share -> {
                             shareCompareResult()
@@ -48,11 +46,11 @@ class CompareFragment : Fragment(R.layout.fragment_compare) {
                     }
                 }
             },
-            viewLifecycleOwner, Lifecycle.State.RESUMED
+            viewLifecycleOwner,
+            Lifecycle.State.RESUMED
         )
 
         fragmentCompareBinding.apply {
-
             done.setOnClickListener {
                 navigateToCalculator()
             }
@@ -88,20 +86,11 @@ class CompareFragment : Fragment(R.layout.fragment_compare) {
         activity?.requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
     }
 
-    /*
-    After the process death, when the user shares the result, the app crashes.
-    So I surrounded the code with a try-catch block.
-     */
     private fun shareCompareResult() {
-        try {
-            startActivity(getShareIntent())
-        } catch (e: ActivityNotFoundException) {
-            Toast.makeText(requireContext(), "Close and open the app again", Toast.LENGTH_SHORT).show()
-        }
+        startActivity(getShareIntent())
     }
 
     private fun getShareIntent(): Intent {
-
         val shareIntent = Intent(Intent.ACTION_SEND)
 
         safeLet(
@@ -110,17 +99,22 @@ class CompareFragment : Fragment(R.layout.fragment_compare) {
         ) { firstEmiCalculation, secondEmiCalculation ->
 
             shareIntent.setType("text/plain")
-                .putExtra(Intent.EXTRA_TEXT,
-                    getString(R.string.shareCompare, firstEmiCalculation.principal, firstEmiCalculation.emiAmount,
-                        firstEmiCalculation.interestRate, firstEmiCalculation.numberInstallments, secondEmiCalculation.principal,
-                        secondEmiCalculation.emiAmount, secondEmiCalculation.interestRate,
-                        secondEmiCalculation.numberInstallments)
+                .putExtra(
+                    Intent.EXTRA_TEXT,
+                    getString(
+                        R.string.shareCompare,
+                        firstEmiCalculation.principal,
+                        firstEmiCalculation.emiAmount,
+                        firstEmiCalculation.interestRate,
+                        firstEmiCalculation.numberInstallments,
+                        secondEmiCalculation.principal,
+                        secondEmiCalculation.emiAmount,
+                        secondEmiCalculation.interestRate,
+                        secondEmiCalculation.numberInstallments
+                    )
                 )
-
         }
 
         return Intent.createChooser(shareIntent, null)
     }
-
-
 }

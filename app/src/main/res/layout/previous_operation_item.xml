@@ -5,55 +5,54 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <variable
             name="previousOperation"
             type="com.example.calculator.data.model.PreviousOperation" />
+
         <variable
             name="previousOperationActions"
             type="com.example.calculator.ui.calculator.PreviousOperationAction" />
     </data>
 
-<androidx.constraintlayout.widget.ConstraintLayout
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    >
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
-    <TextView
-        android:id="@+id/input"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="17dp"
-        android:gravity="end"
-        android:paddingStart="@dimen/_15sdp"
-        android:textAlignment="viewEnd"
-        android:textColor="?attr/textColor"
-        android:textSize="@dimen/_15ssp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:autoSizeTextType="uniform"
-        setInput="@{previousOperation}"
-        tools:text="15+15"
-        android:paddingEnd="0dp"
-        android:onClick="@{() -> previousOperationActions.addPreviousNumber(previousOperation.input)}"
-        />
+        <TextView
+            android:id="@+id/input"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="17dp"
+            android:gravity="end"
+            android:paddingStart="@dimen/_15sdp"
+            android:textAlignment="viewEnd"
+            android:textColor="?attr/textColor"
+            android:textSize="@dimen/_15ssp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:autoSizeTextType="uniform"
+            setInput="@{previousOperation}"
+            tools:text="15+15"
+            android:paddingEnd="0dp"
+            android:onClick="@{() -> previousOperationActions.appendNumberFromHistory(previousOperation.input)}" />
 
-    <TextView
-        android:id="@+id/result"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
-        android:gravity="end"
-        android:paddingStart="@dimen/_15sdp"
-        android:textColor="@color/purple"
-        android:textSize="@dimen/_18ssp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/input"
-        app:autoSizeTextType="uniform"
-        setResult="@{previousOperation}"
-        tools:text="30"
-        android:paddingEnd="0dp"
-        android:onClick="@{() -> previousOperationActions.addPreviousNumber(previousOperation.result)}"
-        />
+        <TextView
+            android:id="@+id/result"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:gravity="end"
+            android:paddingStart="@dimen/_15sdp"
+            android:textColor="@color/purple"
+            android:textSize="@dimen/_18ssp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/input"
+            app:autoSizeTextType="uniform"
+            setResult="@{previousOperation}"
+            tools:text="30"
+            android:paddingEnd="0dp"
+            android:onClick="@{() -> previousOperationActions.appendNumberFromHistory(previousOperation.result)}" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

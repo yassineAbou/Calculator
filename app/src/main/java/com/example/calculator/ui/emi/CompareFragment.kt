@@ -1,6 +1,5 @@
 package com.example.calculator.ui.emi
 
-import android.content.ActivityNotFoundException
 import android.content.Intent
 import android.content.pm.ActivityInfo
 import android.os.Bundle
@@ -8,7 +7,6 @@ import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
 import android.view.View
-import android.widget.Toast
 import androidx.core.view.MenuHost
 import androidx.core.view.MenuProvider
 import androidx.fragment.app.Fragment
@@ -23,8 +21,7 @@ import com.example.calculator.util.viewBinding
 class CompareFragment : Fragment(R.layout.fragment_compare) {
 
     private val fragmentCompareBinding by viewBinding(FragmentCompareBinding::bind)
-    private val emiViewModel : EMIViewModel by activityViewModels()
-
+    private val emiViewModel: EMIViewModel by activityViewModels()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -33,48 +30,50 @@ class CompareFragment : Fragment(R.layout.fragment_compare) {
         fragmentCompareBinding.viewModel = emiViewModel
         val menuHost: MenuHost = requireActivity()
 
-        menuHost.addMenuProvider(object : MenuProvider {
-            override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
-                menuInflater.inflate(R.menu.share_menu, menu)
-            }
-            override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
-
-                return when (menuItem.itemId) {
-                    R.id.share -> {
-                        shareCompareResult()
-                        true
-                    }
-                    else -> false
+        menuHost.addMenuProvider(
+            object : MenuProvider {
+                override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
+                    menuInflater.inflate(R.menu.share_menu, menu)
                 }
-            }
-        }, viewLifecycleOwner, Lifecycle.State.RESUMED)
+
+                override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
+                    return when (menuItem.itemId) {
+                        R.id.share -> {
+                            shareCompareResult()
+                            true
+                        }
+                        else -> false
+                    }
+                }
+            },
+            viewLifecycleOwner,
+            Lifecycle.State.RESUMED,
+        )
 
         fragmentCompareBinding.apply {
+            done.setOnClickListener {
+                navigateToCalculator()
+            }
 
-                done.setOnClickListener {
-                    navigateToCalculator()
-
-                }
-
-                reset.setOnClickListener {
-                    navigateToEmiCalculator()
-                }
+            reset.setOnClickListener {
+                navigateToEmiCalculator()
+            }
         }
     }
 
     private fun navigateToCalculator() {
-        emiViewModel.changeEmiCalculatorState(
-            EmiCalculatorState(isFirstEmiCalculator = false, isSecondEmiCalculator = false)
+        emiViewModel.updateEmiCalculatorState(
+            EmiCalculatorState(isFirstEmiCalculator = false, isSecondEmiCalculator = false),
         )
-        val action = CompareFragmentDirections.actionCompareFragmentToCalculatorFragment()
+        val action = CompareFragmentDirections.compareFragmentToCalculatorFragment()
         NavHostFragment.findNavController(this@CompareFragment).navigate(action)
     }
 
     private fun navigateToEmiCalculator() {
-        emiViewModel.changeEmiCalculatorState(
-            EmiCalculatorState(isFirstEmiCalculator = true, isSecondEmiCalculator = false)
+        emiViewModel.updateEmiCalculatorState(
+            EmiCalculatorState(isFirstEmiCalculator = true, isSecondEmiCalculator = false),
         )
-        val action = CompareFragmentDirections.actionCompareFragmentToEmiCalculator()
+        val action = CompareFragmentDirections.compareFragmentToEmiCalculator()
         NavHostFragment.findNavController(this@CompareFragment).navigate(action)
     }
 
@@ -87,37 +86,35 @@ class CompareFragment : Fragment(R.layout.fragment_compare) {
         activity?.requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
     }
 
-    private fun getShareIntent() : Intent {
+    private fun shareCompareResult() {
+        startActivity(getShareIntent())
+    }
+
+    private fun getShareIntent(): Intent {
         val shareIntent = Intent(Intent.ACTION_SEND)
 
         safeLet(
             emiViewModel.firstEmiCalculation.value,
-            emiViewModel.secondEmiCalculation.value
+            emiViewModel.secondEmiCalculation.value,
         ) { firstEmiCalculation, secondEmiCalculation ->
 
-                shareIntent.setType("text/plain")
-                    .putExtra(Intent.EXTRA_TEXT,
-                        getString(R.string.shareCompare, firstEmiCalculation.principal, firstEmiCalculation.emiAmount,
-                            firstEmiCalculation.interestRate, firstEmiCalculation.numberInstallments, secondEmiCalculation.principal,
-                            secondEmiCalculation.emiAmount, secondEmiCalculation.interestRate,
-                            secondEmiCalculation.numberInstallments)
-                    )
+            shareIntent.setType("text/plain")
+                .putExtra(
+                    Intent.EXTRA_TEXT,
+                    getString(
+                        R.string.shareCompare,
+                        firstEmiCalculation.principal,
+                        firstEmiCalculation.emiAmount,
+                        firstEmiCalculation.interestRate,
+                        firstEmiCalculation.numberInstallments,
+                        secondEmiCalculation.principal,
+                        secondEmiCalculation.emiAmount,
+                        secondEmiCalculation.interestRate,
+                        secondEmiCalculation.numberInstallments,
+                    ),
+                )
         }
 
-        return shareIntent
-
+        return Intent.createChooser(shareIntent, null)
     }
-
-    /*
-    After the process death, when the user shares the result, the app crashes.
-    So I surrounded the code with a try-catch block.
-     */
-    private fun shareCompareResult() {
-        try {
-            startActivity(getShareIntent())
-        } catch (e: ActivityNotFoundException) {
-            Toast.makeText(requireContext(), "Close and open the app again", Toast.LENGTH_SHORT).show()
-        }
-    }
-
 }

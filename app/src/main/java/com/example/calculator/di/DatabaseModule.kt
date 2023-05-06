@@ -18,19 +18,17 @@ object DatabaseModule {
     @Singleton
     @Provides
     fun providePreviousOperationDatabase(
-        @ApplicationContext app: Context
+        @ApplicationContext app: Context,
     ) = Room.databaseBuilder(
         app,
         PreviousOperationDatabase::class.java,
-        "calculator_history_database"
-    ).createFromAsset("database/previous_operation.db").fallbackToDestructiveMigration().build()
+        "calculator_history_database",
+    ).createFromAsset("database/previous_operation.db").build()
 
     @Singleton
     @Provides
     fun providePreviousOperationDao(previousOperationDatabase: PreviousOperationDatabase):
-            PreviousOperationDao {
+        PreviousOperationDao {
         return previousOperationDatabase.getPreviousOperationDao()
     }
-
-
 }

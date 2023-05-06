@@ -11,7 +11,7 @@
         android:label="CalculatorFragment"
         tools:layout="@layout/fragment_calculator">
         <action
-            android:id="@+id/action_calculatorFragment_to_emiCalculator"
+            android:id="@+id/calculatorFragment_to_emiCalculator"
             app:destination="@id/emiCalculatorFragment" />
     </fragment>
     <fragment
@@ -20,12 +20,12 @@
         android:label="EMI calculation"
         tools:layout="@layout/fragment_emi_calculation">
         <action
-            android:id="@+id/action_emiCalculation_to_emiCalculator"
+            android:id="@+id/emiCalculation_to_emiCalculator"
             app:destination="@id/emiCalculatorFragment"
             app:popUpTo="@id/calculatorFragment"
             app:popUpToInclusive="false" />
         <action
-            android:id="@+id/action_emiCalculation_to_calculatorFragment"
+            android:id="@+id/emiCalculation_to_calculatorFragment"
             app:destination="@id/calculatorFragment" />
     </fragment>
     <fragment
@@ -34,10 +34,10 @@
         android:label="EMI calculator"
         tools:layout="@layout/fragment_emi_calculator">
         <action
-            android:id="@+id/action_emiCalculator_to_compareFragment"
+            android:id="@+id/emiCalculator_to_compareFragment"
             app:destination="@id/compareFragment" />
         <action
-            android:id="@+id/action_emiCalculator_to_emiCalculation"
+            android:id="@+id/emiCalculator_to_emiCalculation"
             app:destination="@id/emiCalculationFragment" />
     </fragment>
     <fragment
@@ -46,10 +46,10 @@
         android:label="Compare"
         tools:layout="@layout/fragment_compare">
         <action
-            android:id="@+id/action_compareFragment_to_calculatorFragment"
+            android:id="@+id/compareFragment_to_calculatorFragment"
             app:destination="@id/calculatorFragment" />
         <action
-            android:id="@+id/action_compareFragment_to_emiCalculator"
+            android:id="@+id/compareFragment_to_emiCalculator"
             app:destination="@id/emiCalculatorFragment" />
 
     </fragment>

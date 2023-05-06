@@ -17,6 +17,4 @@ interface PreviousOperationDao {
 
     @Query("SELECT * FROM previous_operation ORDER BY id DESC")
     fun getListPreviousOperations(): Flow<List<PreviousOperation>>
-
-
 }

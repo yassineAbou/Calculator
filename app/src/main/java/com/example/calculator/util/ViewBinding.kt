@@ -11,20 +11,19 @@ import androidx.viewbinding.ViewBinding
 import kotlin.properties.ReadOnlyProperty
 import kotlin.reflect.KProperty
 
-/** Activity binding delegate, may be used since onCreate up to onDestroy (inclusive) */
-inline fun <T : ViewBinding> AppCompatActivity.viewBinding(crossinline factory: (LayoutInflater) -> T) =
+inline fun <T : ViewBinding> AppCompatActivity.viewBinding(
+    crossinline factory: (LayoutInflater) -> T,
+) =
     lazy(LazyThreadSafetyMode.NONE) {
         factory(layoutInflater)
     }
 
-/** Fragment binding delegate, may be used since onViewCreated up to onDestroyView (inclusive) */
 fun <T : ViewBinding> Fragment.viewBinding(factory: (View) -> T): ReadOnlyProperty<Fragment, T> =
     object : ReadOnlyProperty<Fragment, T>, DefaultLifecycleObserver {
         private var binding: T? = null
 
         override fun getValue(thisRef: Fragment, property: KProperty<*>): T =
             binding ?: factory(requireView()).also {
-                // if binding is accessed after Lifecycle is DESTROYED, create new instance, but don't cache it
                 if (viewLifecycleOwner.lifecycle.currentState.isAtLeast(Lifecycle.State.INITIALIZED)) {
                     viewLifecycleOwner.lifecycle.addObserver(this)
                     binding = it

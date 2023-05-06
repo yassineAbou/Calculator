@@ -14,7 +14,6 @@
     <string name="numberThree">3</string>
     <string name="minusSign">+/-</string>
     <string name="numberZero">0</string>
-    <string name="number">%d</string>
 
 
     <string name="history">history</string>
@@ -32,11 +31,6 @@
     <string name="minus">-</string>
     <string name="plus">+</string>
     <string name="equal">=</string>
-    <string name="input">15 + 15</string>
-    <string name="result">30</string>
-
-
-    <string name="invalidFormat">Invalid format used.</string>
 
 
     <string name="alternativeOperation">⇆</string>
@@ -70,37 +64,35 @@
     <string name="degree">Deg</string>
 
 
-    <string name="symbolXSquared">^(2)</string>
-    <string name="symbolXPowerY">^(</string>
-    <string name="symbolCube">^(3)</string>
-    <string name="symbolFactorial">!</string>
-    <string name="symbolRoot">√(</string>
-    <string name="symbolCosine">cos(</string>
-    <string name="symbolSine">sin(</string>
-    <string name="symbolTangent">tan(</string>
-    <string name="symbolNaturalLog">ln(</string>
-    <string name="symbolLogarithm">log10(</string>
-    <string name="symbolInverseNumber">1÷</string>
-    <string name="symbolEPowerX">e^(</string>
-    <string name="symbolAbsoluteValue">abs(</string>
-    <string name="symbolEulerNumber">e</string>
-    <string name="symbolPi">pi</string>
-    <string name="symbolInverseSine">asin(</string>
-    <string name="symbolInverseCosine">acos(</string>
-    <string name="symbolInverseTangent">atan(</string>
-    <string name="symbolHyperbolicSine">sinh(</string>
-    <string name="symbolHyperbolicCosine">cosh(</string>
-    <string name="symbolHyperbolicTangent">tanh(</string>
-    <string name="symbolInverseHyperbolicSine">asinh(</string>
-    <string name="symbolInverseHyperbolicCosine">acosh(</string>
-    <string name="symbolInverseHyperbolicTangent">atanh(</string>
-    <string name="symbolTwoPowerX">2^(</string>
-    <string name="symbolCubeRoot">∛(</string>
-    <string name="symbolRadian">rad(</string>
-    <string name="SymbolDegree">deg(</string>
+    <string name="xSquaredSymbol">^(2)</string>
+    <string name="xPowerYSymbol">^(</string>
+    <string name="cubeSymbol">^(3)</string>
+    <string name="FactorialSymbol">!</string>
+    <string name="rootSymbol">√(</string>
+    <string name="cosineSymbol">cos(</string>
+    <string name="sineSymbol">sin(</string>
+    <string name="tangentSymbol">tan(</string>
+    <string name="naturalLogSymbol">ln(</string>
+    <string name="logarithmSymbol">log10(</string>
+    <string name="inverseNumberSymbol">1÷</string>
+    <string name="ePowerXSymbol">e^(</string>
+    <string name="absoluteValueSymbol">abs(</string>
+    <string name="eulerNumberSymbol">e</string>
+    <string name="inverseSineSymbol">asin(</string>
+    <string name="inverseCosineSymbol">acos(</string>
+    <string name="inverseTangentSymbol">atan(</string>
+    <string name="hyperbolicSineSymbol">sinh(</string>
+    <string name="hyperbolicCosineSymbol">cosh(</string>
+    <string name="hyperbolicTangentSymbol">tanh(</string>
+    <string name="inverseHyperbolicSineSymbol">asinh(</string>
+    <string name="inverseHyperbolicCosineSymbol">acosh(</string>
+    <string name="inverseHyperbolicTangentSymbol">atanh(</string>
+    <string name="twoPowerXSymbol">2^(</string>
+    <string name="cubeRootSymbol">∛(</string>
+    <string name="radianSymbol">rad(</string>
+    <string name="degreeSymbol">deg(</string>
 
 
-    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="loanAmount">Loan amount</string>
     <string name="InterestRate">Interest rate</string>
     <string name="numberInstallments">Number of installments</string>
@@ -126,7 +118,6 @@
     </string>
     <string name="shareCompare">First option \nLoan amount: %1$s\nEMI amount: %2$s\nInterest rate: %3$s\nNumber of installments: %4$s\nSecond option \nLoan amount: %5$s\nEMI amount: %6$s\nInterest rate: %7$s\nNumber of installments: %8$s
     </string>
-
 
 
 </resources>

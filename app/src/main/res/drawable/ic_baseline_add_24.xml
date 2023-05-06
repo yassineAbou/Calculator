@@ -2,15 +2,15 @@
     android:width="24dp"
     android:height="24dp"
     android:viewportWidth="24"
-    android:viewportHeight="24"
-    >
-  <group>
-    <path android:name="square"
-    android:fillColor="?attr/fifthBgColor"
-    android:pathData="M0,0 L24,0 L24,24 L0,24 z" />
-  <path
-      android:fillColor="@color/purple"
-      android:pathData="M19,13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/>
-  </group>
+    android:viewportHeight="24">
+    <group>
+        <path
+            android:name="square"
+            android:fillColor="?attr/fifthBgColor"
+            android:pathData="M0,0 L24,0 L24,24 L0,24 z" />
+        <path
+            android:fillColor="@color/purple"
+            android:pathData="M19,13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z" />
+    </group>
 
 </vector>

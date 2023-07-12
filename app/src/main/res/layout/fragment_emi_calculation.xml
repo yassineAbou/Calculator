@@ -7,7 +7,7 @@
 
         <variable
             name="viewModel"
-            type="com.example.calculator.ui.emi.EMIViewModel" />
+            type="com.yassineabou.calculator.ui.emi.EMIViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

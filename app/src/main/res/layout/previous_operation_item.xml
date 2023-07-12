@@ -8,11 +8,11 @@
 
         <variable
             name="previousOperation"
-            type="com.example.calculator.data.model.PreviousOperation" />
+            type="com.yassineabou.calculator.data.model.PreviousOperation" />
 
         <variable
             name="previousOperationActions"
-            type="com.example.calculator.ui.calculator.PreviousOperationAction" />
+            type="com.yassineabou.calculator.ui.calculator.PreviousOperationAction" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

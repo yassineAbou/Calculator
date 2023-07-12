@@ -10,10 +10,10 @@
         android:supportsRtl="false"
         tools:replace="android:supportsRtl"
         android:theme="@style/Theme.Calculator0"
-        android:name="com.example.calculator.CalculatorApplication">
+        android:name="com.yassineabou.calculator.CalculatorApplication">
 
         <activity
-            android:name="com.example.calculator.ui.MainActivity"
+            android:name="com.yassineabou.calculator.ui.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

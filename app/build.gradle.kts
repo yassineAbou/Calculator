@@ -73,8 +73,8 @@ dependencies {
     implementation("androidx.room:room-ktx:$roomVersion")
     kapt("androidx.room:room-compiler:$roomVersion")
     // hilt
-    implementation("com.google.dagger:hilt-android:2.46.1")
-    kapt("com.google.dagger:hilt-compiler:2.46.1")
+    implementation("com.google.dagger:hilt-android:2.47")
+    kapt("com.google.dagger:hilt-compiler:2.47")
 }
 android {
     buildTypes {
@@ -83,5 +83,8 @@ android {
             matchingFallbacks += listOf("release")
             isDebuggable = false
         }
+    }
+    defaultConfig {
+        signingConfig = signingConfigs.getByName("debug")
     }
 }

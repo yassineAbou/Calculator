@@ -5,6 +5,8 @@ plugins {
     id("dagger.hilt.android.plugin")
     id("org.jetbrains.kotlin.android")
     id("androidx.navigation.safeargs")
+    id("com.google.devtools.ksp")
+
 }
 
 @Suppress("UnstableApiUsage")
@@ -21,7 +23,7 @@ android {
         minSdk = 24
         targetSdk = 33
         versionCode = 1
-        versionName = "1.0"
+        versionName = "1.1"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -47,6 +49,13 @@ android {
     namespace = "com.yassineabou.calculator"
 }
 
+java {
+    toolchain {
+        languageVersion.set(JavaLanguageVersion.of(17))
+    }
+}
+
+
 dependencies {
 
     implementation("androidx.legacy:legacy-support-v4:1.0.0")
@@ -71,10 +80,10 @@ dependencies {
     implementation("androidx.navigation:navigation-ui-ktx:$navVersion")
     // room
     implementation("androidx.room:room-ktx:$roomVersion")
-    kapt("androidx.room:room-compiler:$roomVersion")
+    ksp("androidx.room:room-compiler:$roomVersion")
     // hilt
-    implementation("com.google.dagger:hilt-android:2.47")
-    kapt("com.google.dagger:hilt-compiler:2.47")
+    implementation("com.google.dagger:hilt-android:2.51.1")
+    kapt("com.google.dagger:hilt-compiler:2.51.1")
 }
 android {
     buildTypes {

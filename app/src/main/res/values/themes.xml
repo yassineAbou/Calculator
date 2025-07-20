@@ -30,6 +30,9 @@
         <item name="thirdTextColor">@color/black</item>
         <item name="sixthTextColor">@color/gray_200</item>
 
+        <item name="android:windowDrawsSystemBarBackgrounds">false</item>
+        <item name="android:fitsSystemWindows">true</item>
+
     </style>
 
 

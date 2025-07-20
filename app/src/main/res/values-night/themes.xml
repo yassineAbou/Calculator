@@ -25,5 +25,10 @@
         <item name="thirdTextColor">@color/white</item>
         <item name="sixthTextColor">@color/black</item>
 
+        <item name="android:windowDrawsSystemBarBackgrounds">false</item>
+        <item name="android:fitsSystemWindows">true</item>
+
     </style>
+
+
 </resources>
